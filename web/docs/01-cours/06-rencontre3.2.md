@@ -262,4 +262,4 @@ certaines données au fil de la navigation sur un site Web Angular, comme le **s
 
 :::
 
-🔄 Dans tous les cas, lorsqu'on **réactualise la page**, toute l'application est « détruite » (ou réinitialisée)
+🔄 Dans tous les cas, lorsqu'on **réactualise la page**, toute l'application est « détruite » (ou réinitialisée).
