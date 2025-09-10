@@ -215,7 +215,7 @@ dramatique d'omettre le type de retour.
 
 #### 🧩 Composants
 
-Le cycle de vie des composants peut-être interprété de manière plutôt simple :
+Le cycle de vie des composants peut être interprété de manière plutôt simple :
 
 1. Le composant est **instancié** lorsqu'il doit être affiché dans la page Web.
 2. Son constructeur puis `ngOnInit` sont appelés.
