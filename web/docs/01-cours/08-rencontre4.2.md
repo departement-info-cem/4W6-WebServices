@@ -184,13 +184,11 @@ Notez qu'il faudra activer une autre API (« Maps JavaScript API ») pour pouvoi
 
 **Étape 1 - 📦 Installer une dépendance**
 
-`npm install @angular/google-maps@18.0.4`
+`npm install @angular/google-maps@20.3.2`
 
 :::warning
 
-Le `@18.0.4` à la fin du nom du package permet de spécifier la **version** à installer. Vous devez choisir la même
-version que votre version de **Angular**. (À l'école, la version est `18.0.4`) N'hésitez pas à vérifier votre version
-d'Angular à l'aide de la commande `ng version`.
+Le `@20.3.2` à la fin du nom du package permet de spécifier la **version** à installer. C'est important de choisir une version compatible avec sa version d'Angular.
 
 :::
 

@@ -1,4 +1,4 @@
-# Cours 12 - Intra formatif
+# Cours 13 - Intra formatif
 
 [Voici le formatif](../../static/files/intra_formatif.zip). Les instructions sont dans un document Word. Le format et fonctionnement du sommatif seront identiques !
 

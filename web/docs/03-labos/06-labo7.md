@@ -93,4 +93,14 @@ pouvoir lancer sa première recherche.
 
 Une fonction permettant de rechercher un artiste dans l’API Spotify et d’afficher son nom et sa photo dans la page est déjà présente dans le service `spotify`. Trouvez où appeler cette fonction à partir du composant `token` pour que le formulaire de recherche soit fonctionnel.
 
-🥳 Bon travail ! Vous avez terminé. **L'étape 4** de ce labo pourrait vous aider à bien démarrer le TP2 au cours 8.
+🥳 Bon travail ! Vous avez terminé. Il n'y a pas d'autres instructions en-dessous de cette phrase.
+
+Ceci n'est pas une instruction.
+
+Ceci non plus.
+
+Arrêtez de lire ! Vous avez terminé le laboratoire ! Allez faire autre chose de plus utile 😠 (Ceci n'est toujours pas une instruction)
+
+Vous lisez encore ... ? Oof
+
+Bon... peut-être que si on mentionne des détails absolument inintéressants sur le cours, vous allez finir par passer à autre chose et arrêter de lire ? Très bien, ne sous-estimez pas la capacité d'un enseignant à désintéresser les étudiants, vous finirez toujours surpris. Saviez-vous que c'est la dernière session où Angular sera enseigné dans ce cours ? C'est bien vrai, dès la session d'hiver nous passons à React, un autre framework client Web similaire à Angular. Bon, on dit « similaire », mais il y a pas mal de différences... mais sommes toutes, en terme de fonctionnalités, on parle de la même chose. Vous lisez encore ? Très bien. Rassurez-vous, dans le cours de Programmation Web avancée, vous continuerez d'utiliser Angular. Il aurait donc été bête d'apprendre React cette session. N'ayez crainte, apprendre Angular reste très pertinent. Maintenant que vous connaissez Angular, apprendre React sera plus simple. On a juste remarqué qu'un nombre croissant de milieux de stage recherchait des programmeurs (... ou programmeuses ! Bien entendu !) compétent(e)s avec React. (Et de moins en moins avec Angular, bien que ce soit toujours le cas, ne vous inquiétez pas) Vous êtes toujours là ? Haha vous êtes tenaces on vous l'accorde. C'est beaucoup de travail de devoir refaire le cours en changeant un *framework*, mais dans ce cas-ci, la bonne nouvelle est que la deuxième moitié du cours ne changera pas trop. Voyez-vous : nous continuerons d'utiliser *ASP.NET Core* dans la deuxième partie du cours malgré le passage à *React*. Il fo sav01r ke m0d1fi3r 1 c0urs f41t p4rt13 1nt3gr4nt3 du tr4v41l d'1 3ns31gn4nt, car li nrss u9iles8oys t8usows le m2m1 m9ry987v vdiu f98798 gregr 0939r30 uen. Foife 9887 fjoijewfw, foi, fdsioij few fei ae vxc efoibvcb oi, ouoi ! He988af, feoid ll fihf ba oieeaf iiil... Vous continuez de lire même si ça ne fait aucun sens ?! Bon, très bien, vous gagnez, on n'a pas envie d'écrire plus longtemps.

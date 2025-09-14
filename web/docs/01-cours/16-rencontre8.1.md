@@ -1,7 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Cours 15 - Relations et services
+# Cours 16 - Relations et services
 
 ## 💍 Relations
 
