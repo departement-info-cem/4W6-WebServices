@@ -161,33 +161,26 @@ relativement simple.
 
 #### Étape 2 - 🧰 Quelques ajouts dans `app.config.ts`
 
-* Le `TranslateModule` permet d'accéder à certains gadgets pour simplifier les mécanismes de traduction.
-* Le `TranslateHttpLoader` est un objet qui permettra de charger les textes depuis des fichiers que nous produirons.
+* `provideTranslateService()` permet de configurer le chargement des textes.
+* `provideHttpClient()` est nécessaire pour le chargement des textes.
 
 ```ts showLineNumbers
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }), 
+    provideBrowserGlobalErrorListeners(),
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    // Provider pour HttpClient
     provideHttpClient(),
-    // Bloc pour la configuration du module de traduction
-    importProvidersFrom( 
-      TranslateModule.forRoot({
-        loader : {
-          provide : TranslateLoader,
-          useFactory : HttpLoaderFactory,
-          deps : [HttpClient]
-        }
-      })
-    )
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({
+        prefix:'/assets/i18n/',
+        suffix:'.json'
+      }),
+      fallbackLang:'fr',
+      lang:'fr'
+    }),
   ]
 };
-
-// Fonction externe pour l'instanciation du loader de textes
-export function HttpLoaderFactory(http : HttpClient){
-  return new TranslateHttpLoader(http);
-}
 ```
 
 #### Étape 3 - ⚙ Modification dans le composant à internationaliser
@@ -211,9 +204,12 @@ export class Composant2Component {
 
   language : string = "fr";
 
-  constructor(public translator : TranslateService) { 
-    this.translator.setDefaultLang(this.language);
+  constructor(public translator : TranslateService){
+
+    this.translator.addLangs(['en', 'fr']);
+    this.translator.setFallbackLang(this.language);
     this.translator.use(this.language);
+
   }
 
 }
