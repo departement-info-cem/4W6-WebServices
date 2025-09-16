@@ -223,7 +223,7 @@ dans le constructeur.
 Il y a plusieurs manières de créer les étiquettes, mais en gros, il s'agit de remplacer tout le texte par
 des **clés** qui feront référence à du texte dans un autre fichier.
 
-Attention : Importer le module `TranslateModule` est nécessaire pour tous les composants étiquettés.
+Attention : Importer le module `TranslateModule` est nécessaire pour tous les composants étiquetés.
 
 * ☝ Option 1 : Translation pipe
 
