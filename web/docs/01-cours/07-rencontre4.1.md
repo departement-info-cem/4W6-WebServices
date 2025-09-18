@@ -167,7 +167,6 @@ relativement simple.
 ```ts showLineNumbers
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
@@ -178,10 +177,22 @@ export const appConfig: ApplicationConfig = {
       }),
       fallbackLang:'fr',
       lang:'fr'
-    }),
+    })
   ]
 };
 ```
+
+:::warning
+
+Il se peut que vous deviez rédiger les **importations** manuellement pour certaines fonctions comme `provideTranslateService()` et `provideTranslateHttpLoader()`. Les voici :
+
+```ts showLineNumbers
+import { provideHttpClient } from '@angular/common/http';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+```
+
+:::
 
 #### Étape 3 - ⚙ Modification dans le composant à internationaliser
 
