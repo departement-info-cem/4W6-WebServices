@@ -820,7 +820,7 @@ public async Task<IActionResult> PutVideoGame(int id, VideoGame videoGame)
     VideoGame? updatedVideoGame = await _videoGameService.Edit(id, videoGame);
 
     if (updatedVideoGame == null) return StatusCode(StatusCodes.Status500InternalServerError,
-        new { Message = "Le jeu vidéo a été supprimé ou modifié. Veuillez réessayer." });
+        new { Message = "Opération échouée. Veuillez réessayer." });
 
     return Ok(updatedVideoGame);
 }
