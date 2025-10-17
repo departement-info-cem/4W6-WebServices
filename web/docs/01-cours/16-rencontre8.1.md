@@ -37,7 +37,7 @@ de références vers une autre classe. (Ex : `public virtual List<Item> Items { 
 :::
 
 
-Puisque nous sommes confrontés au **🦥 Lazy Loading**, vous êtes invités à installer le package `Proxies` dans la dernière version `8.X.X` pour vous simplifier la vie lors du chargement des données depuis la base de données !
+Pour pouvoir profiter du **🦥 Lazy Loading**, vous êtes invités à installer le package `Proxies` dans la dernière version `8.X.X` pour vous simplifier la vie lors du chargement des données depuis la base de données !
 
 <center>![Package Proxies](../../static/img/cours15/proxies.png)</center>
 
