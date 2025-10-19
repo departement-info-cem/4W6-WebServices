@@ -111,7 +111,7 @@ Il y aura trois dépendances à installer pour assurer l'interaction avec la bas
 
 :::warning
 
-Installez la dernière version **8** de ces packages. Au moment d'écrire ces notes, la dernière version est `8.0.14` par exemple.
+⛔⛔⛔ Installez la dernière version **8** de ces packages. Au moment d'écrire ces notes, la dernière version est `8.0.21` par exemple.
 
 :::
 
