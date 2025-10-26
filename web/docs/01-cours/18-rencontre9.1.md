@@ -5,7 +5,7 @@
 En général, les actions des contrôleurs retournent le type `Task<IActionResult>` ou `Task<IActionResult<T>>`. Ça peut sembler vague.
 
 * `Task<T>` signifie simplement que la méthode est asynchrone. (Comme les fonctions qui retournent `Promise<T>` en **TypeScript**)
-* `IActionResult` est un interface implémenté par de nombreuses classes, ce qui permet de retourner une panoplie de choses différentes avec une action.
+* `IActionResult` est une interface implémentée par de nombreuses classes, ce qui permet de retourner une panoplie de choses différentes avec une action.
 
 ### 🔮 Retours possibles
 
