@@ -332,7 +332,7 @@ export class DataService {
 Fonctionnement :
 
 * Comme le signal `usernameSignal` possède l'étiquette `private`, seul le service lui-même peut modifier ou lire sa valeur.
-* Tous les composants dans lesquels nous injecterons le `DataService` pourront lire la valeur de `username` (à l'aide de `this.dataService.username()`), qui est un signal non-modifiable. (`.asReadonly()` est l'équivalent de `computed(() => return this.usernameSignal())`)
+* Tous les composants dans lesquels nous injecterons le `DataService` pourront lire la valeur de `username` (à l'aide de `this.dataService.username()`), qui est un signal non-modifiable. (`this.usernameSignal.asReadonly()` est l'équivalent de `computed(() => return this.usernameSignal())`)
 
 Et si on souhaite permettre aux composants de modifier `usernameSignal` ?
 
