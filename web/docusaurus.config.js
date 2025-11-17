@@ -67,7 +67,8 @@ const config = {
         items: [
           {
             type: "doc",
-            docId: "cours/rencontre1.1",
+            docId: "notes/rencontre1.1",
+            sidebarId: "docs",
             position: "left",
             label: "Cours",
           },
@@ -82,6 +83,13 @@ const config = {
             position: "left",
             sidebarId: "labos",
             label: "Laboratoires",
+          },
+          {
+            type: "doc",
+            docId: "cours/rencontre1.1",
+            position: "left",
+            label: "Angular (Ancien cours)",
+            sidebarId: "cours"
           },
         ],
       },
