@@ -63,7 +63,7 @@ Les utilisateurs doivent pouvoir se connecter en utilisant leur nom d’utilisat
 
 ## Étape H
 
-Un rôle administrateur existe. Les administrateurs peuvent ajouter le rôle modérateur à des utilisateurs. Un utilisateur avec le rôle administrateur est ajouté dans le seed.
+Un rôle administrateur doit être créé. Les administrateurs peuvent ajouter le rôle modérateur à des utilisateurs. (Créez le rôle modérateur si votre partenaire ne l'a pas déjà fait) Un utilisateur avec le rôle administrateur est ajouté dans le seed.
 
 * Votre partenaire s'occupera de rendre utiles les modérateurs, mais pour le moment créez juste le rôle s'il n'existe pas déjà.
 * Il faudra rendre disponible un onglet supplémentaire **seulement visible pour les administrateurs**. L'usage d'un **⛔ signal** sera obligatoire pour le `*ngIf` qui permettra de cacher cet onglet. Inspirez-vous fortement du laboratoire 21.

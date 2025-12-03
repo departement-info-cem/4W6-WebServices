@@ -80,7 +80,7 @@ Les utilisateurs peuvent signaler (Report) les commentaires / posts des autres u
 
 ## Étape H
 
-Un rôle modérateur existe. Les modérateurs peuvent voir la liste des commentaires signalés. Ils peuvent supprimer les commentaires de leur choix via cette liste. Un utilisateur avec le rôle modérateur est ajouté dans le seed.
+Un rôle modérateur doit être créé. (Sauf si votre partenaire l'a déjà créé) Les modérateurs peuvent voir la liste des commentaires signalés. Ils peuvent supprimer les commentaires de leur choix via cette liste. Un utilisateur avec le rôle modérateur doit être ajouté dans le seed.
 
 * Le composant `ModerateCommentsComponent` existe déjà et est accessible avec la route `/reports`, mais il faudra rendre disponible un onglet supplémentaire **seulement visible pour les modérateurs** permettant de s'y rendre. L'usage d'un **⛔ signal** sera obligatoire pour le `*ngIf` qui permettra de cacher cet onglet. Inspirez-vous fortement du laboratoire 21.
 
