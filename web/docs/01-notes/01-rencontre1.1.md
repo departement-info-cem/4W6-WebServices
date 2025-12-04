@@ -423,6 +423,14 @@ mis à jour lorsque vous sauvegarderez le fichier modifié. Il n'est pas nécess
 
 :::
 
+:::tip
+
+Si jamais le port `3000` est déjà monopolisé, vous pouvez préciser un port spécifique dans la commande :
+
+`npm run dev -- -p 3001`
+
+:::
+
 ### 🕵️‍♂️ Comprendre les fichiers de base
 
 Pour le moment, tous les fichiers que nous aborderons seront situés dans le dossier `app`.
@@ -436,11 +444,11 @@ Essayez de le garder à l'esprit, même si vous êtes habitués à la convention
 
 * ✅ Valides :
   * page.tsx
-  * ma-super-classe.tsx
+  * ma-super-classe.ts
 
 * ⛔ À éviter :
   * Page.tsx
-  * maSuperClasse.tsx
+  * maSuperClasse.ts
 
 :::
 
@@ -540,75 +548,109 @@ export default function RootLayout({
 
 Nous n'aborderons pas le fonctionnement d'autres fichiers du projet pour le moment, mais ça viendra ! 🙈
 
-### ✏ Afficher une variable dans la page Web
+### 🗃 Afficher une variable (un « état ») dans la page Web
 
-Il est possible de déclarer des **variables** et des **fonctions** dans la **classe TypeScript** d'un composant.
-Ci-dessous, on a déclaré deux **variables** (`prenom` et `nom`) dans la classe du composant `app`.
+:::warning
 
-```ts showLineNumbers
-export class AppComponent {
+Prérequis : il faut ajouter l'instruction `'use client'` tout en haut de notre composant. L'utilité de cette instruction sera abordée plus tard.
+
+```tsx showLineNumbers
+'use client'; // Nécessaire
+
+export default function Home(){
+
+  ...
+
+}
+``` 
+
+:::
+
+Il est possible de déclarer des **états** (variables) dans un composant. (Par exemple, dans le fichier `page.tsx` qui existe par défaut)
+Ci-dessous, on a déclaré deux **états** (`name` et `age`) :
+
+```tsx showLineNumbers
+'use client';
+
+import { useState } from "react"; // Importation de useState
+
+export default function Home() {
   
-  prenom : string = "Jacqueline";
-  nom = "Robidoux"; // Rappel : Pas obligatoire de typer si la variable est immédiatement initialisée.
+  // Deux variables :
+  const [name, setName] = useState("Simone");
+  const [age, setAge] = useState(37);
+
+  return (
+    ...
+  );
 
 }
 ```
 
-Pour afficher la valeur de ces variables dans le **template HTML** du composant `app`, nous devrons utiliser
-des doubles accolades  
-`{{ nom_de_la_variable }}`, comme ceci : 
+:::tip
 
-```html showLineNumbers
-<h2>Composant app</h2>
+Il faudra souvent ajouter des **importations** dans nos composants pour pouvoir utiliser certains *bidules* comme `useState`. Lorsque vous avez du **rouge**, n'hésitez pas à faire un **clic gauche** sur le segment souligné en rouge, puis à utiliser le raccourci `Ctrl + .` pour faire apparaître le menu de suggestions, qui vous proposera généralement les **importations manquantes**. 
 
-<p>Bonjour {{prenom}} {{nom}}</p>
+<center>![Fichier layout.tsx](../../static/img/cours1/ctrlPoint.png)</center>
+
+:::
+
+Pour afficher la valeur de ces états dans le **HTML** du composant, nous devrons utiliser
+des **accolades** :
+
+```tsx showLineNumbers
+export default function Home() {
+
+  const [name, setName] = useState("Simone");
+  const [age, setAge] = useState(37);
+
+  return (
+    <h2 className="text-4xl">Salut {name}, vous avez {age} ans.</h2>
+  );
+}
 ```
 
-Le résultat :
+<center>![Affichage de variables](../../static/img/cours1/displayVariableReact.png)</center>
 
-<center>![Affichage de variables](../../static/img/cours1/displayVariable.png)</center>
+:::note
 
+Pour le moment, on n'a pas expliqué à quoi servent `setName` et `setAge`, mais vous avez sûrement une petite idée 🙄 Nous en reparlerons au prochain cours.
+
+:::
 
 ### ✨ Afficher le résultat d'une fonction
 
-On déclare une fonction (qui retourne quelque chose !) dans la **classe TypeScript** du composant :
+On déclare une fonction (qui retourne quelque chose !) dans le composant et on affiche sa valeur retournée à l'aide d'**accolades** :
 
-```ts showLineNumbers
-export class AppComponent {
-  
-  divideByThreePlusTwo(n : number) : string{
-    return n + " divisé par 3 plus 2 donne " + (n / 3 + 2);
+```tsx showLineNumbers
+export default function Home() {
+
+  // Fonction
+  function displayValue() : number{
+    return 67;
   }
 
+  return (
+      <p>Voici une valeur : {displayValue()}</p>
+  );
 }
 ```
 
-On appelle la fonction sans oublier pas les doubles accolades dans le HTML :
+<center>![Affichage d'une fonction](../../static/img/cours1/displayFunctionReact.png)</center>
 
-```html showLineNumbers
-<h2>Composant app</h2>
-
-<p>{{ divideByThreePlusTwo(9) }}</p>
-```
-
-Le résultat :
-
-<center>![Affichage d'une fonction](../../static/img/cours1/displayFunction.png)</center>
-
-### ⚱ Créer et afficher un objet personnalisé
+### ⚱ Afficher un objet personnalisé
 
 D'abord, créez une nouvelle classe en tentant de respecter ces indications :
 
 * Son fichier aura l'extension `.ts` et sera en minuscules. (Convention JavaScript / TypeScript)
-* Pour bien organiser votre projet, rangez cette classe dans le dossier `app`/`models`.
+* Pour bien organiser votre projet, rangez cette classe dans le dossier `app`/`_types`.
 * Le nom de la classe doit commencer par une majuscule. (C'est une convention aussi)
 
-<center>![Fichier pour une classe](../../static/img/cours1/classFile.png)</center>
+<center>![Fichier pour une classe](../../static/img/cours1/typesFolder.png)</center>
 
 Votre classe pourrait ressembler à ceci. Rappelez-vous que le mot-clé `public` peut être
 utilisé pour simplifier la déclaration des propriétés de la classe. De plus, notez que
-le mot-clé `export` est nécessaire pour que d'autres classes comme celle du composant `app`
-aient accès à la classe que nous déclarons.
+le mot-clé `export` est nécessaire pour que d'autres fichiers comme nos composants aient accès à la classe que nous déclarons.
 
 ```ts showLineNumbers
 export class Npc{
@@ -622,53 +664,58 @@ export class Npc{
 }
 ```
 
-Nous pourrons maintenant créer une instance de cette nouvelle classe personnalisée dans le composant
-`app`. Vous aurez à **importer** la classe pour pouvoir l'utiliser.
+Nous pourrons maintenant créer une instance de cette nouvelle classe personnalisée dans un composant. Vous aurez à **importer** la classe pour pouvoir l'utiliser.
 
-<center>![Importer une classe](../../static/img/cours1/importModel.png)</center>
+<center>![Importer une classe](../../static/img/cours1/importClass.png)</center>
 
 Utilisez le **constructeur** de votre classe pour instancier un nouvel objet :
 
-<center>![Usage d'un constructeur](../../static/img/cours1/constructorCall.png)</center>
+<center>![Usage d'un constructeur](../../static/img/cours1/constructorCallReact.png)</center>
 
-L'instanciation de l'objet devrait ressembler à ceci : 
+Voici un exemple avec un **état** qui contient un `Npc` et l'affichage dans le **HTML** :
 
 ```ts showLineNumbers
-export class AppComponent {
-  
-  myNpc : Npc = new Npc("Khajiit", "Khajiit has wares... if... you have coin.", 176);
+import { Npc } from "./_types/npc";
 
+export default function Home() {
+
+  const [npc, setNpc] = useState(new Npc("Khajiit", "Khajiit has was... if you have coin.", 176));
+
+  return (
+    <div>{npc.name} est un NPC de {npc.age} an(s) dont le dialogue est « {npc.dialogue} »</div>
+  );
 }
+
 ```
 
-Il ne reste plus qu'à gérer l'affichage dans la page Web, qui sera un peu plus délicate puisqu'il s'agit
-d'un objet sophistiqué avec des propriétés :
+<center>![Affichage d'un objet](../../static/img/cours1/displayClass.png)</center>
 
-```html showLineNumbers
-<h2>Composant app</h2>
+### 📜 Afficher un tableau
 
-<p>{{myNpc.name}} est un NPC de {{myNpc.age}} an(s) dont le dialogue est « {{myNpc.dialogue}} »</p>
+En JavaScript (et donc en TypeScript), les tableaux ressemblent à `["chat", "chien", "perruche"]`, `[1, 5, 2, 4]`, `[true, false, false]`, etc.
+
+Voici un exemple où un tableau est déclaré et affiché dans un composant :
+
+```tsx showLineNumbers
+export default function Home() {
+
+  const [colors, setColors] = useState(["indigo", "cramoisi", "ocre"]);
+
+  return (
+    <div>
+      <p>J'adore les couleurs suivantes ! Youpi !</p>
+      <ul className="list-disc mx-5">
+        <li>{colors[0]}</li>
+        <li>{colors[1]}</li>
+        <li>{colors[2]}</li>
+      </ul>
+    </div>
+  );
+}
+
 ```
 
-<center>![Afficahge d'un objet](../../static/img/cours1/displayObject.png)</center>
-
-### 📜 Créer et afficher un tableau
-
-En JavaScript (et donc en TypeScript), les tableaux ressemblent à `["chat", "chien", "perruche"]`.
-
-En TypeScript, on peut déclarer un tableau comme ceci :
-
-```ts showLineNumbers
-myNumbers : number[] = [1, 4, 5, 2];
-```
-
-et afficher ses données dans le HTML comme ceci :
-
-```html showLineNumbers
-<p>J'ADORE les nombres {{myNumbers[0]}}, {{myNumbers[1]}}, {{myNumbers[2]}} et {{myNumbers[3]}} !</p>
-```
-
-<center>![Affichage des éléments d'un tableau](../../static/img/cours1/displayArray.png)</center>
+<center>![Affichage des éléments d'un tableau](../../static/img/cours1/displayArrayReact.png)</center>
 
 :::note
 
@@ -683,30 +730,18 @@ retrouver les conventions de la technique en informatique en lien avec l'usage d
 
 Les adultes 👨👩 doivent utiliser Git. L'usage de Git sera évalué pour les quatres TPs du cours. 
 Bien entendu, pour les laboratoires, vous pouvez vous contenter de OneDrive si vous êtes paresseux. (Pratiquez-vous au moins une fois
-à utiliser Git avec Angular avant le TP1, qui est juste après le labo 3 !)
+à utiliser Git avec Next.js avant le TP1, qui est juste après le labo 3 !)
 
 :::warning
 
-Si vous décidez d'opter pour OneDrive ou une clé USB, n'oubliez jamais de supprimer les dossiers `node_modules` et `.angular` de votre
-projet ! Sinon les transferts seront exponentiellement longs !
+Si vous décidez d'opter pour OneDrive ou une clé USB, n'oubliez jamais de supprimer le dossier `node_modules` de votre
+projet ! Sinon les transferts seront exponentiellement longs ! 🐳
 
 :::
 
-#### 🐣 Créer un nouveau projet et son repository
+#### 🐣 Créer un repository avec un projet Next.js
 
-D'abord, créez votre projet Angular quelque part sur l'ordinateur. Si jamais il y a un dossier nommé `.git`
-dans votre projet Angular, il faut absolument le supprimer pour ne pas avoir de problèmes plus tard.
-
-<center>![Contenu du projet Angular](../../static/img/cours1/repoContent.png)</center>
-
-Au Cégep, ce dossier sera invisible à moins d'avoir activé cette option préalablement :
-
-<center>![Fichiers cachés](../../static/img/cours1/hiddenItems.png)</center>
-
-Vous remarquerez que le projet Angular est automatiquement muni d'un fichier `.gitignore`. Il est parfait
-pour nos besoins car il permettra d'ignorer les sous-dossiers lourds comme `node_modules` et `.angular`.
-
-Ensuite, initialisez votre repository sur GitHub. (Pour pouvoir le cloner dans **Fork** 🔱 ensuite)
+Commencez par initialiser votre repository sur GitHub. (Pour pouvoir le cloner dans **Fork** 🔱 ensuite)
 
 ⛔ Assurez-vous qu'il soit privé !
 
@@ -716,15 +751,21 @@ Clonez le repository sur votre ordinateur à l'aide de son URL :
 
 <center>![Cloner le repository](../../static/img/cours1/git2.png)</center>
 
-Puis, **glissez votre projet Angular dans le repository**. Vous pourrez donc faire un premier **commit**
-pour l'ajout du projet Angular de départ.
+Ensuitez, créez votre projet Next.js dans le repository à l'aide de la [commande désignée](/notes/rencontre1.1#-créer-un-projet-nextjs).
 
-<center>![Commit dans le repository](../../static/img/cours1/git3.png)</center>
+<center>![Contenu du projet Next.js](../../static/img/cours1/react_files_git.png)</center>
 
-On peut faire son premier push
+Vous remarquerez que le projet Next.js est automatiquement muni d'un fichier `.gitignore`. Il est parfait
+pour nos besoins car il permettra d'ignorer les documents lourds comme `node_modules`.
+
+Vous pourrez donc faire un premier **commit** pour l'ajout initial du projet Next.js.
+
+<center>![Commit dans le repository](../../static/img/cours1/commit_react.png)</center>
+
+On peut également faire son premier push.
 
 <center>![Push le repository](../../static/img/cours1/git4.png)</center>
 
 #### 🐑🐑 Cloner un repo pour poursuivre son travail plus tard
 
-Toutes les fois suivantes où vous **clonerez** votre repository, la première chose à faire ensuite sera d'utiliser la commande `npm install` dans votre projet Angular pour générer le dossier `node_modules` ! Gardez à l'esprit que ce dossier sera toujours absent après avoir cloné un projet à cause (ou plutôt grâce) du `.gitignore`.
+Toutes les fois suivantes où vous **clonerez** votre repository, la première chose à faire ensuite sera d'utiliser la commande `npm install` dans votre projet Next.js pour générer le dossier `node_modules` ! Gardez à l'esprit que ce dossier sera toujours absent après avoir cloné un projet à cause du `.gitignore`.
