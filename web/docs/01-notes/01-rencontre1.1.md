@@ -87,6 +87,12 @@ de connexion** à la base de données et aux requêtes SQL)
 
 :::
 
+:::info
+
+Contrairement à Angular et Vue, React n'est pas vraiment un **framework client**, mais plutôt une **librairie**. (Avec moins de fonctionnalités qu'Angular et Vue) Des frameworks comme **Next.js**, **Gatsby**, **Vite.js**, etc. sont construits autour de la librairie React.
+
+:::
+
 ### 🛠 Outil à installer (à la maison seulement)
 
 ⛔ Ces outils sont déjà installés à l'école. Cette section n'est pertinente qu'à la maison. 🏠
