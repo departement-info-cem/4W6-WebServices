@@ -1,19 +1,207 @@
 # Cours 2 - Composant dynamique
 
-Ce cours aborde l'interaction entre la classe TypeScript d'un composant et son template HTML.
+Ce cours aborde l'interaction entre le code TypeScript d'un composant et son code HTML.
 
-* Boucles (Afficher une liste)
+* Changer un état
+* Boucles (Afficher une liste / un tableau)
 * Conditions
 * Événements
 * Formulaires
 
-### 💫 Boucles *ngFor
+## ✏ Changer un état
+
+Au **cours 1**, nous avions abordé les **états** (Variable qui peut être affichée dans le HTML d'un composant)
+
+```tsx showLineNumbers
+'use client';
+
+import { useState } from "react";
+
+export default function Home() {
+
+  const [favoriteColor, setFavoriteColor] = useState("indigo"); // État
+  const [daysWithoutWorkAccident, setDaysWithoutWorkAccident] = useState(0); // État
+
+  return (
+    <div className="m-2">
+        <p>Salut. Tu aimes la couleur {favoriteColor}</p>
+        <p>Il y a eu {daysWithoutWorkAccident} jour(s) sans accident au travail.</p>
+    </div>
+  );
+}
+```
+
+<center>![Affichage d'un état en react](../../static/img/cours2/state.png)</center>
+
+Pour **modifier** la valeur d'un état, il faudra utiliser le `set...` de sa déclaration. Exemple :
+
+```tsx showLineNumbers
+function whateverFunction() : void{
+  setFavoriteColor("cramoisi"); // favoriteColor vaudra maintenant "cramoisi"
+  setDaysWithoutWorkAccident(daysWithoutWorkAccident + 1); // On augmente la valeur de 1
+}
+```
+
+:::warning
+
+⛔ Il est **impossible** de modifier un **état** comme ceci :
+
+```tsx
+favoriteColor = "cramoisi";
+daysWithoutWorkAccident++;
+```
+
+:::
+
+:::info
+
+> Pourquoi est-ce aussi compliqué de manipuler des états ? 😠
+
+Cette manière de procéder aide **React** à mettre à jour le rendu visuel de la page Web de façon **plus performante**, sans avoir à recompiler tous les états et tous les éléments de la page Web. Ce mode opératoire indique à React **qu'est-ce qui doit changer**.
+
+Il existe toutefois des librairies comme **Immer** qui permet de simplifier certaines mutations d'état. Cela peut devenir une solution intéressante pour un projet avec des états particulièrement sophistiquées. (Ce qui sera rarement notre cas)
+
+:::
+
+### 😵 Changer une propriété dans un objet
+
+Disons qu'on a l'état suivant, qui contient un **objet** :
+
+```tsx
+const [npc, setNpc] = useState(new Npc("Khajiit", "Khajiit has wares... if you have coin.", 176));
+```
+
+Pour modifier **la moindre propriété** de cet objet, il faudra malheureusement **le recréer en entier** !
+
+```tsx showLineNumbers
+function whateverFunction() : void{
+  // On veut seulement augmenter son âge de 1 !
+  setNpc(new Npc(npc.name, npc.dialog, npc.age + 1));
+}
+```
+
+On voit qu'on a dû récupérer son ancien `name` et son ancienne `quote` en recréant l'objet.
+
+:::warning
+
+⛔ Encore une fois, il est **impossible** de modifier un **état** qui contient un objet comme ceci :
+
+```tsx
+npc.age = npc.age + 1;
+```
+
+(Ça compile, mais appeler la fonction ne changera rien dans la page, **visuellement**.)
+
+:::
+
+:::tip
+
+✨ Il existe un raccourci pour ne pas avoir à remplir les propriétés **qu'on ne souhaitait pas changer** :
+
+```tsx showLineNumbers
+function whateverFunction() : void{
+  setNpc({
+    ...npc,            // On garde tout comme avant
+    age : npc.age + 1  // sauf l'âge !
+  });
+}
+```
+
+Remarquez l'usage de `...npc` et l'usage d'accolades `{ ... }`.
+
+:::
+
+### 🗄 Changer un tableau
+
+Que ce soit pour **ajouter**, **retirer** ou **modifier** une donnée dans un tableau, il faudra être minutieux également.
+
+Disons qu'on a l'état suivant, qui contient un **tableau** 🥔🍟 :
+
+```tsx showLineNumbers
+const [ingredients, setIngredients] = useState(["patate", "huile d'olive", "sel"]);
+```
+
+:::warning
+
+🚫 Malheureusement, il est **impossible** de faire les manipulations suivantes sur un **état** :
+
+```tsx showLineNumbers
+function whateverFunction() : void{
+  ingredients.push("fécule de maïs"); // Code pour ajouter une donnée à la fin
+  ingredients.pop();                  // Code pour retirer la dernière donnée
+  ingredients.splice(0, 1);           // Code pour retirer la première donnée
+  ingredients[0] = "courgette";       // Code pour modifier la première donnée
+}
+```
+
+(En fait, ça compile, mais ça ne fonctionnera pas, visuellement, dans la page)
+
+:::
+
+#### ✅ Alternatives valides
+
+**Ajouter** une donnée (remarquez `...ingredients` et les crochets `[ ... ]`) :
+
+```tsx showLineNumbers
+function whateverFunction() : void {
+    setIngredients([
+      ...ingredients,   // On conserve les données actuelles
+      "fécule de maïs"  // et on ajoute celle-ci à la fin !
+    ]);
+}
+```
+
+**Retirer** une donnée :
+
+```tsx showLineNumbers
+function whateverFunction() : void {
+    // On garde tout... sauf la dernière donnée
+    setIngredients(ingredients.slice(0, ingredients.length - 1));
+
+    // On garde tout... sauf la première donnée
+    setIngredients(ingredients.slice(1, ingredients.length));
+
+    // On garde tout... sauf une donnée à un index quelconque (i est l'index) 😵
+    let i : number = 5;
+    setIngredients(ingredients.slice(0, i).concat(ingredients.slice(i + 1, ingredients.length)));
+}
+```
+
+**Modifier** une donnée :
+
+```tsx showLineNumbers
+function whateverFunction() : void {
+    let ingredientsCopy : string[] = [...ingredients]; // Copier le tableau dans une variable locale
+    ingredientsCopy[0] = "courgette";                  // Modifier une valeur
+
+    setIngredients(ingredientsCopy);                   // Modifier l'état
+  }
+```
+
+**Modifier** un **tableau d'objets**  :
+
+```tsx showLineNumbers
+const [npcs, setNpcs] = useState([
+    new Npc("Ali", "Allo !", 19),
+    new Npc("Bob", "Bonjour !", 23),
+    new Npc("Camilo", "Ça va ?", 18)
+]);
+
+function whateverFunction(): void {
+    let npcsCopy : Npc[] = [...npcs];       // Copier le tableau dans une variable locale
+    npcsCopy[1].age++;                      // Modifier un objet
+
+    setNpcs(npcsCopy);                      // Modifier l'état
+}
+```
+
+## 💫 Boucles *ngFor
 
 Il faudra d'abord importer un module qui nous permettra d'utiliser la directive `*ngFor` dans le template HTML :
 
 <center>![Importation de CommonModule](../../static/img/cours1/commonModule.png)</center>
 
-#### 👶 Exemple simple
+### 👶 Exemple simple
 
 Disons qu'on souhaite afficher une liste de longueur arbitraire dans la page Web de manière élégante ...
 
@@ -49,7 +237,7 @@ souhaite répéter pour chaque donnée du tableau.
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-#### 🧩 Exemple sophistiqué
+### 🧩 Exemple sophistiqué
 
 Voici un exemple avec un objet personnalisé :
 
@@ -112,7 +300,7 @@ Voici un exemple avec un objet personnalisé :
 
 <center>![Affichage ngFor sophistiqué](../../static/img/cours1/displayNgFor2.png)</center>
 
-### ✅ Conditions *ngIf
+## ✅ Conditions *ngIf
 
 La directive `*ngIf` permet d'afficher un élément HTML (et ses enfants) seulement si une condition est respectée.
 
@@ -120,7 +308,7 @@ Il faudra d'abord importer `CommonModule`, qui nous permettra d'utiliser la dire
 
 <center>![Importation de CommonModule](../../static/img/cours1/commonModule.png)</center>
 
-#### 👶 Exemple simple
+### 👶 Exemple simple
 
 ```ts showLineNumbers
 export class AppComponent {
@@ -140,7 +328,7 @@ Bien entendu, dans ce cas, puisque `userAge` est inférieur à 18, seul le deuxi
 
 <center>![Affichage avec un *ngIf](../../static/img/cours1/displayNgIf.png)</center>
 
-#### 🧩 Exemple sophistiqué
+### 🧩 Exemple sophistiqué
 
 Voici un exemple avec des objets personnalisés :
 
@@ -190,7 +378,7 @@ Remarquez qu'utiliser des conditions ternaires `condition ? valeur_si_vrai : val
 dans certaines situations. Cela dit, le `*ngIf` était incontournable pour rendre l'élément `<span>` optionnel
 à la fin de chaque ligne.
 
-#### 😠 Où est le *ngElse ?
+### 😠 Où est le *ngElse ?
 
 Il n'y a pas de *ngElse à proprement parler, mais il y a tout de même cette alternative :
 
@@ -209,11 +397,11 @@ qui contient un élément enfant avec `*ngFor`)
 
 :::
 
-### 🖱 Événements
+## 🖱 Événements
 
 Angular nous simplifie la vie lorsqu'on souhaite intégrer des écouteurs d'événements à nos pages Web.
 
-#### 👶 Exemple simple
+### 👶 Exemple simple
 
 Par exemple, disons qu'on veut un bouton qui augmente un compteur de 1 et qu'on veut afficher ce compteur...
 
@@ -246,7 +434,7 @@ Résultat : Comme on affiche `{{n}}` dans la page Web, on peut voir la valeur de
 
 <center>![Événement clic](../../static/img/cours1/clickEvent.png)</center>
 
-#### 🧩 Exemple sophistiqué
+### 🧩 Exemple sophistiqué
 
 Commençons par préparer un tableau avec trois `boolean` ainsi qu'une fonction permettant de basculer la
 valeur des booléens dans le tableau :
@@ -293,19 +481,19 @@ de page.
 
 :::
 
-#### 🔍 Autres types d'événements
+### 🔍 Autres types d'événements
 
 En HTML, il existe des tonnes de types d'événements. N'hésitez pas à vérifier la [liste des événements existants](https://www.w3schools.com/jsref/dom_obj_event.asp).
 
 Dans le cadre du cours, nous utiliserons principalement `(click)` et également `(change)` une ou deux fois.
 
-### 📝 Formulaires
+## 📝 Formulaires
 
 Le module `FormsModule` nous donnera accès à certaines directives et gadgets en lien avec les formulaires.
 
 <center>![Module FormsModule](../../static/img/cours1/formsModule.png)</center>
 
-#### ♊ Two-way binding
+### ♊ Two-way binding
 
 Il est possible d'associer une **variable** du composant avec un élément `<input>` du template HTML. C'est-à-dire que si
 la valeur de la **variable** est modifiée dans le code TypeScript, la valeur de l'élément `<input>` sera modifiée également. De plus, si
@@ -352,7 +540,7 @@ Bien entendu, l'élément `<p>` contiendra toujours le même texte que l'input.
 Grâce à ce mécanisme, nous aurons facilement accès à la donnée fournie par l'utilisateur
 en utilisant `this.motPrefere`, n'importe où dans la classe du composant.
 
-#### Exemple de formulaire plus sophistiqué
+### Exemple de formulaire plus sophistiqué
 
 Dans cet exemple, nous utiliserons une classe `Item` et nous permettrons à l'utilisateur d'ajouter plusieurs
 items à son inventaire à l'aide d'un formulaire.
@@ -436,101 +624,7 @@ Voici le résultat final dans la page Web après avoir créé 3 items grâce au 
 
 <center>![Affichage simple d'une liste avec *ngFor](../../static/img/cours1/formulaireEtAffichage.png)</center>
 
-### 🔁 Gadgets syntaxiques supplémentaires
-
-#### ✅ @if
-
-Similaire à `*ngIf`. Peut-être accompagné d'un `@else`.
-
-```ts showLineNumbers
-export class AppComponent{
-
-    isDaytime : boolean = true;
-
-}
-```
-
-```html showLineNumbers
-<div class="tab">
-    @if(isDaytime){
-        <p>Bonjour</p>
-        <button (click)="buy('coffee')">Acheter un café</button>
-    }
-    @else{
-        <p>Bonsoir</p>
-        <button (click)="buy('beer')">Acheter une bière</button>
-    }
-</div>
-```
-
-#### 🔄 @for
-
-Similaire à `*ngFor`. Peut être accompagné d'un `@empty`, qui permet un affichage alternatif si la collection est vide.
-
-```ts showLineNumbers
-export class AppComponent{
-
-    ingredients : string[] = ["farine", "beurre", "lait", "ongles d'orteil"];
-
-}
-```
-
-```html showLineNumbers
-<div class="recipe">
-    @for(i of ingredients; track $index){
-        <p>{{i}}</p>
-    }
-    @empty{
-        <p>La liste n'ingrédients n'a pas pu être chargée. Veuillez ressayer.</p>
-    }
-</div>
-```
-
-L'instruction `track $...` est nécessaire. Elle permet à Angular d'associer chaque élément de la
-collection avec la partie répétée du HTML qui lui est associée. (Par exemple, dans ce cas, chaque
-élément de la liste `ingredients` est associée à un élément `<p>`)
-
-Si une liste est statique (c'est-à-dire qu'aucun élément ne sera ajouté, modifié ou retiré), on peut
-se contenter d'utiliser `track $index`. Si la liste est dynamique, dans ce cas, on doit utiliser une
-propriété unique à chaque élément de la liste. (Donc `track $i.id` la plupart du temps, mais dans ce 
-cas comme c'est une liste de `string` et qu'un `string` n'a pas de sous-propriété, c'est impossible.)
-
-Bref, pour une liste statique, utilisez `track $index` et pour une liste dynamique d'objet personnalisé,
-tentez de trouver une propriété unique à _tracker_. Cela améliorera la performance de l'application Angular,
-surtout si votre liste contient énormément d'éléments.
-
-#### 👉 @switch
-
-Similaire à `*ngIf`. Le bloc `@default` est facultatif.
-
-```ts showLineNumbers
-export class AppComponent{
-
-    roomCapacity : number = 4;
-
-}
-```
-
-```html showLineNumbers
-<div class="roomPricing">
-    @switch(roomCapacity){
-        @case(1){
-            <p>Prix : 125$</p>
-        }
-        @case(2){
-            <p>Prix : 175$</p>
-        }
-        @case(4){
-            <p>Prix : 225$</p>
-        }
-        @default{
-            <p>Damn vous êtes cooked ça coûte 400$+</p>
-        }
-    }
-</div>
-```
-
-### ❓ Est-ce du TypeScript ou du HTML ?
+## ❓ Est-ce du TypeScript ou du HTML ?
 
 Prenons ce composant et son HTML :
 
@@ -549,7 +643,7 @@ export class AppComponent{
 La classe sera-t-elle `n` ou `allo` ? Dans ce cas, le `n` ne sera pas interprété comme du TypeScript, 
 alors le HTML final sera bel et bien `class="n"`.
 
-#### ⚙ C'est du TypeScript lorsque...
+### ⚙ C'est du TypeScript lorsque...
 
 * L'attribut existe seulement avec Angular (`(click)`, `*ngIf`, `[(ngModel)]`, etc.)
 * Des accolades doubles `{{ ... }}` ont été utilisées.
@@ -564,7 +658,7 @@ dans le rendu final du HTML.
 <p id="{{itemName}}">Article</p>
 ```
 
-#### 📜 C'est du HTML lorsque...
+### 📜 C'est du HTML lorsque...
 
 * L'attribut est natif en HTML, aucun crochet `[ ... ]` n'encadre l'attribut et il n'y a pas de 
 double accolades `{{ ... }}` qui encadrent la valeur de l'attribut.
@@ -577,7 +671,7 @@ leur valeur dans le rendu final du HTML. Le HTML sera affiché tel quel !
 <p id="itemName">Article</p>
 ```
 
-#### 📝 Chaîne de caractères dans le HTML
+### 📝 Chaîne de caractères dans le HTML
 
 :::note
 

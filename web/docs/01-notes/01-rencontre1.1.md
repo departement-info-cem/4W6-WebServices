@@ -17,7 +17,7 @@ Quand on envoie une requête HTTP au serveur sur lequel l'application ASP.NET Co
 nous renvoie seulement les données à afficher (vidéos, images, morceaux de texte, etc.) sous forme 
 de JSON ou de XML et l'application React s'occupera de « pluguer » les données dans le HTML. 📦🔍
 
-![Résultat d'une requête HTTP avec client React](../../static/img/cours1/with_angular.png)
+![Résultat d'une requête HTTP avec client React](../../static/img/cours1/with_react.png)
 
 Pour que le navigateur de l'utilisateur ait accès au client React, le serveur doit lui envoyer le
 projet React en entier lorsque l'utilisateur fait sa première requête au site Web.
@@ -568,7 +568,7 @@ export default function Home(){
   ...
 
 }
-``` 
+```
 
 :::
 
@@ -663,7 +663,7 @@ export class Npc{
 
     constructor(
         public name : string,
-        public dialogue : string,
+        public quote : string,
         public age : number
     ){}
 
@@ -685,10 +685,10 @@ import { Npc } from "./_types/npc";
 
 export default function Home() {
 
-  const [npc, setNpc] = useState(new Npc("Khajiit", "Khajiit has was... if you have coin.", 176));
+  const [npc, setNpc] = useState(new Npc("Khajiit", "Khajiit has wares... if you have coin.", 176));
 
   return (
-    <div>{npc.name} est un NPC de {npc.age} an(s) dont le dialogue est « {npc.dialogue} »</div>
+    <div>{npc.name} est un NPC de {npc.age} an(s) dont le dialogue est « {npc.quote} »</div>
   );
 }
 
