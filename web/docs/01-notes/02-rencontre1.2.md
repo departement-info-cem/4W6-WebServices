@@ -303,38 +303,65 @@ Voici un exemple avec un objet personnalisé :
 
 ## ✔ Affichage conditionnel
 
-La directive `*ngIf` permet d'afficher un élément HTML (et ses enfants) seulement si une condition est respectée.
-
-Il faudra d'abord importer `CommonModule`, qui nous permettra d'utiliser la directive `*ngIf` dans le template HTML :
-
-<center>![Importation de CommonModule](../../static/img/cours1/commonModule.png)</center>
-
 ### 👶 Exemple simple
 
-```ts showLineNumbers
-export class AppComponent {
-    
-    userAge : number = 17;
+```tsx showLineNumbers
+// Âge de l'utilisateur
+const [userAge, setUserAge] = useState(18);
 
+function displayButtons(){
+
+  // Boutons pour les 18+
+  if(userAge >= 18){
+    return <div>
+      <button className="btn btn-blue mr-2">Acheter des cigarettes 🚬</button>
+      <button className="btn btn-blue">Acheter des briques 🧱</button>
+    </div>;
+  }
+  // Boutons pour les 17-
+  else{
+    return <button className="btn btn-blue">Acheter des briques 🧱</button>;
+  }
 }
+
+// Rendu HTML
+return (
+  <div className="m-2">
+    {displayButtons()}
+  </div>
+);
 ```
 
-```html showLineNumbers
-<button *ngIf="userAge >= 18">Acheter des cigarettes 🚬</button>
+Bien entendu, dans ce cas, puisque `userAge` est supérieur ou égal à 18, les deux boutons s'afficheront.
 
-<button>Acheter des belles briques 🧱</button>
+<center>![Affichage condition](../../static/img/cours2/displayCondition.png)</center>
+
+:::tip
+
+Il est également possible d'utiliser un *stratagème syntaxtique* suivant la forme `booléen && expression` pour éviter d'avoir à créer une fonction :
+
+```tsx showLineNumbers
+return (
+  <div className="m-2">
+    {
+      userAge >= 18 && <button className="btn btn-blue mr-2">Acheter des cigarettes 🚬</button>
+    }
+    <button className="btn btn-blue">Acheter des briques 🧱</button>
+  </div>
+);
 ```
 
-Bien entendu, dans ce cas, puisque `userAge` est inférieur à 18, seul le deuxième bouton s'affichera.
+Le résultat est identique : 
+<center>![Affichage condition](../../static/img/cours2/displayCondition.png)</center>
 
-<center>![Affichage avec un *ngIf](../../static/img/cours1/displayNgIf.png)</center>
+:::
 
 ### 🧩 Exemple sophistiqué
 
 Voici un exemple avec des objets personnalisés :
 
 <Tabs>
-    <TabItem value="class" label="Classe personnalisée" default>
+    <TabItem value="class" label="Classe" default>
     ```ts showLineNumbers
     export class Youtuber{
 
@@ -347,182 +374,231 @@ Voici un exemple avec des objets personnalisés :
     }
     ```
     </TabItem>
-    <TabItem value="componentClass" label="Classe du composant" default>
-    ```ts showLineNumbers
-    export class AppComponent {
+    <TabItem value="componentClass" label="Composant" default>
+```tsx showLineNumbers
+const [youtubers, setYoutubers] = useState([
+  new Youtuber("MotherSniperZz", "Call of Duty gaming", 16),
+  new Youtuber("Ka$haStudioASMR", "ASMR", 24),
+  new Youtuber("SussyBaka69", "NSFW", null),
+  new Youtuber("Bl0ck4L1f3", "LEGO Collection", 47)
+]);
 
-        youtubers : Youtuber[] = [
-            new Youtuber("MotherSniperZz", "Call of Duty gaming", 16),
-            new Youtuber("Ka$haStudioASMR", "ASMR", 24),
-            new Youtuber("SussyBaka69", "NSFW", null),
-            new Youtuber("Bl0ck4L1f3", "LEGO Collection", 47)
-        ];
+// Ajouter l'émoji 😳 si le contenu est suspect
+function isSussy(content : string){
+  if(content == "ASMR" || content == "NSFW"){
+    return <span>😳</span>;
+  }
+  else{
+    return "";
+  }
+}
 
-    }
-    ```
-    </TabItem>
-    <TabItem value="componentHtml" label="Template HTML" default>
-    ```html showLineNumbers
-    <ul>
-        <li *ngFor="let y of youtubers">
-            {{y.name}} ({{y.age != null ? y.age + ' ans' : 'âge inconnu'}}) fait des vidéos sur le thème 
-            « {{y.content}} » <span *ngIf="y.content == 'ASMR' || y.content == 'NSFW'">😳</span>
-        </li>
+// Rendu HTML
+return (
+  <div className="m-2">
+    <div className="text-2xl">Youtubeurs</div>
+    <ul className="list-disc ml-4">
+      {youtubers.map((y) =>
+        <li key={y.name}>{y.name} ({y.age ?? '???'} ans) fait des vidéos sur le thème « {y.content} » {isSussy(y.content)}</li>
+      )}
     </ul>
-    ```
+  </div>
+);
+```
     </TabItem>
 </Tabs>
 
-<center>![Affichage avec *ngIf](../../static/img/cours1/displayNgIf2.png)</center>
+<center>![Affichage conditionnel avec liste](../../static/img/cours2/displayConditionList.png)</center>
 
-Remarquez qu'utiliser des conditions ternaires `condition ? valeur_si_vrai : valeur_si_faux` est pratique
-dans certaines situations. Cela dit, le `*ngIf` était incontournable pour rendre l'élément `<span>` optionnel
-à la fin de chaque ligne.
+:::info
+
+L'opérateur `??` permet de choisir une valeur différente si jamais la propriété `y.age` est `null`. Ça a permis d'afficher `???` pour `SussyBaka69` puisque son âge est `null`
+
+:::
+
+:::tip
+
+Dans la fonction `isSussy()`, on aurait également pu utiliser une condition ternaire, bien entendu. C'est pas mal plus léger :
+
+```tsx showLineNumbers
+function isSussy(content : string){
+  return content == "ASMR" || content == "NSFW" ? <span>😳</span> : "";
+}
+```
+
+Il est même possible d'intégrer directement la condition ternaire dans le rendu HTML (plus besoin de la fonction `isSussy()` !) :
+
+```tsx showLineNumbers
+<li key={y.name}>{y.name} ({y.age ?? '???'} ans) fait des vidéos sur le thème « {y.content} » {y.content == "ASMR" || y.content == "NSFW" ? <span>😳</span> : ""}</li>
+```
+
+:::
 
 ## 🖱 Événements
 
-Angular nous simplifie la vie lorsqu'on souhaite intégrer des écouteurs d'événements à nos pages Web.
+React nous simplifie la vie lorsqu'on souhaite intégrer des **écouteurs d'événements** à nos pages Web.
 
 ### 👶 Exemple simple
 
 Par exemple, disons qu'on veut un bouton qui augmente un compteur de 1 et qu'on veut afficher ce compteur...
 
-D'abord, créons une variable de classe pour stocker la valeur du compteur et une fonction qui permet 
-d'incrémenter cette variable.
+D'abord, créons un état pour stocker la valeur du compteur et une fonction qui permet d'incrémenter cet état.
 
-```ts showLineNumbers
-export class AppComponent {
+```tsx showLineNumbers
+const [x, setX] = useState(0);
 
-  n : number = 0;
-
-  count() : void{
-    this.n++;
-  }
-
+function incrementX(){
+  setX(x + 1);
 }
 ```
 
-Ensuite, dans le template HTML, on ajoute un écouteur d'événements de type `click` sur un bouton pour
-appeler la fonction `count()` à chaque fois que le bouton est **cliqué**.
+Ensuite, dans le rendu HTML, on ajoute un écouteur d'événements de type `onClick` sur un bouton pour
+appeler la fonction `incrementX()` à chaque fois que le bouton est **cliqué**.
 
-```html showLineNumbers
-<button (click)="count()">+1</button>
-
-<p>Compteur : {{n}}</p>
+```tsx showLineNumbers
+return (
+  <div className="m-2">
+    <div>{x}</div>
+    <button className="btn btn-blue" onClick={incrementX}>Incrémenter X</button>
+  </div>
+);
 ```
 
-Résultat : Comme on affiche `{{n}}` dans la page Web, on peut voir la valeur de `n` évoluer dynamiquement
+Résultat : Comme on affiche `{x}` dans la page Web, on peut voir la valeur de `x` évoluer dynamiquement
 à chaque fois qu'on appuie sur le bouton.
 
-<center>![Événement clic](../../static/img/cours1/clickEvent.png)</center>
+<center>![Événement clic](../../static/img/cours2/displayEvent.png)</center>
 
-### 🧩 Exemple sophistiqué
+:::warning
 
-Commençons par préparer un tableau avec trois `boolean` ainsi qu'une fonction permettant de basculer la
-valeur des booléens dans le tableau :
+⛔ Dans un écouteur d'événements, il n'est pas possible d'appeler une fonction **avec paramètre(s)** comme ceci :
 
-```ts showLineNumbers
-export class AppComponent {
-
-  displayTexts : boolean[] = [false, false, false];
-
-  toggleText(index : number) : void{
-    if(index < 0 || index >= this.displayTexts.length) return; // Ignorer si index outOfRange
-    this.displayTexts[index] = !this.displayTexts[index]; // Inverser un booléen
-  }
-
-}
+```tsx showLineNumbers
+<button onClick={maFonction("param1", "param2")}>Clique-moi</button>
 ```
 
-Ensuite, dans le template HTML, on veut trois boutons qui permettent chacun d'afficher / de cacher un texte spécifique.
+✅ Pour y arriver, il faut utiliser une **fonction anonyme** qui permet de contourner cette contrainte :
 
-```html showLineNumbers
-<p (click)="toggleText(0)">Afficher / cacher texte 1</p>
-<p (click)="toggleText(1)">Afficher / cacher texte 2</p>
-<p (click)="toggleText(2)">Afficher / cacher texte 3</p>
-
-<p *ngIf="displayTexts[0]">Yo, ça vibe ? Ou ben c'est mid rn ?</p>
-<p *ngIf="displayTexts[1]">Man c'te shit là est bussin' fr no cap</p>
-<p *ngIf="displayTexts[2]">C'est W af apprendre des new shits</p>
+```tsx showLineNumbers
+<button onClick={() => maFonction("param1", "param2")}>Clique-moi</button>
 ```
 
-En gros, grâce aux booléens dans le tableau `displayTexts` et à l'usage de la directive `*ngIf`, les trois `<p>` du haut
-permettent de basculer les booléens du tableau entre `true` et `false` pour gérer l'affichage de chacun des textes. Par
-défaut, comme nous avions mis les trois booléens à `false`, les trois textes seront initialement cachés.
-
-Voici l'état de la page si on a cliqué pour afficher les textes 1 et 3 : 
-
-<center>![Événement clic](../../static/img/cours1/clickEvent2.png)</center>
-
-:::note
-
-L'écouteur d'événements `(click)` a été intégré à un élément `<p>` cette fois. Gardez à l'esprit qu'on peut mettre
-un écouteur d'événements sur la grande majorité des types d'éléments HTML sans problème. Il y a quelques exceptions...
-On pourrait éviter de mettre `(click)` dans un élément `<a>` puisque cet élément est déjà cliquable et permet de changer
-de page.
+(Donc on a simplement ajouté `() =>` devant l'appel de la fonction)
 
 :::
 
-### 🔍 Autres types d'événements
+### 🧩 Exemple sophistiqué
 
-En HTML, il existe des tonnes de types d'événements. N'hésitez pas à vérifier la [liste des événements existants](https://www.w3schools.com/jsref/dom_obj_event.asp).
+Bien entendu, `onClick` n'est pas le seul type d'événement. N'hésitez pas à consulter [cette liste](https://www.w3schools.com/jsref/dom_obj_event.asp).
 
-Dans le cadre du cours, nous utiliserons principalement `(click)` et également `(change)` une ou deux fois.
+:::info
 
-## 📝 Formulaires
+Si vous ne connaissez pas déjà les **template string**, voici un exemple :
 
-Le module `FormsModule` nous donnera accès à certaines directives et gadgets en lien avec les formulaires.
+```tsx
+let nom = "Simone";
+let moment = "jour";
 
-<center>![Module FormsModule](../../static/img/cours1/formsModule.png)</center>
+// phrase contient "Hey ! Bonjour Simone"
+let phrase = `Hey ! ${moment == "jour" ? "Bonjour" : "Bonsoir"} ${nom}`;
+```
 
-### ♊ Two-way binding
+Notez qu'un **template string** est entouré d'**accents graves** `` ` ``
 
-Il est possible d'associer une **variable** du composant avec un élément `<input>` du template HTML. C'est-à-dire que si
-la valeur de la **variable** est modifiée dans le code TypeScript, la valeur de l'élément `<input>` sera modifiée également. De plus, si
-l'utilisateur modifie la valeur dans l'élément `<input>`, la valeur de la **variable** changera également. (Bref, les deux valeurs sont **liées**)
+:::
 
-On doit d'abord créer une variable dans le composant. Notez que dans certains cas il faudra permettre à la variable d'être `undefined`, mais
-comme ici nous avons un `string`, la chaîne vide `""` fait le travail.
+Ci-dessous, nous avons trois boutons qui peuvent être **survolés** pour changer la classe d'un texte. Remarquez que l'état `textColor` est utilisé comme **classe** pour un **élément HTML** à l'aide d'un **template string**.
 
-```ts showLineNumbers
-export class AppComponent {
+```tsx showLineNumbers
+const [textColor, setTextColor] = useState("blueText");
 
-  motPrefere : string = "";
+function changeTextColor(color : string){
+  setTextColor(color);
+}
 
+// Rendu HTML
+return (
+  <div className="m-2">
+    <div className={`${textColor} mb-1`}>Ce texte peut changer de couleur</div>
+    <button className="btn btn-blue mr-2" onMouseOver={() => changeTextColor('blueText')}>Bleu</button>
+    <button className="btn btn-red mr-2" onMouseOver={() => changeTextColor('redText')}>Rouge</button>
+    <button className="btn btn-yellow" onMouseOver={() => changeTextColor('yellowText')}>Jaune</button>
+  </div>
+);
+```
+
+<center>![Événement de survol](../../static/img/cours2/displayEventOver.png)</center>
+
+CSS utilisé pour le texte :
+
+```css showLineNumbers
+.blueText{
+  color:cornflowerblue;
+}
+
+.redText{
+  color:crimson;
+}
+
+.yellowText{
+  color:goldenrod;
 }
 ```
 
-Puis, on prépare un `<input>` HTML. N'oubliez surtout pas de remplir l'attribut `name` ! (Sa valeur peut être arbitraire, mais par convention on peut lui donner le même nom que la variable)
+## 📝 Formulaires
 
-```html showLineNumbers
-<input type="text" name="motPrefere">
+
+
+### ♊ Two-way binding
+
+Il est possible d'associer un **état** du composant avec la valeur d'un élément `<input>` du HTML. C'est-à-dire que si
+la valeur de l'**état** est modifiée dans le code TypeScript, la valeur de l'élément `<input>` sera modifiée également. De plus, si
+l'utilisateur modifie la valeur dans l'élément `<input>`, la valeur de l'**état** changera également. (Bref, les deux valeurs sont **liées**)
+
+On doit d'abord créer un **état** dans le composant.
+
+```tsx
+const [favoriteWord, setFavoriteWord] = useState("");
 ```
 
-Pour le moment, la variable du composant et l'input HTML ne sont **pas liés du tout**. La prochaine étape concrétisera le _two way binding_.
+Puis, on prépare un `<input>` HTML :
 
-Ajoutez l'attribut `[(ngModel)]` (les parenthèses et crochets sont essentiels) suivi du nom de la variable que vous avez créée dans le composant :
-
-```html showLineNumbers
-<input type="text" name="motPrefere" [(ngModel)]="motPrefere">
+```html
+<input type="text" className="textInput" name="favoriteWord" placeholder="Mot préféré" />
 ```
 
-Désormais, la variable et l'input sont bel et bien liés : leur valeur sera toujours synchronisée. On peut tester visuellement
+Pour le moment, l'**état** et l'input HTML ne sont **pas liés du tout**. La prochaine étape concrétisera le _two way binding_.
+
+Ajoutez l'événement `onChange` suivant et l'attribut `value` suivant :
+
+```tsx
+<input value={favoriteWord} onChange={(e) => setFavoriteWord(e.target.value)} type="text" className="textInput" name="favoriteWord" placeholder="Mot préféré" />
+```
+
+Désormais, l'**état** et l'input sont bel et bien liés : leur valeur sera toujours synchronisée, car **dès que l'`input` change, l'état changera aussi**. On peut tester visuellement
 cette synchronisation en modifiant le HTML comme ceci :
 
-```html showLineNumbers
-<input type="text" name="motPrefere" [(ngModel)]="motPrefere">
+```tsx showLineNumbers
+const [favoriteWord, setFavoriteWord] = useState("");
 
-<p>{{motPrefere}}</p>
+return (
+  <div className="m-2">
+    <input value={favoriteWord} onChange={(e) => setFavoriteWord(e.target.value)}  type="text" className="textInput" name="favoriteWord" placeholder="Mot préféré" />
+    <div>{favoriteWord}</div>
+  </div>
+);
 ```
 
-Bien entendu, l'élément `<p>` contiendra toujours le même texte que l'input.
+Bien entendu, l'élément `<div>` contiendra toujours le même texte que l'input.
 
-<center>![Usage d'ngModel](../../static/img/cours1/ngModel.png)</center>
+<center>![Two-way binding](../../static/img/cours2/twoWayBinding_1.png)</center>
+
+<center>![Two-way binding](../../static/img/cours2/twoWayBinding_2.png)</center>
 
 Grâce à ce mécanisme, nous aurons facilement accès à la donnée fournie par l'utilisateur
-en utilisant `this.motPrefere`, n'importe où dans la classe du composant.
+dans l'état `favoriteWord`.
 
-### Exemple de formulaire plus sophistiqué
+### 🧩 Exemple de formulaire plus sophistiqué
 
 Dans cet exemple, nous utiliserons une classe `Item` et nous permettrons à l'utilisateur d'ajouter plusieurs
 items à son inventaire à l'aide d'un formulaire.
@@ -542,140 +618,107 @@ export class Item{
 }
 ```
 
-Dans la classe du composant, on a une variable prête à accueillir la donnée fournie par l'utilisateur
+Dans le composant, on a un **état** prêt à accueillir la donnée fournie par l'utilisateur
 pour chacun des quatre champs et une liste qui contiendra tous les items créés par l'utilisateur :
 
-```ts showLineNumbers
-export class AppComponent {
+```tsx showLineNumbers
+const [name, setName] = useState<string>("");
+const [dateAdded, setDateAdded] = useState<string>("");
+const [quantity, setQuantity] = useState<number>(1);
+const [isBroken, setIsBroken] = useState<boolean>(false);
 
-  name : string = "";
-  dateAdded ?: Date;
-  quantity : number = 1;
-  isBroken : boolean = false;
-
-  items : Item[] = [];
-
-}
+const[items, setItems] = useState<Item[]>([]); // Tableau d'items vide
 ```
 
-Dans le HTML, on crée quatre `<input>` adapté à chaque propriété et on utilise `[(ngModel)]` pour faire
-la liaison avec les variables de classe. Remarquez que les valeurs par défaut choisies pour les variables de
-classe (nom vide, date indéfinie, quantité à 1 et item pas brisé) se reflètent dans l'état initial du formulaire.
+:::tip
+
+`useState<T>()` permet de spécifier le **type** ( `T` ) d'un état. Dans ce cas-ci c'est uniquement essentiel pour `items` puisque le tableau est **vide** initialement et ne permet pas de témoigner du **type d'objets** qu'il contiendra. `Item[]` signifie **tableau d'`Item`**.
+
+:::
+
+Dans le HTML, on crée quatre `<input>` adaptés à chaque propriété et on utilise `onChange` et `value` pour faire
+la liaison avec les **états**. Remarquez que les valeurs par défaut choisies pour les variables de
+classe (nom `""`, date `""`, quantité à `1` et item *pas brisé*) se reflètent dans l'état initial du formulaire.
 
 <Tabs>
     <TabItem value="html" label="Code HTML" default>
-    ```html showLineNumbers
-    Nom de l'item : <input type="text" name="name" [(ngModel)]="name"><br>
-    Quantité : <input type="number" name="quantity" [(ngModel)]="quantity"><br>
-    L'item est-il brisé ? <input type="checkbox" name="isBroken" [(ngModel)]="isBroken"><br>
-    Date d'acquisition : <input type="date" name="dateAdded" [(ngModel)]="dateAdded"><br>
+    ```tsx showLineNumbers
+    Nom : <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="textInput" />
+    Date d'ajout : <input type="date" value={dateAdded}  onChange={(e) => setDateAdded(e.target.value)} className="textInput" />
+    Quantité : <input type="number" value={quantity}  onChange={(e) => setQuantity(+e.target.value)} className="textInput" />
+    Brisé ? : <input type="checkbox" checked={isBroken}  onChange={(e) => setIsBroken(e.target.checked)} className="textInput" />
     ```
     </TabItem>
     <TabItem value="ui" label="Page Web" default>
-    ![Formulaire pour créer un item](../../static/img/cours1/form.png)
+    ![Formulaire pour créer un item](../../static/img/cours2/form.png)
     </TabItem>
 </Tabs>
 
+:::info
+
+Ci-dessus, l'opérateur `+` dans l'expression `setQuantity(+e.target.value)` permet de convertir le `string` du champ en `number`.
+
+:::
+
 Ensuite, sous le formulaire, on a besoin d'un bouton qui permettra à l'utilisateur de créer son item pour l'ajouter à la liste d'items :
 
-```html
-<button (click)="ajouterItem()">Ajouter l'item à l'inventaire</button>
+```tsx
+<button className="btn btn-blue" onClick={addItem}>Ajouter</button>
 ```
 
-Nous allons devoir coder la fonction `ajouterItem()` dans le composant. Elle va simplement créer un `new Item(...)`
-à l'aide des données fournies par l'utilisateur. Ce nouvel item sera ajouté à la liste dans la variable de classe `items`.
+Nous allons devoir coder la fonction `addItem()` dans le composant. Elle va simplement créer un `new Item(...)`
+à l'aide des données fournies par l'utilisateur. Ce nouvel item sera ajouté à la liste dans l'état `items` :
 
-```ts
-ajouterItem(){
-    // Une valeur invalide ? On s'arrête
-    if(this.name == "" || this.dateAdded == undefined || this.quantity < 1) return;
-
-    let newItem : Item = new Item(this.name, this.dateAdded, this.quantity, this.isBroken);
-    this.items.push(newItem);
+```tsx showLineNumbers
+function addItem(){
+  setItems([
+    ...items,
+    new Item(name, new Date(dateAdded), quantity, isBroken)
+  ]);
 }
 ```
 
-Avant de tester, on prépare un affichage simple quelque part dans le HTML pour la liste d'items :
+Avant de tester, on prépare un affichage quelque part dans le HTML pour la liste d'items :
 
-```html
-<p *ngFor="let i of items">L'item {{i.name}} (x{{i.quantity}}{{i.isBroken ? ', brisé' : ''}}) 
-    a été acquis le {{i.dateAdded}}</p>
+```tsx showLineNumbers
+<ul className="list-disc ml-6 mb-5">
+  {items.map((i) => <li key={i.name}>{i.quantity} x {i.name} (Obtenu le {i.dateAdded.toLocaleDateString()}) ({i.isBroken ? 'Brisé' : 'Intact'})</li>)}
+</ul>
 ```
 
 Voici le résultat final dans la page Web après avoir créé 3 items grâce au formulaire :
 
-<center>![Affichage simple d'une liste avec *ngFor](../../static/img/cours1/formulaireEtAffichage.png)</center>
+<center>![Affichage d'une liste avec formulaire](../../static/img/cours2/formList.png)</center>
 
-## ❓ Est-ce du TypeScript ou du HTML ?
+**Code complet** :
 
-Prenons ce composant et son HTML :
+```tsx showLineNumbers
+const [name, setName] = useState<string>("");
+const [dateAdded, setDateAdded] = useState<string>("");
+const [quantity, setQuantity] = useState<number>(1);
+const [isBroken, setIsBroken] = useState<boolean>(false);
 
-```ts showLineNumbers
-export class AppComponent{
+const[items, setItems] = useState<Item[]>([]); // Tableau d'items vide
 
-    n : string = "allo";
-
+function addItem(){
+  setItems([
+    ...items,
+    new Item(name, new Date(dateAdded), quantity, isBroken)
+  ]);
 }
+
+return (
+  <div className="m-2">
+    <div className="text-2xl">Items :</div>
+    <ul className="list-disc ml-6 mb-5">
+      {items.map((i) => <li key={i.name}>{i.quantity} x {i.name} (Obtenu le {i.dateAdded.toLocaleDateString()}) ({i.isBroken ? 'Brisé' : 'Intact'})</li>)}
+    </ul>
+    <div className="text-xl">Créer un item : </div>
+    Nom : <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="textInput" />
+    Date d'ajout : <input type="date" value={dateAdded}  onChange={(e) => setDateAdded(e.target.value)} className="textInput" />
+    Quantité : <input type="number" value={quantity}  onChange={(e) => setQuantity(+e.target.value)} className="textInput" />
+    Brisé ? : <input type="checkbox" checked={isBroken}  onChange={(e) => setIsBroken(e.target.checked)} className="textInput" />
+    <button className="btn btn-blue" onClick={addItem}>Ajouter</button>
+  </div>
+);
 ```
-
-```html showLineNumbers
-<p class="n">Bonjour</p>
-```
-
-La classe sera-t-elle `n` ou `allo` ? Dans ce cas, le `n` ne sera pas interprété comme du TypeScript, 
-alors le HTML final sera bel et bien `class="n"`.
-
-### ⚙ C'est du TypeScript lorsque...
-
-* L'attribut existe seulement avec Angular (`(click)`, `*ngIf`, `[(ngModel)]`, etc.)
-* Des accolades doubles `{{ ... }}` ont été utilisées.
-* L'attribut est natif en HTML, mais des crochets `[ ... ]` l'encadrent.
-
-Ci-dessous, les variables `theme`, `age` et `itemName` seront toutes remplacées par leur valeur
-dans le rendu final du HTML.
-
-```html showLineNumbers
-<p [class]="theme">Salut</p>
-<p *ngIf="age >= 18">🍷🍺🍸</p>
-<p id="{{itemName}}">Article</p>
-```
-
-### 📜 C'est du HTML lorsque...
-
-* L'attribut est natif en HTML, aucun crochet `[ ... ]` n'encadre l'attribut et il n'y a pas de 
-double accolades `{{ ... }}` qui encadrent la valeur de l'attribut.
-
-Cette fois-ci, ci-dessous, les variables `theme` et `itemName` ne seront pas remplacées par
-leur valeur dans le rendu final du HTML. Le HTML sera affiché tel quel !
-
-```html showlineNumbers
-<p class="theme">Salut</p>
-<p id="itemName">Article</p>
-```
-
-### 📝 Chaîne de caractères dans le HTML
-
-:::note
-
-**Rappel** : Un élément HTML peut contenir plusieurs classes CSS. Il suffit de les séparer par des espaces.
-
-:::
-
-Si jamais on souhaite qu'un attribut contienne un élément hardcodé et du TypeScript, on peut faire comme ceci :
-
-```html showLineNumbers
-<div [class]="'container ' + selectedTheme">
- <!-- Contenu quelconque -->
-</div>
-```
-
-Ci-dessus, grâce aux apostrophes `' ... '`, la partie `container` sera affichée tel quel. (C'est un string) 
-Cela dit, la variable `selectedTheme` sera remplacée par sa valeur. Cela pourrait donner quelque chose
-comme ceci une fois le rendu compilé :
-
-```html showLineNumbers
-<div class="container dark">
- <!-- Contenu quelconque -->
-</div>
-```
-
