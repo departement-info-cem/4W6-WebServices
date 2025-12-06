@@ -195,42 +195,66 @@ function whateverFunction(): void {
 }
 ```
 
-## 💫 Boucles *ngFor
-
-Il faudra d'abord importer un module qui nous permettra d'utiliser la directive `*ngFor` dans le template HTML :
-
-<center>![Importation de CommonModule](../../static/img/cours1/commonModule.png)</center>
+## 🗄 Afficher une liste
 
 ### 👶 Exemple simple
 
 Disons qu'on souhaite afficher une liste de longueur arbitraire dans la page Web de manière élégante ...
 
-```ts showLineNumber
-export class AppComponent {
-  
-  myCatToys : string[] = ["balle", "écouteurs bluetooth", "clé USB", "lacets de chaussures neuves"];
-
-}
+```tsx
+const [ingredients, setIngredients] = useState(["patate", "huile d'olive", "sel"]);
 ```
 
-Nous allons utiliser la directive `*ngFor` dans le template HTML, qui permet de répéter un élément \<?\> pour chaque donnée d'un tableau.
+Nous allons utiliser la fonction `map()` dans le HTML, qui sert à répéter une opération pour **chaque élément** du tableau :
 
-```html showLineNumbers
-<ul>
-    <li *ngFor="let t of myCatToys">{{t}}</li>
+```tsx showLineNumbers
+return (
+    <div className="m-2">
+        <div className="text-2xl">Ingrédients</div>
+        <ul className="list-disc mx-4">
+            {ingredients.map(
+                (i) => <li key={i}>{i}</li>
+            )}
+        </ul>
+    </div>
+);
+```
+
+<center>![Affichage d'une liste](../../static/img/cours2/displayArray.png)</center>
+
+Le morceau de code ci-dessous permet de créer un élément `<li>` pour **chaque donnée** du tableau **ingredients** :
+
+```tsx
+{ingredients.map(
+    (i) => <li key={i}>{i}</li>
+)}
+```
+
+* `i` représente chaque donnée du tableau, séquentiellement. (`"patate"`, puis `"huile d'olive"`, puis `"sel"`)
+* `<li key={i}>{i}</li>` est l'élément HTML qui sera répété pour chaque donnée du tableau.
+* `key` est un attribut **obligatoire** qui doit être rempli avec **une donnée unique** pour chaque élément du tableau. Comme c'est un simple tableau de `string`... chaque `string` lui-même servira de **key** unique.
+
+:::tip
+
+🤔 L'attribut `key` est **obligatoire** car React s'en sert pour **mettre à jour le rendu HTML** lorsqu'un élément du tableau change.
+
+⚠ Si jamais votre liste ne possède aucune **key unique** pouvant identifier chaque donnée, vous pouvez utiliser `key={index}`, qui est moins performant, mais qui dépanne :
+
+```tsx
+const [ages, setAges] = useState([17, 18, 17, 19, 20, 18]); // Certaines valeurs se répètent ...
+```
+
+```tsx showLineNumbers
+<ul className="list-disc mx-4">
+    {ages.map(
+        (i, index) => <li key={index}>{index} - {i}</li>
+        // i contient chaque donnée.
+        // index contient chaque ... index ! (0, 1, 2, etc.)
+    )}
 </ul>
 ```
 
-Le code `let t of myCatToys` permet de créer la variable `t`, qui contiendra la valeur de chaque donnée
-du tableau, une à la fois, dans chaque élément **\<li\>** répété.
-
-<center>![Affichage d'un ngFor](../../static/img/cours1/displayNgFor.png)</center>
-
-:::warning
-
-La directive `*ngFor` doit être intégrée à la balise ouvrante de l'élément HTML que l'on souhaite répéter.
-Ce serait une erreur de mettre le `*ngFor` dans la balise **\<ul\>**, car c'est bel et bien le **\<li\>** qu'on
-souhaite répéter pour chaque donnée du tableau.
+<center>![Affichage d'une liste](../../static/img/cours2/displayArrayIndex.png)</center>
 
 :::
 
@@ -242,65 +266,42 @@ import TabItem from '@theme/TabItem';
 Voici un exemple avec un objet personnalisé :
 
 <Tabs>
-    <TabItem value="class" label="Classe personnalisée" default>
+    <TabItem value="class" label="Classe" default>
     ```ts showLineNumbers
     export class Npc{
 
         constructor(
             public name : string,
-            public dialogue : string,
+            public quote : string,
             public age : number | null
         ){}
 
     }
     ```
     </TabItem>
-    <TabItem value="componentClass" label="Classe du composant" default>
-    ```ts showLineNumbers
-    export class AppComponent {
-    
-        npcs : Npc[] = [
-            new Npc("Khajiit", "Khajiit has wares... if... you have coin.", 176),
-            new Npc("Stanley Parable narrator", "All of his coworkers were gone... what could it mean ?", null),
-            new Npc("Toad", "aaaaaaaaa wa wa wa wa wa", 35),
-            new Npc("Glados", "You look great by the way, very healthy.", null)
-        ];
-
-    }
+    <TabItem value="state" label="État">
+    ```tsx showLineNumbers
+    const [npcs, setNpcs] = useState([
+        new Npc("Ali", "Allo !", 19),
+        new Npc("Bob", "Bonjour !", 23),
+        new Npc("Camilo", "Ça va ?", 18)
+    ])
     ```
     </TabItem>
-    <TabItem value="htmlTemplate" label="Template HTML" default>
-    ```html showLineNumbers
-    <table>
-        <tr>
-            <th>Nom</th><th>Dialogue</th><th>Âge</th>
-        </tr>
-        <tr *ngFor="let n of npcs">
-            <td>{{n.name}}</td><td>{{n.dialogue}}</td><td>{{n.age}}</td>
-        </tr>
-    </table>
-    ```
-    </TabItem>
-    <TabItem value="css" label="CSS du composant" default>
-    ```css showLineNumbers
-    th, td{
-        padding:5px;
-    }
-
-    tr:nth-child(even){
-        background-color:rgb(235, 235, 235);
-    }
-
-    table{
-        border-collapse: collapse;
-    }
+    <TabItem value="htmlTemplate" label="HTML">
+    ```tsx showLineNumbers
+    <ul className="list-disc mx-4">
+        {npcs.map(
+          (n) => <li key={n.name}>{n.name} a {n.age} an(s) et dit « {n.quote} »</li>
+        )}
+    </ul>
     ```
     </TabItem>
 </Tabs>
 
-<center>![Affichage ngFor sophistiqué](../../static/img/cours1/displayNgFor2.png)</center>
+<center>![Affichage d'une liste sophistiqué](../../static/img/cours2/displayArrayObject.png)</center>
 
-## ✅ Conditions *ngIf
+## ✔ Affichage conditionnel
 
 La directive `*ngIf` permet d'afficher un élément HTML (et ses enfants) seulement si une condition est respectée.
 
@@ -377,25 +378,6 @@ Voici un exemple avec des objets personnalisés :
 Remarquez qu'utiliser des conditions ternaires `condition ? valeur_si_vrai : valeur_si_faux` est pratique
 dans certaines situations. Cela dit, le `*ngIf` était incontournable pour rendre l'élément `<span>` optionnel
 à la fin de chaque ligne.
-
-### 😠 Où est le *ngElse ?
-
-Il n'y a pas de *ngElse à proprement parler, mais il y a tout de même cette alternative :
-
-```html showLineNumbers
-<div *ngIf="... condition ... ; else autreChose">Allo</div>
-<ng-template #autreChose><div>Buh-bye</div></ng-template>
-```
-
-Sinon vous avez toujours la possibilité de créer un `*ngIf` avec la condition inverse. 🧠
-
-:::note
-
-Un élément HTML ne peut pas à la fois contenir la directive `*ngIf` et `*ngFor`. Cela dit, rien ne vous
-empêche de mettre un élément enfant avec l'autre directive. (Par exemple, un élément parent avec `*ngIf`
-qui contient un élément enfant avec `*ngFor`)
-
-:::
 
 ## 🖱 Événements
 
