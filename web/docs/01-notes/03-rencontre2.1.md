@@ -35,7 +35,7 @@ En fait, il est possible d'utiliser **Next.js** comme une application **serveur*
 
 :::
 
-### 🌐 Exemple d'API Web
+## 🌐 Exemple d'API Web
 
 :::info
 
@@ -83,7 +83,7 @@ Ce qu'on voit présentement est un **objet JSON**. Nous allons pouvoir extraire 
 de notre choix afin de les afficher dans notre application Angular. Tout ceci sera automatisé avec du code **TypeScript** dans notre
 application.
 
-### ✈ Envoyer une requête
+## ✈ Envoyer une requête
 
 Si on utilise l'URL de la requête qui a été abordé un peu plus haut, ça pourrait ressembler à ceci dans un composant quelconque :
 
@@ -114,7 +114,7 @@ C'est le même **objet JSON** que lorsque nous avions directement testé la requ
 Cependant, cette fois-ci, l'objet JSON a été stocké dans la variable `data` ! On pourrait donc accéder à toutes les données
 de l'objet JSON en manipulant la variable `data` qui a été déclarée dans la fonction `getData()`.
 
-### 📝 Extraire des données de l'objet JSON
+## 📝 Extraire des données de l'objet JSON
 
 Disons qu'on souhaite afficher le **nom de l'artiste** et le **titre de l'album** :
 
@@ -181,7 +181,7 @@ S'il n'y avait pas eu le caractère `#` dans le nom de la propriété `text`, ce
 Hélas, `#` est un symbole spécial délicat et pour pouvoir l'utiliser dans le nom d'une propriété, il faut absolument remplacer la syntaxe
 `.nomPropriété` par `["nomPropriété"]` pour ne pas que le symbole `#` cause un problème.
 
-### 🎨 Intégration des données dans la page Web
+## 🎨 Intégration des données dans la page Web
 
 Faisons le nécessaire pour pouvoir afficher les données que nous avons extraites de **l'objet JSON** dans la page Web.
 
@@ -228,7 +228,7 @@ async function getData() {
 
 <center>![Affichage des données dans le HTML](../../static/img/cours3/affichageData_react.png)</center>
 
-### 📜 Extraire un tableau de données
+## 📜 Extraire un tableau de données
 
 Disons que je souhaite extraire la liste des chansons de **l'objet JSON** (Le titre et la durée en secondes pour
 chaque chanson) ...
@@ -295,6 +295,26 @@ des sous-propriétés `name` et `duration` pour remplir notre état `songs`.
 
 <center>![Parcourir un tableau dans l'objet JSON](../../static/img/cours3/array_react.png)</center>
 
+:::warning
+
+> Pourquoi ne pas avoir appelé `setState` dans la boucle `for` ? Ça aurait permis de ne pas avoir à créer un **tableau temporaire**.
+
+```tsx showLineNumbers
+for(let s of data.album.tracks.track){
+
+  // Ceci ne fonctionne pas !
+  setSongs([
+    ...songs, 
+    new Song(s.name, s.duration)
+  ]);
+
+}
+```
+
+⛔ Ça ne fonctionne pas car `setState()` (ou `setSongs()` ici) ne doit être appelée qu'**une seule fois par fonction**. L'exécution de `setState()` est seulement « concrétisée » après l'appel de la fonction parente (Ici, c'était `getData()`) et tiendra seulement compte du **dernier appel** effectué. (On aurait donc seulement la **dernière** chanson dans le tableau)
+
+:::
+
 #### 🖼 4 - Afficher les données dans le HTML
 
 Comme c'est un tableau, on va utiliser notre ami `map()` pour l'affichage. 😵
@@ -307,110 +327,100 @@ Comme c'est un tableau, on va utiliser notre ami `map()` pour l'affichage. 😵
 
 <center>![Affichage d'un tableau dans le HTML](../../static/img/cours3/affichageArray_react.png)</center>
 
-### 📈 Améliorer la requête
+## 📈 Améliorer la requête
 
-#### ⚡ Lancer la requête dès le chargement de la page Web
+### ⚡ Lancer la requête dès le chargement de la page Web
 
 Dans certaines situations, on souhaite lancer certaines requêtes dès le chargement de la page. (Lorsque vous arrivez
 sur la plupart des sites Web, des informations / articles / images / vidéos sont déjà étalées sur la page Web)
 
-Bien que le `constructor()` d'un composant soit exécuté au chargement de la page, c'est une mauvaise pratique d'utiliser
-le corps du constructeur pour lancer des requêtes. Le constructeur devrait se limiter à des opérations qui sont essentielles
-au fonctionnement de la page et c'est tout.
+Nous allons devoir utiliser la fonction spéciale `useEffect`, qui est automatiquement appelée lorsque le composant est chargé.
 
-Nous allons plutôt utiliser la fonction spéciale `ngOnInit()`, qui est automatiquement appelée après que le constructeur
-ait été exécuté... mais seulement si le **composant implémente l'interface `OnInit`.**
+```tsx showLineNumbers
+export default function Home() {
 
-```ts showLineNumbers
-export class AppComponent implements OnInit { // Remarquez le implements OnInit !
+  // États ...
 
-  constructor(public http : HttpClient){}
+  // Sera appelée une fois, lorsque le composant sera chargé dans la page.
+  useEffect(() => {
 
-  async ngOnInit(){
-    this.getSongs(); // Sera appelée dès que le chargement de la page Web sera terminé.
+    getData();
+
+  }, []);
+
+  // Fonction qui contient la requête
+  async function getData(){
+
+    // ...
+
   }
 
-  async getSongs(){
-    let x = await lastValueFrom(this.http.get<any>("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=9a8a3facebbccaf363bb9fd68fa37abf&artist=Cher&album=Believe&format=json"));
-    console.log(x);
-  }
+  // etc
 
 }
 ```
 
-#### 🔑 Ranger la clé d'API dans une constante
+:::info
+
+`useEffect()` prend deux paramètres : une **fonction** à appeler (dans notre cas, c'est une **fonction anynonyme** qui appelle `getData()`) et un **tableau de dépendances**. (Dans l'exemple, nous n'avons besoin d'aucune dépendance, alors on le laisse vide.)
+
+:::
+
+### 🔑 Ranger la clé d'API dans une constante
 
 Plutôt que de _harcoder_ la clé d'API directement dans la requête, il est préférable  de la ranger dans une constante.
 Ainsi, si on a plusieurs requêtes, il suffira d'y concaténer la constante. De plus, si jamais la clé d'API change ⛔,
 nous n'aurons pas à modifier chaque requête répétitivement.
 
-```ts showLineNumbers
-const lastFmKey = "9a8a3facebbccaf363bb9fd68fa37abf"; // Clé d'API
+```tsx showLineNumbers
+// Clé d'API déclarée EN DEHORS du composant 
+// (Préférable pour une constante qui ne changera jamais)
+const lastFmKey = "9a8a3facebbccaf363bb9fd68fa37abf"; 
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
-})
-export class AppComponent {
+export default function Home() {
 
-  constructor(public http : HttpClient){}
-
-  async getSongs(){
-    let x = await lastValueFrom(this.http.get<any>("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key="+lastFmKey+"&artist=Cher&album=Believe&format=json"));
-    console.log(x);
-  }
+  // ...
 
 }
 ```
 
-:::warning
+Un peu plus loin, dans la ou les requêtes, on **concatène** la **clé d'API** :
 
-Les constantes doivent être déclarées **au-dessus** de la classe du composant. (Au-dessus du bloc `@Component(...)` !)
-
-:::
+```tsx
+let response = await fetch("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key="+lastFmKey+"&artist=Cher&album=Believe&format=json");
+```
 
 Si vous préférez utiliser des `template strings` plutôt que la concaténation avec des `+`, voici une alternative :
 
 ```ts showLineNumbers
-let x = await lastValueFrom(this.http.get<any>(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${lastFmKey}&artist=Cher&album=Believe&format=json`));
+let response = await fetch(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${$lastFmKey}&artist=Cher&album=Believe&format=json`);
 ```
 
-#### 🛒 Personnaliser la requête (Choisir l'input)
+### 🛒 Personnaliser la requête (Choisir l'input)
 
 Dans l'exemple abordé, nous étions toujours obligé de rechercher l'album **Believe** de l'artiste **Cher**. Permettons
 à l'utilisateur de choisir l'artiste et l'album.
 
-On ajoute deux champs dans le HTML et on utilise `[(ngModel)]` pour exploiter le `two-way binding` :
+On ajoute deux états au composant et deux champs dans le HTML et on utilise `onChange` et `value` pour exploiter le `two-way binding` :
 
-```html showLineNumbers
-Artiste : <input type="text" [(ngModel)]="inputArtist"><br>
-Album : <input type="text" [(ngModel)]="inputAlbum"><br>
-<button (click)="getSongs()">Chansons de Believe par Cher</button>
+```tsx showLineNumbers
+const[artistInput, setArtistInput] = useState("");
+const[albumInput, setAlbumInput] = useState("");
 ```
 
-Les variables `inputArtist` et `inputAlbum` sont intégrées à la requête, de manière à ce que les champs remplis
+```tsx showLineNumbers
+Artiste : <input type="text" className="textInput" onChange={(e) => setArtistInput(e.target.value)} value={artistInput} />
+Album : <input type="text" className="textInput" onChange={(e) => setAlbumInput(e.target.value)} value={albumInput} />
+```
+
+Les états `artistInput` et `albumInput` sont intégrées à la requête, de manière à ce que les champs remplis
 par l'utilisateur soient utilisés lors de la recherche.
 
-```ts showLineNumbers
-export class AppComponent {
-
-  inputArtist : string = "";
-  inputAlbum : string = "";
-
-  constructor(public http : HttpClient){}
-
-  async getSongs(){
-    let x = await lastValueFrom(this.http.get<any>(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${lastFmKey}&artist=${this.inputArtist}&album=${this.inputAlbum}&format=json`));
-    console.log(x);
-  }
-
-}
+```tsx showLineNumbers
+fetch(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${lastFmKey}&artist=${artistInput}&album=${albumInput}&format=json`);
 ```
 
-#### ☢ Gérer les erreurs
+### 🐞 Gérer les erreurs
 
 Permettre à l'utilisateur de personnaliser la recherche implique que certaines recherches ne fonctionneront pas ! (L'artiste n'existe pas,
 l'album n'existe pas ou bien il y a une typo dans la rédaction d'une donnée)
@@ -418,77 +428,72 @@ l'album n'existe pas ou bien il y a une typo dans la rédaction d'une donnée)
 Oups ! Qui l'eut cru ! Rechercher l'artiste `oeif0u809` et l'album `08f0w9ufe` n'a pas fonctionné. Il n'y a aucune donnée à afficher.
 C'est important d'offrir du feedback à l'utilisateur lorsqu'une opération échoue.
 
-<center>![Erreur lors de la requête](../../static/img/cours3/error.png)</center>
+<center>![Erreur lors de la requête](../../static/img/cours3/error_react.png)</center>
 
-Voici comment je m'y suis pris :
+Voici comment on pourrait s'y prendre.
 
-```html showLineNumbers
-Artiste : <input type="text" [(ngModel)]="inputArtist"><br>
-Album : <input type="text" [(ngModel)]="inputAlbum"><br>
-<button (click)="getSongs()">Rechercher</button>
+* On a ajouté un état qui contient un **message d'erreur**.
+* On utilise un `try ... catch` pour gérer l'envoi de la requête et indiquer un message d'erreur au besoin.
 
-<p>{{errorMessage}}</p> <!-- Affiché seulement si le bloc catch a été exécuté -->
+```tsx showLineNumbers
+const [errorMessage, setErrorMessage] = useState("");
 
-<div *ngIf="artistName != ''"> <!-- Affiché seulement si le bloc try a pu être complété -->
-  <p>Artiste : {{artistName}}</p>
-  <p>Album : {{albumName}}</p>
-  <img src="{{imageUrl}}" alt="Pochette de l'album {{albumName}}">
-  
-  <ul>
-      <li *ngFor="let s of songs">{{s.name}} - {{s.duration}} secondes.</li>
-  </ul>
-</div>
-```
+async function getData() {
 
-J'ai ajouté une variable `errorMessage : string = "";` dans le composant et un bloc `try ... catch` autour de la requête :
-
-```ts showLineNumbers
-async getSongs(){
-
-  try{
-    let x = await lastValueFrom(this.http.get<any>(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${lastFmKey}&artist=${this.inputArtist}&album=${this.inputAlbum}&format=json`));
-    console.log(x);
-
-    this.artistName = x.album.artist; // Contient "Cher"
-    this.albumName = x.album.name; // Contient "Believe"
-    this.imageUrl = x.album.image[1]["#text"];
-
-    for(let s of x.album.tracks.track){ // Tableau dans l'objet JSON
-      this.songs.push(new Song(s.name, s.duration)); // Extraction des sous-propriétés dans chaque rangée du tableau
+  try {
+    let response = await fetch(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${lastFmKey}&artist=${artistInput}&album=${albumInput}&format=json`);
+    let data = await response.json();
+    console.log(data);
+    
+    // Obtenir les chansons
+    let songList: Song[] = [];
+    for (let s of data.album.tracks.track) {
+      songList.push(new Song(s.name, s.duration));
     }
+    setSongs(songList);
 
-    this.errorMessage = ""; // Retirer le message d'erreur s'il y en avait un précédemment.
+    // Ça a fonctionné : pas de message d'erreur
+    setErrorMessage("");
   }
-  catch(error){
-    this.errorMessage = "Aucun album n'a été trouvé."
-    this.artistName = ""; // Cacher le résultat de la recherche s'il y en avait un précédemment
+  catch (error) {
+
+    console.log(error);
+
+    // Oups !
+    setErrorMessage("Cet artiste n'existe pas.");
+
   }
-  
+
 }
 ```
 
-### ⌛ Asynchronisme
+Enfin, on affichage l'état avec le **message d'erreur** dans le HTML. (Qui sera invisible tant qu'il n'y aura pas d'erreur)
 
-Nous allons enfin aborder l'🐘 dans la pièce : `await`, `async` et `lastValueFrom()`. Quoi ? Vous aviez déjà oublié et
-ça ne vous intéresse plus ? Laissez-moi tout de même vous en parler beaucoup trop en détails.
+```tsx showLineNumbers
+<p className="error">{errorMessage}</p>
+```
 
-```ts showLineNumbers
-async getSongs(){
-  let x = await lastValueFrom(this.http.get<any>(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${apiKey}&artist=Cher&album=Believe&format=json`));
-  console.log(x);
+<center>![Erreur lors de la requête](../../static/img/cours3/errorMessage.png)</center>
+
+## ⌛ Asynchronisme
+
+Nous allons finalement aborder `await` et `async`. Laissez-moi vous en parler beaucoup trop en détails.
+
+```tsx showLineNumbers
+async function getSongs(){
+  
+  let response = await fetch("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=9a8a3facebbccaf363bb9fd68fa37abf&artist=Cher&album=Believe&format=json");
+  let data = await response.json();
+  console.log(data);
+
 }
 ```
 
 Gardez à l'esprit que la requête prend beaucoup de temps. ⌛ (de quelques millisecondes à quelques secondes) 
 
-* Pour que l'exécution du code se « fige » le temps qu'une réponse (l'objet JSON) ait été reçue, nous utilisons l'opérateur `await`.
+* Le premier `await`, devant `fetch` sert à attendre que l'en-tête de la réponse HTTP ait été reçu. (Ça fige l'exécution du code)
+* Le deuxième `await`, devant `response.json()`, sert à attendre que le **corps** de la réponse HTTP (son contenu, ses données) ait été totalement reçu. (Fige également l'exécution du code)
 * Pour avoir le droit d'utiliser l'opérateur `await` dans une fonction, il faut déclarer la fonction avec `async`.
-* Pour que l'objet retourné par `this.http.get()` puisse être attendu avec `await`, il faut le convertir en un autre type d'objet
-à l'aide de `lastValueFrom()`. (Avant d'être converti grâce à `lastValueFrom()`, l'objet retourné par `this.http.get()` ne pourrait
-PAS être jumelé à l'opérateur `await`.)
-
-En bref : `lastValueFrom()` **rend possible** d'attendre que la requête soit terminée. `await` **fait attendre** que la requête soit
-terminée et `async` est obligatoire pour avoir le droit d'utiliser `await`.
 
 Bien entendu, ces explications sont très simplifiées, mais si vous les comprenez, c'est un excellent début.
 
@@ -501,22 +506,23 @@ devant leur appel.
 
 Puisque ça vous intéresse beaucoup, voyons un exemple qui illustre le phénomène :
 
-```ts showLineNumbers
-test(){
+```tsx showLineNumbers
+function test(){
     console.log("A");
-    this.slowRequest(); 
+    slowRequest(); 
     console.log("C");
   }
 
-async slowRequest(){
-  let x = await lastValueFrom(this.http.get("..requête.."));
+async function slowRequest(){
+  let x = await fetch("..requête..");
+  let y = await x.json();
   console.log("B");
 }
 ```
 
 Dans quel ordre seront imprimées les lettres `A`, `B` et `C` ?
 
-<center>![Exemple d'appel d'une fonction async](../../static/img/cours3/async.png)</center>
+<center>![Exemple d'appel d'une fonction async](../../static/img/cours3/async_react.png)</center>
 <br/>
 > Pourquoi `B` a-t-il été imprimé après `C` ?
 
@@ -530,22 +536,23 @@ terminée et on passe **immédiatement** à la suite du code.
 
 Voyons maintenant un scénario légèrement différent :
 
-```ts showLineNumbers
-async test(){
+```tsx showLineNumbers
+async function test(){
     console.log("A");
-    await this.slowRequest(); 
+    await slowRequest(); 
     console.log("C");
   }
 
-async slowRequest(){
-  let x = await lastValueFrom(this.http.get("..requête.."));
+async function slowRequest(){
+  let x = await fetch("..requête..");
+  let y = await x.json();
   console.log("B");
 }
 ```
 
 Dans quel ordre seront imprimées les lettres `A`, `B` et `C` ?
 
-<center>![Exemple d'appel d'une fonction async](../../static/img/cours3/async2.png)</center>
+<center>![Exemple d'appel d'une fonction async](../../static/img/cours3/async2_react.png)</center>
 <br/>
 > Pourquoi `B` a-t-il été imprimé **avant** `C` ?
 
