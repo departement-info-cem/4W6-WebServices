@@ -1,4 +1,4 @@
-# Cours 1 - Intro à React
+# Cours 1 - Intro à React / Next.js
 
 ### 🙈 Application Web ASP.NET Core <u>sans</u> client React
 

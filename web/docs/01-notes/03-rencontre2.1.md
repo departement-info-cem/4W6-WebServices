@@ -413,7 +413,7 @@ Artiste : <input type="text" className="textInput" onChange={(e) => setArtistInp
 Album : <input type="text" className="textInput" onChange={(e) => setAlbumInput(e.target.value)} value={albumInput} />
 ```
 
-Les états `artistInput` et `albumInput` sont intégrées à la requête, de manière à ce que les champs remplis
+Les états `artistInput` et `albumInput` sont intégrés à la requête, de manière à ce que les champs remplis
 par l'utilisateur soient utilisés lors de la recherche.
 
 ```tsx showLineNumbers
