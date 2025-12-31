@@ -32,7 +32,7 @@ Pour le nom de la **fonction principale** d'un composant, la convention à respe
 
 > Mais où crée-t-on ce fichier `page.tsx` ? Il y en a déjà un avec ce nom dans le dossier `app`.
 
-La réponse est située dans les sections **🎎 Poupées russes** et **🚗 Routage**, plus bas. Cela dépendra de comment on souhaite **utiliser** le composant.
+La réponse est située dans les sections **♻ Composants réutilisables** et **🚗 Routage**, plus bas. Cela dépendra de comment on souhaite **utiliser** le composant.
 
 Il y a deux manières d'utiliser et d'intégrer un composant au site Web :
 
@@ -447,7 +447,98 @@ export default function Yellow() {
 
 ## 🎨 Modules CSS
 
-Bien que le fichier `globals.css` soit pratique, parfois on pourrait vouloir créer des styles qui **s'appliquent seulement à certains composants** plutôt qu'au projet en entier.
+Bien que le fichier `globals.css` soit pratique, parfois on pourrait vouloir créer des styles qui **s'appliquent seulement à certains composants** plutôt qu'au projet en entier. Les **modules CSS** permettent de le faire.
 
-Les **modules CSS** permettent de le faire.
+### 🐣 Créer un module CSS
 
+Le nom du fichier doit avoir la forme `____.module.css` en respectant la convention **kebab-case**.
+
+Il y a deux endroits cohérents où on peut ranger ce fichier, selon l'usage de votre **module CSS** :
+
+* Le module servira à **plusieurs composants variés** : On range le module dans `app/_styles`.
+* Le module servira à **un composant précis** : On range le module dans le dossier du composant.
+
+<center>![Répertoire pour les modules CSS](../../static/img/cours5/stylesFolder.png)</center>
+
+Le fichier contiendra simplement des styles, par exemple :
+
+```css showLineNumbers
+.test{
+
+    color:fuchsia;
+
+}
+```
+
+:::warning
+
+Les **modules CSS** ne peuvent pas cibler de simples éléments. (Sélecteurs *purs*) Il faut absolument utiliser des **classes** ! (ou des **ids**)
+
+```css showLineNumbers
+/* ✅ Valide car c'est une classe */ 
+.test{
+    color:fuchsia;
+}
+
+/* ⛔ Invalide car c'est un sélecteur pur */
+p{
+  margin:0px;
+}
+
+/* ✅ Valide car implique une classe */
+p.large{
+  width:1000px;
+  padding:10px;
+}
+```
+
+Avant de crier au scandale que les *modules CSS sont trop limités*, gardez à l'esprit que l'usage de **sélecteurs purs**, en général, n'est pas idéal car cela cible généralement trop d'éléments de manière *potentiellement imprévisible et conflictuelle*.
+
+:::
+
+### 📬 Importer un module CSS
+
+Dans le ou les **composants** de votre choix, importez un ou plusieurs **modules CSS** comme ceci, par exemple :
+
+```tsx showLineNumbers
+'use client';
+
+// Importation d'un module CSS
+import styles from '../../_styles/tables.module.css';
+
+export default function Pink() {
+
+  return (
+    <div>
+      <h2>🌸 Composant rose 🌸</h2>
+      <div className="pink big">Bienvenue dans le composant rose.</div>
+      <p className={styles.test}>Du texte fuchsia</p> {/* Usage de la classe .test dans le module tables.module.css */}
+    </div>
+  );
+}
+```
+
+**Quelques remarques :**
+
+* Il faut (malheureusement) préciser `styles.nomDeMaClasse` pour pouvoir utiliser une **classe** du **module CSS**. Cependant, cela permet d'avoir des **classes** avec le même nom dans d'autres **modules CSS**.
+* Le mot `styles` qui a été utilisé dans l'instruction `import` aurait pu être n'importe quoi d'autre. (Ex : `styles1`) N'hésitez pas à utiliser des noms variés si vous voulez importer **plusieurs modules CSS**.
+* Notez que les classes `.pink` et `.big` viennent de `globals.css`. C'est pour ça qu'elles ne sont pas précédées de `styles.`
+* Si vous souhaitez utiliser un `id` de votre **module CSS**, la syntaxe sera `id={styles.nomDeMonId}`.
+
+:::tip
+
+Si jamais vous souhaitez combiner **plusieurs classes** de votre **modules CSS** et / ou **plusieurs classes** déclarées dans `globals.css`, ça pourrait ressembler à ceci :
+
+```tsx showLineNumbers
+<p className={styles.test + ' ' + styles.ghost + ' ' + 'big'}>Du texte fuchsia</p>
+```
+
+On a donc utilisé la **concaténation** pour jumeler les classes `.test` et `.ghost` du **module CSS** ainsi que la classe `.big` de `globals.css`.
+
+Si vous préférez les **template strings**, c'est *à peine* plus élégant :
+
+```tsx showLineNumbers
+<p className={`${styles.test} ${styles.ghost} big`}>Du texte fuchsia</p>
+```
+
+:::
