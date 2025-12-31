@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Cours 5 - Plusieurs composants
 
 Utiliser plusieurs composants permettra de « naviguer sur plusieurs pages Web » et permettra également d'éviter
@@ -5,29 +8,35 @@ de répéter des portions de page Web similaires.
 
 ## 🐣 Créer un nouveau composant
 
-Puisqu'un composant est composé 😏 de quatre fichiers qui doivent respecter une structure très précise 📐,
-il existe la commande `ng generate component nomDuNouveauComposant`.
+Pour **créer un composant**, c'est très simple : il suffit de créer un nouveau fichier `page.tsx` dont le code initial correspondra généralement à ceci :
 
-Avant de taper la commande comme un animal, assurez-vous de vous situer dans le dossier `app`. On veut situer la majorité
-de nos fichiers HTML / CSS / TypeScript dans le dossier `app`, à part pour quelques exceptions comme les images et les 
-fichiers de traduction. (Cours 7)
+```tsx showLineNumbers
+'use client'; // Seulement nécessaire pour les composants interactifs
 
-<center>![Utiliser cd pour aller dans src/app](../../static/img/cours5/cd.png)</center>
+export default function NomDuComposant() {
 
-Créez ensuite le ou les composants :
+  return (
+    <div>Ceci est le composant NomDuComposant !</div>
+  );
+}
+```
 
-<center>![Création d'un composant](../../static/img/cours5/newComponent.png)</center>
+:::warning
 
-<center>![Fichiers du nouveau composant](../../static/img/cours5/componentFiles.png)</center>
+Pour le nom de la **fonction principale** d'un composant, la convention à respecter est **PascalCase**. (C'est-à-dire qu'on commence avec une **majuscule** et chaque nouveau mot commence par une **majuscule**)
 
-Si vous comptez utiliser `ng serve` plus tard, n'oubliez pas de revenir dans le dossier principal du projet. 
-(Ou au pire fermer le terminal et en ouvrir un nouveau)
+* ❌ `export default function nomDuComposant()`
+* ✅ `export default function NomDuComposant()`
 
-<center>![Utiliser cd pour retourner à la racine](../../static/img/cours5/cdBack.png)</center>
+:::
 
-Il y a deux manières d'intégrer un composant à la page Web :
+> Mais où crée-t-on ce fichier `page.tsx` ? Il y en a déjà un avec ce nom dans le dossier `app`.
 
-1. 🎎 **Poupées russes** : afficher un composant spécifique dans un autre composant spécifique. 
+La réponse est située dans les sections **🎎 Poupées russes** et **🚗 Routage**, plus bas. Cela dépendra de comment on souhaite **utiliser** le composant.
+
+Il y a deux manières d'utiliser et d'intégrer un composant au site Web :
+
+1. ♻ **Composants réutilisables** : afficher un composant spécifique dans un autre composant spécifique. 
 Pratique pour réutiliser un affichage répétitif.
 2. 🚗 **Routage** : afficher un composant différent selon la route (l'URL) actuelle. Pratique pour
 créer une « illusion de navigation entre les pages Web ».
@@ -69,321 +78,376 @@ Pour les noms des dossiers, la convention à respecter est **kebab-case**. (C'es
 
 <center>![Convention kebab-case](../../static/img/cours5/kebabCase.png)</center>
 
-Pour les noms des **fonctions principales** des composants, la convention à respecter est **PascalCase**. (C'est-à-dire qu'on commence avec une **majuscule** et chaque nouveau mot commence par une **majuscule**)
+:::
 
-* ❌ lightBlue
-* ✅ LightBlue
+### 🔲 Layouts et menus de navigation
+
+> Et si on souhaite qu'une **partie du HTML** soit commune à toutes les pages Web ? (Menu de navigation, header, footer, etc.)
+
+Les fichiers `layout.tsx` sont fait pour ça.
+
+<center>![Layout global](../../static/img/cours5/globalLayout.png)</center>
+
+Ci-dessus, on a un **layout global** (utilisé pour toutes les pages du site Web) défini dans le fichier `layout.tsx` qui est situé dans le dossier `app`.
+
+On remarque d'ailleurs un **menu de navigation** qui fonctionne à l'aide d'attributs `href` :
 
 ```tsx showLineNumbers
-export default function LightBlue() {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <nav>
+          <a className="home" href="/">Accueil</a>
+          <a className="blue" href="/blue">Bleu</a>
+          <a className="red" href="/red">Rouge</a>
+          <a className="yellow" href="/yellow">Jaune</a>
+          <a className="pink" href="/pink">Rose</a>
+        </nav>
+        {children}  {/* ◀◀◀ Le composant sera chargé ici ! */}
+        <footer>Ceci est un fouteur</footer>
+      </body>
+    </html>
+  );
+}
+```
+
+:::info
+
+Gardez à l'esprit que le **composant** associé à la route sera intégré à l'endroit où on place l'instruction `{children}`.
+
+:::
+
+#### 🔳 Layout supplémentaire pour certains composants
+
+Si on préfère que certaines pages aient un **layout** supplémentaire EN PLUS du **layout racine**, on peut ajouter un fichier `layout.tsx` dans un autre dossier. Tous les composants de **ce dossier** et de **ses sous-dossiers** seront intégré à ce nouveau **layout**.
+
+<center>![Layout supplémentaire](../../static/img/cours5/subLayout.png)</center>
+
+Le code pour un **layout** pourrait ressembler à ceci :
+
+```tsx showLineNumbers
+export default function BlueLayout( {children}: Readonly<{children: React.ReactNode }> ) {
+
+    return(
+        <div>
+            <nav>
+                <a className="blue" href="/blue">Bleu</a>
+                <a className="lightBlue" href="/blue/light-blue">Bleu pâle</a>
+            </nav>
+            {children} { /* ◀◀◀ Intégration des composants */}
+            <footer>Fouteur supplémentaire</footer>
+        </div>
+    )
+
+}
+```
+
+**Quelques remarques** :
+
+* Il ne faut surtout pas oublier d'intégrer `{children}` quelque part, sinon le composant `Blue` et les potentiels composants dans ses sous-dossiers **ne seront pas affichés**.
+* Ce **layout** lui-même sera intégré dans le **layout racine**, où `{children}` était placé.
+
+On peut voir le résultat, visuellement, pour les composants `Blue` et `LightBlue` :
+
+<center>![Layout supplémentaire](../../static/img/cours5/subLayoutDisplay.png)</center>
+
+#### 🖼 Utiliser un layout différent pour certains composants
+
+Le **layout racine** est essentiel à l'affichage car il contient certains éléments **indispensables** comme `<html>`, `<head>` et `<body>`. On ne peut pas afficher un **composant** sans l'intégrer au **layout racine**.
+
+Ce qu'on peut faire, cela dit, est de **séparer nos pages Web par layout**. Dans ce cas-ci, nous aurons **deux groupes** :
+
+1. Les pages qui utilisent le menu de navigation principal.
+2. Les pages qui utilisent le menu de navigation limité aux composants `Blue` et `LightBlue`.
+
+**👻 Étape 1 : Alléger le layout racine au maximum**
+
+On conserve uniquement les éléments indispensables, comme `<html>`, `<head>` et `<body>`. Il n'y a aucun élément **visible** dans ce layout. Le `<nav>` et le `<footer>` précédemment présents seront déplacés dans **un autre layout**.
+
+```tsx showLineNumbers
+export default function RootLayout({ children }: Readonly<{ children : React.ReactNode }>) {
+  return (
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {children} {/* Le composant ou layout sera chargé ici ! */}
+      </body>
+    </html>
+  );
+}
+```
+
+**📂 Étape 2 : Séparer les composants en deux groupes**
+
+Grâce à des dossiers encadrés de **parenthèses**, qui seront **ignorés par le routage**, on sépare les composants en deux groupes.
+
+Chaque groupe possède son **propre layout**, déclaré dans le dossier parent du groupe. (Ici, `(root)` et `(blue)`)
+
+<center>![Plusieurs layouts indépendants](../../static/img/cours5/multipleLayouts.png)</center>
+
+**Quelques remarques :**
+
+* Aucun des chemins (Ex : `http://localhost:3001/blue`) n'a changé ! Les dossiers entourés de **parenthèses** sont invisibles pour le routage.
+* Le **composant** utilisé pour la page d'**accueil** doit être situé dans `(root)` OU dans `(blue)`, mais pas les deux ! S'il y avait un fichier `page.tsx` dans chacun de ces deux dossiers, ils auraient la **même route**, et cela lancerait une erreur.
+
+On a maintenant des composants qui utilisent exclusivement le **layout `root`** ou le **layout `blue`** :
+
+<Tabs>
+    <TabItem value="mainLayout" label="Layout principal" default>
+<center>![Layout principal](../../static/img/cours5/rootLayout.png)</center>
+    </TabItem>
+    <TabItem value="otherLayout" label="Layout alternatif">
+<center>![Layout alternatif](../../static/img/cours5/otherLayout.png)</center>
+    </TabItem>
+</Tabs>
+
+### ❓ Routes dynamiques
+
+Parfois, on souhaite utiliser des **paramètres** dans la route. Cela signifie qu'une partie de la route est **variable** (dynamique).
+
+Exemple :
+
+* `localhost:3000/list/character/1`
+* `localhost:3000/list/character/4`
+* `localhost:3000/list/character/12`
+
+Bien entendu, le composant qui sera chargé par cette route devra récupérer ce **paramètre de route** (qui, ici, vaut `1`, `4` ou `12` dans ces exemples) pour l'utiliser. (Par exemple, faire une **requête** à un API Web pour obtenir des données associées au nombre obtenu)
+
+Pour créer une **route dynamique**, on doit créer un dossier **encadré de crochets** :
+
+<center>![Route dynamique](../../static/img/cours5/dynamicRoute.png)</center>
+
+On peut ensuite y ajouter un **composant**, comme d'habitude, avec un fichier `page.tsx`.
+
+La route pour le composant dans le dossier ` [id] ` sera `http://localhost:3000/red/ID_DE_NOTRE_CHOIX`. Par exemple, `http://localhost:3000/red/2` fonctionnerait et chargerait le composant.
+
+Pour récupérer la valeur associé au **paramètre de route** nommé `id`, on pourrait procéder comme ceci :
+
+```tsx showLineNumbers
+'use client';
+
+import { useParams } from "next/navigation";
+
+export default function RedId() {
+
+  // Conteneur pour tous les paramètres de route (Dans ce cas, on a juste « id »)
+  const params = useParams<{ id : string }>();
 
   return (
     <div>
-      <h2>🔵 Composant bleu pâle 🔵</h2>
-      <div>Allo.</div>
+      <h2>🔴 Composant rouge/{params.id} 🔴</h2>
+      <div className="red big">L'id reçue est {params.id}</div>
     </div>
   );
 }
 ```
 
-:::
+<center>![Paramètre de route](../../static/img/cours5/routeParam.png)</center>
 
-### 🔲 Layouts et menus de navigation
+:::note
 
-### ♻ Routes dynamiques
-
-
-3. ⚓ Mettre l'élément `<router-outlet></router-outlet>` dans le HTML du composant `app`.
-
-```html showLineNumbers
-<div class="container">
-
-  <h2>Ceci est le composant App</h2>
-
-  <router-outlet></router-outlet> <!-- Ceci sera remplacé par le composant blue, red, yellow ou pink ! -->
-  
-</div>
-```
-
-On a des règles qui disent quel composant charger selon la route actuelle... mais où est-ce que le composant chargé
-par la règle de routage sera affiché ... ? À l'endroit où on aura placé l'élément `<router-outlet></router-outlet>` !
-
-Généralement, c'est le composant `app`, servant de squelette (avec un `<header>`, un `<nav>`, un `<footer>`, mais un `<main>` vide),
-qui servira à intégrer les composants chargés par le routage.
-
-4. 🗺 Créer un menu de navigation (au besoin)
-
-Grâce à l'attribut `[routerLink]`, qui est utilisable si on a importé le module `RouterModule` dans le composant désiré, on peut
-permettre à l'utilisateur de changer la route actuelle grâce à un clic.
-
-```html
-<div [routerLink]="['/blue']">Bleu</div>
-```
-
-Par exemple, cliquer sur ce `<div>` changera la route actuelle pour `http://localhost:4200/blue`. Si nos règles de routage
-sont bien définies, le composant `blue` sera affiché dans la page à l'endroit où il y avait l'élément `<router-outlet>`.
-
-Voici le menu de navigation utilisé dans l'exemple plus haut :
-
-```html showLineNumbers
-  <nav>
-    <div [routerLink]="['/blue']" style="background-color:cornflowerblue">Bleu</div>
-    <div [routerLink]="['/red']" style="background-color:crimson;">Rouge</div>
-    <div [routerLink]="['/yellow']" style="background-color:gold">Jaune</div>
-    <div [routerLink]="['/allo']" style="background-color:pink">Rose</div>
-  </nav>
-```
-
-<center>![Intégration de 4 composants avec le routage](../../static/img/cours5/routing1.gif)</center>
-
-:::tip
-
-Dans par exemple `[routerLink]=['/blue']`, la barre oblique `/` peut être omise. Dans ce cas, `blue` sera
-ajouté **à la fin de la route actuelle**. (Alors que `/blue` permet de **remplacer entièrement** la route actuelle)
+Les **paramètres de route** sont **toujours** des `string`. (Même si ça ressemble à un nombre, c'est un `string` qui passe par l'URL)
 
 :::
 
-### 📬 Paramètres de route
+### 🚧 Rediriger l'utilisateur
 
-On souhaite parfois envoyer une information au prochain composant lorsqu'on change la route. Avec le routage, notez
-qu'il est uniquement possible d'envoyer une ou plusieurs données de type `string` puisque la donnée sera passée dans
-l'URL.
+Si jamais on désire **rediriger** l'utilisateur (par exemple, après s'être connecté ou après avoir rempli un formulaire), on peut procéder comme ceci dans une fonction de notre choix :
 
-Ci-dessous, on aimerait charger le composant `yellow` tout en lui transmettant une information comme `"patate"`.
+```tsx showLineNumbers
+// Attention d'utiliser cette importation et non next/router !
+import { useRouter } from "next/navigation";
 
-<center>![Paramètre de route](../../static/img/cours5/param.png)</center>
+export default function Red() {
 
-Voici les étapes à suivre :
+  // Objet permettant de manipuler la route
+  const router = useRouter();
 
-1. 🚗 Ajouter ou modifier une règle de routage dans `app.routes.ts`
-
-```ts showLineNumbers
-export const routes: Routes = [
-  {path: "", redirectTo: "/blue", pathMatch: "full"},
-  {path: "blue", component: BlueComponent},
-  {path: "red", component: RedComponent},
-  {path: "yellow", component: YellowComponent}, // Aurait pu être retirée
-  {path: "yellow/:legume", component: YellowComponent}, // Nouvelle règle
-  {path: ":ahem", component: PinkComponent}
-];
-```
-
-* La nouvelle règle `"yellow/:legume"` est déclenchée pour n'importe quelle route avec le format `yellow/???`.
-* La règle `"yellow"` peut être gardée si on souhaite que charger le composant `yellow` soit encore possible sans fournir de paramètre.
-
-2. 🛠 Adapter le ou les `[routerLink]` qui mènent vers ce composant.
-
-Que ce soit avec une valeur _hardcodée_ :
-
-```html
-<div [routerLink]="['/yellow', 'patate']">
-```
-
-Ou via une variable :
-
-```html
-<div [routerLink]="['/yellow', myVegetable]">
-```
-
-L'ajout d'un paramètre de route dans un `[routerLink]` doit être séparé de la route avec une **virgule**.
-
-3. 🎁 Récupérer l'information passée par la route dans le composant chargé
-
-Cela nécessitera d'injecter `ActivatedRoute`. Ce type permet d'accéder aux paramètres qui auront été
-glissés dans la route. 
-
-```ts showLineNumbers
-export class YellowComponent implements OnInit{
-  
-  legume : string | null = null;
-
-  constructor(public route : ActivatedRoute) { } // Injection
-
-  ngOnInit() {
-    this.legume = this.route.snapshot.paramMap.get("legume"); // Récupération du paramètre
+  function someFunction(){
+    router.push("/red/1"); // Redirige vers une autre route
   }
+
+  // ...
+}
+```
+
+## ♻ Composants réutilisables
+
+Ci-dessous, on peut apercevoir trois sections / composants :
+
+<center>![Composant réutilisable](../../static/img/cours5/reusableComponent.png)</center>
+
+Le composant `ItemView` est un **composant réutilisable** qui peut être intégré dans n'importe quel autre composant. C'est très utile s'il y a une section du HTML qu'on a besoin de réutiliser dans plusieurs pages Web.
+
+### 📌 Afficher un composant dans un autre composant
+
+Disons qu'on souhaite afficher le composant `ItemView` quelque part dans le composant `Yellow`, comme ceci :
+
+<center>![Composant réutilisable](../../static/img/cours5/reusableComponent2.png)</center>
+
+📝 **Étapes à suivre**
+
+1. **Créer le composant dans un dossier nommé `_components`**
+
+<center>![Dossier pour les composants réutilisables](../../static/img/cours5/componentFolder.png)</center>
+
+```tsx showLineNumbers
+'use client';
+
+export default function ItemView() {
+
+    return(
+        <div className="item">
+            <h3>Composant ItemView</h3>
+            <p>Affichage d'un item</p>    
+        </div>
+    );
 
 }
 ```
 
-⛔ Notez que le nom du paramètre (ici, `"legume"`) doit être identique à celui déclaré dans la règle de routage ! (sans le symbole `:`)
-De plus, la fonction `ngOnInit()` est plutôt incontournable pour cette tâche. ([Notion du cours 3](/cours/rencontre2.1#-lancer-la-requête-dès-le-chargement-de-la-page-web))
+:::warning
 
-```ts
-{path: "yellow/:legume", component: YellowComponent}
-```
+Le trait de soulignement au début du nom du dossier `_components` est **indispensable** pour que ce dossier ne soit pas pris en compte par le **routage**. C'est ici qu'on rangera tous nos **composants réutilisables**. Comme il y aura **plusieurs composants** dans ce dossier, leur fichier peut être nommé avec quelque chose de plus descriptif que `page.tsx`, mais n'oubliez pas de respecter la covenvention **kebab-case**.
 
-Ensuite, il nous reste à exploiter le contenu de la variable `this.legume` tel que désiré. (Par exemple, afficher `"patate"` dans 
-la page Web)
+:::
 
-### 🛸 Changer la route en TypeScript
+2. **Intégrer le composant réutilisable**
 
-Si jamais on désire changer la route à l'aide d'un bout de code TypeScript plutôt qu'avec un clic dans la page Web, voici un exemple simple :
+Dans **un autre composant** de notre choix (ou dans plusieurs !), il suffit d'ajouter un élément HTML dont le **nom** correspond à la fonction principale de notre **composant réutilisable** :
 
-```ts showLineNumbers
-export class SomeComponent {
+```tsx showLineNumbers
+'use client';
 
-  constructor(public router : Router) { } // Injection
+// Importation du composant réutilisable
+import ItemView from "@/app/_components/item-view";
 
-  someFunction() {
-    this.router.navigate(["/index"]); // Changement de route
-  }
+export default function Yellow() {
 
+  return (
+    <div>
+      <h2>🟢 Composant jaune 🟢</h2>
+      <div className="green big">
+        <p>Bienvenue dans le composant jaune.</p>
+        <ItemView /> {/* ◀◀◀ Intégration du composant réutilisable */}
+        </div>
+    </div>
+  );
 }
-```
-
-Notez que l'injection de `Router` est nécessaire pour avoir accès à la fonction `navigate()`. Le tableau fourni
-en paramètre à la fonction `navigate()` fonctionne exactement comme celui dans un `[routerLink]`.
-
-### ☢ Règles ambiguës
-
-Attention, certaines règles ou combinaisons de règles peuvent poser des problèmes. Abordons quelques exemples.
-
-**1 - Règle composée uniquement d'un paramètre**
-
-```ts showLineNumbers
-export const routes: Routes = [
-  {path: "", redirectTo: "/blue", pathMatch: "full"},
-  {path: ":ahem", component: PinkComponent},
-  {path: "blue", component: BlueComponent},
-  {path: "red", component: RedComponent},
-  {path: "yellow", component: YellowComponent},
-  {path: "yellow/:legume", component: YellowComponent},
-];
-```
-
-Hélas, la règle `:ahem` accepte absolument toutes les routes composées d'un seul terme. Cela signifie que les
-seules règles qui pourront être déclenchées sont `":ahem"` et `"yellow/:legume"`.
-
-Une alternative envisageable pourrait être de placer cette règle en dernier, puisque **les règles sont « tentées »
-dans l'ordre où elles sont listées**.
-
-**2 - Règles identiques**
-
-```ts showLineNumbers
-export const routes: Routes = [
-  {path: "", redirectTo: "/blue", pathMatch: "full"},
-  {path: ":ahem", component: PinkComponent},
-  {path: ":salut", component: BlueComponent}
-];
-```
-
-Bien entendu, ici, la deuxième règle ne pourra jamais être déclenchée. Il n'y a rien à faire, une des
-deux règles devra être retirée ou allongée.
-
-## 🎎 Poupées russes
-
-Ci-dessous, on peut apercevoir trois composants :
-
-* Le composant `app`, qui affiche le composant `red` dans son template HTML.
-* Le composant `red`, qui affiche le composant `enfant` dans son template HTML.
-* Le composant `enfant`.
-
-<center>![Composant Enfant dans composant Red dans composant App](../../static/img/cours5/russianDolls1.png)</center>
-
-### 🔨 Afficher un composant dans un autre composant
-
-Disons qu'on souhaite afficher le composant `enfant` quelque part dans le composant `red`...
-
-<center>![Composant Enfant dans composant Red](../../static/img/cours5/russianDolls2.png)</center>
-
-📝 Voici les étapes à suivre :
-
-1. Importer le composant `enfant` dans le composant `red` :
-
-<center>![Importation du composant](../../static/img/cours5/importComponent.png)</center>
-
-2. Vérifier quel est le `selector` du composant `enfant` :
-
-<center>![Sélecteur du composant](../../static/img/cours5/selector.png)</center>
-
-3. Intégrer le `selector` du composant `enfant` dans le HTML du composant `red` à l'endroit désiré :
-
-```html showLineNumbers
-<main class="red">
-  <h2>Ceci est le composant Rouge</h2>
-  <div class="row">
-    <app-enfant></app-enfant> <!-- Ici, par exemple -->
-  </div>
-</main>
 ```
 
 ### 🕊 Passer un paramètre à un composant
 
 On veut généralement transmettre une ou plusieurs données du composant **parent** vers le composant **enfant**. (Des données
-qui seront utilisées dans l'affichage par exemple)
+qui seront utilisées dans l'affichage, par exemple)
 
-### 📜 Étapes à suivre
+📝 **Étapes à suivre**
 
-1. Préparer une variable dans le composant `enfant` qui recevra et contiendra la donnée reçue en paramètre. Remarquez
-que le décorateur `@Input()` est obligatoire. De plus, une valeur par défaut (`"Rien reçu"`) a été affectée si jamais
-aucun paramètre n'est reçu. Si aucune valeur par défaut n'aurait été définie, il aurait fallu permettre à `nomCouleur`
-d'être `undefined` à l'aide de `?: string`.
+1. **Spécifier un paramètre qui servira de conteneur pour le ou les paramètres du composant**
 
-```ts showLineNumbers
-export class EnfantComponent {
+Ci-dessous, le composant `ItemView` possède un paramètre `props`, dont le type est un *objet anonyme* qui possède une propriété `itemNo` et une propriété `itemName`. (Dont leur **type** est spécifié)
 
-  @Input() nomCouleur : string = "Rien reçu";
+```tsx showLineNumbers
+'use client';
+
+export default function ItemView(props : {itemNo : number, itemName : string}) {
+
+    return(
+        <div className="item">
+            <h3>Composant ItemView</h3>
+            <p>Item #{props.itemNo} : {props.itemName}</p>    
+        </div>
+    );
 
 }
 ```
 
-2. Dans le HTML du composant parent, grâce au `selector` du composant enfant, donner une valeur de notre choix à la 
-variable `nomCouleur` :
+On remarque d'ailleurs que `props.itemNo` et `props.itemName` sont utilisés dans le HTML du composant.
 
-```html showLineNumbers
-<main class="red">
-  <h2>Ceci est le composant Rouge</h2>
-  <div class="row">
-    <app-enfant [nomCouleur]="'écarlate'"></app-enfant> <!-- Valeur hardcodée -->
-    <app-enfant [nomCouleur]="red3"></app-enfant> <!-- Valeur dans une variable -->
-  </div>
-</main>
-```
+:::note
 
-Bien entendu, on peut par le suite faire ce qu'on veut avec la valeur reçue en paramètre dans `nomCouleur`, comme
-l'afficher dans le HTML :
-
-```html showLineNumbers
-<div class="enfant">
-    <h2>Ceci est le composant Enfant</h2>
-    <p>Paramètre reçu : {{nomCouleur}}</p>
-</div>
-```
-
-<center>![Intégration du composant enfant](../../static/img/cours5/russianDolls4.png)</center>
-
-:::tip
-
-On peut envoyer n'importe quel type de donnée en paramètre de composant. Dans l'exemple précédent, on a
-envoyé un `string`, mais ça aurait pu être un `number`, un `boolean`, un objet personnalisé, etc.
+Le paramètre conteneur n'est pas obligé d'être nommé `props`, mais c'est une convention.
 
 :::
 
-### 🍇 Intégration multiple avec *ngFor
+:::info
 
-Rien ne nous empêche d'utiliser un `*ngFor` pour intégrer un composant enfant plusieurs fois en exploitant
-les données qui sont dans une liste :
+Contrairement aux **paramètres de route**, les **paramètres de composant** peuvent avoir n'importe quel **type** puisqu'ils ne sont pas passés dans l'URL.
 
-* Classe du composant parent :
+:::
 
-```ts showLineNumbers
-export class RedComponent {
+2. **Depuis le composant parent, fournir des valeurs pour le(s) paramètre(s)**
 
-  sousRouges : string[] = ["cramoisi", "écarlate", "vermeil", "corail", "carmin"];
-  
+Ci-dessous, on voit que l'élément `<ItemView />` a été complété avec deux attributs qui serviront à envoyer la valeur `1` pour la propriété `itemNo` et la valeur `'Chaise'` pour la propriété `itemName`. (Les apostrophes `''` encadrent le mot « Chaise » car c'est un `string`)
+
+```tsx showLineNumbers
+'use client';
+
+import ItemView from "@/app/_components/item-view";
+
+export default function Yellow() {
+
+  return (
+    <div>
+      <h2>🟢 Composant jaune 🟢</h2>
+      <div className="green big">
+        <p>Bienvenue dans le composant jaune.</p>
+        <ItemView itemNo={1} itemName={'Chaise'} /> {/* itemNo et itemName sont remplis ! */}
+        </div>
+    </div>
+  );
 }
 ```
 
-* HTML du composant parent :
+Observez le résultat dans le HTML :
 
-```html showLineNumbers
-<main class="red">
-  <h2>Ceci est le composant Rouge</h2>
-  <div class="row">
-    <app-enfant *ngFor="let r of sousRouges" [nomCouleur]="r"></app-enfant>
-  </div>
-</main>
+<center>![Paramètres envoyés au composant enfant](../../static/img/cours5/props.png)</center>
+
+### 🍇 Intégration multiple
+
+Rien ne nous empêche d'afficher plusieurs fois un composant réutilisable ! Voici un exemple :
+
+Code du **composant parent** :
+
+```tsx showLineNumbers
+'use client';
+
+import ItemView from "@/app/_components/item-view";
+import { Item } from "@/app/_types/item";
+
+export default function Yellow() {
+
+  // Liste d'items à afficher
+  const items : Item[] = [
+    new Item(1, "Chaise"),
+    new Item(2, "Pneu"),
+    new Item(3, "Cheval")
+  ];
+
+  return (
+    <div>
+      <h2>🟢 Composant jaune 🟢</h2>
+      <div className="green big">
+        <p>Bienvenue dans le composant jaune.</p>
+        {/* Affichage multiple du composant ItemView à l'aide de la liste d'items et de .map() */}
+        {items.map(
+          (i) => <ItemView key={i.id} itemNo={i.id} itemName={i.name} />
+        )}
+        </div>
+    </div>
+  );
+}
 ```
 
-<center>![Intégration de plusieurs composants enfants](../../static/img/cours5/russianDolls3.png)</center>
+<center>![Affichage répétitif d'un composant réutilisable](../../static/img/cours5/multipleReusableComponent.png)</center>
+
+## 🎨 Modules CSS
+
+Bien que le fichier `globals.css` soit pratique, parfois on pourrait vouloir créer des styles qui **s'appliquent seulement à certains composants** plutôt qu'au projet en entier.
+
+Les **modules CSS** permettent de le faire.
+
