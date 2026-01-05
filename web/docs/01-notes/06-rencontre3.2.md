@@ -317,7 +317,7 @@ Les **hooks** sont des **fonctions** très variées qui donnent accès à des fo
 Il y a quelques **hooks préexistants**, comme `useState`, `useEffect` et `useContext`, que nous avons déjà abordés. 
 
 * `useState` permet de stocker une donnée, la modifier et mettre à jour l'affichage du HTML quand elle change.
-* `useEffect` permet d'exécuter des requêtes à des API externes lors de son chargement.
+* `useEffect` permet d'exécuter des requêtes à des API externes lors du chargement d'un composant.
 * `useContext` permet de partager des données entre plusieurs composants.
 
 Il existe d'autres **hooks préexistants**, mais on comprend déjà qu'un **hook**, ça donne accès à des fonctionnalités variées.
@@ -326,8 +326,147 @@ Il existe d'autres **hooks préexistants**, mais on comprend déjà qu'un **hook
 
 ### ♊ Hook pour le two-way binding
 
+Le **two-way binding** utilisé pour chaque champ de formulaire est un classique de fonctionnalité que nous réutilisons constamment.
+
+```tsx showLineNumbers
+export default function Blue() {
+
+    // État associé à l'input
+    const [itemInput, setItemInput] = useState("");
+
+    return(
+        <div className="blue big">
+            <h3>Composant Blue</h3>
+
+            {/* Input avec attribut value et onChange */}
+            <input value={itemInput} onChange={(e) => setItemInput(e.target.value)} type="text" placeholder="Ex : silent shroom" />
+            <button>Chercher</button>
+        </div>
+    );
+}
+```
+
+Pour utiliser cette **fonctionnalité**, à chaque fois, on doit :
+
+1. Déclarer un état.
+2. Rédiger la fonction `e => setState(e.target.value)` dans l'attribut `onChange`
+3. Glisser la valeur de l'état dans l'attribut `value`.
+
+Nous allons créer un **hook personnalisé** qui permet de réutiliser cette fonctionnalité avec moins de répétition.
+
+<center>![Dossier pour les hooks](../../static/img/cours6/hookFolder.png)</center>
+
+:::info
+
+Par convention, le nom des **hooks** doit commencar par « use » et respecter **camelCase**. 
+
+Un fichier n'a pas besoin de l'extension `.tsx` lorsqu'il ne contient QUE du **TypeScript**. (Donc pas de HTML)
+
+:::
+
+```ts showLineNumbers
+import { useState } from "react";
+
+// Le type de startValue doit être any pour que ça puisse fonctionner avec des string, number, tableaux, etc.
+export function useTwoWayBinding(startValue : any){
+
+    // État pour stocker la valeur du champ
+    const [inputValue, setInputValue] = useState(startValue);
+
+    // Objet anonyme qui servira à remplir les attributs value et onChange du <input>
+    return {value : inputValue, onChange : (e : any) => setInputValue(e.target.value)};
+
+}
+```
+
+:::note
+
+Dans l'**objet anonyme** qui est retourné, remarquez les noms des deux propriétés : `value` et `onChange`. Ce n'est pas un hasard qu'ils soient nommés exactement comme les attributs HTML que nous allons remplir : c'était **nécessaire**.
+
+> Pourquoi a-t-il fallu ajouter le `: any` pour le paramètre `e` dans la **fonction anonyme** de l'attribut `onChange` ?
+
+Lorsqu'on déclarait la fonction anonyme directement dans le HTML, le projet savait automatiquement que le type de `e` était `ChangeEvent<HTMLInputElement>`. Désormais, la fonction est déclarée dans un objet anonyme quelconque, alors le type ne peut plus être déduit automatiquement. Pour faire simple, on met `any` pour indiquer au compilateur qu'il peut nous laisser faire ce qu'on veut avec `e`.
+
+:::
+
+Il reste à intégrer `useTwoWayBinding` dans mon composant :
+
+<Tabs>
+    <TabItem value="withHook" label="Avec hook" default>
+```tsx showLineNumbers
+export default function Blue() {
+
+    // Appel du hook avec "" comme valeur de départ pour l'état
+    const itemInput = useTwoWayBinding("");
+
+    return (
+        <div className="blue big">
+            <h3>Composant Blue</h3>
+
+            {/* {...itemInput permet de créer et remplir les attributs onChange et value } */}
+            <input {...itemInput} type="text" placeholder="Ex : silent shroom" />
+            <button>Chercher</button>
+        </div>
+    );
+}
+```
+    </TabItem>
+    <TabItem value="withoutHook" label="Sans hook">
+```tsx showLineNumbers
+export default function Blue() {
+
+    // État associé à l'input
+    const [itemInput, setItemInput] = useState("");
+
+    return(
+        <div className="blue big">
+            <h3>Composant Blue</h3>
+
+            {/* Input avec attribut value et onChange */}
+            <input value={itemInput} onChange={(e) => setItemInput(e.target.value)} type="text" placeholder="Ex : silent shroom" />
+            <button>Chercher</button>
+        </div>
+    );
+}
+```
+    </TabItem>
+</Tabs>
+
+:::note
+
+🧠 Si la syntaxe `{...itemInput}` vous fait peur, vous pouvez remplir les deux attributs manuellement :
+
+<Tabs>
+    <TabItem value="withSpread" label="Opérateur spread">
+```tsx
+<input {...itemInput} type="text" placeholder="Ex : silent shroom" />
+```
+    </TabItem>
+    <TabItem value="withoutSpread" label="Manuellement" default>
+```tsx
+<input onChange={itemInput.onChange} value={itemInput.value} type="text" placeholder="Ex : silent shroom" />
+```
+    </TabItem>
+</Tabs>
+
+:::
+
+:::info
+
+💡 Bien entendu, pour utiliser la valeur de l'input (pour une requête, par exemple), nous n'aurons à utiliser `itemInput.value` dans le code.
+
+```ts showLineNumbers
+async function searchItemImage(){
+
+    let response = await fetch("https://botw-compendium.herokuapp.com/api/v3/compendium/entry/" + itemInput.value);
+    let data = await response.json();
+    console.log(data);
+
+}
+```
+
+:::
+
 ### 📶 Hook pour une requête
 
 ## 🏡 Environnements d'exécution
-
-## 🥚 Cycles de vie
