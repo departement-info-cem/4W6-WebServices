@@ -90,7 +90,7 @@ Les fichiers `layout.tsx` sont fait pour ça.
 
 Ci-dessus, on a un **layout global** (utilisé pour toutes les pages du site Web) défini dans le fichier `layout.tsx` qui est situé dans le dossier `app`.
 
-On remarque d'ailleurs un **menu de navigation** qui fonctionne à l'aide d'attributs `href` :
+On remarque d'ailleurs un **menu de navigation** qui fonctionne à l'aide d'éléments `<Link>` :
 
 ```tsx showLineNumbers
 export default function RootLayout({
@@ -102,11 +102,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <nav>
-          <a className="home" href="/">Accueil</a>
-          <a className="blue" href="/blue">Bleu</a>
-          <a className="red" href="/red">Rouge</a>
-          <a className="yellow" href="/yellow">Jaune</a>
-          <a className="pink" href="/pink">Rose</a>
+          <Link className="home" href="/">Accueil</Link>
+          <Link className="blue" href="/blue">Bleu</Link>
+          <Link className="red" href="/red">Rouge</Link>
+          <Link className="yellow" href="/yellow">Jaune</Link>
+          <Link className="pink" href="/pink">Rose</Link>
         </nav>
         {children}  {/* ◀◀◀ Le composant sera chargé ici ! */}
         <footer>Ceci est un fouteur</footer>
@@ -136,8 +136,8 @@ export default function BlueLayout( {children}: Readonly<{children: React.ReactN
     return(
         <div>
             <nav>
-                <a className="blue" href="/blue">Bleu</a>
-                <a className="lightBlue" href="/blue/light-blue">Bleu pâle</a>
+                <Link className="blue" href="/blue">Bleu</Link>
+                <Link className="lightBlue" href="/blue/light-blue">Bleu pâle</Link>
             </nav>
             {children} { /* ◀◀◀ Intégration des composants */}
             <footer>Fouteur supplémentaire</footer>
