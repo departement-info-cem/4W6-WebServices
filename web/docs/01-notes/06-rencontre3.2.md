@@ -324,6 +324,134 @@ Il existe d'autres **hooks préexistants**, mais on comprend déjà qu'un **hook
 
 🫃 Nous allons voir comment créer **nos propres hooks**. Il est intéressant de créer un **hook** dès qu'on remarque qu'il y a des **fonctionnalités qui se répètent dans notre projet**. (Du code TypeScript très similaire répété dans plusieurs composants) Dans ce cas, on peut parfois déplacer ce code répétitif dans un **hook**, puis utiliser ce nouveau **hook** dans les composants concernés.
 
+### 🤡 Hook inutile
+
+Commençons par un **hook** pas très pertinent pour mieux **comprendre** le potentiel et le fonctionnement des hooks. Le hook que nous allons créer se nommera `useStupidHook`.
+
+<center>![Dossier pour les hooks](../../static/img/cours6/hookFolder2.png)</center>
+
+:::info
+
+Par convention, le nom des **hooks** doit commencer par « use » et respecter **camelCase**. (Bien que leur fichier respecte la convention **kebab-case**)
+
+Un fichier n'a pas besoin de l'extension `.tsx` lorsqu'il ne contient QUE du **TypeScript**. (Donc pas de HTML)
+
+:::
+
+Voici la déclaration de notre **hook** (qui est une fonction) :
+
+```ts showLineNumbers
+import { useState } from "react";
+
+// Fonction principal du hook. Elle peut recevoir des paramètres
+export function useStupidHook(startValue : any){
+
+    // Deux états déclarés dans le hook
+
+    // Celui-ci utilise le paramètre reçu par le hook comme valeur de départ.
+    const [x, setX] = useState(startValue); 
+
+    // Celui-ci est obligé d'être un string et sa valeur de départ est "patate"
+    const [y, setY] = useState<string>("patate"); 
+
+    // Ceci est une fonction relativement banale
+    function displayStates(name : string){
+        console.log(`Salut ${name} ! x vaut ${x} et y vaut ${y}.`);
+    }
+
+    // Ceci est un objet anonyme dans lequel on a mis cinq propriétés (state1, setState1, state2, setState2 et displayFunction)
+    const object = { 
+        state1 : x, 
+        setState1 : setX, 
+        state2 : y, 
+        setState2 : setY, 
+        displayFunction : displayStates
+    };
+
+    // Le hook, lorsqu'il est appelé avec useStupidHook(), retourne l'objet anynome déclaré plus haut.
+    return object;
+
+}
+```
+
+Voici un **composant** qui **intègre** le `useStupidHook` :
+
+```tsx showLineNumbers
+"use client";
+
+import { useStupidHook } from "../_hooks/useStupidHook";
+
+export default function Yellow() {
+
+    // Intégration du hook. stupid contient l'objet anonyme retourné par le hook
+    const stupid = useStupidHook(5);
+
+    function test(){
+
+        // On appelle displayStates(), ce qui affichera un message dans la console
+        stupid.displayFunction("Simone");
+
+        // On augmente x de 1
+        stupid.setState1(stupid.state1 + 1);
+
+        // On fait alterne y entre "patate" et "fromage"
+        stupid.setState2(stupid.state2 == "patate" ? "fromage" : "patate");
+        
+    }
+
+    return (
+        <div className="yellow big">
+            <h3>Composant Yellow</h3>
+            <button onClick={test}>Tester le hook stupide</button>
+        </div>
+    );
+}
+```
+
+<center>![Composant qui intègre le hook](../../static/img/cours6/yellowComponent.png)</center>
+
+#### 📚 Explications
+
+La constante nommée `stupid` contient l'**objet anonyme** qui a été retourné par le `useStupidHook`. On peut donc accéder à `stupid.state1`, `stupid.setState1`, etc. (Les cinq propriétés de l'objet anonyme)
+
+Bien que les **états** `[x, setX]` et `[y, setY]` sont déclarées dans le **hook**, notre **composant** a accès aux valeurs et aux *setState()* de ces deux **états** grâce à l'**objet anonyme**. (`stupid.state1` pour voir la valeur de `x`, `stupid.setState1(x + 1)` pour augmenter la valeur de `x`, etc.)
+
+Bien que la fonction `displayStates()` est déclarée dans le **hook**, notre **composant** y a accès grâce à `stupid.displayFunction("nomDeMonChoix")`.
+
+<center>![Message dans la console du hook stupide](../../static/img/cours6/stupidHook.png)</center>
+
+:::info
+
+Dans cet exemple, on a accès à tout ce qui a été déclaré dans le **hook** car on a tout mis dans l'**objet anonyme** retourné par le **hook**. Bien entendu, il est possible de déclarer des **états** et **fonctions** dans un **hook** sans forcément les rendre accessible aux **composants** qui intègrent ce **hook**.
+
+:::
+
+:::tip
+
+🐁 Notons que nous aurions pu **ne pas nommer les propriétés** de l'**objet anonyme** dans le **hook** (Ça les nomme automatiquement avec le même nom que dans le hook. Par exemple, `x` continue de s'appeler `x`) :
+
+```ts
+return {x, setX, y, setY, displayStates};
+```
+
+Dans ce cas, dans chaque **composant** qui intègre le **hook**, on doit procéder comme ceci :
+
+```ts
+const {x, setX, y, setY, displayStates} = useStupidHook(5);
+```
+
+Pour accéder à la valeur de `x`, on n'utilise donc plus `stupid.state1`, mais simplement `x`.
+
+:::
+
+:::warning
+
+⛔ Les **états** dans un **hook** ne sont pas **partagés**, même si plusieurs **composants** utilisent ce **hook**. (Par exemple, avec le `useStupidHook`, chaque composant aurait ses propres états `x` et `y`, séparément) 
+
+💡 Ce sont vraiment les **contexts** qu'il faut préconiser pour partager des données entre plusieurs composants.
+
+:::
+
 ### ♊ Hook pour le two-way binding
 
 Le **two-way binding** utilisé pour chaque champ de formulaire est un classique de fonctionnalité que nous réutilisons constamment.
@@ -353,16 +481,6 @@ Pour utiliser cette **fonctionnalité**, à chaque fois, on doit :
 3. Glisser la valeur de l'état dans l'attribut `value`.
 
 Nous allons créer un **hook personnalisé** qui permet de réutiliser cette fonctionnalité avec moins de répétition.
-
-<center>![Dossier pour les hooks](../../static/img/cours6/hookFolder.png)</center>
-
-:::info
-
-Par convention, le nom des **hooks** doit commencar par « use » et respecter **camelCase**. 
-
-Un fichier n'a pas besoin de l'extension `.tsx` lorsqu'il ne contient QUE du **TypeScript**. (Donc pas de HTML)
-
-:::
 
 ```ts showLineNumbers
 import { useState } from "react";
@@ -468,5 +586,90 @@ async function searchItemImage(){
 :::
 
 ### 📶 Hook pour une requête
+
+Si jamais vous remarquez que vous utilisez **une même requête** dans **plusieurs composants** et que vous ne voulez pas **répéter** le même code plusieurs fois, vous pouvez toujours créer un **hook**.
+
+Ce **hook** devrait, au minimum :
+
+* Contenir un **état** servant à stocker les données de la requête.
+* Contenir le code de la **requête**.
+
+Voici un exemple :
+
+<Tabs>
+    <TabItem value="class" label="Classe">
+```ts showLineNumbers
+export class Item{
+
+    constructor(
+        public id : number,
+        public name : string,
+        public imageUrl : string
+    ){}
+
+}
+```
+    </TabItem>
+    <TabItem value="hook" label="Hook" default>
+```tsx showLineNumbers
+import { useState } from "react";
+import { Item } from "../_types/item";
+
+export function useItemSearch(){
+
+    // État pour stocker la donnée
+    const [item, setItem] = useState<Item|null>(null);
+
+    // Fonction pour lancer la requête
+    async function searchItem(name : string){
+
+        let response = await fetch("https://botw-compendium.herokuapp.com/api/v3/compendium/entry/" + name);
+        let json = await response.json();
+        console.log(json);
+
+        // On stocke les données sous forme d'item (classe personnalisée)
+        setItem(new Item(json.data.id, json.data.name, json.data.image));
+
+    }
+
+    // On retourne la valeur de l'état et la fonction pour que les composants y aient accès
+    return {item, searchItem};
+
+}
+```
+    </TabItem>
+    <TabItem value="component" label="Composant">
+```tsx showLineNumbers
+export default function Blue() {
+
+    const itemInput = useTwoWayBinding("");
+
+    // Intégration du hook (donne accès à la valeur de l'état et à la fonction qui contient la requête)
+    const {item, searchItem} = useItemSearch();
+
+    return (
+        <div className="blue big">
+            <h3>Composant Blue</h3>
+            <input type="text" placeholder="Ex : silent shroom" {...itemInput} />
+
+            {/* Bouton qui appelle la fonction searchItem() du hook en lui fournissant le texte à chercher */}
+            <button onClick={() => searchItem(itemInput.value)}>Chercher</button>
+
+            {/* Affichage de l'item recherché */}
+            {
+                item != null &&
+                <div>
+                    <h4>Résultat</h4>
+                    <p>Nom : {item.name}</p>
+                    <img src={item.imageUrl} alt={item.name} />
+                </div>
+            }
+
+        </div>
+    );
+}
+```
+    </TabItem>
+</Tabs>
 
 ## 🏡 Environnements d'exécution
