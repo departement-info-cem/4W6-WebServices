@@ -414,7 +414,7 @@ export default function Yellow() {
 
 La constante nommée `stupid` contient l'**objet anonyme** qui a été retourné par le `useStupidHook`. On peut donc accéder à `stupid.state1`, `stupid.setState1`, etc. (Les cinq propriétés de l'objet anonyme)
 
-Bien que les **états** `[x, setX]` et `[y, setY]` sont déclarées dans le **hook**, notre **composant** a accès aux valeurs et aux *setState()* de ces deux **états** grâce à l'**objet anonyme**. (`stupid.state1` pour voir la valeur de `x`, `stupid.setState1(x + 1)` pour augmenter la valeur de `x`, etc.)
+Bien que les **états** `[x, setX]` et `[y, setY]` sont déclarés dans le **hook**, notre **composant** a accès aux valeurs et aux `setState()` de ces deux **états** grâce à l'**objet anonyme**. (`stupid.state1` pour voir la valeur de `x`, `stupid.setState1(x + 1)` pour augmenter la valeur de `x`, etc.)
 
 Bien que la fonction `displayStates()` est déclarée dans le **hook**, notre **composant** y a accès grâce à `stupid.displayFunction("nomDeMonChoix")`.
 
@@ -499,7 +499,7 @@ export function useTwoWayBinding(startValue : any){
 
 :::note
 
-Dans l'**objet anonyme** qui est retourné, remarquez les noms des deux propriétés : `value` et `onChange`. Ce n'est pas un hasard qu'ils soient nommés exactement comme les attributs HTML que nous allons remplir : c'était **nécessaire**.
+Dans l'**objet anonyme** qui est retourné, remarquez les noms des deux propriétés : `value` et `onChange`. Ce n'est pas un hasard qu'elles soient nommées exactement comme les attributs HTML que nous allons remplir : c'était **nécessaire**.
 
 > Pourquoi a-t-il fallu ajouter le `: any` pour le paramètre `e` dans la **fonction anonyme** de l'attribut `onChange` ?
 
@@ -673,3 +673,40 @@ export default function Blue() {
 </Tabs>
 
 ## 🏡 Environnements d'exécution
+
+Avec **React**, il y a deux types de composants : des composants **serveur 🌐** et des composants **client 👤**. Par défaut, tous les **composants** et **layouts** sont **serveur 🌐**. Pour qu'un **composant** soit **client 👤**, on doit déclarer `"use client"` au début de son fichier.
+
+**🔑 Quelques différences clés :**
+
+<table>
+    <tr>
+        <th>Aspect 🛠</th><th>Composants serveur 🌐</th><th>Composants client 👤</th>
+    </tr>
+    <tr>
+        <td>🔄 Interactivité</td>
+        <td>Aucune ! Ex : pas d'événements `onClick`, `onSubmit`, pas d'**états**, etc.</td>
+        <td>On peut utiliser des **états**, événements, etc.</td>
+    </tr>
+    <tr>
+        <td>🗺 Environnement d'exécution</td>
+        <td>Serveur (Aucun JavaScript envoyé au client, on envoie du HTML prêt à l'affichage)</td>
+        <td>Client (Le client reçoit tout le HTML, CSS et JavaScript)</td>
+    </tr>
+    <tr>
+        <td>⚡ Performance</td>
+        <td>Affichage du composant plus rapide</td>
+        <td>Affichage du composant moins rapide</td>
+    </tr>
+</table>
+
+L'important à retenir, c'est qu'il faut seulement utiliser `"use client"` 👤 lorsque le **composant** en question a bel et bien besoin d'**interactivité**. (États, contexts, hooks, requête à une API externe, etc.)
+
+Dans une application bien **optimisée ⚡**, si on remarque qu'un **grand** composant contient seulement quelques éléments **interactifs** bien isolés, il faudrait le séparer en **plusieurs composants**. (Dont un ou plusieurs seront **serveur 🌐** et un ou plusieurs seront **client 👤**)
+
+:::warning
+
+Dans la majorité des cas, un composant qui est **enfant** d'un composant **client 👤** devient automatiquement **client 👤**. 
+
+L'exception est quand un composant **serveur 🌐** est transmis **en paramètre** (`children : React.ReactNode`) à travers un composant **client 👤** par un composant **serveur 🌐**. (Oui c'est une phrase plutôt complexe, ce n'est pas dramatique si vous ne saisissez pas)
+
+:::
