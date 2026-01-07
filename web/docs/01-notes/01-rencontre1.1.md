@@ -1,37 +1,33 @@
 # Cours 1 - Intro à React / Next.js
 
-### 🙈 Application Web ASP.NET Core <u>sans</u> client React
+### 🙈 Application Web ASP.NET Core <u>sans</u> client Next.js
 
 Quand on envoie une requête HTTP au serveur sur lequel l'application ASP.NET Core roule, le serveur 
 nous renvoie du **HTML**, du **CSS** et du **JavaScript** pour que la page Web à afficher chez
 l'utilisateur soit toute prête. 🎁👌
 
-![Résultat d'une requête HTTP sans client React](../../static/img/cours1/without_angular.png)
+![Résultat d'une requête HTTP sans Next.js](../../static/img/cours1/without_angular.png)
 
-### ✅ Application Web ASP.NET Core <u>avec</u> client React
+### ✅ Application Web ASP.NET Core <u>avec</u> client React / Next.js
 
-Désormais, il y a une application Web cliente (c'est-à-dire qu'elle est exécutée sur l'ordinateur de 
-l'utilisateur) qui contient tout le HTML, le CSS et le JavaScript du site Web visité.
+Désormais, il y a une application Web **Next.js** qui est hébergée sur un serveur (ça peut être le même que l'application **ASP.NET Core** ou pas) qui s'occupe de nous envoyer tout le **HTML**, **CSS** et **JavaScript** de nos pages Web. Par contre, ces pages Web ne contiennent pas encore les **données** à afficher. (Vidéos, commentaires, messages, titres, articles de blogs, etc.)
 
-Quand on envoie une requête HTTP au serveur sur lequel l'application ASP.NET Core roule, le serveur
-nous renvoie seulement les données à afficher (vidéos, images, morceaux de texte, etc.) sous forme 
-de JSON ou de XML et l'application React s'occupera de « pluguer » les données dans le HTML. 📦🔍
+Quand on envoie une requête HTTP au serveur sur lequel l'application **ASP.NET Core** roule, le serveur
+nous renvoie seulement les **données** à afficher (vidéos, images, morceaux de texte, etc.) sous forme 
+de JSON ou de XML et l'application **Next.js** s'occupera de « pluguer » les données dans les pages Web. 📦🔌
 
-![Résultat d'une requête HTTP avec client React](../../static/img/cours1/with_react.png)
-
-Pour que le navigateur de l'utilisateur ait accès au client React, le serveur doit lui envoyer le
-projet React en entier lorsque l'utilisateur fait sa première requête au site Web.
+![Résultat d'une requête HTTP avec Next.js](../../static/img/cours1/with_react.png)
 
 Par exemple, lorsque je souhaite naviguer sur YouTube, voici ce qu'il se passe, grossièrement :
 
 1. J'envoie ma **première requête HTTP** (`https://www.youtube.ca`) à YouTube.
-2. L'application Web serveur de YouTube me retourne les choses suivantes :
+2. Le ou les serveurs de YouTube me retournent les choses suivantes :
 
-    * ⚙ Une application React (inclut tous le **HTML**, le **CSS** et le **JavaScript** du site Web)
-    * 📦 Les **données** à afficher sur la page d'accueil du site Web (Quelques thumbnails de vidéo, les titres des vidéos, etc.)
+    * ⚙ L'application **Next.js** m'envoie le **HTML**, le **CSS** et le **JavaScript** de la page Web, puis, une **2e requête** est envoyée pour que...
+    * 📦 L'application **ASP.NET Core** m'envoie les données à afficher sur la page d'accueil du site Web (Quelques thumbnails de vidéo, les titres des vidéos, etc.)
 
 3. Ma navigation se poursuit. Par exemple, je clique sur une vidéo. (Ce qui envoie une **deuxième requête HTTP** à Youtube : `https://www.youtube.com/watch?v=dQw4w9WgXcQ`)
-4. L'application Web serveur de YouTube me retourne des **données** supplémentaires :
+4. L'application **Next.js** de YouTube me retourne du **HTML**, du **CSS** et du **JavaScript** supplémentaire au besoin, puis une **2e requête** est envoyée pour que l'application **ASP.NET Core** m'envoie :
 
     * 🎥 La vidéo à visionner.
     * 📃 Le titre de la vidéo.
@@ -40,17 +36,16 @@ Par exemple, lorsque je souhaite naviguer sur YouTube, voici ce qu'il se passe, 
 
 ### 🎭 Différences avec / sans une application Web cliente
 
-| Aspect | Avec React | Sans React |
+| Aspect | Avec Next.JS + ASP.NET Core | Avec ASP.NET Core uniquement |
 | - | - | - |
-| 🏁 Première requête à un site Web | Recevoir l'application cliente React en entier. **Plus long** pour charger la page d'accueil. | Recevoir un peu de HTML, de CSS et de JavaScript. |
-| 🚩 Requêtes suivantes | Recevoir seulement les nouvelles données à intégrer à la page Web. **Plus court**. | Recevoir le HTML, le CSS et le JavaScript de la nouvelle page Web. |
-| ⚡ Charge du serveur | Allégée : il n'a plus besoin de construire les pages Web. (Les views) | Alourdie : il doit construire chaque page Web avant de les envoyer. |
-| 🖥 Charge du client | Alourdie : il y a plus de JavaScript qui travaille côté client pour faire évoluer les pages Web dynamiquement. | Allégée : les pages Web arrivent toutes faites. Il y a parfois un peu de JavaScript pour rendre les pages Web dynamiques, mais c'est léger. |
-| 📱🖥💻 Portabilité | Flexible : le serveur Web retourne des données sous format JSON / XML ! On pourrait créer une application mobile qui envoie des requêtes au même serveur Web sans problème. | Rigide : Le serveur retourne du HTML, du CSS et du JavaScript... Il faut utiliser la page Web tel quel. |
+| ⚡ Charge du projet ASP.NET Core | Allégée : il n'a plus besoin de construire les pages Web. (Les views) | Alourdie : il doit construire chaque page Web avant de les envoyer. |
+| 🖥 Charge du navigateur Web du client | Alourdie : il y a plus de JavaScript qui travaille côté client pour faire évoluer les pages Web dynamiquement. | Allégée : les pages Web arrivent toutes faites. Il y a parfois un peu de JavaScript pour rendre les pages Web dynamiques, mais c'est léger. |
+| 📱🖥💻 Portabilité | Flexible : le serveur Web retourne des données sous format JSON / XML ! On pourrait créer une application mobile qui envoie des requêtes au même serveur ASP.NET Core sans problème. | Rigide : Le serveur retourne du HTML, du CSS et du JavaScript... Il faut utiliser la page Web tel quel. |
+| 🤹‍♂️ Interactivité (Menus, jeux, formulaires, événements, etc.) | Plus performante et facile à mettre en place. | Plus difficile à mettre en place, parfois moins performant. |
 
 :::tip
 
-Bien qu'utiliser un framework client comme React offre plusieurs avantages pour un site Web dont le contenu est très dynamique, 
+Bien qu'utiliser un framework client comme Next.js offre plusieurs avantages pour un site Web dont le contenu est très dynamique, 
 pour des sites Web simples et très statiques, (blogs, journaux, recettes, etc.) se passer d'une application cliente est parfois préférable.
 On pourrait même aller plus loin et simplement utiliser un CMS (Content Management System) comme Wordpress pour ne pas avoir à écrire
 la moindre ligne de code.
@@ -71,7 +66,7 @@ Comme ce type de projet ne roule pas dans un navigateur Web, n'importe quel lang
 
 #### 🖥 Frameworks clients
 
-Dans ce cours, nous apprendrons à utiliser **React** et le framework **Next.js** pour créer des applications Web **cliente**.
+Dans ce cours, nous apprendrons à utiliser **React** avec le framework **Next.js** pour créer des applications Web **cliente**.
 Il existe d'autres frameworks Web clients (_front end_) également.
 
 Comme ce type de projet roule dans le navigateur Web de l'utilisateur, **JavaScript** est un choix relativement obligatoire.
@@ -80,16 +75,16 @@ Comme ce type de projet roule dans le navigateur Web de l'utilisateur, **JavaScr
 
 :::warning
 
-Pourquoi ne pas communiquer directement avec la base de données avec une application cliente comme React ? (Et se passer
-d'un framework serveur comme ASP.NET Core) Le projet React est envoyé en entier au client et il n'est donc **pas du tout
-sécuritaire** d'interagir avec une base de données dans une application cliente. (L'utilisateur aurait accès aux **identifiants
-de connexion** à la base de données et aux requêtes SQL)
+> Pourquoi ne pas communiquer directement avec la base de données avec une application cliente comme React / Next.js ? (Et se passer
+d'un framework serveur comme ASP.NET Core)
+
+En général, les frameworks clients envoient leur code JavaScript au navigateur de l'utilisateur. Ça impliquerait de rendre public les identifiants et mots de passe de connexion à la base de données. 💀⛔
 
 :::
 
 :::info
 
-Contrairement à Angular et Vue, React n'est pas vraiment un **framework client**, mais plutôt une **librairie**. (Avec moins de fonctionnalités qu'Angular et Vue) Des frameworks comme **Next.js**, **Gatsby**, **Vite.js**, etc. sont construits autour de la librairie React.
+Contrairement à Angular et Vue, React n'est pas vraiment un **framework client**, mais plutôt une **librairie**. (Avec moins de fonctionnalités qu'Angular et Vue) Des frameworks comme **Next.js**, **Gatsby**, **Vite.js**, etc. sont construits autour de la librairie React. De notre côté, nous utiliserons **Next.js** car c'est, en date d'aujourd'hui, le framework client le plus populaire. 💃🕺📢
 
 :::
 

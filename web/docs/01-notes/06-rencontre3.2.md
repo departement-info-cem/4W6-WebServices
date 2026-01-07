@@ -25,6 +25,12 @@ Les `Contexts` permettent de partager des **données** entre **plusieurs composa
 
 On peut voir ça comme une **variable globale**, mais plus **propre** et plus **compliquée**.
 
+:::note
+
+Même si ça permet de préserver une donnée lorsqu'on navigue d'un composant à l'autre, gardez à l'esprit que dès qu'on ferme la page Web ou qu'on réactualise la page Web, toute information est perdue, **context** ou non. (Les variables et états du projet se réinitialisent)
+
+:::
+
 ### 🦴 Structure
 
 Un **Context** est généralement composé de trois morceaux :
