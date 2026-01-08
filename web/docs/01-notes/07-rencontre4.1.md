@@ -1,6 +1,6 @@
 # Cours 7 - Stockage, i18n, token
 
-### 💾 Stockage local
+## 💾 Stockage local
 
 🧹 Tel que vu au cours 6, si on réinitialise la page Web lorsque notre application Angular est en exécution, toutes les données (contenu des variables) sont perdues.
 
@@ -12,7 +12,7 @@ de stockage permettent de sauvegarder des données <u>dans le navigateur du clie
 * Le stockage local est **permanent**. Il ne se nettoie jamais par lui-même.
 * Le stockage de session est **temporaire**. Il se nettoie lorsque le navigateur est fermé.
 
-#### 📜 Sauvegarder une donnée de type `string`
+### 📜 Sauvegarder un `string`
 
 Cette opération peut être exécutée dans la fonction TypeScript de votre choix.
 
@@ -39,7 +39,7 @@ paramètre qui contient la **donnée** à sauvegarder.
 **composant** ou **service**. Pas besoin d'injection de dépendance ou d'importation
 pour que ces deux outils fonctionnent.
 
-#### 📫 Récupérer une donnée de type `string`
+### 📫 Récupérer un `string`
 
 Cette opération est _généralement_ effectuée dans la fonction `ngOnInit()`, puisqu'on
 souhaite accéder à certaines données dès le chargement d'un composant.
@@ -70,7 +70,7 @@ doit pouvoir être `null`.
 
 :::
 
-#### 💾📦 Sauvegarder une donnée d'un autre type que `string`
+### 💾📦 Sauvegarder une donnée
 
 Pour toute autre donnée qu'un `string`, il faudra « stringifier » (convertir en `string`) la
 donnée avant de la ranger grâce à `JSON.stringify(...)`. Ceci s'applique pour les `boolean`, `number`, tableau, objet personnalisé, etc.
@@ -93,7 +93,7 @@ export class AppComponent{
 }
 ```
 
-#### 📫📦 Récupérer une donnée d'un autre type que `string`
+### 📫📦 Récupérer une donnée
 
 Puisque la donnée que nous allons récupérer dans le stockage local a été convertie en `string`,
 nous allons devoir la **reconvertir** en son type d'origine lorsqu'on la récupère grâce à `JSON.parse(...)`.
@@ -126,7 +126,7 @@ de classe.
 
 :::
 
-#### 🚮 Supprimer des données du stockage local
+### 🚮 Supprimer des données
 
 Que ce soit pour le stockage de session ou le stockage local, il est possible de supprimer
 manuellement certaines données si on connait leur **clé** grâce à `removeItem(...)`.
@@ -142,226 +142,132 @@ l'aide de `clear()` :
 localStorage.clear();
 ```
 
-#### 🔍 Vérifier le stockage local dans le navigateur
+### 🔍 Inspecter le stockage local
 
 N'hésitez pas à utiliser l'outil du navigateur qui permet de jeter un coup d'oeil au **stockage local**. On peut
 d'ailleurs y supprimer manuellement des données pour simplifier les tests.
 
 <center>![Stockage local dans le navigateur](../../static/img/cours7/localStorage.png)</center>
 
-### 👅 Internationalisation
+## 👅 Internationalisation
 
-Il y a plusieurs manières de traduire les textes dans le HTML d'un projet Angular. Nous utiliserons une méthode
-relativement simple.
+Il y a plusieurs manières de traduire les textes d'un projet Next.js. Dans ce cours, nous utiliserons la librairie `next-intl`, qui semble être la solution la plus populaire™.
 
-#### Étape 1 - 📦 Installer deux dépendances
+#### Étape 1 - 📦 Installer une dépendance
 
-`npm install @ngx-translate/core`  
-`npm install @ngx-translate/http-loader`
+`npm install next-intl`
 
-#### Étape 2 - 🧰 Quelques ajouts dans `app.config.ts`
-
-* `provideTranslateService()` permet de configurer le chargement des textes.
-* `provideHttpClient()` est nécessaire pour le chargement des textes.
+#### Étape 2 - 🧰 Modifications dans `next.config.ts`
 
 ```ts showLineNumbers
-export const appConfig: ApplicationConfig = {
-  providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
-    provideHttpClient(),
-    provideTranslateService({
-      loader: provideTranslateHttpLoader({
-        prefix:'/assets/i18n/',
-        suffix:'.json'
-      }),
-      fallbackLang:'fr',
-      lang:'fr'
-    })
-  ]
-};
+import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
+
+
+const nextConfig: NextConfig = {};
+
+// Ici
+const withNextIntl = createNextIntlPlugin();
+export default withNextIntl(nextConfig);
 ```
 
-:::warning
+#### Étape 3 - 📄 Création de fichiers
 
-Il se peut que vous deviez rédiger les **importations** manuellement pour certaines fonctions comme `provideTranslateService()` et `provideTranslateHttpLoader()`. Les voici :
+<center>![Nouveaux fichiers pour i18n](../../static/img/cours7/i18nFiles.png)</center>
+
+On doit créer un nouveau dossier nommé `i18n` à la racine de notre projet. (Donc pas dans `app`, mais bien dans le dossier parent de `app`, dont le nom varie selon votre projet)
+
+Créez également un autre dossier nommé `messages` à la racine de votre projet.
+
+Il y aura six **fichiers** à créer : 
+
+1. `i18n/routing.ts`
 
 ```ts showLineNumbers
-import { provideHttpClient } from '@angular/common/http';
-import { provideTranslateService } from '@ngx-translate/core';
-import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { defineRouting } from "next-intl/routing";
+
+export const routing = defineRouting({
+    locales: ['en', 'fr'],
+    defaultLocale:"fr"
+});
 ```
 
-:::
-
-#### Étape 3 - ⚙ Modification dans le composant à internationaliser
-
-Il faut importer le `TranslateModule` :
+2. `i18n/request.ts`
 
 ```ts showLineNumbers
-@Component({
-  selector: 'app-composant2',
-  standalone: true,
-  imports: [TranslateModule], // ✅
-  templateUrl: './composant2.component.html',
-  styleUrl: './composant2.component.css'
-})
+import { hasLocale } from 'next-intl';
+import {getRequestConfig} from 'next-intl/server';
+import { routing } from './routing';
+ 
+export default getRequestConfig(async ({requestLocale}) => {
+
+  const requested = await requestLocale;
+  const locale = hasLocale(routing.locales, requested)
+    ? requested
+    : routing.defaultLocale;
+ 
+  return {
+    locale,
+    messages: (await import(`../messages/${locale}.json`)).default
+  };
+});
 ```
 
-... et injecter `TranslateService` (un service qui existe déjà par défaut) :
+3. `i18n/navigation.ts`
 
 ```ts showLineNumbers
-export class Composant2Component {
+import { createNavigation } from 'next-intl/navigation';
+import { routing } from './routing';
 
-  language : string = "fr";
-
-  constructor(public translator : TranslateService){
-
-    this.translator.addLangs(['en', 'fr']);
-    this.translator.setFallbackLang(this.language);
-    this.translator.use(this.language);
-
-  }
-
-}
+export const { Link, redirect, usePathname, useRouter, getPathname } = createNavigation(routing);
 ```
 
-Le `TranslateService` permettra de choisir la language à afficher. Il faut d'ailleurs choisir une **langue par défaut**
-dans le constructeur.
+Attention, on change de dossier ! Rendez-vous dans `messages` :
 
-#### Étape 4 - 🏷 Étiqueter tous les textes internationalisés dans le HTML
+4. `messages/fr.json`
 
-Il y a plusieurs manières de créer les étiquettes, mais en gros, il s'agit de remplacer tout le texte par
-des **clés** qui feront référence à du texte dans un autre fichier.
-
-Attention : Importer le module `TranslateModule` est nécessaire pour tous les composants étiquetés.
-
-* ☝ Option 1 : Translation pipe
-
-```html
-<h2>{{ 'nomComposant.title' | translate }}</h2>
-```
-
-* ✌ Option 2 : Translation directive en attribut
-
-```html
-<h2 [translate]="'nomComposant.title'"></h2>
-```
-
-* 🤟 Option 3 : Translation directive en contenu
-
-```html
-<h2 translate>nomComposant.title</h2>
-```
-
-⛔ Peu importe l'option utilisée, assurez-vous que chaque étiquette ait la forme `nomDuComposant.nomEtiquetteUnique`.
-
-Pour une valeur d'attribut, on peut utiliser cette structure :
-
-```html
-<input type="submit" [value]="'nomComposant.search' | translate">
-```
-
-#### Étape 5 - 📝 Produire les fichiers de traduction
-
-Dans le dossier `public/assets/i18n` (à créer au besoin), on pourrait par exemple créer les fichiers `fr.json` et `en.json`.
-Il faut **un fichier JSON par langue**.
-
-<center>![Fichier JSON pour une langue](../../static/img/cours7/i18n_json.png)</center>
-<br/>
-#### Étape 5½ - 🧩 Gérer le texte mêlée à des variables
-
-Voici un exemple complet dans lequel **on glisse une variable** au sein d'une phrase à traduire.
-
-**Texte initial non internationalisé :**
-
-```ts
-maVariable : string = "Longueuil";
-```
-
-```html
-<p>Je n'aimerais pas être un cerf à {{maVariable}}</p>
-```
-
-**Voici le HTML une fois internationalisé :**
-
-* ☝ Option 1 : Translation pipe
-
-```html
-<p>{{ 'composant1.textWithVar' | translate : {x : maVariable} }}</p>
-```
-
-* ✌ Option 2 : Translation directive en contenu
-
-(S'il y a plusieurs translateParams, séparez-les par des virgules en restant dans les accolades `{ ... }`)
-
-```html
-<p translate [translateParams]="{x : maVariable}">composant2.textWithVar</p>
-```
-
-Dans le fichier de traduction, nous aurons ceci (on retrouve le symbole `x` !) :
+Ce fichier sera relativement vide pour le moment.
 
 ```json showLineNumbers
 {
-    "composant2":
-    {
-        "textWithVar":"Je n'aimerais pas être un cerf à {{x}}",
-    }
-}
-```
-
-Ainsi, selon la langue, nous aurons l'opportunité de placer le `{{x}}` à un emplacement différent dans la phrase.
-
-#### Étape 6 - 🙋‍♂️ Permettre à l'utilisateur de changer la langue
-
-Le but est simplement d'offrir un mécanisme quelconque pour appeler la fonction `this.translator.use("langueQuelconque")'.
-
-* Exemple 1 : 🔘 Des boutons
-
-<center>![Boutons](../../static/img/cours7/buttons.png)</center>
-
-```html
-<button (click)="changeLanguage('fr')">Français</button>
-<button (click)="changeLanguage('en')">English</button>
-```
-
-```ts
-changeLanguage(lang : string){
-
-    this.language = lang; // Pas forcément nécessaire, dépend du composant
-    this.translator.use(this.language); // Ceci chargera les textes de la nouvelle langue
-    
-}
-```
-
-* Exemple 2 : 🛴 Un menu déroulant
-
-<center>![Menu déroulant](../../static/img/cours7/dropDown.png)</center>
-
-Assurez-vous de _two-way bind_ le `<select>` avec une variable qui contiendra la langue. (Ici, `language`)
-
-```html
-<select name="language" [(ngModel)]="language" (change)="changeLanguage()">
-  <option value="fr">Français</option>
-  <option value="en">English</option>
-</select>
-```
-
-```ts
-changeLanguage(){
-
-    this.translator.use(this.language);
 
 }
 ```
 
-#### 🌐 Et pour internationaliser TOUS les composants ?
+5. `messages/en.json`
 
-⛔ Les étapes **3** et **6** doivent seulement être réalisées dans le composant `app`. (Squelette de l'application)
+Ce fichier sera relativement vide pour le moment.
 
-Cela dit, les **étiquettes de traduction** devront être intégrées à tous les composants à traduire.
+```json showLineNumbers
+{
 
-### 🪙 Requête avec authentification (token)
+}
+```
+
+Finalement, à la <u>racine</u> du projet, on crée le fichier `proxy.ts`.
+
+6. `proxy.ts`
+
+```ts showLineNumbers
+import createMiddleware from 'next-intl/middleware';
+import { routing } from './i18n/routing';
+ 
+export default createMiddleware(routing);
+ 
+export const config = {
+  matcher: '/((?!api|trpc|_next|_vercel|.*\\..*).*)'
+};
+```
+
+#### Étape 4 - ⚙ Ajout d'une route dynamique
+
+#### Étape 5 - 📐 Modification du RootLayout
+
+#### Étape 6 - 🏷 Produire les textes et traduire les composants
+
+#### Étape 7 - 🙋‍♂️ Permettre à l'utilisateur de changer la langue
+
+## 🪙 Requête avec authentification (token)
 
 Certaines Web API requièrent une authentification pour être utilisées. C'est par exemple le cas
 de **Spotify**, que nous allons aborder en exemple.
@@ -496,7 +402,7 @@ Un token n'est pas valide éternellement. Selon l'API, le token peut expirer apr
 
 :::
 
-### 📜 Exemples de requêtes à Spotify pour le TP2
+## 📜 Exemples de requêtes à Spotify pour le TP2
 
 Voici deux classes qui pourraient vous être utiles dans le contexte du **TP2** (N'oubliez pas de les isoler chacune dans leur propre fichier !) :
 
@@ -587,7 +493,7 @@ async getSongs(albumId : string): Promise<Song[]> {
 }
 ```
 
-### 🐇 Pour éviter de répéter du code
+## 🐇 Pour éviter de répéter du code
 
 Comme nous avons besoin des **en-têtes** contenant le **token d'authentification** pour chaque requête, n'hésitez pas
 à intégrer ce code à une fonction de votre service :

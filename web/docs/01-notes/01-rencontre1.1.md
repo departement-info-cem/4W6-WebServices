@@ -1,6 +1,6 @@
 # Cours 1 - Intro à React / Next.js
 
-### 🙈 Application Web ASP.NET Core <u>sans</u> client Next.js
+### 🙈 Application Web ASP.NET Core <u>sans</u> Next.js
 
 Quand on envoie une requête HTTP au serveur sur lequel l'application ASP.NET Core roule, le serveur 
 nous renvoie du **HTML**, du **CSS** et du **JavaScript** pour que la page Web à afficher chez
@@ -8,7 +8,7 @@ l'utilisateur soit toute prête. 🎁👌
 
 ![Résultat d'une requête HTTP sans Next.js](../../static/img/cours1/without_angular.png)
 
-### ✅ Application Web ASP.NET Core <u>avec</u> client React / Next.js
+### ✅ Application Web ASP.NET Core <u>avec</u> Next.js
 
 Désormais, il y a une application Web **Next.js** qui est hébergée sur un serveur (ça peut être le même que l'application **ASP.NET Core** ou pas) qui s'occupe de nous envoyer tout le **HTML**, **CSS** et **JavaScript** de nos pages Web. Par contre, ces pages Web ne contiennent pas encore les **données** à afficher. (Vidéos, commentaires, messages, titres, articles de blogs, etc.)
 
