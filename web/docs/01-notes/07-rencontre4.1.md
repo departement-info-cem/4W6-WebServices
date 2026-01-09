@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Cours 7 - Stockage, i18n, token
 
 ## 💾 Stockage local
@@ -159,6 +162,8 @@ Il y a plusieurs manières de traduire les textes d'un projet Next.js. Dans ce c
 
 #### Étape 2 - 🧰 Modifications dans `next.config.ts`
 
+On « active » les fonctionnalités de `next-intl` dans la configuration de notre projet.
+
 ```ts showLineNumbers
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
@@ -175,13 +180,15 @@ export default withNextIntl(nextConfig);
 
 <center>![Nouveaux fichiers pour i18n](../../static/img/cours7/i18nFiles.png)</center>
 
-On doit créer un nouveau dossier nommé `i18n` à la racine de notre projet. (Donc pas dans `app`, mais bien dans le dossier parent de `app`, dont le nom varie selon votre projet)
-
-Créez également un autre dossier nommé `messages` à la racine de votre projet.
+On doit créer deux nouveaus dossiers nommés `i18n` et `messages` à la racine de notre projet. (Donc pas dans `app`, mais bien dans le dossier parent de `app`, dont le nom varie selon votre projet)
 
 Il y aura six **fichiers** à créer : 
 
 1. `i18n/routing.ts`
+
+Notez que la langue 👅 (la « locale ») active sera spécifiée **dans la route** 🚗. Par exemple, les routes `http://localhost:3000/fr/home` et `http://localhost:3000/en/home` chargeront **la même page**, dans une langue différente.
+
+Dans ce fichier, nous spécifions les **langues disponibles** et la **langue par défaut**.
 
 ```ts showLineNumbers
 import { defineRouting } from "next-intl/routing";
@@ -194,9 +201,11 @@ export const routing = defineRouting({
 
 2. `i18n/request.ts`
 
+À chaque fois que l'utilisateur naviguera vers une nouvelle page, la fonction `getRequestConfig()` récupérera la **locale** présente dans la **route** et chargera les messages (textes) de la langue détectée. Si la langue est invalide (Ex : `'es'` n'existe pas dans `routing.ts`), les textes de la langue par défaut seront chargés à la place.
+
 ```ts showLineNumbers
 import { hasLocale } from 'next-intl';
-import {getRequestConfig} from 'next-intl/server';
+import { getRequestConfig } from 'next-intl/server';
 import { routing } from './routing';
  
 export default getRequestConfig(async ({requestLocale}) => {
@@ -215,6 +224,13 @@ export default getRequestConfig(async ({requestLocale}) => {
 
 3. `i18n/navigation.ts`
 
+Ce petit fichier **permettra de ne pas avoir à constamment préciser la langue dans la route**.
+
+❌ Pas besoin de préciser la locale dans nos routes : `<Link href="/fr/home">...</Link>`  
+✅ On peut continuer d'utiliser des routes ordinaires : `<Link href="/home">...</Link>`
+
+La locale actuellement chargée sera simplement transposée dans la nouvelle route lors de la navigation.
+
 ```ts showLineNumbers
 import { createNavigation } from 'next-intl/navigation';
 import { routing } from './routing';
@@ -226,7 +242,7 @@ Attention, on change de dossier ! Rendez-vous dans `messages` :
 
 4. `messages/fr.json`
 
-Ce fichier sera relativement vide pour le moment.
+Ce fichier sera relativement vide pour le moment. Il contiendra les textes français de nos pages Web.
 
 ```json showLineNumbers
 {
@@ -236,7 +252,7 @@ Ce fichier sera relativement vide pour le moment.
 
 5. `messages/en.json`
 
-Ce fichier sera relativement vide pour le moment.
+Ce fichier sera relativement vide pour le moment. Il contiendra les textes anglais de nos pages Web.
 
 ```json showLineNumbers
 {
@@ -247,6 +263,8 @@ Ce fichier sera relativement vide pour le moment.
 Finalement, à la <u>racine</u> du projet, on crée le fichier `proxy.ts`.
 
 6. `proxy.ts`
+
+Celui-ci permet entre autres d'ajouter la locale par défaut dans la route lorsqu'aucune locale n'est précisée dans l'URL et de détecter la locale actuelle. De plus, il permet aussi d'**exclure** certaines routes de la localisation. (ex : **fichiers** statiques, chargement d'**assets**, **requêtes** à des APIs, etc.)
 
 ```ts showLineNumbers
 import createMiddleware from 'next-intl/middleware';
@@ -261,11 +279,264 @@ export const config = {
 
 #### Étape 4 - ⚙ Ajout d'une route dynamique
 
+En général, il y a les fichiers `page.tsx` et `layout.tsx` directement dans le dossier `app`. Cela dit, il nous faut un segment de **route dynamique** à la racine de la route, alors on va créer un dossier `app/[locale]` et y déplacer les fichiers `page.tsx` et `layout.tsx`.
+
+<center>![Route dynamique pour la locale](../../static/img/cours7/dynamicRoute.png)</center>
+
+⛔ L'importation de `globals.css` devra être changée légèerement dans `layout.tsx` : `import "../globals.css";`
+
 #### Étape 5 - 📐 Modification du RootLayout
+
+Le layout racine, qu'on vient de déplacer dans `/app/[locale]`, doit être modifié légèrement pour **préciser la langue dans la balise `<html>`** et pour que les **composants** de l'application puissent avoir accès à la configuration de `next-intl` et être traduits.
+
+```tsx showLineNumbers
+// 1️⃣ Ajout d'un paramètre dans la fonction RootLayout
+export default async function RootLayout({ children, params }: Readonly<{ children: React.ReactNode, params : Promise<{locale : string}> }>) {
+
+  // 2️⃣ Récupération de la locale dans les paramètres
+  const {locale} = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+
+  return (
+    <html lang="{locale}"> {/* 3️⃣ On spécifie la locale dans le HTML */}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+
+        {/* 4️⃣ Modification ici ! */}
+        <NextIntlClientProvider>
+          {children}
+        </NextIntlClientProvider> 
+
+      </body>
+    </html>
+  );
+}
+```
 
 #### Étape 6 - 🏷 Produire les textes et traduire les composants
 
+Le plus gros du travail est bien entendu de produire les textes dans les fichiers `fr.json` et `en.json` et d'*étiquetter* le HTML des composants pour intégrer chaque texte au bon endroit.
+
+📝 Voici un exemple **valide** pour les fichiers `json`.
+
+* Remarquez que les textes sont **séparés par composants**.
+* Remarquez que les **noms des propriétés sont identiques** dans les deux fichiers.
+
+<Tabs>
+    <TabItem value="fr" label="fr.json" default>
+```json showLineNumbers
+{
+  "NomComposant1":{
+    "title":"Titre de la page",
+    "nav1":"Accueil",
+    "nav2":"Profil"
+  },
+  "NomComposant2":{
+    "left":"Texte à gauche",
+    "right":"Texte à droite"
+  }
+}
+```
+    </TabItem>
+    <TabItem value="en" label="en.json">
+```json showLineNumbers
+{
+  "NomComposant1":{
+    "title":"Page title",
+    "nav1":"Home",
+    "nav2":"Profile"
+  },
+  "NomComposant2":{
+    "left":"Left text",
+    "right":"Right text"
+  }
+}
+```
+    </TabItem>
+</Tabs>
+
+🏷 Étiquettez ensuite les composants pour intégrer chaque texte au bon endroit.
+
+Il faut commencar par ajouter cette ligne de code dans chaque composant. La constante `t` nous permettra d'accéder aux **textes** préparés plus haut.
+
+```tsx showLineNumbers
+export default function Home() {
+
+  // "Home" est le nom de la section dans les fichiers fr.json et en.json 
+  // (NomComposant1 ou NomComposant2, par exemple)
+  const t = useTranslations('Home');
+
+  return ( /* ...  */ );
+
+}
+```
+
+**⚱ Exemple 1 : texte invariable**
+
+C'est le cas le plus commun.
+
+* 🌐 HTML : `<p>{t('title')}</p>`
+* 📝 JSON : `"title":"Titre de la page"`
+* 🔍 Résultat : `<p>Titre de la page</p>`
+
+**✏ Exemple 2 : texte avec variable(s)**
+
+`myName` et `myAge` sont des **états** déclarés dans le composant.
+
+* 🌐 HTML : `<p>{t('greetings', {name : myName, age : myAge })}</p>`
+* 📝 JSON : `"greetings":"Bonjour {name}, tu as {age} ans."`
+* 🔍 Résultat : `<p>Bonjour Simone, tu as 39 ans.</p>`
+
+**🧮 Exemple 3 : texte avec singulier / pluriel**
+
+`myItemCount` est un **état** déclaré dans le composant.
+
+* 🌐 HTML : `<p>{t('itemCount', {count : myItemCount})}</p>`
+* 📝 JSON : `"itemCount":"Tu {count, plural, =0 {n'as aucun item} =1 {as un seul item} other {as # items}}."`
+* 🔍 Résultat : `<p>Tu as 5 items.</p>`
+
+:::note
+
+Il existe plusieurs autres types de textes. [Voir la documentation](https://next-intl.dev/docs/usage/translations)
+
+:::
+
+**Voici une page qui exploite les trois exemples abordés** :
+
+<Tabs>
+    <TabItem value="fr" label="fr.json">
+```json showLineNumbers
+{
+    "Home":{
+        "title":"Cours 7",
+        "hi":"Bonjour {name} !",
+        "friends":"Tu {count, plural, =0 {n'as aucun ami, HAHAHA !} =1 {as un ami} other {as # amis}}.",
+        "button":"Appuie-moi délicatement 😩"
+    }
+}
+```
+    </TabItem>
+    <TabItem value="en" label="en.json">
+```json showLineNumbers
+{
+    "Home":{
+        "title":"Lesson 7",
+        "hi":"Hi {name} !",
+        "friends":"You {count, plural, =0 {have no friends, HAHAHA !} =1 {have a single friend.} other {have # friends.}}",
+        "button":"Click me gently 😩"
+    }
+}
+```
+    </TabItem>
+    <TabItem value="component" label="Composant" default>
+```tsx showLineNumbers
+"use client";
+
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+
+export default function Home() {
+
+  const t = useTranslations('Home');
+  const [myName, setMyName] = useState("Simone");
+  const [nbFriends, setNbFrients] = useState(0);
+
+  return (
+    <div>
+      <h2>{t('title')}</h2>
+      <p>{t('hi', {name : myName})}</p>
+      <p>{t('friends', {count : nbFriends})}</p>
+      <input type="submit" value={t('button')} />
+    </div>
+  );
+}
+```
+    </TabItem>
+    <TabItem value="frResult" label="Résultat (fr)">
+<center>![Textes français chargés dans une page](../../static/img/cours7/frResult.png)</center>
+    </TabItem>
+    <TabItem value="enResult" label="Résultat (en)">
+<center>![Textes anglais chargés dans une page](../../static/img/cours7/enResult.png)</center>
+    </TabItem>
+</Tabs>
+
 #### Étape 7 - 🙋‍♂️ Permettre à l'utilisateur de changer la langue
+
+Généralement, le bouton ou le menu permettant de changer la **locale** (la langue) risque d'être dans un **layout** ou une page principale.
+
+**🔘 Bouton permettant d'alterner entre `fr` et `en`**
+
+```tsx showLineNumbers
+"use client";
+
+import { Link, usePathname } from "@/i18n/navigation"; // ⛔ Utilisez le BON import pour <Link> !
+import { useLocale, useTranslations } from "next-intl";
+
+export default function Home() {
+  
+  // Ce hook permet d'obtenir la route actuelle pour pouvoir rester sur la même page
+  const pathname = usePathname();
+
+  // Ce hook permet d'obtenir la locale actuelle
+  const locale = useLocale();
+
+  const t = useTranslations('Home');
+
+  return (
+    <div>
+      <button>
+       {/* Un élément <Link> est utilisé pour changer la locale */}
+        <Link locale={locale == 'fr' ? 'en' : 'fr'} href={pathname}>{t('language')}</Link>
+      </button>
+    </div>
+  );
+}
+```
+
+**⚙ Menu déroulant permettant de choisir la langue**
+
+Cette fois nous aurons besoin d'effectuer du **two-way binding ♊** pour un menu `<select>` :
+
+```tsx showLineNumbers
+"use client";
+
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { useLocale } from "next-intl";
+import { useState } from "react";
+
+export default function Home() {
+
+  // Ce hook permet d'obtenir la route actuelle pour pouvoir rester sur la même page
+  const pathname = usePathname();
+
+  // Ce hook permet d'obtenir la locale actuelle
+  const locale = useLocale();
+
+  // Ce hook nous permettra de changer la route sans utiliser un élément <Link>
+  const router = useRouter();
+
+  // État pour stocker la locale actuellement utilisée
+  const [selectLocale, setSelectLocale] = useState(locale);
+
+  // Fonction qui change la locale utilisée ET l'état selectLocale
+  function chooseLocale(e : any){
+    setSelectLocale(e.target.value); // On met l'état à jour
+    router.replace(pathname, { locale : e.target.value }); // On change la locale dans la route
+  }
+
+  return (
+    <div>
+      {/* Un événement onChange est utilisé pour détecter la sélection d'une nouvelle option */}
+      <select onChange={chooseLocale} value={selectLocale}>
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+  );
+}
+
+```
 
 ## 🪙 Requête avec authentification (token)
 
