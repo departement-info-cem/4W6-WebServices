@@ -3,11 +3,9 @@ import TabItem from '@theme/TabItem';
 
 # Cours 7 - Stockage, i18n, token
 
-## 💾 Stockage local
+## 💿 Stockage local
 
-🧹 Tel que vu au cours 6, si on réinitialise la page Web lorsque notre application Angular est en exécution, toutes les données (contenu des variables) sont perdues.
-
-⚙ Même le cycle de vie spécial des **services** ne permet pas de faire perdurer certaines données.
+🧹 Tel que brièvement abordé au cours 6, si on réinitialise la page Web lorsque notre application Next.js est en exécution, toutes les données (contenu des états et variables) sont perdues.
 
 💡 C'est là que le **stockage local** et le **stockage de session** entrent en jeu ! Ces deux types
 de stockage permettent de sauvegarder des données <u>dans le navigateur du client</u>.
@@ -15,83 +13,95 @@ de stockage permettent de sauvegarder des données <u>dans le navigateur du clie
 * Le stockage local est **permanent**. Il ne se nettoie jamais par lui-même.
 * Le stockage de session est **temporaire**. Il se nettoie lorsque le navigateur est fermé.
 
-### 📜 Sauvegarder un `string`
+:::warning
 
-Cette opération peut être exécutée dans la fonction TypeScript de votre choix.
+Le stockage local et le stockage de sssion peuvent seulement être manipulés dans un **composant client 👤**.
 
-```ts showLineNumbers
-export class AppComponent{
+:::
+
+### 💾 Sauvegarder un `string`
+
+Cette opération peut être exécutée dans la fonction de votre choix.
+
+```tsx showLineNumbers
+export default function Home() {
     
-    guestName : string = "";
+  const [guestName, setGuestName] = useState("");
 
-    myFunctionToSaveSomeThings() : void{
+  function myFunctionToSaveSomeThings() : void{
 
-        sessionStorage.setItem("username", this.guestName); // Stockage de session
-        localStorage.setItem("nameOfTheUser", this.guestName); // Stockage local
+    sessionStorage.setItem("username", this.guestName); // Stockage de session
+    
+    // ... ou encore ...
 
-    }
+    localStorage.setItem("username", this.guestName); // Stockage local
+
+  }
 
 }
 ```
 
 Pour les deux types de stockages, il suffit d'un paramètre servant de **clé** (vous pouvez
-lui donner le nom de votre choix, mais assurez-vous que ce nom soit unique) et un deuxième
+lui donner le nom de votre choix, mais assurez-vous que ce nom soit **unique ✨**) et un deuxième
 paramètre qui contient la **donnée** à sauvegarder.
 
-`sessionStorage` et `localStorage` sont deux outils accessibles depuis n'importe quel
-**composant** ou **service**. Pas besoin d'injection de dépendance ou d'importation
-pour que ces deux outils fonctionnent.
+`sessionStorage` et `localStorage` sont deux outils automatiquement accessibles depuis n'importe quel **composant client 👤**.
 
 ### 📫 Récupérer un `string`
 
-Cette opération est _généralement_ effectuée dans la fonction `ngOnInit()`, puisqu'on
-souhaite accéder à certaines données dès le chargement d'un composant.
+Cette opération est _généralement_ effectuée dans `useEffect()`, puisqu'on souhaite accéder à certaines données dès le chargement d'un composant.
 
 Il suffit de préciser **la clé** de la donnée à récupérer en paramètre.
 
-```ts showLineNumbers
-export class AppComponent implements OnInit{
+:::warning
+
+Gardez à l'esprit qu'il se peut que le stockage local / stockage de session soit **vide** ! C'est généralement le cas pour la première navigation d'un utilisateur, par exemple. La fonction `.getItem()` peut donc retourner `null` dans certains cas.
+
+:::
+
+```tsx showLineNumbers
+export default function Home() {
     
-    guestName : string | null = null;
-    guestName2 : string | null = null;
+  const [guestName, setGuestName] = useState("");
 
-    ngOnInit() : void{
+  useEffect(() => {
 
-        this.guestName = sessionStorage.getItem("username");
-        this.guestName2 = localStorage.getItem("nameOfTheUser");
+    const usernameJSON1 : string | null = sessionStorage.getItem("username");
 
+    // Si pas vide, on récupère l'info
+    if(usernameJSON1 != null){
+      setGuestName(usernameJSON1);
     }
+
+    // ... ou encore ...
+
+    const usernameJSON2 : string | null = localStorage.getItem("username");
+
+    // Si pas vide, on récupère l'info
+    if(usernameJSON2 != null){
+      setGuestName(usernameJSON2);
+    }
+
+  }, []);
 
 }
 ```
-
-:::warning
-
-Comme la fonction `getItem()` retourne une donnée de type `string` ou `null` (puisqu'il n'y
-a pas forcément une donnée avec la clé demandée), la variable dans laquelle on glisse la donnée
-doit pouvoir être `null`.
-
-:::
 
 ### 💾📦 Sauvegarder une donnée
 
 Pour toute autre donnée qu'un `string`, il faudra « stringifier » (convertir en `string`) la
 donnée avant de la ranger grâce à `JSON.stringify(...)`. Ceci s'applique pour les `boolean`, `number`, tableau, objet personnalisé, etc.
 
-```ts showLineNumbers
-export class AppComponent{
+```tsx showLineNumbers
+export default function Home() {
     
-    guestData : Guest | null = null;
-    guestFavs : number[] = [];
+  const [guestData, setGuestData] = useState(new Guest("Simone", 39));
 
-    myFunctionToSaveSomeThings() : void{
+  function myFunctionToSaveSomeThings(){
 
-        if(this.guestData != null){
-            localStorage.setItem("guest", JSON.stringify(this.guestData));
-        }
-        localStorage.setItem("favs", JSON.stringify(this.guestFavs));
+    localStorage.setItem("guest", JSON.stringify(guestData));
 
-    }
+  }
 
 }
 ```
@@ -101,33 +111,22 @@ export class AppComponent{
 Puisque la donnée que nous allons récupérer dans le stockage local a été convertie en `string`,
 nous allons devoir la **reconvertir** en son type d'origine lorsqu'on la récupère grâce à `JSON.parse(...)`.
 
-```ts showLineNumbers
-export class AppComponent implements OnInit{
+```tsx showLineNumbers
+export default function Home() {
     
-    guestData : Guest | null = null;
+  const [guestData, setGuestData] = useState(null);
 
-    ngOnInit() : void{
+  useEffect(() => {
 
-        // Récupérer la donnée qui est sous forme de string (ou inexistante)
-        let guestStringData : string | null = localStorage.getItem("guest");
+    const guestJSON : string | null = localStorage.getItem("guest");
 
-        if(guestStringData != null){
-            // Reconvertir la donnée en son type d'origine
-            this.guestData = JSON.parse(guestStringData);
-        }
+    // N'oubliez pas qu'il se peut que le stockage local / de session soit vide !
+    if(guestJSON != null) setGuestData(JSON.parse(guestJSON));
 
-    }
+  }, []);
 
 }
 ```
-
-:::warning
-
-Remarquez qu'il a fallu procéder en **deux étapes** pour valider qu'une donnée existait avec la
-clé demandée avant de la reconvertir en son type d'origine et la stocker dans notre variable
-de classe.
-
-:::
 
 ### 🚮 Supprimer des données
 
@@ -411,7 +410,7 @@ Il existe plusieurs autres types de textes. [Voir la documentation](https://next
     "Home":{
         "title":"Cours 7",
         "hi":"Bonjour {name} !",
-        "friends":"Tu {count, plural, =0 {n'as aucun ami, HAHAHA !} =1 {as un ami} other {as # amis}}.",
+        "friends":"Tu {count, plural, =0 {n'as aucun ami, HAHAHA !} =1 {as un ami.} other {as # amis.}}",
         "button":"Appuie-moi délicatement 😩"
     }
 }
@@ -474,7 +473,7 @@ import { Link, usePathname } from "@/i18n/navigation"; // ⛔ Utilisez le BON im
 import { useLocale, useTranslations } from "next-intl";
 
 export default function Home() {
-  
+
   // Ce hook permet d'obtenir la route actuelle pour pouvoir rester sur la même page
   const pathname = usePathname();
 
