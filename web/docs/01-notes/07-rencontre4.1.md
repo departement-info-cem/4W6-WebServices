@@ -556,19 +556,17 @@ serviront plus tard pour envoyer des requêtes.
 
 #### Étape 2 - 🕵️‍♂️ Hard-coder le Client ID et le Client Secret
 
-Dans le **service** où vos requêtes HTTP à Spotify seront situées, créez des constantes pour y ranger
+Dans le **composant** ou **hook** de votre choix, créez des constantes pour y ranger
 votre **Client ID** et votre **Client Secret** :
 
-```ts showLineNumbers
-const CLIENT_ID : string = "098gf0fd987gdf89g7sd7g9sd";
-const CLIENT_SECRET : string = "9dsh79d8m7j9ds7b97nber978675";
+```tsx showLineNumbers
+// Déclarées à l'extérieur comme ça elles ne sont pas réinitialisée à chaque fois que le composant est chargé
+const CLIENT_ID = "098gf0fd987gdf89g7sd7g9sd";
+const CLIENT_SECRET = "9dsh79d8m7j9ds7b97nber978675";
 
-@Injectable({
-  providedIn: 'root'
-})
-export class SpotifyService {
+export default function Home() {
 
-  ...
+  //...
 
 }
 ```
@@ -576,7 +574,7 @@ export class SpotifyService {
 :::note
 
 En temps normal, dans une vraie application, on demanderait à l'utilisateur de se connecter à **son propre compte**
-Spotify et c'est **son ID** et **son secret** qui seraient utilisées par l'application pour envoyer des requêtes à **Spotify**.
+Spotify et c'est **son ID** et **son secret** qui seraient utilisés par l'application pour envoyer des requêtes à **Spotify**.
 
 :::
 
@@ -585,21 +583,24 @@ Spotify et c'est **son ID** et **son secret** qui seraient utilisées par l'appl
 Avant de pouvoir envoyer une requête quelconque à Spotify, nous allons devoir nous munir d'un **🪙 token d'authentification**.
 Ce **🪙 token** peut être obtenu à l'aide d'une **requête de connexion** :
 
-```ts showLineNumbers
-async connect() : Promise<void> {
+```tsx showLineNumbers
+async function connect(){
 
-  // Création d'une en-tête spéciale qui accompagnera la requête de connexion.
-  // Cette en-tête contient d'ailleurs le CLIENT_ID et le CLIENT_SECRET !
-  let body = new HttpParams().set('grant_type', 'client_credentials');
-  let httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic ' + btoa(CLIENT_ID + ':' + CLIENT_SECRET)
-    })
-  };
-  let x = await lastValueFrom(this.http.post<any>('https://accounts.spotify.com/api/token', body.toString(), httpOptions))
-  console.log(x);
-  this.spotifyToken = x.access_token; // Stockage du token
+  let response = await fetch("https://accounts.spotify.com/api/token", {
+    // Pour une fois, c'est une requête POST plutôt que GET (On n'a jamais écrit GET car c'est la méthode par défaut)
+    method : "POST",
+    // Il faut joindre le corps et les en-têtes suivants pour respecter le format imposé par l'API de Spotify
+    body : new URLSearchParams({ grant_type : "client_credentials" }),
+    headers : {
+      "Content-Type" : "application/x-www-form-urlencoded",
+      "Authorization" : "Basic " + btoa(CLIENT_ID + ":" + CLIENT_SECRET)
+    }
+  });
+  let data = await response.json();
+  console.log(data);
+
+  // data.access_token contient le token qu'on voulait obtenir !
+  setSpotifyToken(data.access_token);
 
 }
 ```
@@ -608,30 +609,32 @@ Dans l'objet JSON obtenu, on peut accéder au **token** grâce à `x.access_toke
 
 <center>![Objet JSON obtenu](../../static/img/cours7/json.png)</center>
 
-Dans notre cas, le **token** a été rangé dans la variable `spotifyToken`, qui a dû être déclarée dans le service :
+Dans notre cas, le **token** a été rangé dans l'**état** `spotifyToken`, qui a dû être déclaré plus haut :
 
-```ts showLineNumbers
-export class SpotifyService {
+```tsx showLineNumbers
+export default function Home(){
 
-  spotifyToken : string; // Utilisée pour stocker le token
+  const [spotifyToken, setSpotifyToken] = useState(""); // Utilisé pour stocker le token
 
-  constructor(public http : HttpClient) { }
-
-  ...
+  // ...
 
 }
 ```
 
-💡 Pour éviter d'avoir à se connecter manuellement (en cliquant sur un bouton par exemple), n'hésitez pas à appeler
-la requête de connexion dans la méthode `ngOnInit()` d'un composant :
+:::tip
 
-```ts showLineNumbers
-ngOnInit() : void{
+📶 Pour éviter d'avoir à se connecter manuellement (en cliquant sur un bouton par exemple), n'hésitez pas à appeler
+la requête de connexion dans le **hook** `useEffect()` d'un composant :
 
-  this.spotifyService.connect();
+```tsx showLineNumbers
+useEffect(() => {
 
-}
+  connect();
+
+}, []);
 ```
+
+:::
 
 #### Étape 4 - 🎵 Effectuer des requêtes avec authentification
 
@@ -639,36 +642,29 @@ Une fois le **token obtenu** grâce à la **requête de connexion**, on peut env
 à la Web API de Spotify. Voici comment joindre le token à une requête :
 
 ```ts showLineNumbers
-async getArtist(artistName : string): Promise<void> {
+async function getArtist(){
 
-  // Création des en-têtes avec le token
-  const httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.spotifyToken
-    })
-  };
-  
-  // Requête avec authentification
-  let x = await lastValueFrom(this.http.get<any>('https://api.spotify.com/v1/search?type=artist&offset=0&limit=1&q=' + artistName, httpOptions));
-  console.log(x);
+  let response = await fetch('https://api.spotify.com/v1/search?type=artist&offset=0&limit=1&q=' + artistInput, {
+    // On joint le token dans les en-têtes de la requête !
+    headers : {
+      "Content-Type" : "application/x-www-form-urlencoded",
+      "Authorization" : "Bearer " + spotifyToken
+    }
+  });
+  let data = await response.json();
+  console.log(data);
 
-  // Extraction des données
-  this.artist = new Artist(x.artists.items[0].id, x.artists.items[0].name, x.artists.items[0].images[0].url);
+  // On crée un nouvel Artist en utilisant les données disponibles dans l'objet JSON
+  setArtist(new Artist(data.artists.items[0].id, data.artists.items[0].name, data.artists.items[0].images[0].url));
 
 }
 ```
-
-Remarquez les principales différences avec les requêtes des précédents cours :
-
-* Des **en-têtes** (`httpOptions`) sont préparées avant la requête pour y glisser le token.
-* Un **deuxième paramètre** a été glissé dans la fonction `this.http.get<any>(...)` : c'est `httpOptions` !
 
 C'est à peu près tout, sinon le fonctionnement est similaire à une requête sans authentification.
 
 :::warning
 
-Un token n'est pas valide éternellement. Selon l'API, le token peut expirer après 5 minutes, 60 minutes, jamais, etc.
+Un token n'est pas valide éternellement. Selon l'API, le token peut expirer après 5 minutes, 60 minutes, etc.
 
 :::
 
@@ -693,102 +689,66 @@ N'oubliez pas la **requête de connexion** (disponible plus haut) qui vous sera 
  
 N'hésitez pas à consulter la [documentation de l'API de Spotify](https://developer.spotify.com/documentation/web-api) !
 
-* Requête pour rechercher un artiste :
+* Requête pour rechercher un **artiste** (il vous faudra le **nom de l'artiste**) :
 
 ```ts showLineNumbers
-async getArtist(artistName : string): Promise<Artist> {
+async function getArtist(){
 
-  // Création des en-têtes
-  const httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.spotifyToken
-    })
-  };
-  
-  // Requête avec authentification
-  let x = await lastValueFrom(this.http.get<any>('https://api.spotify.com/v1/search?type=artist&offset=0&limit=1&q=' + artistName, httpOptions));
-  console.log(x);
-  return new Artist(x.artists.items[0].id, x.artists.items[0].name, x.artists.items[0].images[0].url);
+  let response = await fetch('https://api.spotify.com/v1/search?type=artist&offset=0&limit=1&q=' + artistInput, {
+    headers : {
+      "Content-Type" : "application/x-www-form-urlencoded",
+      "Authorization" : "Bearer " + spotifyToken
+    }
+  });
+  let data = await response.json();
+  console.log(data);
+  setArtist(new Artist(data.artists.items[0].id, data.artists.items[0].name, data.artists.items[0].images[0].url));
 
 }
 ```
 
-* Requête pour obtenir les albums d'un artiste précis :
+* Requête pour obtenir les **albums d'un artiste** précis (il vous faudra l'**id Spotify de l'artiste**) :
 
 ```ts showLineNumbers
-async getAlbums(artistId : string): Promise<Album[]> {
+async function getAlbums(){
 
-  // Création des en-têtes
-  const httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.spotifyToken
-    })
-  };
+  let response = await fetch("https://api.spotify.com/v1/artists/" + artistId + "/albums?include_groups=album,single", {
+    headers : {
+      "Content-Type" : "application/x-www-form-urlencoded",
+      "Authorization" : "Bearer " + spotifyToken
+    }
+  });
+  let data = await response.json();
+  console.log(data);
   
-  // Requête avec authentification
-  let x = await lastValueFrom(this.http.get<any>("https://api.spotify.com/v1/artists/" + artistId + "/albums?include_groups=album,single", httpOptions));
-  console.log(x);
-
   let albums : Album[] = [];
-  for(let i = 0; i < x.items.length; i++){
-    albums.push(new Album(x.items[i].id, x.items[i].name, x.items[i].images[0].url));
+  for(let i = 0; i < data.items.length; i++){
+    albums.push(new Album(data.items[i].id, data.items[i].name, data.items[i].images[0].url));
   }
   return albums;
 
 }
 ```
 
-* Requête pour obtenir les chansons d'un album précis :
+* Requête pour obtenir les **chansons d'un album** précis (il vous faudra l'**id Spotify de l'album**) :
 
 ```ts showLineNumbers
-async getSongs(albumId : string): Promise<Song[]> {
+async function getSongs(){
 
-  const httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.spotifyToken
-    })
-  };
-
-  let x = await lastValueFrom(this.http.get<any>("https://api.spotify.com/v1/albums/" + albumId, httpOptions));
-  console.log(x);
+  let response = await fetch("https://api.spotify.com/v1/albums/" + albumId, {
+    headers : {
+      "Content-Type" : "application/x-www-form-urlencoded",
+      "Authorization" : "Bearer " + spotifyToken
+    }
+  });
+  let data = await response.json();
+  console.log(data);
   
-  let songs : Song[] = [];
-  for(let i = 0; i < x.tracks.items.length; i++){
-    songs.push(new Song (x.tracks.items[i].id, x.tracks.items[i].name));
+  let songs : string[] = [];
+  for(let i = 0; i < data.tracks.items.length; i++){
+    songs.push(data.tracks.items[i].name);
   }
   return songs;
+
 }
 ```
-
-## 🐇 Pour éviter de répéter du code
-
-Comme nous avons besoin des **en-têtes** contenant le **token d'authentification** pour chaque requête, n'hésitez pas
-à intégrer ce code à une fonction de votre service :
-
-```ts showLineNumbers
-getHttpOptions() : { headers : HttpHeaders } {
-  return {
-    headers : new HttpHeaders({
-      'Content-Type' : 'application/json',
-      'Authorization' : 'Bearer ' + this.spotifyToken
-    })
-  };
-}
-```
-
-Vous pourrez ensuite utiliser cette fonction comme ceci dans vos requêtes :
-
-```ts 
-let x = await lastValueFrom(this.http.get<any>(" ... requête ... ", this.getHttpOptions()));
-console.log(x);
-```
-
-:::note
-
-Dans quelques cours, nous aborderons les **intercepteurs**, qui permettront d'intégrer facilement le token 
-à toutes nos requêtes d'une manière un peu plus intéressante. 
-
-:::
