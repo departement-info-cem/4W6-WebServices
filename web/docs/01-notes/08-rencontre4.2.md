@@ -141,22 +141,24 @@ Notez qu'il faudra activer une autre API (« Maps JavaScript API ») pour pouvoi
 
 `npm install @react-google-maps/api`
 
-**Étape 2 - ⚙ Préparation de deux constantes**
+**Étape 2 - ⚙ Préparation de trois constantes**
 
 (Dans le **composant** de votre choix)
 
-Il faudra copier-coller votre **clé d'API Google 🔑** (La même que pour YouTube)
+Il faudra copier-coller votre **clé d'API Google 🔑** dans la propriété `googleMapsApiKey`. (La même que pour YouTube)
 
 ```tsx showLineNumbers
 export default function Home() {
   
-  // Coordonnées au centre de la map au chargement de la page
+  // Coordonnées du centre de la carte au chargement de la page et niveau de zoom
   const center = { lat: -4, lng: -40 };
+  const zoom = 4;
 
-  // 
+  // Ce « useJsApiLoader » permet de charger un script JavaScript sur le pouce
+  // afin de pouvoir exécuter correctement la carte Google.
   const { isLoaded } = useJsApiLoader({
     id : "google-map-script",
-    googleMapsApiKey : "AI********************"
+    googleMapsApiKey : "mEtTeZvOtRePrOpReCléHiHihiUwU"
   });
 
   // ...
@@ -165,69 +167,71 @@ export default function Home() {
 
 **Étape 3 - 🗺 Placer un élément `<google-map>`**
 
-Dans le HTML du composant souhaité, intégrez cet élément HTML qui se servira
-d'ailleurs des deux variables créées plus haut.
-
-```html showLineNumbers
+```tsx showLineNumbers
 <h2>Gougueule mappe</h2>
 
-<google-map
-  [center]="center"
-  [zoom]="zoom"
-  width="700"
-  height="300"
-></google-map>
+{ isLoaded && 
+<GoogleMap 
+  center={center} 
+  zoom={zoom} 
+  mapContainerStyle={{ width: "700px", height : "400px" }}
+>
+</GoogleMap>}
 ```
+
+:::info
+
+* `isLoaded` est utilisé pour attendre que le `JsApiLoader` soit prêt avant d'afficher la carte.
+* `center` est la position initiale de la carte.
+* `zoom` est le niveau de ... zoom 🧠 initial.
+* `mapContainerStyle` permet de définir la largeur et la hauteur.
+
+:::
 
 <center>![Carte Google](../../static/img/cours8/googleMap.png)</center>
 
 :::warning
 
-Vous aurez très probablement un message d'erreur en lien avec la facturation non activée.
-Pas de problème, le seul impact est que la carte est obscurcie ! Vous n'avez pas à activer
-la facturation dans ce cours.
+C'est normal qu'il y ait une erreur signalée par Next.js ainsi que quelques dizaines d'erreurs et d'avertissements dans la console lorsqu'on utilise une carte Google et / ou un lecteur YouTube. Nous vivrons avec 🚒🔥
 
-<center>![Erreur avec Google Maps](../../static/img/cours8/mapError.png)</center>
+<center>![Erreur avec Google Maps](../../static/img/cours8/billingError.png)</center>
 
 :::
 
 ### 🚩 Ajouter des marqueurs sur une carte
 
-Suivez les étapes suivantes pour afficher des marqueurs / épingles 📍 sur une carte Google.
+Suivez les étapes suivantes pour afficher des marqueurs / punaises 📍 sur une carte Google.
 
 **Étape 1 - 📍 Créer un tableau de marqueurs**
 
-```ts showLineNumbers
-export class AppComponent{
-
-  center : google.maps.LatLngLiteral = {lat : 42, lng : -4};
-  zoom : number = 5;
-
-  // Tableau de marqueurs
-  markers : google.maps.LatLngLiteral[] = [
+```tsx showLineNumbers
+export default function Home() {
+  
+  const [markers, setMarkers] = useState([
     {lat : 42, lng : -4},
     {lat : 40, lng : 0},
     {lat : 48, lng : -8}
-  ];
+  ]);
 
-  ...
+  // ...
 
 }
 ```
 
 **Étape 2 - 📋 Intégrer le tableau de marqueurs à la carte**
 
-```html showLineNumbers
-<h2>Gougueule mappe</h2>
-
-<google-map
-  [center]="center"
-  [zoom]="zoom"
-  width="700"
-  height="300">
-  <map-marker *ngFor="let m of markers" [position]="m">
-  </map-marker>
-</google-map>
+```tsx showLineNumbers
+{ isLoaded && 
+<GoogleMap 
+  center={center} 
+  zoom={zoom} 
+  mapContainerStyle={{ width: "700px", height : "400px" }}
+>
+  {/* Pour chaque marqueur, on crée un élément <Marker> */}
+  {markers.map((m, index) => 
+    <Marker key={index} position={{lat:m.lat,lng:m.lng}}></Marker>
+  )}
+</GoogleMap>}
 ```
 
 **Étape 3 (optionnelle) - 📬 Permettre d'ajouter des marqueurs**
@@ -235,8 +239,8 @@ export class AppComponent{
 Si jamais vous aimeriez pouvoir ajouter des marqueurs supplémentaires dynamiquement dans le
 tableau `markers`, le code pourrait ressembler à ceci :
 
-```ts
-this.markers.push({lat : xValue, lng : yValue});
+```tsx
+setMarkers([...markers, {lat : xValue, lng : yValue}]);
 ```
 
 Dans le code ci-dessus, `xValue` et `yValue` doivent être des données de type `number`. Attention
@@ -249,183 +253,5 @@ Attention ! Les valeurs pour `lat` et `lng` doivent absolument être des `number
 convertir un `string` (Ex : `"-4.521"`) en `number`, vous pouvez utiliser `parseFloat(monString)`. Ce sera
 nécessaire dans le **TP2** puisque l'API **BandsInTown** fournit les coordonnées des concerts sous forme 
 de `string`.
-
-:::
-
-### ⚙ Pipes
-
-Les pipes permettent de transformer facilement une donnée affichée dans le HTML. Abordons un exemple
-ultra simplifié.
-
-On a la variable suivante : `n : number = 5;`. On a un pipe nommé `timesTwo` qui multiplie par deux.
-
-On pourrait utiliser le pipe comme ceci dans le html :
-
-```html
-<p>{{ n | timesTwo}}</p>
-```
-
-La valeur affichée sera `10`, en raison de la transformation effectuée par le pipe `timesTwo`.
-
-#### 🐣 Créer un pipe
-
-Utilisez la commande `ng generate pipe nomDeVotrePipe` pour créer un nouveau pipe. N'oubliez pas de commencer
-par **créer un dossier pour vos pipes** et **vous déplacer dans le bon dossier avec `cd`** pour créer votre pipe au bon endroit.
-
-<center>
-    ![Commande pour créer un pipe](../../static/img/cours8/pipeCommand.png)
-    ![Dossier pour ranger les pipes](../../static/img/cours8/pipeFolder.png)
-</center>
-
-Comme pour les composants et les services, un **fichier de tests** accompagne le pipe. On peut le supprimer pour le moment.
-
-Vous remarquerez qu'un **pipe vide** ressemble à ceci :
-
-```ts showLineNumbers
-import { Pipe, PipeTransform } from '@angular/core';
-
-@Pipe({
-  name: 'upper', // Nom du pipe pour l'utiliser
-  standalone: true
-})
-export class UpperPipe implements PipeTransform {
-
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
-  }
-
-}
-```
-
-Dans ce cas-ci, on peut voir que pour utiliser ce pipe, on utilisera le nom `upper`. Exemple : `{{ maVariable | upper }}`
-
-⛔ Notez que pour pouvoir utiliser un pipe dans un composant spécifique, **il faut l'importer**.
-
-```ts showLineNumbers
-@Component({
-  selector: 'app-root',
-  standalone : true,
-  imports: [UpperPipe], // Ici !
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
-```
-
-#### 🎨 Personnaliser un pipe
-
-Il faut remplacer le `return null` par la transformation / les opérations de notre choix, tant qu'on retourne une valeur.
-Notez que le paramètre `value` reçu par la fonction `transform(...)` contient la **valeur placée à gauche du pipe**.
-
-Pour simplifier la manipulation du paramètre `value`, remplacez son type par `any`. Attention toutefois : on risque
-d'avoir des résultats inattendus si on utilise mal un pipe.
-
-```ts showLineNumbers
-transform(value: any, ...args: unknown[]): unknown {
-  return null;
-}
-```
-
-Voici deux exemples de pipes relativement simples :
-
-**1. 📢 Pipe pour mettre du texte en majuscules :**
-
-```ts showLineNumbers
-export class UpperPipe implements PipeTransform {
-
-  transform(value: any, ...args: unknown[]): unknown {
-    return value.toUpperCase();
-  }
-
-}
-```
-
-Usage : `{{ monString | upper }}`
-
-**2. 🧼 Pipe pour _sanitize_ une ressource externe :**
-
-```ts showLineNumbers
-export class TrustPipe implements PipeTransform {
-
-  constructor(public sanitizer : DomSanitizer){}
-
-  transform(value: any, ...args: unknown[]): unknown {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(value); 
-  }
-
-}
-```
-
-Usage : `<iframe [src]="videoUrl | trust" width="700" ...>`
-
-### 📅 Pipe pour le formatage des dates
-
-Un pipe nommé `date` existe déjà par défaut. Il permet de formater des dates facilement.
-
-Usage : `{{ maDate | date:'format' }}`
-Exemple : `{{ '2021-05-26' | date:'MMM d, y' }}` affichera `may 26, 2021`
-
-Liste de (quelques) symboles pour le formatage de la date :
-
-<center>
-|symbole|description|
-|:-|:-|
-|d|Jour|
-|MMM|Mois en 3 lettres|
-|MMMM|Mois complet|
-|MM|Mois en chiffres|
-|y ou yyyy|Année complète|
-|yy|Année en deux chiffres|
-|h|Heure de 1 à 12|
-|mm|Minutes|
-|ss|Secondes|
-|a|AM / PM|
-|EEEE|Jour de la semaine|
-</center>
-
-⛔ Notez que pour pouvoir utiliser ce pipe dans un composant spécifique, **il faut l'importer**.
-
-```ts showLineNumbers
-@Component({
-  selector: 'app-root',
-  standalone : true,
-  imports: [DatePipe], // Ici !
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
-```
-
-#### 🥖 Dates en français
-
-Par défaut, les dates (noms de mois et jours de la semaine) seront affichées en anglais. Voici la procédure
-pour les afficher en français.
-
-**Étape 1 - ⚙ Ajouter la « locale » français dans `app.config.ts`**
-
-```ts showLineNumbers
-// Trois lignes à ajouter juste après les autres importations dans le haut du fichier :
-import { registerLocaleData } from '@angular/common'; 
-import localeFr from '@angular/common/locales/fr'; 
-registerLocaleData(localeFr, 'fr'); 
-
-export const appConfig : ApplicationConfig = {
-  ...
-};
-```
-
-**Étape 2 - 📬 Ajouter un 3e paramètre en utilisant le DatePipe pour choisir une langue**
-
-Le deuxième paramètre peut être laissé vide, car il permet de choisir un fuseau horaire.
-L'important est de spécifier `fr` comme troisième paramètre.
-
-```html
-<p> {{ maDate | date:'EEEE le d MMMM yyyy':'':'fr' }} </p>
-```
-
-Cet affichage pourrait par exemple donner `lundi le 15 novembre 2021`.
-
-:::tip
-
-Lorsqu'un pipe nécessite des paramètres, ils sont glissés après le nom du pipe, entre apostrophes :
-`nomDuPipe:'param1':'param2':'param3'`. S'il y a plusieurs paramètres, ils sont séparés par des `:`.
 
 :::
