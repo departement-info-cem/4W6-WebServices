@@ -395,13 +395,23 @@ C'est le cas le plus commun.
 * 📝 JSON : `"itemCount":"Tu {count, plural, =0 {n'as aucun item} =1 {as un seul item} other {as # items}}."`
 * 🔍 Résultat : `<p>Tu as 5 items.</p>`
 
+**📅 Exemple 4 : Date**
+
+`myDate` est une donnée de type `Date` déclarée dans le composant.
+
+* 🌐 HTML : `<p>{t('currentDate', {dateVar : myDate})}</p>`
+* 📝 JSON : `"currentDate":"Nous sommes le {dateVar, date, ::yyyyMMMMd}"`
+* 🔍 Résultat : `<p>Nous sommes le 12 janvier 2026</p>`
+
 :::note
+
+Le format `::yyyyMMMMd` peut être remplacé par un autre format. Vérifiez les autres formats disponibles [ici](https://next-intl.dev/docs/usage/dates-times#dates-and-times-within-messages).
 
 Il existe plusieurs autres types de textes. [Voir la documentation](https://next-intl.dev/docs/usage/translations)
 
 :::
 
-**Voici une page qui exploite les trois exemples abordés** :
+**Voici une page qui exploite les quatre exemples abordés** :
 
 <Tabs>
     <TabItem value="fr" label="fr.json">
@@ -411,7 +421,8 @@ Il existe plusieurs autres types de textes. [Voir la documentation](https://next
         "title":"Cours 7",
         "hi":"Bonjour {name} !",
         "friends":"Tu {count, plural, =0 {n'as aucun ami, HAHAHA !} =1 {as un ami.} other {as # amis.}}",
-        "button":"Appuie-moi délicatement 😩"
+        "button":"Appuie-moi délicatement 😩",
+        "currentDate":"Nous sommes le {dateVar, date, ::yyyyMMMMd}"
     }
 }
 ```
@@ -423,7 +434,8 @@ Il existe plusieurs autres types de textes. [Voir la documentation](https://next
         "title":"Lesson 7",
         "hi":"Hi {name} !",
         "friends":"You {count, plural, =0 {have no friends, HAHAHA !} =1 {have a single friend.} other {have # friends.}}",
-        "button":"Click me gently 😩"
+        "button":"Click me gently 😩",
+        "currentDate":"It is {dateVar, date, ::yyyyMMMMd}"
     }
 }
 ```
@@ -441,8 +453,12 @@ export default function Home() {
   const [myName, setMyName] = useState("Simone");
   const [nbFriends, setNbFrients] = useState(0);
 
+  const formatter = useFormatter(); // Hook préexistant nécessaire pour les dates !
+  const myDate = new Date(); // Maintenant
+
   return (
     <div>
+      <p>{t('currentDate', { 'dateVar' : myDate})}</p>
       <h2>{t('title')}</h2>
       <p>{t('hi', {name : myName})}</p>
       <p>{t('friends', {count : nbFriends})}</p>
