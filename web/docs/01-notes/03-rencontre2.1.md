@@ -85,34 +85,41 @@ application.
 
 ## ✈ Envoyer une requête
 
+🔽📦 Nous allons d'abord installer `Axios`, une librairie qui simplifie l'envoi de requête : `npm install axios`.
+
+:::note
+
+Il est possible d'envoyer des requêtes sans installer de librairie supplémentaire en utilisant `Fetch API`, mais `Axios` propose quelques fonctionnalités supplémentaires qui rendront notre expérience plus confortable au fil de la session.
+
+:::
+
 Si on utilise l'URL de la requête qui a été abordé un peu plus haut, ça pourrait ressembler à ceci dans un composant quelconque :
 
 ```tsx showLineNumbers
 async function getData(){
 
-  let response = await fetch("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=9a8a3facebbccaf363bb9fd68fa37abf&artist=Cher&album=Believe&format=json");
-  let data = await response.json();
-  console.log(data);
+  const response = await axios.get("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=9a8a3facebbccaf363bb9fd68fa37abf&artist=Cher&album=Believe&format=json")
+  console.log(response.data);
 
 }
 ```
 
-🔍 Avant de jeter un coup d'oeil à ce que `console.log(data)` a imprimé dans la console du navigateur, abordons quelques
+🔍 Avant de jeter un coup d'oeil à ce que `console.log(response.data)` a imprimé dans la console du navigateur, abordons quelques
 éléments clés de cette fonction :
 
-* On voit que l'URL de la requête (`"http://ws.audioscrobbler....."`) a été glissé dans la fonction `fetch()`.
-* `fetch()` permet d'envoyer des requêtes HTTP de type `GET`. (Exemples d'autres types de requête : `post`, `put`, `delete`, etc.)
-* `.json()` permet de convertir les données reçues en **JSON**.
+* On voit que l'URL de la requête (`"http://ws.audioscrobbler....."`) a été glissé dans la fonction `get()`.
+* La fonction `get()` permet d'envoyer des requêtes HTTP de type `GET`. (Exemples d'autres types de requête : `post`, `put`, `delete`, etc.)
+* La constante `reponse` contient les données reçues en **JSON**.
 * On remarque les éléments `async` et `await`, qui seront expliqués en détails plus loin.
 
 Dans la console du navigateur où la fonction `getData()` a été appelée, on peut apercevoir ceci suite à l'appel de
-`console.log(data)` :
+`console.log(response.data)` :
 
 <center>![Résultat du console.log()](../../static/img/cours3/consolelOg.png)</center>
 
 C'est le même **objet JSON** que lorsque nous avions directement testé la requête dans la barre d'adresse du navigateur.
-Cependant, cette fois-ci, l'objet JSON a été stocké dans la variable `data` ! On pourrait donc accéder à toutes les données
-de l'objet JSON en manipulant la variable `data` qui a été déclarée dans la fonction `getData()`.
+Cependant, cette fois-ci, l'objet JSON a été stocké dans la variable `reponse` ! On pourrait donc accéder à toutes les données
+de l'objet JSON en manipulant `reponse.data`. (`response` ne contient pas seulement les données, mais aussi d'autres méta-données sur la requête HTTP)
 
 ## 📝 Extraire des données de l'objet JSON
 
@@ -125,31 +132,30 @@ Voici comment on pourrait extraire ces données dans le code :
 ```tsx showLineNumbers
 async getData(){
 
-  let response = await fetch("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=9a8a3facebbccaf363bb9fd68fa37abf&artist=Cher&album=Believe&format=json");
-  let data = await response.json();
-  console.log(data);
+  const response = await axios.get("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=9a8a3facebbccaf363bb9fd68fa37abf&artist=Cher&album=Believe&format=json")
+  console.log(response.data);
 
-  let nomArtiste : string = data.album.artist; // Contient "Cher"
-  let nomAlbum : string = data.album.name; // Contient "Believe"
+  let nomArtiste : string = response.data.album.artist; // Contient "Cher"
+  let nomAlbum : string = response.data.album.name; // Contient "Believe"
 
 }
 ```
 
-Pour déterminer le chemin (Exemple : `data.album.artist`) vers une donnée à extraire, il faut partir de la racine
+Pour déterminer le chemin (Exemple : `response.data.album.artist`) vers une donnée à extraire, il faut partir de la racine
 de **l'objet JSON** et descendre dans sa hiérarchie jusqu'à la propriété voulue.
 
 <center>![Résultat du console.log()](../../static/img/cours3/consoleLog3.png)</center>
 <br/>
-> Pourquoi le chemin utilisé dans le code n'est pas `data.Object.album.artist` ?
+> Pourquoi le chemin utilisé dans le code n'est pas `response.data.Object.album.artist` ?
 
-Comme nous avons rangé **l'objet JSON** dans une variable nommée `data` dans le code, et que `Object` n'est qu'un
-_placeholder_ pour représenter la **racine** de l'objet JSON, on doit simplement utiliser `data` lorsqu'on parle de la racine.
+Comme les données ont été rangées dans `response.data` dans le code, et que `Object` n'est qu'un
+_placeholder_ pour représenter la **racine** de l'objet JSON, on doit simplement utiliser `response.data` lorsqu'on parle de la racine.
 
 :::warning
 
-Faites ben attention lorsque vous accédez à des données dans **l'objet JSON**, car cela peut facilement générer des **exceptions** 🐞 si on essaye d'accéder à des sous-propriétés **qui n'existent pas**.
+Faites bien attention lorsque vous accédez à des données dans **l'objet JSON**, car cela peut facilement générer des **exceptions** 🐞 si on essaye d'accéder à des sous-propriétés **qui n'existent pas**.
 
-Par exemple, `data.bruh.six.seven` n'existe pas dans l'objet JSON reçu.
+Par exemple, `response.data.bruh.six.seven` n'existe pas dans l'objet JSON reçu.
 
 :::
 
@@ -166,18 +172,17 @@ Voici comment extraire la propriété `#text` :
 ```ts showLineNumbers
 async getSongs(){
   
-  let response = await fetch("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=9a8a3facebbccaf363bb9fd68fa37abf&artist=Cher&album=Believe&format=json");
-  let data = await response.json();
-  console.log(data);
+  const response = await axios.get("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=9a8a3facebbccaf363bb9fd68fa37abf&artist=Cher&album=Believe&format=json")
+  console.log(response.data);
 
-  let urlImageMedium : string = data.album.image[1]["#text"];
+  let urlImageMedium : string = response.data.album.image[1]["#text"];
 
 }
 ```
 <br/>
-> Pourquoi ce n'est pas plutôt `data.album.image[1].#text` ?
+> Pourquoi ce n'est pas plutôt `response.data.album.image[1].#text` ?
 
-S'il n'y avait pas eu le caractère `#` dans le nom de la propriété `text`, cela aurait été possible d'utiliser `data.album.image[1].text` !
+S'il n'y avait pas eu le caractère `#` dans le nom de la propriété `text`, cela aurait été possible d'utiliser `response.data.album.image[1].text` !
 Hélas, `#` est un symbole spécial délicat et pour pouvoir l'utiliser dans le nom d'une propriété, il faut absolument remplacer la syntaxe
 `.nomPropriété` par `["nomPropriété"]` pour ne pas que le symbole `#` cause un problème.
 
@@ -204,13 +209,12 @@ export default function Home() {
 ```tsx showLineNumbers
 async function getData() {
 
-  let response = await fetch("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=9a8a3facebbccaf363bb9fd68fa37abf&artist=Cher&album=Believe&format=json");
-  let data = await response.json();
-  console.log(data);
+  const response = await axios.get("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=9a8a3facebbccaf363bb9fd68fa37abf&artist=Cher&album=Believe&format=json")
+  console.log(response.data);
 
-  setArtistName(data.album.artist);
-  setAlbumName(data.album.name);
-  setImageUrl(data.album.image[1]["#text"]);
+  setArtistName(response.data.album.artist);
+  setAlbumName(response.data.album.name);
+  setImageUrl(response.data.album.image[1]["#text"]);
 
 }
 ```
@@ -267,19 +271,18 @@ export default function Home() {
 ```tsx showLineNumbers
 async function getData() {
 
-  let response = await fetch("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=9a8a3facebbccaf363bb9fd68fa37abf&artist=Cher&album=Believe&format=json");
-  let data = await response.json();
-  console.log(data);
+  const response = await axios.get("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=9a8a3facebbccaf363bb9fd68fa37abf&artist=Cher&album=Believe&format=json")
+  console.log(response.data);
 
-  setArtistName(data.album.artist);
-  setAlbumName(data.album.name);
-  setImageUrl(data.album.image[1]["#text"]);
+  setArtistName(response.data.album.artist);
+  setAlbumName(response.data.album.name);
+  setImageUrl(response.data.album.image[1]["#text"]);
 
   // On prépare une nouvelle liste vide
   let songList : Song[] = [];
 
   // Pour chaque chanson de l'album, on ajoute une new Song() dans songList
-  for(let s of data.album.tracks.track){
+  for(let s of response.data.album.tracks.track){
     songList.push(new Song(s.name, s.duration));
   }
 
@@ -300,7 +303,7 @@ des sous-propriétés `name` et `duration` pour remplir notre état `songs`.
 > Pourquoi ne pas avoir appelé `setState` dans la boucle `for` ? Ça aurait permis de ne pas avoir à créer un **tableau temporaire**.
 
 ```tsx showLineNumbers
-for(let s of data.album.tracks.track){
+for(let s of response.data.album.tracks.track){
 
   // Ceci ne fonctionne pas !
   setSongs([
@@ -387,13 +390,13 @@ export default function Home() {
 Un peu plus loin, dans la ou les requêtes, on **concatène** la **clé d'API** :
 
 ```tsx
-let response = await fetch("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key="+lastFmKey+"&artist=Cher&album=Believe&format=json");
+const response = await axios.get("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key="+lastFmKey+"&artist=Cher&album=Believe&format=json")
 ```
 
 Si vous préférez utiliser des `template strings` plutôt que la concaténation avec des `+`, voici une alternative :
 
-```ts showLineNumbers
-let response = await fetch(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${$lastFmKey}&artist=Cher&album=Believe&format=json`);
+```tsx
+const response = await axios.get(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${$lastFmKey}&artist=Cher&album=Believe&format=json`);
 ```
 
 ### 🛒 Personnaliser la requête (Choisir l'input)
@@ -417,7 +420,7 @@ Les états `artistInput` et `albumInput` sont intégrés à la requête, de mani
 par l'utilisateur soient utilisés lors de la recherche.
 
 ```tsx showLineNumbers
-fetch(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${lastFmKey}&artist=${artistInput}&album=${albumInput}&format=json`);
+axios.get(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${lastFmKey}&artist=${artistInput}&album=${albumInput}&format=json`);
 ```
 
 ### 🐞 Gérer les erreurs
@@ -441,13 +444,12 @@ const [errorMessage, setErrorMessage] = useState("");
 async function getData() {
 
   try {
-    let response = await fetch(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${lastFmKey}&artist=${artistInput}&album=${albumInput}&format=json`);
-    let data = await response.json();
-    console.log(data);
-    
+    const response = await axios.get(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${lastFmKey}&artist=${artistInput}&album=${albumInput}&format=json`)
+    console.log(response.data);
+
     // Obtenir les chansons
     let songList: Song[] = [];
-    for (let s of data.album.tracks.track) {
+    for (let s of response.data.album.tracks.track) {
       songList.push(new Song(s.name, s.duration));
     }
     setSongs(songList);
@@ -482,20 +484,16 @@ Nous allons finalement aborder `await` et `async`. Laissez-moi vous en parler be
 ```tsx showLineNumbers
 async function getSongs(){
   
-  let response = await fetch("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=9a8a3facebbccaf363bb9fd68fa37abf&artist=Cher&album=Believe&format=json");
-  let data = await response.json();
-  console.log(data);
+  const response = await axios.get("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=9a8a3facebbccaf363bb9fd68fa37abf&artist=Cher&album=Believe&format=json")
+  console.log(response.data);
 
 }
 ```
 
 Gardez à l'esprit que la requête prend beaucoup de temps. ⌛ (de quelques millisecondes à quelques secondes) 
 
-* Le premier `await`, devant `fetch` sert à attendre que l'en-tête de la réponse HTTP ait été reçu. (Ça fige l'exécution du code)
-* Le deuxième `await`, devant `response.json()`, sert à attendre que le **corps** de la réponse HTTP (son contenu, ses données) ait été totalement reçu. (Fige également l'exécution du code)
+* Le `await`, devant `axios.get()` sert à attendre que la réponse HTTP ait été reçue. (Ça fige l'exécution du code)
 * Pour avoir le droit d'utiliser l'opérateur `await` dans une fonction, il faut déclarer la fonction avec `async`.
-
-Bien entendu, ces explications sont très simplifiées, mais si vous les comprenez, c'est un excellent début.
 
 :::info
 
@@ -514,7 +512,7 @@ function test(){
   }
 
 async function slowRequest(){
-  let x = await fetch("..requête..");
+  let x = await axios.get("..requête..");
   let y = await x.json();
   console.log("B");
 }
@@ -544,7 +542,7 @@ async function test(){
   }
 
 async function slowRequest(){
-  let x = await fetch("..requête..");
+  let x = await axios.get("..requête..");
   let y = await x.json();
   console.log("B");
 }
