@@ -363,7 +363,7 @@ Il faut commencar par ajouter cette ligne de code dans chaque composant. La cons
 export default function Home() {
 
   // "Home" est le nom de la section dans les fichiers fr.json et en.json 
-  // (NomComposant1 ou NomComposant2, par exemple)
+  // (Comme NomComposant1 ou NomComposant2, par exemple)
   const t = useTranslations('Home');
 
   return ( /* ...  */ );
