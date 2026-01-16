@@ -620,6 +620,7 @@ export class Item{
 ```tsx showLineNumbers
 import { useState } from "react";
 import { Item } from "../_types/item";
+import axios from "axios";
 
 export function useItemSearch(){
 
@@ -629,12 +630,11 @@ export function useItemSearch(){
     // Fonction pour lancer la requête
     async function searchItem(name : string){
 
-        let response = await fetch("https://botw-compendium.herokuapp.com/api/v3/compendium/entry/" + name);
-        let json = await response.json();
-        console.log(json);
+        const response = await axios.get("https://botw-compendium.herokuapp.com/api/v3/compendium/entry/" + name);
+        console.log(response.data);
 
         // On stocke les données sous forme d'item (classe personnalisée)
-        setItem(new Item(json.data.id, json.data.name, json.data.image));
+        setItem(new Item(response.data.data.id, response.data.data.name, response.data.data.image));
 
     }
 
@@ -714,5 +714,11 @@ Dans une application bien **optimisée ⚡**, si on remarque qu'un **grand** com
 Dans la majorité des cas, un composant qui est **enfant** d'un composant **client 👤** devient automatiquement **client 👤**. 
 
 L'exception est quand un composant **serveur 🌐** est transmis **en paramètre** (`children : React.ReactNode`) à travers un composant **client 👤** par un composant **serveur 🌐**. (Oui c'est une phrase plutôt complexe, ce n'est pas dramatique si vous ne saisissez pas)
+
+:::
+
+:::info
+
+Comme les composants **serveur 🌐** sont exécutés sur le... *serveur*, il est **sécuritaire** de se connecter à une base de données directement. Il est donc possible de faire un projet Next.js **full stack** sans avoir un serveur Web ASP.NET Core. Ce n'est cela dit pas le cas pour tous les frameworks Web.
 
 :::
