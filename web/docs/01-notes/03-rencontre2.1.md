@@ -559,3 +559,33 @@ fonction soit totalement résolue avant de passer à la suite et d'imprimer `C`.
 
 Notez que pour pouvoir utiliser l'opérateur `await` dans la fonction `test()`, il a fallu déclarer `test()`
 comme étant `async` elle aussi !
+
+## 🕵️‍♂️ Débogage
+
+Bien que `console.log(...)` soit un outil intéressant pour identifier des bogues dans le code, voici les démarches à suivre si jamais vous souhaiter faire du **débogage** en pas-à-pas.
+
+#### 🛑 Étape 1 - Instruction `debugger`
+
+Ajoutez, temporairement, l'instruction `debugger;` dans le code, à l'endroit où vous aimeriez amorcer le débogage pas-à-pas.
+
+```ts showLineNumbers
+const response = await axios.get(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${lastFmKey}&artist=${artistInput}&album=${albumInput}&format=json`)
+console.log(response.data);
+
+debugger; // Ajouter cette instruction dans le code
+let songList: Song[] = [];
+for (let s of response.data.album.tracks.track) {
+  songList.push(new Song(s.name, s.duration));
+}
+setSongs(songList);
+```
+
+#### 💰 Étape 2 - Profiter
+
+Dans le navigateur **Microsoft Edge** (Pour une rare fois, hélas, le débogueur de **Firefox 🦊🔥** est un peu moins intéressant), ouvrez votre page Web et faites le nécessaire pour que la section du code qui contient l'instruction `debugger;` s'active.
+
+<center>![Débogage avec Microsoft Edge](../../static/img/cours8/debug.png)</center>
+
+Vous pouvez utiliser des boutons pour progresser dans l'exécution du code, Vous pouvez survoler des variables pour inspecter leur contenu, etc.
+
+N'oubliez pas de retirer l'instruction `debugger;` éventuellement 🙄.
