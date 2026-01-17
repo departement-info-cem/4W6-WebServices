@@ -1,4 +1,4 @@
-# Cours 8 - Maps, vidéos
+# Cours 8 - Maps, vidéos, UI
 
 ### ▶ Intégration YouTube
 
@@ -253,5 +253,62 @@ Attention ! Les valeurs pour `lat` et `lng` doivent absolument être des `number
 convertir un `string` (Ex : `"-4.521"`) en `number`, vous pouvez utiliser `parseFloat(monString)`. Ce sera
 nécessaire dans le **TP2** puisque l'API **BandsInTown** fournit les coordonnées des concerts sous forme 
 de `string`.
+
+:::
+
+## ✨ Shadcn
+
+**[Shadcn](https://ui.shadcn.com/)** est une librairie UI (User Interface). Elle propose plusieurs éléments visuels permettant d'améliorer l'apparence et l'organisation d'une page Web. Cela permet aussi d'éviter de rédiger beaucoup de CSS soi-même.
+
+Contrairement à **Bootstrap**, qui est une librairie très *intrusive*, incompatible avec plusieurs librairies UI, **Shadcn** est conçue pour être totalement compatible avec **Tailwind**, qui est intégré à **Next.js** par défaut. C'est donc un choix populaire™ lorsqu'on travaille avec **Next.js**.
+
+:::warning
+
+Si vous utilisez **Shadcn**, il faut absolument conserver le **preflight** de **Tailwind**. (Dans `app/globals.css`) De nombreux styles utilisés par **Shadcn** seront compromis par les styles natifs utilisés par les navigateurs.
+
+:::
+
+#### 📦 Installation
+
+Dans un projet **Next.js** existant, tapez d'abord la commande suivante :
+
+`npx shadcn@latest create`
+
+Vous pouvez choisir `neutral` comme couleur de base. Au pire, cela se change manuellement dans le fichier `components.json` qui sera ajouté au projet. Vous remarquerez que plusieurs dossiers et fichiers se sont ajoutés au projet durant l'installation, c'est normal.
+
+#### 🛠 Usage
+
+Commencez par identifier un élément UI qui vous intéresse parmi la [liste disponible](https://ui.shadcn.com/docs/components).
+
+Par exemple, allons-y avec les éléments `Button` et `Input`.
+
+Il faudra ajouter une **dépendance** par élément : `npx shadcn@latest add button` et `npx shadcn@latest add input`.
+
+Il reste seulement à utiliser les éléments dans le ou les **composants** de notre choix :
+
+```tsx showLineNumbers
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
+export default function Ui(){
+
+    return(
+        <div>
+            <h3>Shadcn ✨</h3>
+            <div className="myForm">
+                <Input type="text" placeholder="Votre nom ..." />
+                <Button variant="outline">Clique-moi 😩</Button>
+            </div>
+        </div>
+    );
+
+}
+```
+
+<center>![Bouton et champ chadcn](../../static/img/cours8/ui.png)</center>
+
+:::note
+
+Bien entendu, il faudra combiner ces éléments UI avec des **classes** de la librairie **Tailwind** (ou du CSS fait à la main), notamment pour la mise en page et les espacements.
 
 :::

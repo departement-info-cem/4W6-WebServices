@@ -84,7 +84,7 @@ En général, les frameworks clients envoient leur code JavaScript au navigateur
 
 :::info
 
-Contrairement à Angular et Vue, React n'est pas vraiment un **framework client**, mais plutôt une **librairie**. (Avec moins de fonctionnalités qu'Angular et Vue) Des frameworks comme **Next.js**, **Gatsby**, **Vite.js**, etc. sont construits autour de la librairie React. De notre côté, nous utiliserons **Next.js** car c'est, en date d'aujourd'hui, le framework client le plus populaire. 💃🕺📢
+Contrairement à Angular et Vue, React n'est pas vraiment un **framework client**, mais plutôt une **librairie**. (Avec moins de fonctionnalités qu'Angular et Vue) Des frameworks comme **Next.js**, **Gatsby**, **Vite.js**, etc. sont construits autour de la librairie React. De notre côté, nous utiliserons **Next.js** car c'est, en date d'aujourd'hui, le framework client le plus populaire™. 💃🕺📢
 
 :::
 
