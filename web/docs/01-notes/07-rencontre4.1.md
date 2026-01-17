@@ -602,26 +602,24 @@ Ce **🪙 token** peut être obtenu à l'aide d'une **requête de connexion** :
 ```tsx showLineNumbers
 async function connect(){
 
-  let response = await fetch("https://accounts.spotify.com/api/token", {
-    // Pour une fois, c'est une requête POST plutôt que GET (On n'a jamais écrit GET car c'est la méthode par défaut)
-    method : "POST",
-    // Il faut joindre le corps et les en-têtes suivants pour respecter le format imposé par l'API de Spotify
-    body : new URLSearchParams({ grant_type : "client_credentials" }),
+  // Attention ! Pour une fois, on utilise une requête POST
+  const response = await axios.post("https://accounts.spotify.com/api/token", 
+    // On joint un contenu (body) à la requête
+    new URLSearchParams({ grant_type : "client_credentials" }), {
+    // On joint des en-têtes (headers) à la requête
     headers : {
       "Content-Type" : "application/x-www-form-urlencoded",
       "Authorization" : "Basic " + btoa(CLIENT_ID + ":" + CLIENT_SECRET)
-    }
-  });
-  let data = await response.json();
-  console.log(data);
+    }});
+  console.log(response.data);
 
-  // data.access_token contient le token qu'on voulait obtenir !
-  setSpotifyToken(data.access_token);
+  // response.data.access_token contient le token qu'on voulait obtenir !
+  setSpotifyToken(response.data.access_token);
 
 }
 ```
 
-Dans l'objet JSON obtenu, on peut accéder au **token** grâce à `x.access_token` :
+Dans l'objet JSON obtenu, on peut accéder au **token** grâce à `response.data.access_token` :
 
 <center>![Objet JSON obtenu](../../static/img/cours7/json.png)</center>
 
@@ -660,18 +658,17 @@ Une fois le **token obtenu** grâce à la **requête de connexion**, on peut env
 ```ts showLineNumbers
 async function getArtist(){
 
-  let response = await fetch('https://api.spotify.com/v1/search?type=artist&offset=0&limit=1&q=' + artistInput, {
+  const response = await axios.get('https://api.spotify.com/v1/search?type=artist&offset=0&limit=1&q=' + artistInput, {
     // On joint le token dans les en-têtes de la requête !
     headers : {
       "Content-Type" : "application/x-www-form-urlencoded",
       "Authorization" : "Bearer " + spotifyToken
     }
   });
-  let data = await response.json();
-  console.log(data);
+  console.log(response.data);
 
-  // On crée un nouvel Artist en utilisant les données disponibles dans l'objet JSON
-  setArtist(new Artist(data.artists.items[0].id, data.artists.items[0].name, data.artists.items[0].images[0].url));
+  // On joint le token dans les en-têtes de la requête !
+  setArtist(new Artist(response.data.artists.items[0].id, response.data.artists.items[0].name, response.data.artists.items[0].images[0].url));
 
 }
 ```
@@ -708,17 +705,17 @@ N'hésitez pas à consulter la [documentation de l'API de Spotify](https://devel
 * Requête pour rechercher un **artiste** (il vous faudra le **nom de l'artiste**) :
 
 ```ts showLineNumbers
-async function getArtist(){
+async function getArtist(artistName : string){
 
-  let response = await fetch('https://api.spotify.com/v1/search?type=artist&offset=0&limit=1&q=' + artistInput, {
+  const response = await axios.get('https://api.spotify.com/v1/search?type=artist&offset=0&limit=1&q=' + artistName, {
     headers : {
       "Content-Type" : "application/x-www-form-urlencoded",
       "Authorization" : "Bearer " + spotifyToken
     }
   });
-  let data = await response.json();
-  console.log(data);
-  setArtist(new Artist(data.artists.items[0].id, data.artists.items[0].name, data.artists.items[0].images[0].url));
+  console.log(response.data);
+
+  return new Artist(response.data.artists.items[0].id, response.data.artists.items[0].name, response.data.artists.items[0].images[0].url);
 
 }
 ```
@@ -726,20 +723,19 @@ async function getArtist(){
 * Requête pour obtenir les **albums d'un artiste** précis (il vous faudra l'**id Spotify de l'artiste**) :
 
 ```ts showLineNumbers
-async function getAlbums(){
+async function getAlbums(artistId : string){
 
-  let response = await fetch("https://api.spotify.com/v1/artists/" + artistId + "/albums?include_groups=album,single", {
+  const response = await axios.get("https://api.spotify.com/v1/artists/" + artistId + "/albums?include_groups=album,single", {
     headers : {
       "Content-Type" : "application/x-www-form-urlencoded",
       "Authorization" : "Bearer " + spotifyToken
     }
   });
-  let data = await response.json();
-  console.log(data);
+  console.log(response.data);
   
   let albums : Album[] = [];
-  for(let i = 0; i < data.items.length; i++){
-    albums.push(new Album(data.items[i].id, data.items[i].name, data.items[i].images[0].url));
+  for(let i = 0; i < response.data.items.length; i++){
+    albums.push(new Album(response.data.items[i].id, response.data.items[i].name, response.data.items[i].images[0].url));
   }
   return albums;
 
@@ -749,22 +745,140 @@ async function getAlbums(){
 * Requête pour obtenir les **chansons d'un album** précis (il vous faudra l'**id Spotify de l'album**) :
 
 ```ts showLineNumbers
-async function getSongs(){
+async function getSongs(albumId : string){
 
-  let response = await fetch("https://api.spotify.com/v1/albums/" + albumId, {
+  const response = await axios.get("https://api.spotify.com/v1/albums/" + albumId, {
     headers : {
       "Content-Type" : "application/x-www-form-urlencoded",
       "Authorization" : "Bearer " + spotifyToken
     }
   });
-  let data = await response.json();
-  console.log(data);
+  console.log(response.data);
   
   let songs : string[] = [];
-  for(let i = 0; i < data.tracks.items.length; i++){
-    songs.push(data.tracks.items[i].name);
+  for(let i = 0; i < response.data.tracks.items.length; i++){
+    songs.push(response.data.tracks.items[i].name);
   }
   return songs;
+
+}
+```
+
+## 📶 Intercepteurs
+
+### 🔑 Problème du token
+
+Si **plusieurs composants** différents doivent envoyer des requêtes à **Spotify**, il faudra trouver un moyen qu'ils se partagent le **token** d'authentification 🔑.
+
+La solution pourrait être d'utiliser un **Context**, mais il existe une autre solution qui permet, en bonus, d'**alléger** les requêtes, dans lesquelles on doit constamment glisser le token avec des **en-têtes**. (Headers)
+
+### ✨ Créer un intercepteur
+
+Un **intercepteur** est une fonction qui **intercepte** (*et oui*) les requêtes HTTP qui sont envoyées. Les requêtes interceptées sont généralement modifiées, par exemple pour ajouter un **token** dans les en-têtes. Cela permet d'éviter de joindre manuellement le token à chaque requête constamment.
+
+Voici un exemple d'**intercepteur**, dont le fichier a simplement été glissé dans le dossier `app` et nommé `spotify-interceptor.ts` :
+
+```ts showLineNumbers
+import axios from "axios";
+
+export const spotifyRequest = axios.create();
+
+spotifyRequest.interceptors.request.use((config) => {
+
+  // À chaque fois qu'une requête est envoyée, on modifie le 
+  // Content-Type et l'Authorization dans ses en-têtes
+  config.headers["Content-Type"] = "application/x-www-form-urlencoded";
+  config.headers.Authorization = "Bearer " + localStorage.getItem("token");
+
+  return config;
+
+});
+```
+
+:::warning
+
+Pour exploiter le **token** qui a été obtenu en se **connectant** à l'API de Spotify, il a fallu le sauvegarder dans le **stockage local** lors de la connexion :
+
+```ts showLineNumbers
+async function connect(){
+
+  const response = await axios.post("https://accounts.spotify.com/api/token", new URLSearchParams({ grant_type : "client_credentials" }), {
+    headers : {
+      "Content-Type" : "application/x-www-form-urlencoded",
+      "Authorization" : "Basic " + btoa(CLIENT_ID + ":" + CLIENT_SECRET)
+    }}
+  );
+  console.log(response.data);
+
+  // ⛔ On range le token dans le stockage local plutôt que dans un état !
+  localStorage.setItem("token", response.data.access_token);
+
+}
+```
+
+:::
+
+⚠ Pour que l'intercepteur ... *intercepte* ... une requête, il faudra lancer la requête comme ceci :
+
+```ts showLineNumbers
+async function getArtist(){
+
+  // Remarquez qu'on n'utilise pas axios.get() et qu'on a retiré les en-têtes !
+  const response = await spotifyRequest.get('https://api.spotify.com/v1/search?type=artist&offset=0&limit=1&q=' + artistInput);
+  console.log(response.data);
+
+  setArtist(new Artist(response.data.artists.items[0].id, response.data.artists.items[0].name, response.data.artists.items[0].images[0].url));
+
+}
+```
+
+Plus haut dans le fichier, il y a l'**importation** suivante, qui fait référence à la constante `spotifyRequest` que nous avions créée au-dessus de l'**intercepteur**.
+
+```ts
+import { spotifyRequest } from "../axios-interceptor";
+```
+
+:::danger
+
+Attention ! La requête de **connexion** à l'API de Spotify **ne** doit **pas** ⛔ être interceptée, car ses en-têtes sont légèrement différentes et il ne faut pas les modifier. (De toute façon, on n'a pas besoin d'un **token** pour se connecter ! 🧠)
+
+Dans ce cas, on doit simplement utiliser `axios.get()` plutôt que `spotifyRequest.get()` comme avant, ou encore ajouter un `if` stratégique dans notre intercepteur :
+
+```ts showLineNumbers
+import axios from "axios";
+
+export const spotifyRequest = axios.create();
+
+spotifyRequest.interceptors.request.use((config) => {
+
+    // S'il n'y a pas DÉJÀ une autorisation dans les en-têtes, on joint le token et on définit le Content-Type ...
+    if(config.headers.Authorization == null){
+        config.headers["Content-Type"] = "application/x-www-form-urlencoded";
+        config.headers.Authorization = "Bearer " + localStorage.getItem("token");
+    }
+
+    return config;
+
+});
+```
+
+:::
+
+🕊 N'oubliez surtout pas que vous n'aurez plus à joindre des en-têtes avec le token manuellement dans vos requêtes !
+
+```ts showLineNumbers
+async function getAlbums(artistId : string){
+
+  // La partie commentée n'est plus nécessaire ! L'intercepteur s'en occupe !
+  const response = await spotifyRequest.get("https://api.spotify.com/v1/artists/" + artistId + "/albums?include_groups=album,single" /*, {
+    headers : {
+      "Content-Type" : "application/x-www-form-urlencoded",
+      "Authorization" : "Bearer " + spotifyToken
+    }
+  }*/);
+  console.log(response.data);
+  
+  // ...
 
 }
 ```

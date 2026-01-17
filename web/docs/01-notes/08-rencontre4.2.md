@@ -115,7 +115,7 @@ Notez les éléments suivants :
 
 :::warning
 
-Avec le forfait gratuit, vous avez une **limite de 10 000 requêtes par jour**. Ça ne devrait pas trop poser problème à moins
+Avec le forfait gratuit, vous avez une **limite d'environ 100 requêtes par jour**. Ça ne devrait pas trop poser problème à moins
 que vous appeliez plusieurs requêtes maladroitement **dans une boucle**. Soyez prudents ! 👷‍♂️👷‍♀️🚧
 
 :::
