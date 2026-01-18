@@ -314,13 +314,13 @@ function displayButtons(){
   // Boutons pour les 18+
   if(userAge >= 18){
     return <div>
-      <button className="btn btn-blue mr-2">Acheter des cigarettes 🚬</button>
-      <button className="btn btn-blue">Acheter des briques 🧱</button>
+      <button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold mr-2">Acheter des cigarettes 🚬</button>
+      <button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold">Acheter des briques 🧱</button>
     </div>;
   }
   // Boutons pour les 17-
   else{
-    return <button className="btn btn-blue">Acheter des briques 🧱</button>;
+    return <button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold">Acheter des briques 🧱</button>;
   }
 }
 
@@ -338,15 +338,15 @@ Bien entendu, dans ce cas, puisque `userAge` est supérieur ou égal à 18, les 
 
 :::tip
 
-Il est également possible d'utiliser un *stratagème syntaxtique* suivant la forme `booléen && expression` pour éviter d'avoir à créer une fonction :
+Il est également possible d'utiliser un *stratagème syntaxique* suivant la forme `booléen && expression` pour éviter d'avoir à créer une fonction :
 
 ```tsx showLineNumbers
 return (
   <div className="m-2">
     {
-      userAge >= 18 && <button className="btn btn-blue mr-2">Acheter des cigarettes 🚬</button>
+      userAge >= 18 && <button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold">Acheter des cigarettes 🚬</button>
     }
-    <button className="btn btn-blue">Acheter des briques 🧱</button>
+    <button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold">Acheter des briques 🧱</button>
   </div>
 );
 ```
@@ -459,7 +459,7 @@ appeler la fonction `incrementX()` à chaque fois que le bouton est **cliqué**.
 return (
   <div className="m-2">
     <div>{x}</div>
-    <button className="btn btn-blue" onClick={incrementX}>Incrémenter X</button>
+    <button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold" onClick={incrementX}>Incrémenter X</button>
   </div>
 );
 ```
@@ -718,7 +718,7 @@ return (
     Date d'ajout : <input type="date" value={dateAdded}  onChange={(e) => setDateAdded(e.target.value)} className="textInput" />
     Quantité : <input type="number" value={quantity}  onChange={(e) => setQuantity(+e.target.value)} className="textInput" />
     Brisé ? : <input type="checkbox" checked={isBroken}  onChange={(e) => setIsBroken(e.target.checked)} className="textInput" />
-    <button className="btn btn-blue" onClick={addItem}>Ajouter</button>
+    <button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold" onClick={addItem}>Ajouter</button>
   </div>
 );
 ```
