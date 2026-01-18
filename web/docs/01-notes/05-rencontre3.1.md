@@ -542,3 +542,11 @@ Si vous préférez les **template strings**, c'est *à peine* plus élégant :
 ```
 
 :::
+
+:::note
+
+Les auteurs de la librairie **Tailwind** déconseillent l'usage de **modules CSS**. Le but de **Tailwind** est d'offrir des classes qui ont le même comportement peu importe le navigateur et la page Web. En créant des styles dont la portée est exclusive à certaines pages, les classes Tailwind peuvent devenir imprévisibles.
+
+Malgré tout, il est très possible de réussir à utiliser **Tailwind** et les **modules CSS** simultanément, mais il faut être attentif à d'éventuelles incohérences parmi les styles appliqués.
+
+:::

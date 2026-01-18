@@ -781,6 +781,7 @@ Voici un exemple d'**intercepteur**, dont le fichier a simplement été glissé 
 ```ts showLineNumbers
 import axios from "axios";
 
+// La variable spotifyRequest va nous servir dans d'autres fichiers !
 export const spotifyRequest = axios.create();
 
 spotifyRequest.interceptors.request.use((config) => {

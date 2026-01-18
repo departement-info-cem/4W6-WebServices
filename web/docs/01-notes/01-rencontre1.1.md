@@ -724,6 +724,57 @@ Lors du Cours 2, nous verrons une méthode plus élégante pour afficher les él
 
 :::
 
+### 🎨 Tailwind
+
+Tel que mentionné plus haut, **Tailwind** est une **librairie CSS**. Son installation est suggérée, par défaut, lorsqu'on crée un projet **Next.js**. Nous allons l'utiliser docilement pour se plier aux standards de Next.js, mais gardez à l'esprit que c'est optionnel en dehors de ce cours !
+
+:::info
+
+> Pourquoi on n'utilise pas Bootstrap à la place ? 😠
+
+**Bootstrap** est une librairie plutôt *invasive* qui engendre plusieurs incompatibilités avec d'autres librairies CSS / UI. Elle est relativement lourde et nécessite l'usage de `jQuery`. Ça reste un choix de librairie admissible, surtout si on ne compte utiliser aucune autre librairie CSS / UI.
+
+:::
+
+#### 📐 Styles *preflight*
+
+Un ensemble de styles nommés `Preflight` sont appliqués par défaut dans les projets **Next.js**. Ils visent à **uniformiser les styles de bases** des navigateurs. (Par défaut, certains styles des navigateurs sont différents ! Ça veut dire que la même page Web pourrait être différente d'un navigateur à l'autre, alors Tailwind tente de mitiger cela)
+
+* Les marges de nombreux éléments sont retirées. (Titres, paragraphes, listes, etc.)
+* Les tailles de texte sont uniformisées. (Et oui, même les `<h1>` ont la même taille que les `<p>` !)
+* Les bordures et fond sont retirés / uniformisés. (Les `<button>` et les `<input>` semblent identiques à un `<div>`)
+* Les listes ne sont pas stylisées. (Pas de marge, pas de puces ou de numérotation, ...)
+* Etc.
+
+Bien entendu, avec **Tailwind** et / ou du CSS vanille, nous pourrons, au besoin, styliser tous ces éléments, avec l'avantage que ce soit uniformisé pour tous les navigateurs.
+
+:::warning
+
+**😳 Désactiver les styles Preflight**
+
+Il est possible de désactiver les styles **Preflight** en modifiant le fichier `globals.css`. Il suffit de remplacer ceci ...
+
+```css showLineNumbers
+@import "tailwindcss";
+```
+
+... par ceci ...
+
+```css showLineNumbers
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+/* @import "tailwindcss/preflight.css" layer(base); */
+@import "tailwindcss/utilities.css" layer(utilities);
+```
+
+En gros, on importe les mêmes choses qu'avant ... sauf les styles **Preflight** ! ( `@import "tailwindcss"` est un raccourci qui remplace ces 4 instructions)
+
+Bien entendu, désactiver les styles **Preflight** n'est pas recommandé.
+
+:::
+
+#### 🖌 Classes Tailwind
+
 ### 📂 Git
 
 **Rappel** : N'hésitez pas à visiter [cette page](https://info.cegepmontpetit.ca/git) du site départemental pour 
