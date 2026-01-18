@@ -775,6 +775,80 @@ Bien entendu, désactiver les styles **Preflight** n'est pas recommandé.
 
 #### 🖌 Classes Tailwind
 
+La librairie **Tailwind** nous invite à n'écrire presque aucun CSS par nous-mêmes : à la place, il existe une **classe** pour à peu près tout. Le but sera de les appliquer, individuellement, à chaque élément dont on souhaite modifier le style. [Voir la documentation](https://tailwindcss.com/docs)
+
+Voici quelques exemples :
+
+<table>
+<tr>
+<th>Effet</th><th>Classes</th><th>Précisions</th>
+</tr>
+<tr>
+<td>Alignement du texte</td><td>`text-left`, `text-center`, `text-right`, `text-justify`, etc.</td><td></td>
+</tr>
+<tr>
+<td>Taille du texte</td><td>`text-xs`, `text-sm`, `text-base` (taille normale), `text-lg`, `text-xl`, `text-█xl`</td><td>Pour des tailles plus grandes que `text-xl`, utilisez `text-█xl` en remplaçant le █ par un nombre entier de 2 à 9.</td>
+</tr>
+<tr>
+<td>Marges externes</td><td>`m-█` pour les 4 côtés<br/>`mx-█` pour horizontal<br/>`my-█` pour vertical<br/>`m-auto` pour centrer<br/>`mt-█` ou `mr-█` ou `mb-█` ou `ml-█` pour un côté précis</td><td>Remplacez █ par un nombre entier plus grand ou égal à 0</td>
+</tr>
+<tr>
+<td>Marges internes (padding)</td><td>`p-█` pour les 4 côtés<br/>`px-█` pour horizontal<br/>`py-█` pour vertical<br/>`pt-█` ou `pr-█` ou `pb-█` ou `pl-█` pour un côté précis</td><td>Remplacez █ par un nombre entier plus grand ou égal à 0</td>
+</tr>
+<tr>
+<td>Couleur du texte</td><td>`text-black`, `text-white`, `text-█-█`</td><td>Pour les couleurs autres que blanc et noir, il faut utiliser le [système de couleur de Tailwind](https://tailwindcss.com/docs/colors). Le premier █ est le nom d'une couleur (blue, red, gray, green, etc.) et le deuxième █ est un multiple de 100. (Maximum 900. Il existe aussi 50 et 950 pour une saturation/luminosité aux extrêmes. Un grand nombre veut dire foncé)</td>
+</tr>
+<tr>
+<td>Couleur de fond</td><td>`bg-black`, `bg-white`, `bg-█-█`</td><td>^ Voir les explications de la cellule au-dessus ^</td>
+</tr>
+<tr>
+<td>Couleur de bordure</td><td>`border-black`, `border-white`, `border-█-█`</td><td>^^ Voir les explications deux cellules plus haut ^^</td>
+</tr>
+<tr>
+<td>Largeur de bordure</td><td>`border-█`</td><td>Remplacez █ par le nombre de pixels. (Sans écrire `px`)</td>
+</tr>
+<tr>
+<td>Largeur</td><td>`w-full` pour 100%<br/>`w-FRACTION` pour un autre pourcentage<br/>`w-3xs`, `w-2xs`, `w-xs`, `w-sm`, `w-md`, `w-lg`, `w-xl`, `w-2xl`, `w-3xl`, etc. pour une variété de tailles.</td><td>`w-FRACTION` doit utiliser une *fraction* de votre choix comme `w-1/2`, `w-2/5`, etc.<br/>`w-3xs` correspond à 256px. `w-md` correspond à 448px, etc.</td>
+</tr>
+<tr>
+<td>Hauteur</td><td>Comme pour la largeur, mais remplacez le `w` par un `h`</td><td>`h-FRACTION` doit utiliser une *fraction* de votre choix comme `h-1/2`, `h-2/5`, etc.</td>
+</tr>
+<tr>
+<td>Listes</td><td>`list-disc` pour des puces<br/>`list-decimal` pour des numéros</td><td></td>
+</tr>
+<tr>
+<td>Dédoublement des bordures d'un tableau (**border-collapse**)</td><td>`border-collapse`, `border-separate`</td><td>Qui, sur Terre, utilise `border-separate` ?</td>
+</tr>
+<tr>
+<td>Type de bloc</td><td>`inline`, `block`, `inline-block`, `flex`, `grid`, etc.</td><td></td>
+</tr>
+<tr>
+<td>Espacement horizontal dans une flexbox / grid</td><td>`justify-start`, `justify-end`, `justify-center`, `justify-between`, `justify-around`, etc.</td><td>À appliquer sur l'élément parent, pas sur les éléments enfants. Pour les éléments enfant, ce serait `justify-self-█`, où █ est la valeur au choix.</td>
+</tr>
+<tr>
+<td>Alignement vertical dans une flexbox / grid</td><td>`items-start`, `items-end`, `items-center`, etc.</td><td>À appliquer sur l'élément parent, pas sur les éléments enfants. Pour les éléments enfant, ce serait `self-█`, où █ est la valeur au choix.</td>
+</tr>
+<tr>
+<td>Espacements entre les items dans une flexbox / grid (**gap**)</td><td>`gap-█` pour tous côtés<br/>`gap-x-█` pour horizontal<br/>`gap-y-█` pour vertical</td><td>█ doit être remplacé par un nombre entier supérieur ou égal à 0.</td>
+</tr>
+<tr>
+<td>Retour à la ligne dans une flexbox / grid (**wrap**)</td><td>`flex-wrap`, `flex-nowrap`</td><td></td>
+</tr>
+<tr>
+<td>Largeur relative d'un item dans une flexbox / grid</td><td>`flex-█`</td><td>Doit être attribué à un élément enfant. █ doit être remplacé par un nombre entier supérieur ou égal à 1. Par exemple, si un enfant possède `flex-2`, il sera deux fois plus large qu'un enfant avec `flex-1`.</td>
+</tr>
+<tr>
+<td>Largeur *absolue* d'un item dans une flexbox / grid (**flex-basis**)</td><td>`basis-full` pour 100%.<br/>`basis-FRACTION` pour une fraction.<br/>`basis-3xs`, `basis-2xs`, `basis-xs`, `basis-sm`, `basis-md`, `basis-lg`, `basis-xl`, `basis-2xl`, `basis-3xl`, etc. pour une variété de tailles.</td><td>`basis-FRACTION` doit utiliser une *fraction* de votre choix comme `basis-1/2`, `basis-2/5`, etc.<br/>`basis-3xs` correspond à 256px. `basis-md` correspond à 448px, etc.</td>
+</tr>
+<tr>
+<td>Position</td><td>`static`, `relative`, `fixed`, `absolute`, `sticky`</td><td></td>
+</tr>
+<tr>
+<td>Top / left / right / bottom</td><td>`top-█`, `bottom-█`, `left-█`, `right-█`</td><td>Remplacez █ par un nombre entier supérieur ou égal à 0. Ce n'est pas le nombre de pixels, mais bien une unité relative à l'espacement.</td>
+</tr>
+</table>
+
+
 ### 📂 Git
 
 **Rappel** : N'hésitez pas à visiter [cette page](https://info.cegepmontpetit.ca/git) du site départemental pour 
