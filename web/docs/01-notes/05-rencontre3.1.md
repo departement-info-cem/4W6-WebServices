@@ -445,6 +445,23 @@ export default function Yellow() {
 
 <center>![Affichage répétitif d'un composant réutilisable](../../static/img/cours5/multipleReusableComponent.png)</center>
 
+### 💩 L'enfer de Tailwind
+
+Comme vous savez, parfois, en utilisant **Tailwind**, le HTML peut finir par ressembler à ceci :
+
+```tsx
+<button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold" onClick={incrementX}>Incrémenter X</button>
+```
+
+L'ensemble de classes peut sembler *monstrueux*, mais il faut avoir des réflexes stratégiques : il **faut** convertir ce bouton en un **composant** qui contient uniquement ce bouton ! De cette manière, au lieu de copier-coller toutes ces classes pour chaque bouton, on va simplement intégrer un **composant réutilisable** qui contient uniquement ce bouton. Ça peut être vrai également pour un input, un menu, une image, etc. !
+
+En général, visez une des deux visions suivantes :
+
+* 👨‍🎨 Créez votre propre CSS à 100%.
+* ♻ Utilisez Tailwind à 95% et créez de nombreux mini-composants réutilisables. (Quelques classes personnalisées peuvent être acceptables, rarement)
+
+Les laboratoires vous feront goûter aux deux possibilités.
+
 ## 🎨 Modules CSS
 
 Bien que le fichier `globals.css` soit pratique, parfois on pourrait vouloir créer des styles qui **s'appliquent seulement à certains composants** plutôt qu'au projet en entier. Les **modules CSS** permettent de le faire.
@@ -547,6 +564,6 @@ Si vous préférez les **template strings**, c'est *à peine* plus élégant :
 
 Les auteurs de la librairie **Tailwind** déconseillent l'usage de **modules CSS**. Le but de **Tailwind** est d'offrir des classes qui ont le même comportement peu importe le navigateur et la page Web. En créant des styles dont la portée est exclusive à certaines pages, les classes Tailwind peuvent devenir imprévisibles.
 
-Malgré tout, il est très possible de réussir à utiliser **Tailwind** et les **modules CSS** simultanément, mais il faut être attentif à d'éventuelles incohérences parmi les styles appliqués.
+De toute façon, tel que mentionné plus haut, soit vous utilisez votre propre CSS à 100%, soit vous utilisez Tailwind à 95% et n'aurez même pas besoin des modules CSS de toute façon.
 
 :::

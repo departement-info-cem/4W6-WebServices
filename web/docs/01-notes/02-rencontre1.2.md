@@ -1,5 +1,11 @@
 # Cours 2 - Composant dynamique
 
+:::warning
+
+Dans de nombreux exemples à partir de ce cours, des classes personnelles sont utilisées à la place des classes **Tailwind** pour alléger le code HTML des exemples. C'est normal qu'en copiant certains exemples, l'apparence de vos pages Web soit un peu moins pétillant 🌶 !
+
+:::
+
 Ce cours aborde l'interaction entre le code TypeScript d'un composant et son code HTML.
 
 * Changer un état

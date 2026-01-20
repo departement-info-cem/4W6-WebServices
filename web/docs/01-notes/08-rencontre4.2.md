@@ -312,3 +312,9 @@ export default function Ui(){
 Bien entendu, il faudra combiner ces éléments UI avec des **classes** de la librairie **Tailwind** (ou du CSS fait à la main), notamment pour la mise en page et les espacements.
 
 :::
+
+:::tip
+
+Grâce à **Shadcn**, on économise parfois pas mal de temps car on n'a pas à étaler vingt milles classes **Tailwind** sur un bouton !
+
+:::
