@@ -217,7 +217,7 @@ Finalement, dans le HTML, faites un autre `<ul>` (avec `list-disc`, `ml-5` et `t
 
 Attention ! Les deux `<li>` doivent être **identiques** dans le code ! (Sauf pour les index `[0]` et `[1]`) Ça veut dire qu'il faudra une **condition ternaire** pour bien afficher `jolie` ou `moche`. ( `{ condition ? "jolie" : "moche" }` ) 
 
-## 👋 Étape 5 - J'aI fInI mOnSiEuR
+## 👋 Étape 4 - J'aI fInI mOnSiEuR
 
 ### **11 -** Ranger son projet et quitter
 
