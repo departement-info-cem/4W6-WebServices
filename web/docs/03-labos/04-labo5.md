@@ -1,4 +1,4 @@
-# Laboratoire 5
+# Laboratoire 5 💩
 
 Dans ce laboratoire, [texte d'introduction qui parle des composants pour stimuler les étudiant(e)s à
 apprendre et à prendre le laboratoire au sérieux] !

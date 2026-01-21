@@ -7,18 +7,9 @@ ouverte en cliquant sur l'💡, maintenez `ctrl` appuyé.
 
 ## ✊ Étape 1 - Git Good
 
-### **1 -** Créer le projet Angular
+### **1 -** Créer le repo
 
-[💡](/cours/rencontre1.1#-créer-un-projet-angular) Créez un nouveau projet Angular et nommez-le `labo1` ou `lab1` ou `laboratoire1` ou `labo01` ou `lab01` ou
-`laboratoire01` ou `labo_1` ou `labo_01` ou `lab_1` ou `lab_01` ou `laboratoire_1` ou `laboratoire_01` ou 
-`coccinelle`.
-
-N'ouvrez pas votre projet avec Visual Studio Code immédiatement, nous avons quelques manipulations à faire avant.
-
-### **2 -** Créer le repo
-
-[💡](/cours/rencontre1.1#-créer-un-nouveau-projet-et-son-repository) Créez un nouveau repository Git vide à l'aide de **Fork** 🔱
-
+[💡](/notes/rencontre1.1#-git) Créez un nouveau repository Git vide à l'aide de **Fork** 🔱
 
 #### 🦸‍♂️ Tous pour un ou Un pour tous ?
 
@@ -27,10 +18,11 @@ serez forcés.
 
 Si vous comptez utiliser Git pour vos labos -> décidez si vous voulez faire 1 repo avec TOUS vos labos (moins de bordel sur GitHub) ou bien 1 repo par labo. (Projets mieux séparés... mais bordel sur GitHub)
 
-### **3 -** Préparer le repo
+### **2 -** Créer le projet Next.js dans le repo
 
-[💡](/cours/rencontre1.1#-créer-un-nouveau-projet-et-son-repository) Déplacez votre projet Angular dans le repository vide, mais ⛔ assurez-vous de d'abord supprimer le dossier `.git` dans votre
-projet Angular s'il y en a un ! (Ne supprimez pas celui dans le repo vide par contre)
+[💡](/notes/rencontre1.1#-créer-un-projet-nextjs) Créez un nouveau projet Next.js et nommez-le `labo1` ou `lab1` ou `laboratoire1` ou `labo01` ou `lab01` ou
+`laboratoire01` ou `labo_1` ou `labo_01` ou `lab_1` ou `lab_01` ou `laboratoire_1` ou `laboratoire_01` ou 
+`coccinelle`.
 
 Faites un premier commit et un premier push.
 
@@ -40,121 +32,97 @@ Pour la suite du laboratoire, n'hésitez pas à faire un commit et un push à la
 
 :::
 
-## 🚬 Étape 2 - Mon étrange dépendance
+### **3 -** Lancer le projet
 
-### **4 -** Installer deux dépendances
-
-[💡](/cours/rencontre1.1#-installer-une-d%C3%A9pendance) Installez deux dépendances : `jquery` et `bootstrap`. Attention à l'orthographe, si vous faites la moindre faute dans leur nom ça n'installera pas la bonne chose. 🙄
-
-Ensuite, assurez-vous que ces deux lignes ont bel et bien été ajoutées dans le fichier `package.json` :
-
-```json
-"bootstrap": "^5.3.3",
-"jquery": "^3.7.1",
-```
-
-(Les versions pourraient varier légèrement, c'est normal.)
-
-✨ Vous pouvez maintenir ouvrir votre projet Angular avec **Visual Studio Code**.
-
-Pour que **jQuery** et **Bootstrap** fonctionnent bel et bien dans notre projet, nous allons devoir modifier le fichier
-`angular.json` pour importer certains scripts (le noeud `scripts` devra être ajouté !) :
-
-```json
-"styles": [  
-    "./node_modules/bootstrap/dist/css/bootstrap.css",
-    "src/styles.css"
-],
-"scripts": [               
-    "node_modules/jquery/dist/jquery.min.js",
-    "node_modules/bootstrap/dist/js/bootstrap.min.js"
-]
-```
-
-⛔ **Attention !** Le noeud `styles` est présent deux fois dans le fichier `angular.json`. Dans
-notre cas, on doit seulement modifier la **première occurence** de ce noeud. (On ne touche pas à ceux vers
-la fin du fichier ! 😠) Notre noeud `scripts` sera ajouté juste en-dessous de ce noeud `styles`.
+[💡](/notes/rencontre1.1#-ouvrir-et-exécuter-un-projet-nextjs) Vous pouvez maintenant exécuter la commande `npm run dev` dans le terminal de Visual Studio Code pour exécuter le projet.
 
 :::note
 
-Notez que c'est la dernière fois de la session que nous utiliserons Bootstrap. Ce n'est pas une librairie très
-amicale avec Angular. À l'image d'un rhinocéros 🦏 dans une boutique de poteries ⚱, Bootstrap génère des
-conflits et brise plusieurs mécanismes lorsque plusieurs librairies sont utilisées. 
+À chaque fois que vous travaillerez sur un projet Next.js, la première étape suivante sera toujours de lancer l'exécution du projet avec `npm run dev`. Ça permet de compiler les changements à chaque fois qu'on sauvegarde un fichier du projet et de rapidement intercepter les erreurs. Ça permet aussi de visualiser son site Web à l'adresse `http://localhost:3000` dans le navigateur de son choix.
 
-:::
-
-### **5 -** Lancer le projet
-
-[💡](/cours/rencontre1.1#-ouvrir-et-exécuter-un-projet-angular) Vous pouvez maintenant exécuter la commande `ng serve` dans le terminal de Visual Studio Code pour exécuter le projet. Si vous aviez déjà lancé le projet, il faudra l'arrêter (Ctrl + C dans le terminal) et le démarrer à nouveau.
-
-:::note
-
-À chaque fois que vous travaillerez sur un projet Angular, une fois les dépendances installées (`npm install`) et le projet ouvert avec
-**VS Code**, l'étape suivante sera toujours de lancer l'exécution du projet avec `ng serve`. Ça permet de compiler tous les changements
-à chaque fois qu'on sauvegarde un fichier du projet et de rapidement intercepter les erreurs. Ça permet aussi de visualiser son site Web
-à l'adresse `http://localhost:4200` dans le navigateur de son choix.
+Si vous clonez un projet qui était déjà sur Git plutôt que d'en créer un nouveau, il faut toujours commencer par réinstaller les dépendances du projet à l'aide de la commande `npm install`. Ça permet de restaurer une tonne de fichiers qui sont absents de Git à cause du `.gitignore`.
 
 :::
 
 Si ce n'est pas déjà fait, affichez votre site Web dans le navigateur de votre choix (Il n'y a pas de mauvais choix à part tout ce qui
-n'est pas **Firefox** 🦊🔥) à l'aide de l'adresse `http://localhost:4200`.
+n'est pas **Firefox** 🦊🔥) à l'aide de l'adresse `http://localhost:3000`.
 
-### **6 -** Un peu de HTML / CSS
+### **4 -** Un peu de HTML / CSS
 
 Pour le moment, si vous jetez un coup d'oeil à votre page Web dans le navigateur, ça ressemble à ceci :
 
-<center>![App par défaut](../../static/img/labo1/defaultView.png)</center>
+<center>![Page d'accueil par défaut](../../static/img/cours1/default_index_next.png)</center>
 
-[💡](/cours/rencontre1.1#-les-composants) Supprimez tout le code HTML présent dans le fichier `app.html` et sauvegardez. À présent, la page
-Web devrait être complètement vide. (Tout ce qu'il reste, c'est un `<body></body>` relativement vide.)
+[💡](/notes/rencontre1.1#-pagetsx) Supprimez tout le code HTML présent dans le fichier `page.tsx`, et mettez un `<div>` vide à la place :
 
-Copiez-collez ce HTML dans le composant `app` à la place :
-
-```html showLineNumbers
-<div class="container">
-  <div class="row mt-1">
-    <div class="col-3 socialisme">
-      Gauche
-    </div>
-    <div class="col-9 conservatisme">
-      Droite
-    </div>
-  </div>
-</div>
+```tsx showLineNumbers
+return(
+  <div></div>
+);
 ```
 
-Si vous avez bien installé et importé `bootstrap`, les deux colonnes devraient bien être côte-à-côte.
-Notez que les classes `socialisme` et `conservatisme` ne font rien pour le moment et n'ont pas de lien avec `bootstrap`.
+Sauvegardez le fichier, et retournez voir la page Web. Elle devrait être complètement vide. (Il reste des balises comme `<head>`, `<body>`, notre `<div>`, etc. mais rien de visible)
 
-[💡](/cours/rencontre1.1#-les-composants) Ajoutez du CSS _au bon endroit_ (ce CSS ne doit s'appliquer qu'au
-composant `app` !) pour obtenir un résultat similaire à celui ci-dessous. Vous êtes invités à choisir des couleurs 
-qui représentent bien l'âme de l'esprit du mental de la tête de l'aura de votre personne. 
+Copiez-collez ce HTML dans le composant `Home` (`page.tsx`) à la place du `<div>` existant :
+
+```tsx showLineNumbers
+return(
+  <div className="m-auto w-3xl">
+    <div className="flex mt-1">
+      <div className="flex-1 p-1 AAA">
+        Gauche
+      </div>
+      <div className="flex-3 p-1 BBB">
+        Droite
+      </div>
+    </div>
+  </div>
+);
+```
+
+Grâce aux classes utilitaires de **Tailwind**, deux colonnes devraient bien être côte-à-côte dans la page.
+Notez que les classes `AAA` et `BBB` ne font rien pour le moment et n'ont pas de lien avec **Tailwind**.
+
+:::info
+
+> Pourquoi on utilise l'attribut `className` plutôt que `class`, comme en HTML ordinaire ?
+
+Comme un fichier `tsx` contient du **HTML** ET du **TypeScript**, le terme `class` est sensible : il sert à déclarer une classe en TypeScript. Il a donc fallu que React trouve une alternative... l'attribut `className` est transformé en attribut `class` en cachette lorsque la page Web est exécutée.
+
+:::
+
+[💡](/notes/rencontre1.1#-classes-tailwind) Remplacez les classes `AAA` et `BBB` par deux **classes utilitaires Tailwind**
+pour que la colonne de gauche ait un fond **rose pâle** et que la colonne de droite ait un fond **bleu pâle**.
 
 <center>![Fond coloré](../../static/img/labo1/backgroundColor.png)</center>
+
+Dupliquez une partie du HTML pour obtenir ce résultat :
+
+<center>![Deux rangées](../../static/img/labo1/twoRows.png)</center>
+
+[💡](/notes/rencontre1.1#-globalscss) Ajoutez une classe personnalisée et du **code CSS classique** (pas de Tailwind !) _au bon endroit_ pour modifier la couleur du cadran inférieur gauche (la section en bas à gauche 🙄) Vous êtes invités à choisir une couleur qui représente bien l'âme de l'esprit du mental de la tête de l'aura de votre personne. 
 
 Ouf ! C'est assez de CSS pour le moment. Vous êtes probablement _é-pui-sé(e)_.
 
-## 👶 Étape 3 - Mon tout premier TypeScript
+<center>![Deux rangées](../../static/img/labo1/twoRows_with_color.png)</center>
 
-Avant de se lancer, profitez-en pour aérer le projet en supprimant le fichier `app.spec.ts`. 
-Pour rappel, c'est un fichier de tests unitaires que nous n'utiliserons pas avant la semaine 6.
+## 👶 Étape 2 - Mon tout premier TypeScript
 
-### **7 -** Afficher une variable
+### **5 -** Afficher des états
 
-[💡](/cours/rencontre1.1#-afficher-une-variable-dans-la-page-web) Déclarez une variable
-nommée `myWisdom` dans votre composant `app`. _Typez-la_ en `string` et affectez-lui une phrase qui vous inspire.
+[💡](/notes/rencontre1.1#-afficher-une-variable-un--état--dans-la-page-web) Déclarez un état nommé `myWisdom` dans votre composant `Home`. Affectez-lui une phrase (un `string`) qui vous inspire.
 
-Déclarez une deuxième variable nommée `n` (sans la typer car vous êtes un _bandit_) et affectez-lui un nombre
-de votre choix entre 7 et 13. (Mais surtout pas plus que 13.)
+Déclarez un deuxième état nommé `n` et affectez-lui un nombre quelconque de votre choix entre 7 et 13. (Mais surtout pas plus que 13.)
 
-Remplacez ensuite, dans le HTML, le mot « Droite » par la valeur de la variable `myWisdom` à l'aide des
-doubles accolades. De plus, remplacez le mot « Gauche » par la valeur de la variable `n`.
+Remplacez ensuite, dans le HTML, dans la première rangée, le mot « Droite » par la valeur de `myWisdom` à l'aide d'accolades. De plus, remplacez le mot « Gauche » par la valeur de `n`.
 
-<center>![Fond coloré](../../static/img/labo1/backgroundColor.png)</center>
+<center>![Deux états affichés](../../static/img/labo1/displayStates.png)</center>
 
-### **8 -** Afficher des résultats de fonction
+Vérifiez votre posture : votre dos est-il droit ? Oui ? Très bien, continuez.
 
-[💡](/cours/rencontre1.1#fonctions-de-classe) Nous allons créer deux fonctions dans le composant `app`.
+### **6 -** Afficher des résultats de fonction
+
+[💡](/notes/rencontre1.1#-afficher-le-résultat-dune-fonction) Nous allons créer deux fonctions dans le composant `Home`. C'est excitant.
 
 La première fonction se nomme `bruh`, ne reçoit aucun paramètre et retourne un `string`. La fonction retourne
 la valeur `"Bruh."`.
@@ -162,27 +130,19 @@ la valeur `"Bruh."`.
 La deuxième fonction se nomme `equalToN`, reçoit un `number` en paramètre et retourne un `string`. La fonction
 retourne `"Identique"` si le paramètre reçu est identique à la valeur de la variable de classe `n` et retourne `"Différent"` sinon.
 
-Avant de poursuivre, dupliquez votre « `row` » dans le HTML car nous allons ajouter du contenu dans la page.
+Affichez le résultat de la fonction `bruh()` dans la colonne de gauche de la 2e rangée.
 
-<center>![Deux rangées](../../static/img/labo1/twoRows.png)</center>
-
-[💡](/cours/rencontre1.1#-afficher-le-résultat-dune-fonction) Affichez le résultat de la fonction `equalToN()`
-deux fois dans la colonne de gauche de la 2e rangée : une fois en fournissant un paramètre qui est égal à votre variable `n` et
-une autre fois en fournissant un paramètre qui n'est pas égal à votre variable `n`.
-
-De plus, affichez le résultat de la fonction `bruh()` dans la colonne de droite de la 2e rangée.
-
-Vous devriez avoir un résultat similaire :
+De plus, affichez le résultat de la fonction `equalToN()` deux fois dans la colonne de droite de la 2e rangée : une fois en fournissant un paramètre qui est égal à votre état `n` et une autre fois en fournissant un paramètre qui n'est pas égal à votre état `n`.
 
 <center>![Affichage de deux fonctions](../../static/img/labo1/displayFunctions.png)</center>
 
-## 🧩 Étape 4 - Sais un peu plus compliquais
+## 🧩 Étape 3 - Sais un peu plus compliquais
 
-### **9 -** Créer une classe
+### **7 -** Créer une classe
 
-[💡](/cours/rencontre1.1#-créer-et-afficher-un-objet-personnalisé) Nous allons maintenant créer une classe personnalisée.
+[💡](/notes/rencontre1.1#-afficher-un-objet-personnalisé) Nous allons maintenant créer une classe personnalisée.
 
-Préparez un nouveau dossier `models` qui pourra accueillir une classe. Voici la classe à créer :
+Préparez un nouveau dossier `_types` qui pourra accueillir une classe. Voici la classe à créer :
 
 La classe `Towel`, qui possède trois propriétés :
 
@@ -191,46 +151,77 @@ La classe `Towel`, qui possède trois propriétés :
 * `image` : un `string` assigné par le constructeur.
 * `wet` : un `boolean` automatiquement assigné à `false`.
 
-...et qui possède une fonction :
+[💡](/notes/rencontre1.1#-classes-variables-et-fonctions-en-typescript) ...et qui possède une fonction :
 
 * `use()` : ne possède pas de paramètre et retourne un `string`. Retourne "La cible est maintenant sèche."
  si la serviette n'est pas mouillée et retourne "Ça ne fonctionne pas..." sinon.
 
-### **10 -** Afficher un objet
+:::note
+
+Dans une **classe**, les fonctions ne sont pas précédées du mot-clé `function`. De plus, pour utiliser une variable de classe, il faut utiliser `this.nomDeLaVariable`. C'est légèrement différent dans le composant `Home` car un composant n'est pas une classe, mais une (grosse) fonction.
+
+:::
+
+### **8 -** Afficher un objet
 
 Dupliquez (encore) une des rangées dans le HTML pour qu'on puisse ajouter du contenu dans une 3e rangée.
 
-Trouvez, sur **Google images**, une image inspirante de serviette. Placez-la dans le dossier `public/assets/images` de votre
-projet (vous aurez à le créer) :
+Trouvez, sur **Google images**, une image inspirante de serviette. Placez-la dans le dossier `public/images` de votre
+projet (vous aurez à créer `/images`) :
 
 <center>![Dossier](../../static/img/labo1/folder.png)</center>
 
-[💡](/cours/rencontre1.1#-créer-et-afficher-un-objet-personnalisé) Créez une variable de type serviette
-dans le composant `app`. Donnez lui votre couleur préférée (sauf si votre couleur préférée est bleu, dans ce cas
-choisissez `brun`), une taille de `1.8` et le nom de votre fichier image. (Ex : `"servietteBleue.jpeg"`)
+[💡](/notes/rencontre1.1#-afficher-un-objet-personnalisé) Créez un état de type `Towel` dans le composant `Home`. Donnez lui votre couleur préférée (sauf si votre couleur préférée est bleu, dans ce cas choisissez `brun`), une taille de `1.2` et le nom de votre fichier image. (Ex : `"servietteBleue.jpeg"`)
 
-Dans la colonne de droite, faites-le nécessaire pour obtenir un affichage similaire à celui ci-dessous. J'ai utilisé
-un élément `<br>` pour les sauts de ligne.
+Dans la colonne de droite, faites-le nécessaire pour obtenir un affichage similaire à celui ci-dessous. Utilisez Tailwind si l'image a une taille dysjonctée. (`w-3xs` devrait bien limiter sa largeur)
 
-Pour l'image, vous aurez besoin d'un élément `<img>` dans lequel vous glisserez `/assets/images/{{serviette.image}}` dans l'attribut `src`.
+Pour l'image, vous aurez besoin d'un élément `<img>` dans lequel vous glisserez l'attribut `src={'/images/' + myTowel.image}`. (Avec de la concaténation, on combine le chemin `/images/` avec le nom de votre fichier.)
 
-<center>![Deux rangées](../../static/img/labo1/threeRows.png)</center>
+<center>![Afficher une serviette](../../static/img/labo1/threeRows.png)</center>
 
-### **11 -** Afficher un tableau
+### **9 -** Afficher un tableau
 
-[💡](/cours/rencontre1.1#-créer-et-afficher-un-tableau) Déclarez un tableau de `string` nommé `hateList` dans le composant `app` et affectez-lui un tableau
-avec trois choses que vous détestez.
+[💡](/notes/rencontre1.1#-afficher-un-tableau) Déclarez un état avec un tableau de `string` nommé `hateList` dans le composant `Home` et affectez-lui un tableau avec trois choses que vous détestez.
 
-Dans le HTML du composant `app`, à l'aide d'un élément `<ul>` qui contient trois éléments `<li>`, affichez
+Dans le HTML du composant `Home`, à l'aide d'un élément `<ul>` qui contient trois éléments `<li>`, affichez
 les trois éléments du tableau `hateList` dans la colonne de gauche de la dernière rangée.
 
-<center>![Deux rangées](../../static/img/labo1/hateList.png)</center>
+<center>![Afficher un tableau](../../static/img/labo1/hateList.png)</center>
+
+Il faut utiliser les classes `list-disc` et `ml-5` sur le `<ul>` pour que la liste ne soit pas moche.
+
+### **10 -** Afficher un tableau ... d'objets !
+
+Ajoutez cette classe dans vos `/_types` :
+
+```ts showLineNumbers
+export class Potato{
+
+    constructor(
+        public isPretty : boolean,
+        public weight : number
+    ){}
+
+}
+```
+
+Dans votre composant `Home`, déclarez un état qui contiendra un **tableau de patates**.
+
+Le tableau contiendra deux patates :
+* Une patate jolie avec un poids de 6.9.
+* Une patate pas jolie avec un poids de 6.7.
+
+Finalement, dans le HTML, faites un autre `<ul>` (avec `list-disc`, `ml-5` et `text-xs`) avec deux `<li>` pour afficher les patates comme ceci :
+
+<center>![Afficher un tableau d'objets](../../static/img/labo1/potatoes.png)</center>
+
+Attention ! Les deux `<li>` doivent être **identiques** dans le code ! (Sauf pour les index `[0]` et `[1]`) Ça veut dire qu'il faudra une **condition ternaire** pour bien afficher `jolie` ou `moche`. ( `{ condition ? "jolie" : "moche" }` ) 
 
 ## 👋 Étape 5 - J'aI fInI mOnSiEuR
 
-### **12 -** Ranger son projet et quitter
+### **11 -** Ranger son projet et quitter
 
 Faites un dernier commit et un dernier push et allez toucher un peu de gazon. 🌱
 
 Si vous n'utilisez pas Git 🙄, transférez votre projet dans l'espace de stockage de votre choix, mais n'oubliez surtout
-pas de d'abord supprimer les dossiers `node_modules` et `.angular` !
+pas de d'abord supprimer les dossiers `node_modules` et `.next` !

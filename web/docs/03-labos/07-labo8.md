@@ -1,4 +1,4 @@
-# Laboratoire 8
+# Laboratoire 8 💩
 
 Téléchargez le [projet de départ](../../static/files/labo8.zip) et réinstallez les dépendances.
 

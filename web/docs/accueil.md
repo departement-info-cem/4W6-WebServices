@@ -9,4 +9,4 @@ slug: /
 Web orientée services. 
 
 ⛔🐞 Si vous remarquez des fautes de français, des erreurs dans le code ou des imprécisions dans certaines explications,
-n'hésitez pas à contacter Maxime Pelletier ou Mathieu Dupont sur Teams pour qu'ils les corrigent pour améliorer le matériel du cours. Merci ! 🙇‍♂️
+n'hésitez pas à contacter Maxime Pelletier sur Teams pour qu'il les corrige pour améliorer le matériel du cours. Merci ! 🙇‍♂️

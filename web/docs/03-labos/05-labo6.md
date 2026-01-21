@@ -1,4 +1,4 @@
-# Laboratoire 6
+# Laboratoire 6 💩
 
 Téléchargez le [projet de départ](../../static/files/labo6.zip) et lancez-le. 🧤⚾
 

@@ -1,4 +1,4 @@
-# Laboratoire 3
+# Laboratoire 3 💩
 
 Commencez par télécharger le ⛔ [projet de départ](../../static/files/labo3.zip) pour ce laboratoire. 🎁
 

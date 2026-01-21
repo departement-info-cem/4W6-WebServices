@@ -374,29 +374,6 @@ de d'abord ouvrir PowerShell dans le dossier qui contient les fichiers du projet
 
 <center>![Commande npm install](../../static/img/cours1/npm_install.png)</center>
 
-<!--
-#### 🍷 Installer une dépendance
-
-Pour pouvoir utiliser certaines librairies dans un projet Angular, on peut se servir de **npm** pour installer la librairie
-sous forme de dépendance. Par exemple, pour pouvoir utiliser **Bootstrap**, on doit installer deux dépendances : `jquery` et
-`bootstrap`, à l'aide des commandes suivantes :
-
-1. `npm install jquery`
-2. `npm install bootstrap`
-
-N'oubliez pas de d'abord ouvrir PowerShell dans le dossier qui contient les fichiers du projet à l'aide de `shift + clic-droit`. 
-(Le dossier qui contient `src`, `public`, etc.) Si vos dépendances sont bien installées, elles seront visibles dans le fichier 
-`package.json` :
-
-<center>![Dépendances dans le fichier package.json](../../static/img/cours1/dependencies.png)</center>
-
-Notons que des fichiers auront été ajoutés dans `node_modules` également.
-
-#### 🩹 Désinstaller une dépendance
-
-Les dépendances peuvent être désinstallées à l'aide de la commande `npm uninstall nomDeLaDependance`.
--->
-
 ### 🏁 Ouvrir et exécuter un projet Next.js
 
 Il suffit d'ouvrir le dossier dans **Visual Studio Code** à l'aide d'un clic-droit à l'intérieur du dossier lui-même ou sur le dossier.
@@ -409,7 +386,7 @@ Il suffit d'ouvrir le dossier dans **Visual Studio Code** à l'aide d'un clic-dr
 
 Pour exécuter le projet, ouvrez un terminal (Onglet `Terminal` -> `Nouveau terminal`) puis tapez la commande `npm run dev`.
 
-<center>![Commande ng serve](../../static/img/cours1/run_dev.png)</center>
+<center>![Commande npm run dev](../../static/img/cours1/run_dev.png)</center>
 
 Pour voir votre site Web, ouvrez un navigateur Web de votre choix et tapez l'adresse `localhost:3000`.
 Pour le moment, ce sera le gabarit par défaut qui est affiché :
@@ -440,8 +417,7 @@ Pour le moment, tous les fichiers que nous aborderons seront situés dans le dos
 
 :::warning
 
-Pour respecter la convention de nommage en JavaScript / TypeScript, les noms de fichiers **ne doivent pas contenir de majuscules**.
-Essayez de le garder à l'esprit, même si vous êtes habitués à la convention PascalCase en C#.
+Pour respecter la convention de nommage en JavaScript / TypeScript, les noms de fichiers **ne doivent pas contenir de majuscules**. Il faut utiliser le standard **kebab-case** pour les noms de fichiers. Essayez de le garder à l'esprit, même si vous êtes habitués à la convention PascalCase en C#.
 
 * ✅ Valides :
   * page.tsx

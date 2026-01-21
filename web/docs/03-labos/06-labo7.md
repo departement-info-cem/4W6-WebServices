@@ -1,4 +1,4 @@
-# Laboratoire 7
+# Laboratoire 7 💩
 
 ## 🐌 Étape 1 - La routine... ou presque.
 
