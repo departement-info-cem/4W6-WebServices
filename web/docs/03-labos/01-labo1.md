@@ -102,6 +102,12 @@ Dupliquez une partie du HTML pour obtenir ce résultat :
 
 [💡](/notes/rencontre1.1#-globalscss) Ajoutez une classe personnalisée et du **code CSS classique** (pas de Tailwind !) _au bon endroit_ pour modifier la couleur du cadran inférieur gauche (la section en bas à gauche 🙄) Vous êtes invités à choisir une couleur qui représente bien l'âme de l'esprit du mental de la tête de l'aura de votre personne. 
 
+:::warning
+
+Attention ! Parfois, quand on modifie `globals.css`, même si on sauvegarde le fichier, les changements n'apparaissent pas immédiatement dans la page Web. C'est un bug de **Next.js**, et on peut **temporairement réparer** cette erreur en vidant le cache de *Turbopack*. Pour cela, dans votre page Web, dans le navigateur, cliquez sur le cercle noir en bas à gauche (avec le **N** de Next.js) et choisissez `Preferences` -> `Reset bundler cache`
+
+:::
+
 Ouf ! C'est assez de CSS pour le moment. Vous êtes probablement _é-pui-sé(e)_.
 
 <center>![Deux rangées](../../static/img/labo1/twoRows_with_color.png)</center>

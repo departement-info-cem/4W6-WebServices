@@ -360,6 +360,21 @@ return (
 Le résultat est identique : 
 <center>![Affichage condition](../../static/img/cours2/displayCondition.png)</center>
 
+On peut utiliser une **condition ternaire** dans certaines situations (Quand on veut afficher une chose OU l'autre) :
+
+```tsx showLineNumbers
+return (
+  <div className="m-2">
+    <button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold">
+      { 
+        userAge >= 18 ? <span>Acheter des cigarettes 🚬</span> : <span>Acheter des briques 🧱</span>
+      }
+    </button>
+  </div>
+);
+```
+
+
 :::
 
 ### 🧩 Exemple sophistiqué
