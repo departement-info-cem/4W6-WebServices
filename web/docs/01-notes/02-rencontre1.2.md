@@ -619,6 +619,12 @@ Bien entendu, l'élément `<div>` contiendra toujours le même texte que l'input
 Grâce à ce mécanisme, nous aurons facilement accès à la donnée fournie par l'utilisateur
 dans l'état `favoriteWord`.
 
+:::warning
+
+Parfois, lorsqu'on implémente le **two-way binding**, **Next.js** lève une erreur 🐞 au sujet d'un *controlled input*. Si vous avez bel et bien fait les deux étapes du **two-way binding** (`value` et `onChange`), réactualisez la page Web et l'erreur devrait disparaître.
+
+:::
+
 ### 🧩 Exemple de formulaire plus sophistiqué
 
 Dans cet exemple, nous utiliserons une classe `Item` et nous permettrons à l'utilisateur d'ajouter plusieurs

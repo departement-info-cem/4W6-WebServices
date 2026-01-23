@@ -42,7 +42,7 @@ Une fois que c'est fait, ouvrez le projet dans VS Code et exécutez-le.
 
 ### **2 -** Compléter les formulaires
 
-[💡](/notes/rencontre1.2#-formulaires) Avant de lancer les requêtes, pouvez-vous associez les champs (les `<input`>) avec les bons états ? Ces états nous serviront pour exploiter l'input de l'utilisateur lorsque nous lancerons une requête.
+[💡](/notes/rencontre1.2#-formulaires) Avant de lancer les requêtes, pouvez-vous associer les champs (les `<input`>) avec les bons états ? Ces états nous serviront pour exploiter l'input de l'utilisateur lorsque nous lancerons une requête.
 
 [💡](/notes/rencontre1.2#-événements) De plus, assurez-vous que cliquer sur les boutons appelle bel et bien la fonction appropriée dans le code. (Bien que les fonctions en question soient vides pour le moment)
 
@@ -86,7 +86,9 @@ une erreur. Faites le nécessaire pour obtenir un affichage similaire si une err
 
 <center>![Recherche d'artistes invalide](../../static/img/labo3/artistBadSearch.png)</center>
 
-Finalement, assurez-vous de vider le tableau `similarArtists` à chaque fois que vous lancez une nouvelle recherche ! Sinon les anciens résultats vont s'accumuler avec les nouveaux. En TypeScript / JavaScript, on peut vider un tableau en faisant `monTableau = []`. Dans ce cas, avec un état, ce sera plutôt `setMonEtat([])`.
+Finalement, assurez-vous de vider le tableau `similarArtists` à chaque fois que vous lancez une nouvelle recherche ! (Même si la requête a généré une erreur) Sinon les anciens résultats vont s'accumuler avec les nouveaux. 
+
+En TypeScript / JavaScript, on peut vider un tableau en faisant `monTableau = []`. Dans ce cas, avec un état, ce sera plutôt `setMonEtat([])`.
 
 ### **4 -** Meilleures chansons d'un genre
 
