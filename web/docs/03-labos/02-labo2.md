@@ -83,6 +83,12 @@ On peut combiner des variables (qui contiennent des noms de classes) et des clas
 <div className={'classe1 classe2 ' + maVariable1 + ' ' + maVariable2}>Blabla</div>
 ```
 
+Si vous préférez les **template strings** :
+
+```tsx
+<div className={`classe1 classe2 ${maVariable1} ${maVariable2}`}>Blabla</div>
+```
+
 :::
 
 <center>![Affichage conditionnel 4](../../static/img/labo2/display5.png)</center>
@@ -95,7 +101,7 @@ Vous commencez peut-être à trouver qu'il commence à y avoir beaucoup de code 
 
 ## 🧾 Étape 3 - La formule R
 
-Pour les prochains exercices, nous travaillerons avec des éléments de formulaire. Nous feronsun usage excessif du **Two-way binding. C'est un outil indispensable pour toute la session, car ça permet d'accéder à l'input utilisateur facilement.
+Pour les prochains exercices, nous travaillerons avec des éléments de formulaire. Nous ferons un usage excessif du **Two-way binding**. C'est un outil indispensable pour toute la session, car ça permet d'accéder à l'input utilisateur facilement.
 
 ### **6 -** Saluer avec le nom fourni
 

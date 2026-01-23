@@ -85,7 +85,7 @@ application.
 
 ## ✈ Envoyer une requête
 
-🔽📦 Nous allons d'abord installer `Axios`, une librairie qui simplifie l'envoi de requête : `npm install axios`.
+🔽📦 Nous allons d'abord installer `Axios`, une librairie qui simplifie l'envoi de requête : `npm install axios`. Cette commande doit être exécutée dans PowerShell (ou dans le terminal de VS Code), dans le dossier racine de votre projet **Next.js**.
 
 :::note
 
