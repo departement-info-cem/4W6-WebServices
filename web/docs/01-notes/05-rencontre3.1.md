@@ -205,7 +205,7 @@ On a maintenant des composants qui utilisent exclusivement le **layout `root`** 
     </TabItem>
 </Tabs>
 
-### ❓ Routes dynamiques
+### 🚁 Routes dynamiques
 
 Parfois, on souhaite utiliser des **paramètres** dans la route. Cela signifie qu'une partie de la route est **variable** (dynamique).
 
@@ -251,6 +251,74 @@ export default function RedId() {
 :::note
 
 Les **paramètres de route** sont **toujours** des `string`. (Même si ça ressemble à un nombre, c'est un `string` qui passe par l'URL)
+
+:::
+
+### 🛴 Routes dynamiques optionnelles
+
+Disons qu'on souhaite qu'un **paramètre de route** soit **optionnel**, c'est-à-dire qu'une page (un composant) est accessible même si on ne fournit pas le paramètre de route demandé, alors il faudra qu'on utilise un « **Optional Catch-all Segment** ».
+
+Les 🗄 **Catch-All Segment** sont similaires aux routes dynamiques, à quelques différences près :
+
+1. Le nom du dossier ressemblera plutôt à `[...params]` plutôt que `[param]`. (Remarquez les `...`)
+2. On peut glisser **plusieurs** paramètres de route plutôt qu'un seul.
+
+Par exemple, si la structure des dossiers est `app/red/[...params]/page.tsx`, alors toutes les routes suivantes seront valides :
+
+* `http://localhost:3000/red/allo`
+* `http://localhost:3000/red/a/b/c`
+* etc.
+
+Les ❔ **Optional Catch-All Segments** sont similaires aux 🗄 **Catch-All Segments**, à quelques différences près :
+
+1. Le nom du dossier ressemblera plutôt à `[[...params]]` plutôt que `[...params]`. (Remarquez les doubles crochets)
+2. On peut glisser de **0 à plusieurs** paramètres de routes.
+
+Par exemple, si la structure des dossiers est `app/red/[[...params]]/page.tsx`, alors toutes les routes suivantes seront valides :
+
+* `http://localhost:3000/red`
+* `http://localhost:3000/red/allo`
+* `http://localhost:3000/red/a/b/c`
+* etc.
+
+Voici comment **récupérer** les **paramètres de routes** avec un ❔ **Optional Catch-All Segment** dont le dossier est nommé `[[...proute]]` :
+
+```tsx showLineNumbers
+export default function MyComponent() {
+
+    // ⛔ Attention ! proute est un tableau de string !
+    const params = useParams<{ proute : string[] }>();
+
+    useEffect(() => {
+
+        // Attention ! params.proute est peut-être undefined ! (Si aucun paramètre de route n'a été fourni)
+        const proute = params.proute;
+        
+        if(proute != undefined){
+
+          // Ouf ! On peut tenter d'aller récupérer des paramètres, mais on ne sait pas il y en a combien !
+          const param1 = proute[0]; // Existe forcément
+
+          const param2 = proute[1]; // Pourrait être undefined...
+          const param3 = proute[2]; // Pourrait être undefined...
+
+        }
+        
+        // ...
+
+    }, []);
+
+    // ...
+}
+```
+
+(`params` a été manipulé dans `useEffect()`, mais ça aurait pu être dans n'importe quelle fonction !)
+
+:::warning
+
+Pour les 🗄 **Catch-All Segment** et les ❔ **Optional Catch-All Segment**, il est impossible d'ajouter des **dossiers enfants supplémentaires** puisque ces segments peuvent déjà contenir une infinité de paramètres de route.
+
+Pour les ❔ **Optional Catch-All Segment**, le dossier parent **ne peut pas contenir** de `page.tsx` ! Puisque le paramètre de route est **optionnel**, disons qu'on a la structure de dossiers `app/red/[[...params]]/page.tsx`, alors `http://localhost:3000/red` ET `http://localhost:3000/red/allo` mèneront vers le même `page.tsx`, qui sera glissé dans le dossier `[[...params]]`.
 
 :::
 
@@ -460,8 +528,6 @@ En général, visez une des deux visions suivantes :
 * 👨‍🎨 Créez votre propre CSS à 100%.
 * ♻ Utilisez Tailwind à 95% et créez de nombreux mini-composants réutilisables. (Quelques classes personnalisées peuvent être acceptables, rarement)
 
-Les laboratoires vous feront goûter aux deux possibilités.
-
 ## 🎨 Modules CSS
 
 Bien que le fichier `globals.css` soit pratique, parfois on pourrait vouloir créer des styles qui **s'appliquent seulement à certains composants** plutôt qu'au projet en entier. Les **modules CSS** permettent de le faire.
@@ -473,7 +539,7 @@ Le nom du fichier doit avoir la forme `____.module.css` en respectant la convent
 Il y a deux endroits cohérents où on peut ranger ce fichier, selon l'usage de votre **module CSS** :
 
 * Le module servira à **plusieurs composants variés** : On range le module dans `app/_styles`.
-* Le module servira à **un composant précis** : On range le module dans le dossier du composant.
+* Le module servira à **un composant précis** : On range le module dans le dossier du composant. (Sauf si c'est un composant **réutilisable**, alors là, on peut mettre le module CSS dans `app/_styles` finalement)
 
 <center>![Répertoire pour les modules CSS](../../static/img/cours5/stylesFolder.png)</center>
 
