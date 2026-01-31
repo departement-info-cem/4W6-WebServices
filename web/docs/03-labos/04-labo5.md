@@ -211,7 +211,7 @@ Dans le composant `Card`, ajoutez un `<Link>` sur le `<div>` pour rediriger vers
 
 Dans le composant `Home`, faites les modifications nécessaires pour qu'on puisse écrire le nom d'un personnage dans l'`<input>` et que ce nom soit ensuite utilisé comme **paramètre de route** quand on appuie sur le bouton « Chercher » qui mène vers la route `/details`. (Donc, si on écrit « eric » dans l'`<input>`,le bouton va rediriger vers `/details/eric`)
 
-<center>![Mini formulaire](../../static/img/labo5/miniForm.png)  </center>
+<center>![Mini formulaire](../../static/img/labo5/miniForm.png)</center>
 
 Ce n'est pas grave si le composant `details` fonctionne mal avec un nom invalide.
 
