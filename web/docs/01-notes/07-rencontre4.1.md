@@ -30,11 +30,11 @@ export default function Home() {
 
   function myFunctionToSaveSomeThings() : void{
 
-    sessionStorage.setItem("username", this.guestName); // Stockage de session
+    sessionStorage.setItem("username", guestName); // Stockage de session
     
     // ... ou encore ...
 
-    localStorage.setItem("username", this.guestName); // Stockage local
+    localStorage.setItem("username", guestName); // Stockage local
 
   }
 
@@ -667,7 +667,7 @@ async function getArtist(){
   });
   console.log(response.data);
 
-  // On joint le token dans les en-têtes de la requête !
+  // On récupère les infos de l'artiste
   setArtist(new Artist(response.data.artists.items[0].id, response.data.artists.items[0].name, response.data.artists.items[0].images[0].url));
 
 }
