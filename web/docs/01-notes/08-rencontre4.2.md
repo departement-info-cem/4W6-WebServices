@@ -272,7 +272,7 @@ Si vous utilisez **Shadcn**, il faut absolument conserver le **preflight** de **
 
 Dans un projet **Next.js** existant, tapez d'abord la commande suivante :
 
-`npx shadcn@latest create`
+`npx shadcn@latest init`
 
 Vous pouvez choisir `neutral` comme couleur de base. Au pire, cela se change manuellement dans le fichier `components.json` qui sera ajouté au projet. Vous remarquerez que plusieurs dossiers et fichiers se sont ajoutés au projet durant l'installation, c'est normal.
 
@@ -282,7 +282,7 @@ Commencez par identifier un élément UI qui vous intéresse parmi la [liste dis
 
 Par exemple, allons-y avec les éléments `Button` et `Input`.
 
-Il faudra ajouter une **dépendance** par élément : `npx shadcn@latest add button` et `npx shadcn@latest add input`.
+Il faudra ajouter une **dépendance** <u>par composant shadcn</u> : `npx shadcn@latest add button` et `npx shadcn@latest add input`.
 
 Il reste seulement à utiliser les éléments dans le ou les **composants** de notre choix :
 
