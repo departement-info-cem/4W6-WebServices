@@ -207,7 +207,7 @@ Suivez les étapes suivantes pour afficher des marqueurs / punaises 📍 sur une
 ```tsx showLineNumbers
 export default function Home() {
   
-  const [markers, setMarkers] = useState([
+  const [markers, setMarkers] = useState<any[]>([
     {lat : 42, lng : -4},
     {lat : 40, lng : 0},
     {lat : 48, lng : -8}

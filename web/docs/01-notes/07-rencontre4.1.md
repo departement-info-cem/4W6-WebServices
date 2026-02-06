@@ -299,7 +299,7 @@ export default async function RootLayout({ children, params }: Readonly<{ childr
   }
 
   return (
-    <html lang="{locale}"> {/* 3️⃣ On spécifie la locale dans le HTML */}
+    <html lang={locale}> {/* 3️⃣ On spécifie la locale dans le HTML */}
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 
         {/* 4️⃣ Modification ici ! */}
@@ -312,6 +312,19 @@ export default async function RootLayout({ children, params }: Readonly<{ childr
   );
 }
 ```
+
+:::warning
+
+Si jamais vous souhaitiez traduire certains textes de votre **layout** et / ou inclure un bouton ou menu permettant de changer la langue dans votre **layout**, il est plus simple de **séparer le layout en deux** :
+
+* Le **layout racine** ressemble à celui ci-dessus, avec une quantité minimale de HTML.
+* Un autre **layout**, directement sous la racine, intègre les éléments avec les textes. (`<header>`, `<footer>`, menu pour changer la langue, etc.)
+
+Si vous voulez éviter que le 2e **layout** ait un impact sur le routage, n'oubliez pas d'utiliser un dossier entouré de **parenthèses** :
+
+<center>![Layout traduit](../../static/img/cours7/layout.png)</center>
+
+:::
 
 #### Étape 6 - 🏷 Produire les textes et traduire les composants
 
@@ -405,9 +418,15 @@ C'est le cas le plus commun.
 
 :::note
 
-Le format `::yyyyMMMMd` peut être remplacé par un autre format. Vérifiez les autres formats disponibles [ici](https://next-intl.dev/docs/usage/dates-times#dates-and-times-within-messages).
+Le format `::yyyyMMMMd` peut être remplacé par un autre format. `::::dMMMMyyyyHHmmss` est très utile aussi pour inclure l'heure. Vérifiez les autres formats disponibles [ici](https://next-intl.dev/docs/usage/dates-times#dates-and-times-within-messages).
 
 Il existe plusieurs autres types de textes. [Voir la documentation](https://next-intl.dev/docs/usage/translations)
+
+:::
+
+:::warning
+
+La date fournie doit respecter un format précis. Si votre date est sous forme de `string` ou de `number`, n'hésitez pas à la glisser dans `new Date(...)` pour satisfaire `next-intl` : `<p>{t('currentDate', {dateVar : new Date(myDate)})}</p>`
 
 :::
 
