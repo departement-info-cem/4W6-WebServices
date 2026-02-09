@@ -67,6 +67,12 @@ Exemples :
 * 🌿 On peut créer des **sous-dossiers** à volonté. (Comme le composant `LightBlue`, situé dans le dossier `/app/blue/light-blue` )
 * 🌌 Certains dossiers **peuvent être vides** (On peut avoir un composant avec la route `localhost:3000/options/langue` et n'en avoir aucun avec la route `localhost:3000/options`. Le dossier `/app/options` ne contiendrait aucun fichier `page.tsx`, mais le dossier `/app/options/langue` contiendrait un fichier `page.tsx`.)
 
+:::tip
+
+🐞 Lorsque vous ajoutez des dossiers et déplacez des composants dans votre projet pour manipuler le routage, redémarrez l'exécution (`npm run dev`) du projet, car changer la structure du projet cause généralement des erreurs durables.
+
+:::
+
 :::warning
 
 Pour les noms des dossiers, la convention à respecter est **kebab-case**. (C'est-à-dire pas de **majuscules** : on sépare les mots par des **traits d'union** !)
