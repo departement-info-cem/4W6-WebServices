@@ -4,7 +4,7 @@
 
 ## 🐌 Étape 1 - La routine... ou presque.
 
-### 📦 1 - Installer deux dépendances pour i18n
+### 📦 1 - Installer une dépendance pour i18n
 
 Téléchargez le [projet de départ](../../static/files/labo7.zip) et réinstallez les dépendances.
 
