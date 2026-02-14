@@ -326,12 +326,12 @@ public async Task<ActionResult> PostRecipe(RecipeDTO recipeDTO){
 async function createRecipe(ids : number[], recipeName : string){
 
     // Ceci est un « objet anonyme », mais comme sa structure est identique au DTO, ça fonctionne.
-    let recipeDTO = {
+    const recipeDTO = {
         name : recipeName,
         ingredientIds : ids
     }
 
-    let x = await axios.post("https://localhost:6969/api/Recipes/PostRecipe", recipeDTO);
+    const x = await axios.post("https://localhost:6969/api/Recipes/PostRecipe", recipeDTO);
     console.log(x.data);
     ...
 }
@@ -499,11 +499,11 @@ Côté **client**, voici comment on pourrait envoyer les données de la nouvelle
 ```ts showLineNumbers
 async function postRecipe(recipeName : string, ids : number[]){
 
-    let recipeDTO = {
+    const recipeDTO = {
         name : recipeName, // Nom de la Recipe
         ingredientIds : ids // Ids des ingrédients
     };
-    let x = await axios.post("https://localhost:6969/api/Recipes/PostRecipe", recipeDTO);
+    const x = await axios.post("https://localhost:6969/api/Recipes/PostRecipe", recipeDTO);
     console.log(x.data);
 
 }
