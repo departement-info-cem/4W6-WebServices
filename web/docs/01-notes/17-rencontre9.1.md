@@ -1,4 +1,4 @@
-# Cours 17 - Gestion utilisateurs
+# Cours 17 - Utilisateurs et services
 
 ## 📦 Packages nécessaires
 
@@ -548,4 +548,262 @@ authRequest.interceptors.request.use((config) => {
     return config;
 
 });
+```
+
+## ⚙ Services
+
+Les **contrôleurs auto-générés** interagissent directement avec le **DbContext**. Généralement, on n'aime pas ça et on préfèrera introduire une petite _couche_ entre les **contrôleurs** et le **DbContext** qui prendra la forme de **Services**. Toutes nos **opérations sur la base de données** seront encapsulées dans les services.
+
+1. Ça permet d'**éviter de répéter des bouts de code similaires** qui font la même chose.
+
+Exemple : J'ai deux contrôleurs capables de créer des `Patate` ? Au lieu de répéter les lignes de code servant à la **création de patates**, mes deux contrôleurs vont simplement appeler une seule et même méthode dans mon `PatateService`.
+
+2. Ça permet d'**améliorer la cohésion** de nos contrôleurs.
+
+Un peu plus délicat à expliquer. En gros, en programmation, en général, on aime quand une classe possède **une seule responsabilité cohérente**. Si on injecte directement le `DbContext` dans un **contrôleur**, on ouvre la porte à lui permettre de faire pas mal n'importe quoi avec la base de données. C'est à partir de ce moment qu'on n'est plus sûr dans quel contrôleur on pourra retrouver telle ou telle opération. Avec un `PatateService`, on sait qu'on pourra y retrouver toutes les opérations possibles qui concernent les patates et qu'on n'aura pas à aller fouiller dans `HotDogService` pour chercher des opérations sur les patates.
+
+<center>![Services](../../static/img/cours15/services.png)</center> 
+
+### 💉 Injection
+
+Il faut **retirer les injections de `DbContext` dans les contrôleurs** et les remplacer par des **injections de services**.
+
+❌ Ceci :
+
+```cs showLineNumbers
+public class VideoGamesController : ControllerBase
+{
+    private readonly semaine8Context _context;
+
+    public VideoGamesController(semaine8Context context) 
+    {
+        _context = context;
+    }
+    
+    ...
+```
+
+✅ Devient :
+
+```cs showLineNumbers
+public class VideoGamesController : ControllerBase
+{
+    private readonly VideoGameService _videoGameService; // Injection d'un service !
+
+    public VideoGamesController(VideoGameService videoGameService)
+    {
+        _videoGameService = videoGameService;
+    }
+    
+    ...
+```
+
+### 🥚 Création d'un service
+
+Pour créer un **service**, créez une **simple classe** dans laquelle on **injecte le DbContext**.
+
+<center>![Dossier pour les services](../../static/img/cours15/serviceFolder.png)</center> 
+
+```cs showLineNumbers
+    public class VideoGameService
+    {
+        private readonly semaine8Context _context; // Injection du DbContext !
+
+        public VideoGameService(semaine8Context context) 
+        {
+            _context = context;
+        }
+
+        ...
+```
+
+De plus, il faudra **ajouter une ligne de code** dans `Program.cs` pour configurer **l'instanciation** / le **cycle de vie** de chaque service :
+
+```cs
+builder.Services.AddScoped<VideoGameService>();
+```
+
+⛔ Cette ligne doit être située quelque part avant la ligne `var app = builder.Build()`.
+
+### 🔍 Exemples
+
+Voici, pour chacune des cinq opérations (GetAll, Get, Post, Put et Delete) auto-générées, un équivalent lorsqu'on utilise les **services**. Il faut surtout retenir que **toute ligne de code qui contenait `_context.QuelqueChose.Méthode(...)` a été déplacée dans un service**.
+
+Notez que la méthode ci-dessous a été ajoutée au **service** puisque c'est une vérification fréquente :
+
+```cs
+private bool IsContextValid() => _context != null && _context.VideoGame != null;
+```
+
+... qui est équivalent à ...
+
+```cs
+private bool IsConstextValid(){
+    return _context != null && _context.VideoGame != null;
+}
+```
+
+<hr/>
+
+**🍇 GetAll**
+
+Contrôleur :
+
+```cs showLineNumbers
+[HttpGet]
+public async Task<ActionResult<IEnumerable<VideoGame>>> GetVideoGame()
+{
+    List<VideoGame>? videoGames = await _videoGameService.GetAll();
+    if (videoGames == null) return StatusCode(StatusCodes.Status500InternalServerError);
+
+    return Ok(videoGames);
+}
+```
+
+Service : 
+
+```cs showLineNumbers
+public async Task<List<VideoGame>?> GetAll()
+{
+    if (!IsContextValid()) return null;
+
+    return await _context.VideoGame.ToListAsync();
+}
+```
+
+<hr/>
+
+**🍎 Get**
+
+Contrôleur :
+
+```cs showLineNumbers
+[HttpGet("{id}")]
+public async Task<ActionResult<VideoGame>> GetVideoGame(int id)
+{
+    VideoGame? videoGame = await _videoGameService.Get(id);
+    if (videoGame == null) return NotFound();
+
+    return Ok(videoGame);
+}
+```
+
+Service : 
+
+```cs showLineNumbers
+public async Task<VideoGame?> Get(int id)
+{
+    if(!IsContextValid()) return null;
+
+    return await _context.VideoGame.FindAsync(id);
+}
+```
+
+<hr/>
+
+**📬 Post**
+
+Contrôleur :
+
+```cs showLineNumbers
+[HttpPost]
+public async Task<ActionResult<VideoGame>> PostVideoGame(VideoGame videoGame)
+{
+    VideoGame? newVideoGame = await _videoGameService.Create(videoGame);
+    if (newVideoGame == null) return StatusCode(StatusCodes.Status500InternalServerError);
+
+    return Ok(newVideoGame);
+}
+```
+
+Service : 
+
+```cs showLineNumbers
+public async Task<VideoGame?> Create(VideoGame videoGame)
+{
+    if (!IsContextValid()) return null;
+
+    _context.VideoGame.Add(videoGame);
+    await _context.SaveChangesAsync();
+
+    return videoGame;
+}
+```
+
+<hr/>
+
+**❌ Delete**
+
+Contrôleur :
+
+```cs showLineNumbers
+[HttpDelete("{id}")]
+public async Task<IActionResult> DeleteVideoGame(int id)
+{
+    bool deleteSuccess = await _videoGameService.Delete(id);
+    if (!deleteSuccess) return NotFound();
+
+    return Ok(new {Message = "Suppression réussie."});
+}
+```
+
+Service : 
+
+```cs showLineNumbers
+public async Task<bool> Delete(int id)
+{
+    if (!IsContextValid()) return false;
+    VideoGame? videoGame = await _context.VideoGame.FindAsync(id);
+
+    if (videoGame == null) return false;
+
+    _context.VideoGame.Remove(videoGame);
+    await _context.SaveChangesAsync();
+
+    return true;
+}
+```
+
+<hr/>
+
+**✏ Put**
+
+Contrôleur :
+
+```cs showLineNumbers
+[HttpPut("{id}")]
+public async Task<IActionResult> PutVideoGame(int id, VideoGame videoGame)
+{
+    if (id != videoGame.Id) return BadRequest();
+
+    VideoGame? updatedVideoGame = await _videoGameService.Edit(id, videoGame);
+
+    if (updatedVideoGame == null) return StatusCode(StatusCodes.Status500InternalServerError,
+        new { Message = "Opération échouée. Veuillez réessayer." });
+
+    return Ok(updatedVideoGame);
+}
+```
+
+Service : 
+
+```cs showLineNumbers
+public async Task<VideoGame?> Edit(int id, VideoGame videoGame)
+{
+    if (!IsContextValid()) return null;
+
+    _context.Entry(videoGame).State = EntityState.Modified;
+
+    try
+    {
+        await _context.SaveChangesAsync();
+    }
+    catch (DbUpdateConcurrencyException)
+    {
+        if (Get(id) == null) return null;
+        else throw;
+    }
+
+    return videoGame;
+}
 ```
