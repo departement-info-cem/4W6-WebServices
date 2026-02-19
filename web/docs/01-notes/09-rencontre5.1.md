@@ -54,6 +54,20 @@ Si vous êtes sur votre ordinateur personnel, il est possible que vous deviez in
 
 :::
 
+## 📦 Classes utiles
+
+Voici deux classes qui pourraient vous être utiles dans le contexte du **TP2** (N'oubliez pas de les isoler chacune dans leur propre fichier !) :
+
+```ts showLineNumbers
+export class Artist{
+  constructor(public id : string, public name : string, public imageUrl : string){}
+}
+
+export class Album{
+  constructor(public id : string, public name : string, public image : string){}
+}
+```
+
 ## 🔑 Requête de connexion
 
 ```tsx showLineNumbers
