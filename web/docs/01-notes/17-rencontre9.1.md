@@ -629,6 +629,8 @@ builder.Services.AddScoped<VideoGameService>();
 
 Voici, pour chacune des cinq opérations (GetAll, Get, Post, Put et Delete) auto-générées, un équivalent lorsqu'on utilise les **services**. Il faut surtout retenir que **toute ligne de code qui contenait `_context.QuelqueChose.Méthode(...)` a été déplacée dans un service**.
 
+Il y a plusieurs bonnes manières de créer les méthodes d'un service. Ces simples exemples ne sont pas du tout *sacrés*.
+
 Notez que la méthode ci-dessous a été ajoutée au **service** puisque c'est une vérification fréquente :
 
 ```cs

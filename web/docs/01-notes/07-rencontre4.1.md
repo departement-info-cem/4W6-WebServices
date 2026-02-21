@@ -284,6 +284,12 @@ En général, il y a les fichiers `page.tsx` et `layout.tsx` directement dans le
 
 ⛔ L'importation de `globals.css` devra être changée légèerement dans `layout.tsx` : `import "../globals.css";`
 
+:::warning
+
+Si votre projet contenait **plusieurs composants** chargés via le routage, il faut déplacer **toutes les routes** (tous les dossiers) dans le dossier `[locale]` ! (Et pas seulement `page.tsx` et `layout.tsx`)
+
+:::
+
 #### Étape 5 - 📐 Modification du RootLayout
 
 Le layout racine, qu'on vient de déplacer dans `/app/[locale]`, doit être modifié légèrement pour **préciser la langue dans la balise `<html>`** et pour que les **composants** de l'application puissent avoir accès à la configuration de `next-intl` et être traduits.
