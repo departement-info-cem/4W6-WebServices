@@ -33,7 +33,7 @@ C'est normal qu'une erreur de facturation soit affichée. Nous n'utiliserons pas
 
 :::
 
-[💡](/cours/rencontre4.2#-ajouter-des-marqueurs-sur-une-carte) Créez une variable de classe dans le composant `Swift` qui contiendra un tableau de marqueurs à mettre sur la map Google. Initialement, mettez déjà un marqueur avec la latitude `42` et la longitude `-4` dans ce tableau.
+[💡](/notes/rencontre4.2#-ajouter-des-marqueurs-sur-une-carte) Créez une variable de classe dans le composant `Swift` qui contiendra un tableau de marqueurs à mettre sur la map Google. Initialement, mettez déjà un marqueur avec la latitude `42` et la longitude `-4` dans ce tableau.
 
 * Modifiez le HTML pour que tous les (éventuels) marqueurs soient affichés dans la map Google.
 * Complétez la fonction `addMarker()` pour permettre à l’utilisateur d’ajouter des marqueurs dans cette variable grâce aux `<input>` présents.
