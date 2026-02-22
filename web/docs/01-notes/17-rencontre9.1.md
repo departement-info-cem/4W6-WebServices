@@ -178,7 +178,7 @@ Créez un DTO qui sera utilisé pour recevoir des données lors de l'inscription
     public class RegisterDTO
     {
         public string Username { get; set; } = null!;
-        public string Email { get; set; } = null!;
+        public string Email { get; set; } = null!; // Optionnel !
         public string Password { get; set; } = null!;
         public string PasswordConfirm { get; set; } = null!;
     }
@@ -225,7 +225,7 @@ public async Task<ActionResult> Register(RegisterDTO register)
     User user = new User()
     {
         UserName = register.Username,
-        Email = register.Email
+        Email = register.Email // Seulement si vous avez inclus un courriel dans le DTO
     };
 
     // On tente d'ajouter l'utilisateur dans la base de données. Ça pourrait échouer si le mot de
@@ -254,7 +254,7 @@ async function register(user : string, mail : string, pass : string, passCon : s
 
     const registerDTO = {
         username : user, 
-        email : mail, 
+        email : mail, // Seulement si vous avez inclus un email dans le DTO du serveur
         password : pass, 
         passwordConfirm : passCon
     };

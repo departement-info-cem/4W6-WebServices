@@ -509,9 +509,9 @@ protected override void OnModelCreating(ModelBuilder builder)
     User u1 = new User{
         Id = "11111111-1111-1111-1111-111111111111", // Format GUID à respecter (8-4-4-4-12)
         UserName = "Bob69",
-        Email = "bobibou@mail.com",
+        Email = "bobibou@mail.com", // Optionnel
         NormalizedUserName = "BOB69", // Important
-        NormalizedEmail = "BOBIBOU@MAIL.COM" // Important
+        NormalizedEmail = "BOBIBOU@MAIL.COM" // Important si on a mis un Email 2 lignes plus haut
     };
 
     // Hachage du mot de passe et ajout de l'utilisateur au seed
@@ -546,8 +546,8 @@ protected override void OnModelCreating(ModelBuilder builder)
         Id = "11111111-1111-1111-1111-111111111111", // Format GUID à respecter (8-4-4-4-12)
         UserName = "Bob69",
         Email = "bobibou@mail.com",
-        NormalizedUserName = "BOB69", // Important
-        NormalizedEmail = "BOBIBOU@MAIL.COM" // Important
+        NormalizedUserName = "BOB69",
+        NormalizedEmail = "BOBIBOU@MAIL.COM"
     };
 
     // Hachage du mot de passe et ajout de l'utilisateur au seed
@@ -607,8 +607,8 @@ protected override void OnModelCreating(ModelBuilder builder)
         Id = "11111111-1111-1111-1111-111111111111", // Format GUID à respecter (8-4-4-4-12)
         UserName = "Bob69",
         Email = "bobibou@mail.com",
-        NormalizedUserName = "BOB69", // Important
-        NormalizedEmail = "BOBIBOU@MAIL.COM" // Important
+        NormalizedUserName = "BOB69",
+        NormalizedEmail = "BOBIBOU@MAIL.COM"
     };
     u1.PasswordHash = hasher.HashPassword(u1, "Salut1!");
     builder.Entity<User>().HasData(u1);
