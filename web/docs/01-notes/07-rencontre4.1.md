@@ -330,6 +330,8 @@ Si vous voulez éviter que le 2e **layout** ait un impact sur le routage, n'oubl
 
 <center>![Layout traduit](../../static/img/cours7/layout.png)</center>
 
+N'hésitez pas à consulter [cette section du cours 5](/notes/rencontre3.1#-layouts-et-menus-de-navigation) pour voir un exemple de 2e layout. Ça ressemble énormément à un composant réutilisable, sauf que le fichier se nommera `layout.tsx`. N'oubliez pas de déplacer **tous les autres composants chargés par routage** dans le dossier `(home)`, par exemple.
+
 :::
 
 #### Étape 6 - 🏷 Produire les textes et traduire les composants
