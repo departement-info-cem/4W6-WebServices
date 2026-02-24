@@ -307,7 +307,7 @@ builder.Services.AddAuthentication(options =>
     options.TokenValidationParameters = new TokenValidationParameters()
     {
         ValidateAudience = true, ValidateIssuer = true,
-        ValidAudience = "http://localhost:4200", // Audience : Client
+        ValidAudience = "http://localhost:3000", // Audience : Client
         ValidIssuer = "https://localhost:6969", // ⛔ Issuer : Serveur -> HTTPS VÉRIFIEZ le PORT de votre serveur dans launchsettings.json !
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
             .GetBytes("LooOOongue Phrase SiNoN Ça ne Marchera PaAaAAAaAas !")) // Clé pour déchiffrer les tokens
@@ -362,7 +362,7 @@ public async Task<ActionResult> Login(LoginDTO login)
             .GetBytes("LooOOongue Phrase SiNoN Ça ne Marchera PaAaAAAaAas !")); // Phrase identique dans Program.cs
         JwtSecurityToken token = new JwtSecurityToken(
             issuer: "https://localhost:6969", // ⛔ Vérifiez le PORT de votre serveur dans launchSettings.json !
-            audience: "http://localhost:4200",
+            audience: "http://localhost:3000",
             claims: authClaims, 
             expires: DateTime.Now.AddMinutes(30), // Durée de validité du token
             signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature)

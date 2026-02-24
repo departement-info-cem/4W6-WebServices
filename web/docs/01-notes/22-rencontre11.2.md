@@ -82,7 +82,7 @@ public async Task<ActionResult> Login(LoginDTO login)
             .GetBytes("LooOOongue Phrase SiNoN Ça ne Marchera PaAaAAAaAas !"));
         JwtSecurityToken token = new JwtSecurityToken(
             issuer: "https://localhost:6969",
-            audience: "http://localhost:4200",
+            audience: "http://localhost:3000",
             claims: authClaims, // ⛔ Rôle(s) joint(s) au token !
             expires: DateTime.Now.AddMinutes(30),
             signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature)
