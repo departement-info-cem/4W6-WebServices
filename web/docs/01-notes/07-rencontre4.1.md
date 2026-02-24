@@ -330,7 +330,35 @@ Si vous voulez éviter que le 2e **layout** ait un impact sur le routage, n'oubl
 
 <center>![Layout traduit](../../static/img/cours7/layout.png)</center>
 
-N'hésitez pas à consulter [cette section du cours 5](/notes/rencontre3.1#-layouts-et-menus-de-navigation) pour voir un exemple de 2e layout. Ça ressemble énormément à un composant réutilisable, sauf que le fichier se nommera `layout.tsx`. N'oubliez pas de déplacer **tous les autres composants chargés par routage** dans le dossier `(home)`, par exemple.
+N'oubliez pas de déplacer **tous les autres composants chargés par routage** dans le dossier `(home)`, par contre.
+
+Votre 2e **layout** pourrait ressembler à ceci :
+
+```tsx showLineNumbers
+export default function OtherLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+
+  // ... Bidules variés pour i18n (locale, router, pathname, etc.)
+
+  return (
+
+    <div>
+
+      <header>Éléments et textes à traduire</header>
+
+      <main>
+        {children}
+      </main>
+
+      <footer>Éléments et textes à traduires</footer>
+
+    </div>
+
+  );
+
+}
+```
+
+N'hésitez pas à consulter [cette section du cours 5](/notes/rencontre3.1#-layouts-et-menus-de-navigation) qui aborde les **layouts**. Ça ressemble énormément à un composant réutilisable, sauf que le fichier se nommera `layout.tsx`.
 
 :::
 
