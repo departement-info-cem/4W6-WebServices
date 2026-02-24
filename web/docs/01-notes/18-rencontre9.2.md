@@ -74,13 +74,13 @@ public class Comment{
     public string Text { get; set; } = null!;
     
     [InverseProperty("Comments")]
-    public User Author { get; set; } = null!;
+    public virtual User Author { get; set; } = null!;
 
     [InverseProperty("Upvotes")]
-    public List<User> Upvoters { get; set; } = new List<User>();
+    public virtual List<User> Upvoters { get; set; } = new List<User>();
 
     [InverseProperty("Downvotes")]
-    public List<User> Downvoters { get; set; } = new List<User>();
+    public virtual List<User> Downvoters { get; set; } = new List<User>();
 }
 ```
 

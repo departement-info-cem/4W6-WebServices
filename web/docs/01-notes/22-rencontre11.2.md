@@ -192,3 +192,157 @@ public async Task<IActionResult> PostRole(string roleName){
 
 }
 ```
+
+## 👤 Identité côté client
+
+Parfois, côté client, on souhaite :
+
+* Cacher certains boutons ou menus qui sont seulement disponibles pour certains **rôles**.
+* Cacher certains boutons ou menus qui sont seulement disponibles pour les utilisateurs **authentifiés**.
+* Afficher le **nom d'utilisateur** de ... l'utilisateur, s'il est connecté.
+* etc.
+
+Problème : La **gestion des utilisateurs** existe seulement **côté serveur**. Il n'y a pas de notions de `User` ou de `Role` **côté client**.
+
+Il est tout de même possible de *bricoler* des solutions pour réaliser les défis mentionnés ci-dessus, mais il faut garder à l'esprit que cela ne permettra jamais de **sécuriser** l'application, seulement de **raffiner** l'apparence. Pour rappel, les utilisateurs ont **accès à tout le code** des composants qui sont `"use client";` !
+
+⛔ Gardons tout de même à l'esprit que les utilisateurs n'aiment pas voir des menus ou boutons qui ne leur sont pas destinés.
+
+### 🔑 Données de connexion
+
+Pour rappel, lorsqu'on se **connecte**, on envoyait le token à l'application cliente :
+
+```cs showLineNumbers
+return Ok(new
+{
+    token = new JwtSecurityTokenHandler().WriteToken(token), // Token !
+    validTo = token.ValidTo
+});
+```
+
+Or, on peut également envoyer d'**autres informations** si on veut !
+
+```cs showLineNumbers
+return Ok(new
+{
+    token = new JwtSecurityTokenHandler().WriteToken(token),
+    validTo = token.ValidTo,
+    username = user.UserName, // Pseudo !
+    roles = roles // List<string> des rôles !
+});
+```
+
+Côté client, on peut récupérer ces informations et les utiliser pour cacher des menus et boutons ou personnaliser l'apparence de l'interface selon l'identité.
+
+```tsx showLineNumbers
+async function login(loginDTO : any){
+
+    const x = await axios.post(domain + "api/Users/Login", loginDTO);
+    console.log(x.data);
+
+    // 🔑 On stocke le token... et les autres infos !
+    sessionStorage.setItem("token", x.data.token);
+    sessionStorage.setItem("username", x.data.username);
+    sessionStorage.setItem("roles", JSON.stringify(x.data.roles));
+
+    // 📬 Ça peut aussi être dans des états
+    setUsername(x.data.username);
+    setRoles(x.data.roles);
+
+    // 🤷‍♂️ On peut aussi retourner les données pour qu'une autre fonction les utilise
+    return x.data;
+
+}
+```
+
+:::tip
+
+✅ Stocker les données de l'utilisateur dans des **états** sera très intéressant pour gérer des **affichages conditionnels** dans le HTML. Cela dit, les données seront perdues si on réactualise la page.
+
+💾 Stocker les données de l'utilisateur dans le **stockage du navigateur** n'est pas très pratique pour gérer les affichages conditionnels, mais c'est parfait pour s'assurer que les données puissent être récupérées avec `useEffect()` et les faire perdurer malgré un *reload*.
+
+Combinez les **deux** stratégies autant que possible. Les **Contexts** pourraient même servir afin de **partager** ces données entre **plusieurs commposants** dans certains cas.
+
+:::
+
+### 📦 DTOs différenciés selon l'identité
+
+Une autre stratégie possible est d'exploiter les *DisplayDTOs*. Par exemple, voici, les classes `Comment.cs` et `CommentDisplayDTO.cs`. Bien entendu, ce sont des `CommentDisplayDTO` qui seront envoyés au **client** car ils sont **plus adaptés** au projet **Next.js**.
+
+<Tabs>
+    <TabItem value="cs1" label="Comment.cs">
+```cs showLineNumbers
+public class Comment{
+
+    public int Id { get; set; }
+    public string Text { get; set; } = null!;
+    
+    [InverseProperty("Comments")]
+    public virtual User Author { get; set; } = null!;
+
+    [InverseProperty("Upvotes")]
+    public virtual List<User> Upvoters { get; set; } = new List<User>();
+
+    [InverseProperty("Downvotes")]
+    public virtual List<User> Downvoters { get; set; } = new List<User>();
+}
+```
+    </TabItem>
+    <TabItem value="cs2" label="CommentDisplayDTO.cs" default>
+```cs showLineNumbers
+public class CommentDisplayDTO{
+
+    public int Id { get; set; }
+    public string Text { get; set; } = null!;
+    public string Author { get; set; } = null!; // Simple pseudo plutôt qu'objet User
+    public int Upvotes { get; set; } // Nombre d'upvotes plutôt que la liste des upvoters
+    public int Downvotes { get; set; } // Nombre de downvotes plutôt que la liste des upvoters
+
+    public CommentDisplayDTO(Comment comment){
+        Id = comment.Id;
+        Text = comment.Text;
+        Author = comment.User.UserName;
+        Upvotes = comment.Upvoters.Count;
+        Downvotes = comment.Downvotes.Count;
+    }
+}
+```
+    </TabItem>
+</Tabs>
+
+Or, nous pourrions également en profiter pour inclure certaines données qui varient selon l'identité de l'utilisateur :
+
+```cs showLineNumbers
+public class CommentDisplayDTO{
+
+    public int Id { get; set; }
+    public string Text { get; set; } = null!;
+    public string Author { get; set; } = null!;
+    public int Upvotes { get; set; }
+    public int Downvotes { get; set; }
+
+    public bool IsAuthor { get; set; } // Celui qui envoie la requête est-il l'auteur ?
+    public bool HasUpvoted { get; set; } // Celui qui envoie la requête a déjà posivoté ?
+    public bool HasDownvoted { get; set; } // Celui qui envoie la requête a déjà négavoté ?
+
+    public CommentDisplayDTO(Comment comment, User user){ // On demande le User en paramètre
+        Id = comment.Id;
+        Text = comment.Text;
+        Author = comment.User.UserName;
+        Upvotes = comment.Upvoters.Count;
+        Downvotes = comment.Downvotes.Count;
+
+        // Remplir les nouvelles propriétés
+        IsAuthor = user.UserName == Author;
+        HasUpvoted = comment.Upvoters.Contains(user);
+        HasDownvoted = comment.Downvoters.Contains(user);
+    }
+}
+```
+
+Avec ces nouvelles propriétés, on pourrait facilement modifier l'apparence d'un commentaire **côté client** :
+
+* Cacher le bouton pour Modifier / Supprimer le commentaire si `IsAuthor` est `false`.
+* Changer la couleur des boutons pour upvote / downvote selon la valeur de `HasUpvoted` et `HasDownvoted`.
+* Changer la couleur de fond du commentaire si `IsAuthor` est `true`.
+* etc.
