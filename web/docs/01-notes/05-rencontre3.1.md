@@ -262,7 +262,7 @@ Les **paramètres de route** sont **toujours** des `string`. (Même si ça resse
 
 :::warning
 
-Si jamais votre paramètre de route contient des espaces ou certains caractères spéciaux et que vous tenter de **l'afficher dans le HTML**, vous pourriez obtenir quelque chose comme `Mon%20param%E8tre%20de%20route`. Pour corriger cela, utilisez simplement `decodeURI(params.id)` en l'affichant.
+Si jamais votre paramètre de route contient des espaces ou certains caractères spéciaux et que vous tenter de **l'afficher dans le HTML**, vous pourriez obtenir quelque chose comme `Mon%20param%E8tre%20de%20route`. Pour corriger cela, utilisez simplement `decodeURIComponent(params.id)` en l'affichant.
 
 :::
 
