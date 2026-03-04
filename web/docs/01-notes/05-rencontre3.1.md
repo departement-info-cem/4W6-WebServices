@@ -540,6 +540,24 @@ En général, visez une des deux visions suivantes :
 * 👨‍🎨 Créez votre propre CSS à 100%.
 * ♻ Utilisez Tailwind à 95% et créez de nombreux mini-composants réutilisables. (Quelques classes personnalisées peuvent être acceptables, rarement)
 
+Exemple de composant pour ce bouton :
+
+```tsx showLineNumbers
+export default function BlueButton(props : {text : string, fct : any}){
+
+  return(
+
+    <button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold" onClick={props.fct}>
+      {props.text}
+    </button>
+
+  );
+
+}
+```
+
+Remarquez que le **texte** a été reçu en paramètre, mais aussi une **fonction** du composant parent ! Cela permet d'ajouter un événement `onClick` sur le bouton facilement.
+
 ## 🎨 Modules CSS
 
 Bien que le fichier `globals.css` soit pratique, parfois on pourrait vouloir créer des styles qui **s'appliquent seulement à certains composants** plutôt qu'au projet en entier. Les **modules CSS** permettent de le faire.
