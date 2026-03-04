@@ -1,6 +1,6 @@
-# TP4 - Raidite - Pinotte 🥜
+# TP4 - Raidite - Sushi 🍣
 
-Cet énoncé précise les fonctionalités du membre 🥜 et donne quelques pistes pour réussir.
+Cet énoncé précise les fonctionalités du membre 🍣 et donne quelques pistes pour réussir.
 
 ## Étape C
 
@@ -41,6 +41,12 @@ Il est pas mal **incontournable** de faire le merge de la branche de cette étap
 ## Étape D
 
 Lorsqu'on crée un forum (`hub`), on doit pouvoir choisir une image qui servira d'icône, optionnellement. Les aperçus des publications doivent contenir leur première image, lorsqu'applicable.
+
+:::warning
+
+⛔ N’utilisez pas la classe `Picture` pour les icônes des forums. Ajoutez seulement un `FileName` et un `MimeType` dans la classe `Hub`, c’est plus simple.
+
+:::
 
 L'icône choisie lors de la création du forum doit pouvoir être **prévisualisée** :
 
@@ -105,3 +111,7 @@ Un rôle administrateur doit être créé. Les administrateurs peuvent ajouter l
 
 <center>![Ajout de modérateurs](../../static/img/tp4/h_pinotte_1.png)</center>
 
+## Étape I
+
+* Lorsque votre partenaire fera ses derniers **merges** dans **dev**, vérifiez vos fonctionnalités ! Votre partenaire les a peut-être brisé...
+* N'oubliez pas de faire le merge ultime dans **main** lorsque votre partenaire et vous aurez terminé le TP.

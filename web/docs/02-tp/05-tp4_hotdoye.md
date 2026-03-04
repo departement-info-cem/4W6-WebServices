@@ -37,7 +37,7 @@ Les utilisateurs doivent pouvoir choisir un avatar personnalisé. L’avatar peu
 <center>![Avatar](../../static/img/tp4/d_hotdoye_1.png)</center>
 
 * Ceci se déroule surtout dans le composant `Profile` et dans le `UsersController`.
-* ⛔ N’utilisez pas la classe `Picture` les avatars, ajoutez seulement un `FileName` et un `MimeType` dans la classe `User`, c’est plus simple. Exceptionnellement, vous pouvez vous en tirer sans utiliser de service côté serveur pour cette fois. (À l’aide de `UserManager`)
+* ⛔ N’utilisez pas la classe `Picture` pour les avatars, ajoutez seulement un `FileName` et un `MimeType` dans la classe `User`, c’est plus simple. Exceptionnellement, vous pouvez vous en tirer sans utiliser de service côté serveur pour cette fois. (À l’aide de `UserManager`)
 * La requête pour afficher l’avatar sera plus simple si le paramètre dans l’URL est le **pseudo de l’utilisateur**.
 * Attention ! L'avatar est affiché à quatre endroits : `Reply`, `CommentBox`, `PostThumbnail` et `Profile`. Ne vous mélangez pas avec les **icônes des forums** (hubs), qui sont affichés à plusieurs endroits aussi.
 
