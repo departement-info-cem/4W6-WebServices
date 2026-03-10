@@ -440,13 +440,13 @@ Dans cet exemple, on a accès à tout ce qui a été déclaré dans le **hook** 
 return {x, setX, y, setY, displayStates};
 ```
 
-Dans ce cas, dans chaque **composant** qui intègre le **hook**, on doit procéder comme ceci :
+Dans ce cas, dans chaque **composant** qui intègre le **hook**, on **peut** procéder comme ceci :
 
 ```ts
 const {x, setX, y, setY, displayStates} = useStupidHook(5);
 ```
 
-Pour accéder à la valeur de `x`, on n'utilise donc plus `stupid.state1`, mais simplement `x`.
+Maintenant, pour accéder à la valeur de `x`, on n'utilise donc pas `stupid.x`, mais simplement `x`.
 
 :::
 
