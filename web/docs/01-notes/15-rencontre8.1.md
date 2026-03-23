@@ -246,7 +246,7 @@ namespace cours14.Data
 
 :::note
 
-Notez qu'il doit y avoir un `DbSet<T>` pour chacun des modèles qu'on souhaite stocker dans la BD. Si on créait un deuxième modèle nommé `Costumer`, il faudrait ajouter un `DbSet<Costumer>` dans le **DbContext**, par exemple.
+Notez qu'il doit y avoir un `DbSet<T>` pour chacun des modèles qu'on souhaite stocker dans la BD. Si on créait un deuxième modèle nommé `Customer`, il faudrait ajouter un `DbSet<Customer>` dans le **DbContext**, par exemple.
 
 :::
 
