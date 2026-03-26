@@ -396,6 +396,15 @@ Par contre, lorsque nous allons créer un `Comment`, il faudra absolument ⛔ in
 * Le `Text` (`string`) du `Comment`.
 * L'`Id` (`int`) du `Post` auquel il appartient.
 
+```cs showLineNumbers
+public class CommentDTO{
+
+	public string Text { get; set; } = null!;
+	public int PostId { get; set; }
+
+}
+```
+
 Côté **client**, voici comment on pourrait envoyer les données du nouveau `Comment` :
 
 ```ts showLineNumbers
