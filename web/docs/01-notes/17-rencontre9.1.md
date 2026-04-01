@@ -640,7 +640,7 @@ private bool IsContextValid() => _context != null && _context.VideoGame != null;
 ... qui est équivalent à ...
 
 ```cs
-private bool IsConstextValid(){
+private bool IsContextValid(){
     return _context != null && _context.VideoGame != null;
 }
 ```
