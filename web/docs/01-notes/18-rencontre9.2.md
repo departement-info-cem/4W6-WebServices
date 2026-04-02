@@ -397,7 +397,7 @@ public async Task<IActionResult> PutComment(EditCommentDTO editCommentDTO)
     // 🛑 Utilisateur pas propriétaire du commentaire ?
     if(user == null || !user.Comments.Contains(oldComment)) return Unauthorized(new { Message = "Hey touche pas, c'est pas à toi !"});
 
-    Comment? newComment = await _commentService.UpdateComment(editCommentDTO.NewText, comment);
+    Comment? newComment = await _commentService.UpdateComment(editCommentDTO.NewText, oldComment);
 
     if(newComment == null) return StatusCode(StatusCodes.Status500InternalServerError,
         new { Message = "Veuillez réessayer plus tard." }); // Problème avec la BD ?
