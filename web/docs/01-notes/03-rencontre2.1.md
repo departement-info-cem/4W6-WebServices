@@ -367,6 +367,22 @@ export default function Home() {
 
 `useEffect()` prend deux paramètres : une **fonction** à appeler (dans notre cas, c'est une **fonction anynonyme** qui appelle `getData()`) et un **tableau de dépendances**. (Dans l'exemple, nous n'avons besoin d'aucune dépendance, alors on le laisse vide.)
 
+Voici un exemple où le **tableau de dépendances** est utilisé, mais nous ne nous en servirons pas vraiment cette session.
+
+```tsx showLineNumbers
+const [x, setX] = useState(4);
+
+useEffect(() => {
+
+  console.log(x);
+
+}, [x]);
+```
+
+Comment se comportera ce bloc `useEffect` ? Il sera executé **à chaque fois que la valeur de l'état `x` change**. Donc à chaque fois que `x` changera de valeur, sa valeur sera affichée dans la console.
+
+⛔ Attention ! Si vous changez la valeur de `x` dans ce bloc `useEffect`, le code sera appelé à l'infini puisqu'il change lui-même `x`.
+
 :::
 
 ### 🔑 Ranger la clé d'API dans une constante
@@ -582,7 +598,7 @@ setSongs(songList);
 
 #### 💰 Étape 2 - Profiter
 
-Dans le navigateur **Microsoft Edge** (Pour une rare fois, hélas, le débogueur de **Firefox 🦊🔥** est un peu moins intéressant), ouvrez votre page Web et faites le nécessaire pour que la section du code qui contient l'instruction `debugger;` s'active.
+Dans le navigateur de votre choix, ouvrez votre page Web et faites le nécessaire pour que la section du code qui contient l'instruction `debugger;` s'active.
 
 <center>![Débogage avec Microsoft Edge](../../static/img/cours8/debug.png)</center>
 

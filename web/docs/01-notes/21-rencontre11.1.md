@@ -344,7 +344,7 @@ public async Task<ActionResult<SimpleImage>> GetPicture(string size, int id)
 }
 ```
 
-**Étape 2 - 🔑 Modifier le projet Angular**
+**Étape 2 - 🔑 Modifier le projet Next.js**
 
 * Il faudra un état de type `string | null`.
 * Il faudra une requête servant à récupérer un `blob`. (Binary Large Object)

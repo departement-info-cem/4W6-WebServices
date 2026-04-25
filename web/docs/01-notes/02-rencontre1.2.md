@@ -232,6 +232,46 @@ function whateverFunction(): void {
 }
 ```
 
+### ⌛ Nouvelle valeur retardée
+
+⛔⛔⛔ En tout temps, lorsqu'on utilise le **setter** d'un **état**, gardez à l'esprit que l'état ne changera pas de valeur pour de vrai **tant que l'exécution du code ne sera pas terminée**. Exemple :
+
+```tsx showLineNumbers
+const [x, setX] = useState(3);
+
+function someFunction(){
+
+  setX(x + 1); // x va donc devenir 4
+  console.log(x); // Imprime pourtant 3 !
+
+}
+```
+
+Une fois que la fonction `someFunction()` sera terminée, c'est à ce moment que `x` contiendra vraiment `4`.
+
+> Et si j'ai immédiatement besoin d'utiliser sa nouvelle valeur ?
+
+Il faudra utiliser un stratagème simple comme celui-ci :
+
+```tsx showLineNumbers
+const [x, setX] = useState(3);
+
+function someFunction(){
+
+  const newX = x + 1; // Préparation de la nouvelle valeur (4)
+
+  setX(newX); // x va donc devenir 4
+  console.log(newX); // Imprime 4 ✅
+
+}
+```
+
+:::danger
+
+Cette contrainte ne va pas vous agacer pour le **laboratoire 2**, mais ça deviendra un défi récurrent **pour toute la session**, alors tentez de faire un *effort prononcé* pour vous en souvenir.
+
+:::
+
 ## 🗄 Afficher une liste
 
 ### 👶 Exemple simple
