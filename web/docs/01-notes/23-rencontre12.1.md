@@ -11,7 +11,77 @@ Fonctionnement général :
 * Puis on recommence pour la prochaine fonctionnalité.
 * Chaque partenaire travaille toujours **seul(e) sur sa propre branche**.
 
-<center>![Résumé du processus](../../static/img/cours22/git.png)</center>
+### 🌳 Exemple concret
+
+1. Au début du projet, seule la branche `main` existe.
+
+<center>![Résumé du processus](../../static/img/cours22/dessin1.png)</center>
+
+<hr/>
+
+2. On crée immédiatement la branche `dev`.
+
+<center>![Résumé du processus](../../static/img/cours22/dessin2.png)</center>
+
+<hr/>
+
+3. Les deux partenaires créent chacun une **branche** pour travailler sur leur propre fonctionnalité.
+
+<center>![Résumé du processus](../../static/img/cours22/dessin3.png)</center>
+
+<hr/>
+
+4. Les deux partenaires font des **commits** et avancent leur fonctionnalité. La fonctionnalité `b` est terminée, un des partenaires est prêt à **merge**.
+
+<center>![Résumé du processus](../../static/img/cours22/dessin4.png)</center>
+
+<hr/>
+
+5. Puisque c'est la **toute première fonctionnalité** et qu'aucun **merge** n'a eu lieu, pour la seule fois du projet, on peut **merge** directement `b` dans `dev`.
+
+<center>![Résumé du processus](../../static/img/cours22/dessin5.png)</center>
+
+<hr/>
+
+6. Une fois que `b` a été **merge** dans `dev`, le partenaire crée une nouvelle **branche** pour travailler sur la fonctionnalité `c`.
+
+<center>![Résumé du processus](../../static/img/cours22/dessin6.png)</center>
+
+<hr/>
+
+7. Un peu plus tard, la fonctionnalité `a` est terminée et l'autre partenaire est prêt pour un **merge**.
+
+<center>![Résumé du processus](../../static/img/cours22/dessin7.png)</center>
+
+<hr/>
+
+8. Pour cette fonctionnalité **et toutes les suivantes**, il faudra d'abord **merge** `dev` dans la branche de la fonctionnalité. (Ici, `a`) Dans certaines situations, il y aura des **conflits ⚠**. (Bouts de code modifiés par les deux partenaires ! Quelles modifications conserver ?) 
+
+<center>![Résumé du processus](../../static/img/cours22/dessin8.png)</center>
+
+<hr/>
+
+9. S'il y a des **conflits ⚠** à régler, on fait un **commit supplémentaire** dans le but de les régler et de s'assurer que toutes les fonctionnalités sont intactes. 
+
+<center>![Résumé du processus](../../static/img/cours22/dessin9.png)</center>
+
+<hr/>
+
+10. Enfin, lorsqu'on est sûr que tous les conflits sont réglés, on **merge** la branche dans `dev`. Il n'y aura **aucun conflit** cette fois, comme ils ont déjà été réglés.
+
+<center>![Résumé du processus](../../static/img/cours22/dessin10.png)</center>
+
+<hr/>
+
+11. Ensuite, le partenaire peut recréer une nouvelle **branche** pour sa prochaine fonctionnalité. Les étapes **8** à **10** pourront être répétées pour **toutes les nouvelles branches**.
+
+<center>![Résumé du processus](../../static/img/cours22/dessin11.png)</center>
+
+<hr/>
+
+12. Une fois toutes les fonctionnalités **terminées** et **merge** dans `dev`, si tout fonctionne bien, on peut **merge** dans `main`, pour livrer et / ou déployer le **produit fini**.
+
+<center>![Résumé du processus](../../static/img/cours22/dessin12.png)</center>
 
 :::tip
 
