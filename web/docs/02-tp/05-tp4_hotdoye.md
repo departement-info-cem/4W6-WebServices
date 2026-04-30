@@ -91,5 +91,6 @@ Il suffira de remplir une liste de commentaires dans le composant `Profile` avec
 
 ## Étape I
 
+* N'oubliez pas que la **sécurité** est évaluée. Si ce n'est pas fait, vérifiez cet aspect dans vos étapes C à H.
 * Lorsque votre partenaire fera ses derniers **merges** dans **dev**, vérifiez vos fonctionnalités ! Votre partenaire les a peut-être brisé...
 * N'oubliez pas de faire le merge ultime dans **main** lorsque votre partenaire et vous aurez terminé le TP.
