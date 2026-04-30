@@ -22,7 +22,7 @@ Voici quelques pistes non exhaustives pour savoir où donner de la tête. Cette 
 
 **📶 Envoyer des images au serveur :**
 
-* Le composant `FullPost`, en utilisant le **hook** `usePost`, devra maintenant envoyer un **FormData** plutôt qu'un **DTO** pour pouvoir y joindre 0 à plusieurs images en plus du texte du commentaire.
+* Le composant `CreatePost`, en utilisant le **hook** `usePost`, devra maintenant envoyer un **FormData** plutôt qu'un **DTO** pour pouvoir y joindre 0 à plusieurs images en plus du texte du commentaire.
 * L'action `PostPost` du `PostsController` devra recevoir ce **FormData** plutôt qu'un `PostDTO`. La classe `Comment` devra avoir une relation **One-To-Many** avec la classe `Picture`. Il faudra modifier la méthode `CreateComment` du `CommentService` et ajouter la méthode `CreatePicture` dans le `PictureService`.
 
 **🖼 Afficher les images sur le client :**
