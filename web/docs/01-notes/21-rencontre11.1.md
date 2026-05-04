@@ -465,6 +465,14 @@ function previewImage(e : any){
 
     // S'il y a bel et bien une image dans l'input
     if(e.target.files && e.target.files[0]){
+
+        // Si nous étions déjà en train de prévisualiser l'image, supprimer l'ancienne version
+        // pour ne pas avoir de fuite de mémoire.
+        if (imageBlob) {
+            URL.revokeObjectURL(imageBlob);
+        }
+
+        // Afficher le fichier dans l'élément <img> de la page dont src={imageBlob}
         setImageBlob(URL.createObjectURL(e.target.files[0]));
     }
 
@@ -482,23 +490,3 @@ function previewImage(e : any){
 ```
 
 (L'image qu'on s'apprête à envoyer au serveur sera affichée dans l'élément `<img>`)
-
-:::warning
-
-Avec cette manière d'afficher l'image à l'aide de `URL.createObjectURL()`, il faut « *revoke* » le fichier si jamais l'état qui le contient change de valeur. (C'est pour éviter les fuites de mémoire, car sinon les précédentes images téléchargées s'accumulent inutilement dans la mémoire du navigateur)
-
-Pour une rare fois, on peut utiliser le tableau de **dépendances** du **hook** `useEffect` :
-
-```ts showLineNumbers
-// Le code sera exécuté à chaque fois que imageBlob change.
-// Le précédent fichier sera « revoked »
-useEffect(() => {
-  
-    if (imageBlob) {
-        URL.revokeObjectURL(imageBlob);
-    }
-
-}, [imageBlob]);
-```
-
-:::
