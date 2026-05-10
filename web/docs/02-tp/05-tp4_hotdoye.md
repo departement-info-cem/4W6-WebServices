@@ -52,7 +52,7 @@ Les utilisateurs doivent pouvoir choisir un avatar personnalisé. L’avatar peu
 Cliquer sur une image dans une publication ou un commentaire doit permettre de l’afficher en pleine taille, dans un autre onglet.
 
 * Ne vous compliquez pas la vie : Ajoutez une balise `<a>` avec un `href` qui contient la requête vers l’image en **pleine taille**. Cela redirigera vers une autre page qui contient seulement l’image. C’est suffisant. Vous devez ouvrir l’image dans un nouvel onglet.
-* Ceci concerne TOUTES les images qui ne sont pas des avatars ou des icônes de forum. (Donc ça inclut les images du message principal d'une publication !)
+* Ceci concerne TOUTES les images qui ne sont pas des avatars ou des icônes de forum. (Donc ça inclut les images du message principal d'une publication !) Par contre, la potentielle image visible dans une `PostThumbnail` n'a pas à être cliquable. (Lorsqu'on consulte un **forum** ou la **page d'accueil**)
 
 ## Étape F
 
