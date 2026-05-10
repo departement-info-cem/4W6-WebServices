@@ -52,7 +52,7 @@ L'icône choisie lors de la création du forum doit pouvoir être **prévisualis
 
 <center>![Icône de forum](../../static/img/tp4/d_pinotte_1.png)</center>
 
-Attention ! L'icône du forum est affichée à quatre endroits : `FullHub`, `LeftBar`, `FullPost` et `PostThumbnail`. Ne vous mélangez pas avec les **avatars**, qui sont affichés à plusieurs endroits aussi.
+Attention ! L'icône du forum est affichée à quatre endroits : `FullHub`, `LeftBar`, `FullPost`, `CreatePost` et `PostThumbnail`. Ne vous mélangez pas avec les **avatars**, qui sont affichés à plusieurs endroits aussi.
 
 <center>![Icône de forum](../../static/img/tp4/d_pinotte_2.png)</center>
 
@@ -60,7 +60,7 @@ Si on ne choisit pas d'icône en créant un forum, une icône par défaut est af
 
 <center>![Icône de forum](../../static/img/tp4/d_pinotte_4.png)</center>
 
-Pour l'affichage de la première image d'une publication dans `PostThumbnail` (vous aviez peut-être oublié cette partie ?), ça ne devrait pas être trop complexe : si la publication possède au moins une image, utilisez l'id de la première image pour l'afficher dans l'aperçu :
+Pour l'affichage de la première image d'une publication dans `PostThumbnail`, ça ne devrait pas être trop complexe : si la publication possède au moins une image, utilisez l'id de la première image pour l'afficher dans l'aperçu :
 
 <center>![Publication avec images](../../static/img/tp4/d_pinotte_3.png)</center>
 
