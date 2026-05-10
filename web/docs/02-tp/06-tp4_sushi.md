@@ -52,7 +52,7 @@ L'icône choisie lors de la création du forum doit pouvoir être **prévisualis
 
 <center>![Icône de forum](../../static/img/tp4/d_pinotte_1.png)</center>
 
-Attention ! L'icône du forum est affichée à quatre endroits : `FullHub`, `LeftBar`, `FullPost`, `CreatePost` et `PostThumbnail`. Ne vous mélangez pas avec les **avatars**, qui sont affichés à plusieurs endroits aussi.
+Attention ! L'icône du forum est affichée à cinq endroits : `FullHub`, `LeftBar`, `FullPost`, `CreatePost` et `PostThumbnail`. Ne vous mélangez pas avec les **avatars**, qui sont affichés à plusieurs endroits aussi.
 
 <center>![Icône de forum](../../static/img/tp4/d_pinotte_2.png)</center>
 
