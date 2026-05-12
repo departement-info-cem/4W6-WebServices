@@ -150,7 +150,7 @@ De plus, affichez le résultat de la fonction `equalToN()` deux fois dans la col
 
 Préparez un nouveau dossier `_types` qui pourra accueillir une classe. Voici la classe à créer :
 
-La classe `Towel`, qui possède trois propriétés :
+La classe `Towel`, qui possède quatre propriétés :
 
 * `color` : un `string` assigné par le constructeur.
 * `length` : un `number` assigné par le constructeur.
