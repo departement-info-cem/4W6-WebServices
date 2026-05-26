@@ -1,0 +1,28 @@
+name: Générer les zips de code
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Zipper les sous-dossiers de code/
+        run: |
+          mkdir -p zips
+          for dir in code/*/; do
+            [ -d "$dir" ] || continue
+            parent=$(basename "$dir")
+            name=$(basename "$subdir")
+            zip -r "zips/${parent}-${name}.zip" "$subdir"
+          done
+
+      - name: Créer la release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: labs-${{ github.run_number }}
+          name: "Labs — build ${{ github.run_number }}"
+          files: zips/*.zip
