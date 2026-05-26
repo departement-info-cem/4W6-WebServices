@@ -1,5 +1,5 @@
 ---
-title: "Cours 6 - Contexts et hooks"
+title: "3.2 - Contexts et hooks"
 ---
 
 import Tabs from '@theme/Tabs';

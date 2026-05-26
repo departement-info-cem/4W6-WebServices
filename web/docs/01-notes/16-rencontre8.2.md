@@ -1,5 +1,5 @@
 ---
-title: "Cours 16 - Relations et DTOs"
+title: "8.2 - Relations et DTOs"
 ---
 
 import Tabs from '@theme/Tabs';

@@ -1,5 +1,5 @@
 ---
-title: "Cours 22 - Rôles"
+title: "11.2 - Rôles"
 ---
 
 import Tabs from '@theme/Tabs';

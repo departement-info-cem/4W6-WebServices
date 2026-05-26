@@ -1,5 +1,5 @@
 ---
-title: "Cours 1 - Intro à React / Next.js"
+title: "1.1 - Intro à React / Next.js"
 ---
 
 ### 🙈 Application Web ASP.NET Core <u>sans</u> Next.js

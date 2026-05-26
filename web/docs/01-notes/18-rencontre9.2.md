@@ -1,5 +1,5 @@
 ---
-title: "Cours 18 - Retours, sécurité, seed"
+title: "9.2 - Retours, sécurité, seed"
 ---
 
 ## 📬 Retours

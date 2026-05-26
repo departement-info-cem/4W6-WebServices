@@ -1,5 +1,5 @@
 ---
-title: "Cours 15 - Intro Web API"
+title: "8.1 - Intro Web API"
 ---
 
 import Tabs from '@theme/Tabs';

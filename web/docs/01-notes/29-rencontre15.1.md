@@ -1,5 +1,5 @@
 ---
-title: "Cours 29 - Final formatif"
+title: "15.1 - Final formatif"
 ---
 
 [Voici le formatif](../../static/files/final_formatif.zip). Les instructions sont dans un document Word.
