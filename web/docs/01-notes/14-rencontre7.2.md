@@ -1,4 +1,4 @@
 ---
-title: "7.2 - Intra sommatif (15%)"
+title: "7.2 - Intra sommatif (15%) 📝"
 ---
 

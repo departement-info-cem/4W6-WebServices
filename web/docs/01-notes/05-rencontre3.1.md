@@ -1,5 +1,5 @@
 ---
-title: "3.1 - Plusieurs composants"
+title: "3.1 - Plusieurs composants 🧩"
 ---
 
 import Tabs from '@theme/Tabs';

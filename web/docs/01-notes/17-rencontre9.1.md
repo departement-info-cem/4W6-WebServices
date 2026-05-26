@@ -1,5 +1,5 @@
 ---
-title: "9.1 - Utilisateurs et services"
+title: "9.1 - Utilisateurs et services 👤"
 ---
 
 ## 📦 Packages nécessaires

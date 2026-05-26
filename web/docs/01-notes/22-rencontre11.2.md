@@ -1,5 +1,5 @@
 ---
-title: "11.2 - Rôles"
+title: "11.2 - Rôles 🧝"
 ---
 
 import Tabs from '@theme/Tabs';
