@@ -89,7 +89,7 @@ const config = {
           },
           {
             type: "doc",
-            docId: "cours/rencontre1.1",
+            docId: "angular/rencontre1.1",
             position: "left",
             label: "Angular (Ancien cours)",
           },

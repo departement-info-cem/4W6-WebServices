@@ -31,7 +31,7 @@ Il y aura beaucoup de code **boilerplate** à rédiger pour configurer `Identity
 
 **1 - 📰 Se référer au cours 15**
 
-Tout d'abord, répétez toutes les étapes de création d'un projet telles qu'abordées dans le [cours 14](/cours/rencontre7.2).
+Tout d'abord, répétez toutes les étapes de création d'un projet telles qu'abordées dans le [cours 14](/angular/rencontre7.2).
 
 Arrêtez-vous juste avant la création d'un **modèle**.
 
@@ -163,7 +163,7 @@ La classe `UserManager` fait office de « UserService » et nous aidera à inter
 
 **1 - 📬 Création d'un DTO**
 
-(Les DTOs ont été abordés dans le [cours 16](/cours/rencontre8.1))
+(Les DTOs ont été abordés dans le [cours 16](/angular/rencontre8.1))
 
 Créez un DTO qui sera utilisé pour recevoir des données lors de l'inscription :
 

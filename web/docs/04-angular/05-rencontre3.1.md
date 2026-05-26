@@ -309,7 +309,7 @@ export class YellowComponent implements OnInit{
 ```
 
 ⛔ Notez que le nom du paramètre (ici, `"legume"`) doit être identique à celui déclaré dans la règle de routage ! (sans le symbole `:`)
-De plus, la fonction `ngOnInit()` est plutôt incontournable pour cette tâche. ([Notion du cours 3](/cours/rencontre2.1#-lancer-la-requête-dès-le-chargement-de-la-page-web))
+De plus, la fonction `ngOnInit()` est plutôt incontournable pour cette tâche. ([Notion du cours 3](/angular/rencontre2.1#-lancer-la-requête-dès-le-chargement-de-la-page-web))
 
 ```ts
 {path: "yellow/:legume", component: YellowComponent}

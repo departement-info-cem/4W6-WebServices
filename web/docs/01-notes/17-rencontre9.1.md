@@ -172,7 +172,7 @@ La classe `UserManager` fait office de « UserService » et nous aidera à inter
 
 **1 - 📬 Création d'un DTO**
 
-(Les DTOs ont été abordés dans le [cours 16](/cours/rencontre8.1))
+(Les DTOs ont été abordés dans le [cours 16](/angular/rencontre8.1))
 
 Créez un DTO qui sera utilisé pour recevoir des données lors de l'inscription :
 
