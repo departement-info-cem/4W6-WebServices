@@ -1,7 +1,9 @@
+---
+title: "Cours 16 - Relations et DTOs"
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# Cours 16 - Relations et DTOs
 
 ## 💍 Relations
 

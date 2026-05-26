@@ -1,4 +1,6 @@
-# Cours 8 - Maps, vidéos, UI
+---
+title: "Cours 8 - Maps, vidéos, UI"
+---
 
 ### ▶ Intégration YouTube
 

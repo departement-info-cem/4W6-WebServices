@@ -1,3 +1,4 @@
-# Cours 14 - Intra sommatif (15%)
-
+---
+title: "Cours 14 - Intra sommatif (15%)"
+---
 

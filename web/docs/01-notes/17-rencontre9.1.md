@@ -1,4 +1,6 @@
-# Cours 17 - Utilisateurs et services
+---
+title: "Cours 17 - Utilisateurs et services"
+---
 
 ## 📦 Packages nécessaires
 

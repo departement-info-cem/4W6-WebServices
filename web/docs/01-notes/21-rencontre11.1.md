@@ -1,4 +1,6 @@
-# Cours 21 - Serveur d'images
+---
+title: "Cours 21 - Serveur d'images"
+---
 
 En résumé, nous allons voir comment ...
 

@@ -1,1 +1,4 @@
-# Cours 30 - Final sommatif (25%)
+---
+title: "Cours 30 - Final sommatif (25%)"
+---
+

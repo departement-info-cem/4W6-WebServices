@@ -1,4 +1,6 @@
-# Cours 23 - Git et TP4
+---
+title: "Cours 23 - Git et TP4"
+---
 
 ## 👥 Git à deux
 
