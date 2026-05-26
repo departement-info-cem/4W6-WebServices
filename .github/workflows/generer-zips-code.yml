@@ -12,12 +12,12 @@ jobs:
 
       - name: Zipper les sous-dossiers de code/
         run: |
-          mkdir -p zips
-          for dir in code/*/; do
-            [ -d "$dir" ] || continue
-            name=$(basename "$dir")
-            zip -r "zips/code-${name}.zip" "$dir"
-          done
+            mkdir -p zips
+            for subdir in code/*/; do
+            [ -d "$subdir" ] || continue
+            name=$(basename "$subdir")
+            (cd "$subdir" && zip -r "${GITHUB_WORKSPACE}/zips/code-${name}.zip" .)
+            done
 
       - name: Créer la release
         uses: softprops/action-gh-release@v3
