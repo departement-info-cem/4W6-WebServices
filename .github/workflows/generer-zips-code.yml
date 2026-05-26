@@ -15,9 +15,8 @@ jobs:
           mkdir -p zips
           for dir in code/*/; do
             [ -d "$dir" ] || continue
-            parent=$(basename "$dir")
-            name=$(basename "$subdir")
-            zip -r "zips/${parent}-${name}.zip" "$subdir"
+            name=$(basename "$dir")
+            zip -r "zips/code-${name}.zip" "$dir"
           done
 
       - name: Créer la release
