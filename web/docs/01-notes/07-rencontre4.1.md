@@ -1,7 +1,9 @@
+---
+title: "4.1 - Stockage, i18n, token 🪙"
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# Cours 7 - Stockage, i18n, token
 
 ## 💿 Stockage local
 

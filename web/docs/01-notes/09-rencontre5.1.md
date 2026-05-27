@@ -1,4 +1,6 @@
-# Cours 9 - TP2 (20%)
+---
+title: "5.1 - TP2 (20%) 🔨"
+---
 
 Les instructions du TP2 sont [ici](/tp/tp2).
 

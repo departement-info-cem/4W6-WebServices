@@ -1,7 +1,9 @@
+---
+title: "3.1 - Plusieurs composants 🧩"
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# Cours 5 - Plusieurs composants
 
 Utiliser plusieurs composants permettra de « naviguer sur plusieurs pages Web » et permettra également d'éviter
 de répéter des portions de page Web similaires.

@@ -1,4 +1,6 @@
-# Cours 2 - Composant dynamique
+---
+title: "1.2 - Composant dynamique 🏃"
+---
 
 :::warning
 

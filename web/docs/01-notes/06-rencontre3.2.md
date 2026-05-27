@@ -1,7 +1,9 @@
+---
+title: "3.2 - Contexts et hooks 🎣"
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# Cours 6 - Contexts et hooks
 
 Nous avons appris comment créer et utiliser plusieurs composants. Il reste cependant certains défis à adresser pour pouvoir utiliser plusieurs composants stratégiquement.
 

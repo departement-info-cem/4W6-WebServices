@@ -1,4 +1,6 @@
-# Cours 3 - Requêtes HTTP
+---
+title: "2.1 - Requêtes HTTP ↔️"
+---
 
 ✅ Une application Web client **Next.js** peut :
 

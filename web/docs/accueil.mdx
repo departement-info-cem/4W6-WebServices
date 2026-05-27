@@ -1,0 +1,37 @@
+---
+sidebar_position: 1
+slug: /
+hide_table_of_contents: true
+---
+
+# Programmation Web Orientée Services
+
+✅📚 Vous retrouverez sur ce site Web toutes les **notes de cours**, **laboratoires** et **TPs** pour le cours Programmation
+Web orientée services. 
+
+⛔🐞 Si vous remarquez des fautes de français, des erreurs dans le code ou des imprécisions dans certaines explications,
+n'hésitez pas à contacter Pierre-Olivier Brillant ou Philippe Martel sur Teams pour qu'ils les corrige pour améliorer le matériel du cours. Merci ! 🙇‍♂️
+
+<DocsViewer
+    tabs={[
+    {
+        id: "grid",
+        label: "Cours",
+        icon: "📋",
+        component: <MainDocsGrid />,
+    }, 
+    {
+        id: "po",
+        label: "Pierre-Olivier",
+        icon: "📅",
+        component: <MainDocsCalendar professorName="Pierre-Olivier" />,
+    },
+    {
+        id: "calendar-prof2",
+        label: "Philippe",
+        icon: "📅",
+        component: <MainDocsCalendar professorName="Philippe" />, 
+    },
+    ]}
+    defaultTabId="grid"
+/>

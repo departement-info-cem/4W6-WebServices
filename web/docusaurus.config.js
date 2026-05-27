@@ -1,11 +1,11 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
-import { themes } from 'prism-react-renderer';
+import { themes } from "prism-react-renderer";
 
 const siteConfig = require("./config");
 
-const lightCodeTheme = themes.vsLight
-const darkCodeTheme = themes.vsDark
+const lightCodeTheme = themes.vsLight;
+const darkCodeTheme = themes.vsDark;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -14,7 +14,6 @@ const config = {
   url: "https://info.cegepmontpetit.ca/",
   baseUrl: `/${siteConfig.nomUrl}/`,
   onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
 
   organizationName: "departement-info-cem",
@@ -28,10 +27,13 @@ const config = {
   },
 
   markdown: {
-    mermaid: true
+    mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: "warn",
+    },
   },
 
-  themes: ['@docusaurus/theme-mermaid'],
+  themes: ["@docusaurus/theme-mermaid"],
 
   presets: [
     [
@@ -49,6 +51,8 @@ const config = {
       }),
     ],
   ],
+
+  plugins: [require.resolve("./plugins/docs-metadata")],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -68,7 +72,6 @@ const config = {
           {
             type: "doc",
             docId: "notes/rencontre1.1",
-            sidebarId: "docs",
             position: "left",
             label: "Cours",
           },
@@ -86,10 +89,9 @@ const config = {
           },
           {
             type: "doc",
-            docId: "cours/rencontre1.1",
+            docId: "angular/rencontre1.1",
             position: "left",
             label: "Angular (Ancien cours)",
-            sidebarId: "cours"
           },
         ],
       },

@@ -1,7 +1,9 @@
+---
+title: "11.2 - Rôles 🧝"
+---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# Cours 22 - Rôles
 
 ## 👮‍♀️👨‍🍳 Rôles
 
