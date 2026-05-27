@@ -61,37 +61,6 @@ daysWithoutWorkAccident++;
 
 :::
 
-:::danger
-
-Lorsqu'on appelle le *setter* d'un état, sachez qu'**il est seulement exécuté à la fin de la fonction**.
-
-```tsx showLineNumbers
-function someFunction(){
-
-  setX(x + 1); // x passera de 4 à 5
-
-  console.log(x); // La valeur 4 sera affichée ! ⛔
-
-}
-```
-
-React possède ce comportement car il compile tous les appels de *setters* en même temps, à la fin de la fonction. Cela permet de générer le nouveau HTML une seule fois, plutôt qu'une fois par appel d'un *setter*.
-
-Il n'y a pas de solution simple et stratégique pour « attendre » qu'un *setter* ait été exécuté. Il faut adapter le code :
-
-```tsx showLineNumbers
-function someFunction(){
-
-  const newValue = x + 1;
-  setX(newValue); // x passera de 4 à 5
-
-  console.log(newValue); // La valeur 5 sera affichée ✅
-
-}
-```
-
-:::
-
 :::info
 
 > Pourquoi est-ce aussi compliqué de manipuler des états ? 😠
