@@ -32,6 +32,15 @@ n'hésitez pas à contacter Pierre-Olivier Brillant ou Philippe Martel sur Teams
         icon: "📅",
         component: <MainDocsCalendar professorName="Philippe" />, 
     },
+    {
+        id: "schedule-po",
+        label: "Horaire Pierre-Olivier",
+        icon: "🧑‍🏫",
+        component: <WeeklySchedule
+            title="Horaire Pierre-Olivier"
+            data={require('./horaire-po.json')}
+        />,
+    }
     ]}
     defaultTabId="grid"
 />
