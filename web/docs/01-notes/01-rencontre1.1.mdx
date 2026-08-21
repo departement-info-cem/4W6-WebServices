@@ -5,6 +5,7 @@ title: "1.1 - Intro à React / Next.js 🏁"
 
 import clientServeur from './_01-rencontre1.1/animation-client-serveur'
 import spa from './_01-rencontre1.1/animation-spa'
+import { DataFlowPlayer } from '@dataflow-animator/react';
 
 ### 🙈 Application Web ASP.NET Core <u>sans</u> Next.js
 
@@ -12,6 +13,7 @@ Quand on envoie une requête HTTP au serveur sur lequel l'application ASP.NET Co
 nous renvoie du **HTML**, du **CSS** et du **JavaScript** pour que la page Web à afficher chez
 l'utilisateur soit toute prête. 🎁👌
 
+<DataFlowPlayer spec={clientServeur} theme="auto" />
 
 ### ✅ Application Web ASP.NET Core <u>avec</u> Next.js
 
@@ -21,6 +23,7 @@ Quand on envoie une requête HTTP au serveur sur lequel l'application **ASP.NET 
 nous renvoie seulement les **données** à afficher (vidéos, images, morceaux de texte, etc.) sous forme 
 de JSON ou de XML et l'application **Next.js** s'occupera de « pluguer » les données dans les pages Web. 📦🔌
 
+<DataFlowPlayer spec={spa} theme="auto" />
 
 Par exemple, lorsque je souhaite naviguer sur YouTube, voici ce qu'il se passe, grossièrement :
 
