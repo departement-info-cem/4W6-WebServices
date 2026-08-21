@@ -116,13 +116,22 @@ Pour les prochains exercices, nous travaillerons avec des éléments de formulai
 
 Les attributs `value` et `onChange` **auront seulement à être placés à un endroit** : dans la balise `<select>`. L'état associé au champ `<select>` grâce au **two-way binding** va contenir la valeur spécifiée dans l'attribut `value` de l'élément `<option>` qui aura été choisi par l'utilisateur. (Relisez cette phrase plusieurs fois au besoin 😬)
 
-Si je le formule autrement, ça donnerait « Dans le fond dude l'`<option>` que t'as choisie, ben c'est sa `value` qui va aller dans l'état associé au `<select>`. Genre, si t'as choisi l'option **Bleu**, ben ton état va contenir `"cyan"` dude. ». 
-
 Le but sera simplement d'utiliser cette valeur parmi les **classes**. Avec un peu de concaténation pour glisser un **état** qui contient la **classe**, vous y arriverez.
+
+:::tip
+La **liaison bidirectionnelle** (two-way binding) pour le `<select>` fonctionne exactement comme pour l'`<input>`. La seule différence est que sa valeur (`<value>`) est restrainte à l'un des choix que l'on retrouve dans les `<option>` sous leur `<value>` respective. 
+
+Si on le formule autrement, ça donnerait « Dans le fond dude l'`<option>` que t'as choisie, ben c'est sa `value` qui va aller dans l'état associé au `<select>`. Genre, si t'as choisi l'option **Bleu**, ben ton état va contenir `"cyan"` dude. ».
+
+(*Une `<value>` dynamique pour le `<select>` et trois `<value>` statiques pour chaque `<option>`? 🤔💭*)
+::: 
+
 
 <center>![Affichage avec fond](../../static/img/labo2/display7_1.png)</center>
 <center>![Affichage avec fond](../../static/img/labo2/display7_2.png)</center>
 <center>![Affichage avec fond](../../static/img/labo2/display7_3.png)</center>
+
+
 
 ### **8 -** Formulaire pour créer un objet
 
