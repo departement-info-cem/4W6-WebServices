@@ -102,22 +102,19 @@ export default {
         {
             "type": "comment",
             "object": "browser",
-            "text": "1. Chargement de l'application",
-            "duration": 500
+            "text": "1. Chargement de l'application"
         },
         {
             "type": "move",
             "object": "getindex",
             "from": "browser",
-            "to": "web",
-            "duration": 700
+            "to": "web"
         },
         {
             "type": "move",
             "object": "bundle",
             "from": "web",
-            "to": "browser",
-            "duration": 700
+            "to": "browser"
         },
         {
             "type": "set_content",
@@ -132,15 +129,13 @@ export default {
         {
             "type": "comment",
             "object": "browser",
-            "text": "2. La SPA appelle le Web API",
-            "duration": 500
+            "text": "2. La SPA appelle le Web API"
         },
         {
             "type": "move",
             "object": "apireq",
             "from": "browser",
-            "to": "api",
-            "duration": 800
+            "to": "api"
         },
         {
             "type": "loading",
@@ -151,8 +146,7 @@ export default {
             "type": "move",
             "object": "sql",
             "from": "api",
-            "to": "db",
-            "duration": 600
+            "to": "db"
         },
         {
             "type": "loading",
@@ -165,21 +159,18 @@ export default {
             "object": "rows",
             "from": "db",
             "to": "api",
-            "duration": 600,
             "wait_for": "dbwork"
         },
         {
             "type": "move",
             "object": "apires",
             "from": "api",
-            "to": "browser",
-            "duration": 800
+            "to": "browser"
         },
         {
             "type": "set_content",
             "id": "render",
             "object": "browser",
-            "keep_until_end": true,
             "content": {
                 "type": "text",
                 "url": "https://mon.app/produits",
@@ -187,8 +178,9 @@ export default {
             }
         },
         {
-            "type": "wait",
-            "delay_ms": 1000
+            "type": "comment",
+            "object": "browser",
+            "text": "3. Rendu des données"
         }
     ]
 };

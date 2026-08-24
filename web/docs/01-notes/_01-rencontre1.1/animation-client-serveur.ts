@@ -91,8 +91,7 @@ export default {
         {
             "type": "comment",
             "object": "browser",
-            "text": "L'utilisateur ouvre la page, la requête HTTP est envoyée au serveur",
-            "duration": 1500
+            "text": "L'utilisateur ouvre la page, la requête HTTP est envoyée au serveur"
         },
         {
             "type": "parallel",
@@ -101,8 +100,7 @@ export default {
                     "type": "move",
                     "object": "req",
                     "from": "browser",
-                    "to": "api",
-                    "duration": 900
+                    "to": "api"
                 },
                 {
                     "type": "loading",
@@ -116,15 +114,13 @@ export default {
             "type": "move",
             "object": "sql",
             "from": "api",
-            "to": "db",
-            "duration": 700
+            "to": "db"
         },
         {
             "type": "move",
             "object": "rows",
             "from": "db",
             "to": "api",
-            "duration": 700,
             "wait_for": "dbwork"
         },
         {
