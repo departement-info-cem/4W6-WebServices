@@ -12,7 +12,7 @@ export default {
             "id": "web",
             "type": "server",
             "text": "Serveur web",
-            "icon": "nextjs",
+            "icon": "nginx",
             "lane": 2
         },
         {
@@ -25,8 +25,8 @@ export default {
         {
             "id": "db",
             "type": "database",
-            "text": "Base de données",
-            "icon": "mssql",
+            "text": "BD",
+            "icon": "postgres",
             "align_with": "api",
             "lane": 3
         }
@@ -40,13 +40,33 @@ export default {
             }
         },
         {
-            "id": "bundle",
+            "id": "html",
             "kind": "http_packet",
             "packet_content": {
-                "header": "200 OK",
+                "header": "200 OK\nContent-Type: text/html",
                 "body": {
                     "type": "text",
-                    "value": "index.html + app.js"
+                    "value": "<div id=\"root\"></div>\n<script src=\"/app.js\"></script>",
+                    "language": "html"
+                }
+            }
+        },
+        {
+            "id": "getjs",
+            "kind": "http_packet",
+            "packet_content": {
+                "header": "GET /app.js"
+            }
+        },
+        {
+            "id": "js",
+            "kind": "http_packet",
+            "packet_content": {
+                "header": "200 OK\nContent-Type: application/javascript",
+                "body": {
+                    "type": "text",
+                    "value": "fetch(\"/api/products\")\n  .then(r => r.json())\n  .then(render);",
+                    "language": "javascript"
                 }
             }
         },
@@ -54,29 +74,51 @@ export default {
             "id": "apireq",
             "kind": "http_packet",
             "packet_content": {
-                "header": "GET /api/products"
+                "header": "GET /api/products\nAccept: application/json"
             }
         },
         {
             "id": "sql",
             "kind": "sql_request",
-            "request_content": "SELECT * FROM products"
+            "request_content": "SELECT id, name FROM products"
         },
         {
             "id": "rows",
             "kind": "sql_response",
             "response_content": {
-                "rows": 12
+                "header": "3 lignes",
+                "body": {
+                    "type": "table",
+                    "columns": [
+                        "id",
+                        "nom"
+                    ],
+                    "rows_data": [
+                        [
+                            1,
+                            "Clavier"
+                        ],
+                        [
+                            2,
+                            "Souris"
+                        ],
+                        [
+                            3,
+                            "Écran"
+                        ]
+                    ]
+                }
             }
         },
         {
             "id": "apires",
             "kind": "http_packet",
             "packet_content": {
-                "header": "200 OK",
+                "header": "200 OK\nContent-Type: application/json",
                 "body": {
                     "type": "text",
-                    "value": "[ 12 produits ]"
+                    "value": "[\n  { \"id\": 1, \"name\": \"Clavier\" },\n  { \"id\": 2, \"name\": \"Souris\" },\n  { \"id\": 3, \"name\": \"Écran\" }\n]",
+                    "language": "json"
                 }
             }
         }
@@ -102,34 +144,68 @@ export default {
         {
             "type": "comment",
             "object": "browser",
-            "text": "1. Chargement de l'application"
+            "text": "1. Le navigateur demande la page au serveur web"
+        },
+        {
+            "type": "parallel",
+            "actions": [
+                {
+                    "type": "move",
+                    "object": "getindex",
+                    "from": "browser",
+                    "to": "web"
+                },
+                {
+                    "type": "loading",
+                    "object": "browser",
+                    "keep_until": "shell"
+                }
+            ]
         },
         {
             "type": "move",
-            "object": "getindex",
-            "from": "browser",
-            "to": "web"
-        },
-        {
-            "type": "move",
-            "object": "bundle",
+            "object": "html",
             "from": "web",
             "to": "browser"
         },
         {
             "type": "set_content",
+            "id": "shell",
             "object": "browser",
             "content": {
                 "type": "text",
-                "url": "https://mon.app",
-                "value": "✅ SPA chargée (React) — prête à appeler l'API"
+                "url": "mon.app/produits",
+                "value": "📄 index.html rendu — <div id=\"root\"> encore vide"
             },
-            "keep_until": "render"
+            "keep_until": "waiting"
+        },
+        {
+            "type": "move",
+            "object": "getjs",
+            "from": "browser",
+            "to": "web"
+        },
+        {
+            "type": "move",
+            "object": "js",
+            "from": "web",
+            "to": "browser"
         },
         {
             "type": "comment",
             "object": "browser",
-            "text": "2. La SPA appelle le Web API"
+            "text": "2. La coquille est affichée mais vide : le script appelle l'API"
+        },
+        {
+            "type": "set_content",
+            "id": "waiting",
+            "object": "browser",
+            "content": {
+                "type": "text",
+                "url": "mon.app/produits",
+                "value": "⚛️ SPA démarrée · ⏳ chargement… ▭▭▭▭▭ ▭▭▭"
+            },
+            "keep_until": "render"
         },
         {
             "type": "move",
@@ -168,19 +244,30 @@ export default {
             "to": "browser"
         },
         {
-            "type": "set_content",
-            "id": "render",
-            "object": "browser",
-            "content": {
-                "type": "text",
-                "url": "https://mon.app/produits",
-                "value": "📦 12 produits affichés"
-            }
+            "type": "parallel",
+            "actions": [
+                {
+                    "type": "set_content",
+                    "id": "render",
+                    "object": "browser",
+                    "keep_until_end": true,
+                    "content": {
+                        "type": "text",
+                        "url": "mon.app/produits",
+                        "value": "✅ 3 produits : Clavier · Souris · Écran"
+                    }
+                },
+                {
+                    "type": "comment",
+                    "object": "browser",
+                    "text": "3. Le JSON devient du DOM : les produits sont affichés",
+                    "keep_until_end": true
+                }
+            ]
         },
         {
-            "type": "comment",
-            "object": "browser",
-            "text": "3. Rendu des données"
+            "type": "wait",
+            "delay_ms": 1000
         }
     ]
 };
