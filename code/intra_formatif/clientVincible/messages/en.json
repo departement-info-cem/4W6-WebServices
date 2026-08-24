@@ -1,0 +1,8 @@
+{
+    "favorites":{
+        "title":"Favorite characters",
+        "language":"Français",
+        "name":"Name : NOM DU PERSONNAGE",
+        "empty":"Clear all favorites"
+    }
+}

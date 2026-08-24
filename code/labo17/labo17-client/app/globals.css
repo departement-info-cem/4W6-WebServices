@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(to bottom, rgb(235, 255, 255), rgb(255, 240, 243)) fixed;
+}
+
+header,
+nav,
+main,
+footer {
+  background: linear-gradient(to bottom, rgb(255, 255, 255), rgb(255, 244, 245)) fixed;
+  width: 1000px;
+  margin: auto;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.8em;
+}
+
+nav {
+  display: flex;
+  padding: 0px;
+}
+
+nav>a {
+  flex: 1;
+  padding: 5px;
+  cursor: pointer;
+  text-align: center;
+  font-weight:bold;
+}
+
+nav>a:hover {
+  background: rgb(254, 240, 255);
+}
+
+input,
+button {
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+input {
+
+  background-color: rgb(255, 255, 255);
+  padding: 3px 10px;
+  margin-right: 3px;
+  border:rgb(196, 237, 255) solid 1px;
+  border-radius:5px;
+
+}
+
+button {
+
+  background-color: rgb(255, 255, 255);
+  color: rgb(42, 37, 83);
+  padding: 3px 10px;
+  cursor: pointer;
+  font-weight: bold;
+
+}
+
+button:hover {
+  background-color: rgb(218, 248, 255);
+}
+
+h3{
+  font-size: 1.2em;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+hr{
+  color:rgb(196, 237, 255);
+  margin:5px 0px;
+}
+
+.anime, .anime2{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+}
+
+.anime>div,.anime2>div{
+  height:200px;
+  flex-basis:30%;
+  display:flex;
+  align-items: center;
+  background-color:rgb(196, 237, 255);
+  padding:5px;
+  box-sizing:content-box;
+  gap:10px;
+  position:relative;
+}
+
+.anime button{
+  position:absolute;
+  top:0px;
+  right:5px;
+}
+
+.anime img{
+  height:200px;
+}
+
+.anime2>div{
+  height:150px;
+}
+
+.anime2 img{
+  height:150px
+}

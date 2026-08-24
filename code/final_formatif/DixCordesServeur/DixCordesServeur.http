@@ -1,0 +1,6 @@
+@DixCordesServeur_HostAddress = http://localhost:5294
+
+GET {{DixCordesServeur_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

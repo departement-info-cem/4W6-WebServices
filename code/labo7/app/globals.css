@@ -1,0 +1,276 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+footer{
+  text-align: center;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(to bottom, #28264e, #361d51, #550d57) fixed;
+}
+
+img{
+  display:inline;
+}
+
+.container{
+  margin:auto;
+  width:1000px;
+  margin-top: 20px;
+  margin-bottom:20px;
+}
+
+input{
+  background-color:white;
+  border:lightgray solid 1px;
+  border-radius:3px;
+  padding:0px 4px;
+  margin-bottom:3px;
+  margin-left:3px;
+  color:rgb(72, 72, 72);
+}
+
+button{
+  background-color:white;
+  color:black;
+  font-weight:bold;
+  border-radius:5px;
+  padding:5px 10px;
+  cursor:pointer;
+}
+
+.btn-danger{
+  background-color:crimson;
+  color:white;
+}
+
+.btn-dark{
+  background-color:black;
+  color:white;
+}
+
+.row{
+  display:flex;
+}
+
+header .row{
+  align-items: center;
+  gap:20px;
+}
+
+.fond{
+  background:linear-gradient(to bottom, #788be7, #6373c0);
+  border:white solid 5px;
+  border-bottom-color:rgb(236, 236, 236);
+  border-right-color:rgb(236, 236, 236);
+  border-radius:50px;
+  color:white;
+  padding:10px;
+}
+
+.slotMachine{
+  gap:50px;
+}
+
+nav .row{
+  gap:20px;
+}
+
+nav a{
+  text-decoration: none;
+  text-align:center;
+  font-weight:bolder;
+  flex:1;
+}
+
+nav a:hover{
+  background:linear-gradient(to bottom, #b1bcf3, #727fc0);
+  color:white;
+}
+
+.logo{
+  background:linear-gradient(to bottom, #ffffff, #eeeeee);
+  border-radius:35px;
+  padding:15px;
+  padding-left:17px;
+  margin-left:5px;
+  border:black solid 3px;
+}
+
+.titre{
+  font-weight:bolder;
+  font-size:2em;
+}
+
+.fond form, .fond .form{
+  background:linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+  padding:20px;
+  border-radius:30px;
+  margin-bottom:10px;
+}
+
+.profile{
+  border-radius:20px;
+}
+
+.slot{
+  border:white solid 5px;
+  border-radius:20px;
+}
+
+#message, #messageRoulette{
+  margin:auto;
+  margin-top:10px;
+  margin-bottom:10px;
+  width:400px;
+  padding:5px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+  border-radius:10px;
+  font-family:verdana;
+  font-weight:bold;
+}
+
+.money{
+font-family:verdana;
+font-weight:bold;
+}
+
+.roulette{
+  position:relative;
+}
+
+.rouletteRow{
+  gap:20px;
+  
+}
+
+#ball{
+  position:absolute;
+}
+
+
+.colJeu{
+  border:black solid 2px;
+  background-color:white;
+}
+
+.colJeu>img{
+  border-bottom:solid black 1px;
+  display:block;
+}
+
+.petit{
+  height:25px;
+  width:75px;
+}
+
+.moyen{
+  height:50px;
+  width:75px;
+}
+
+.jeu{
+  width:249px;
+  position:relative;
+}
+
+#fleche{
+  position:absolute;
+  left:-70px;
+  top:80px;
+}
+
+[id^="stop"]{
+  border:black solid 3px;
+  border-radius:20px;
+  background-color:crimson;
+  color:white;
+  padding:10px;
+  margin:5px 10px 0px 10px;
+  display:none;
+  text-align:center;
+  cursor:pointer;
+}
+
+#argent{
+  background-color:white;
+  padding:10px;
+  border-radius:10px;
+  color:limegreen;
+  font-weight:bold;
+  width:100px;
+  text-align:center;
+}
+
+.panneau{
+  border:black solid 3px;
+  border-radius:20px;
+  background:linear-gradient(to bottom, #a0c0fb, #6d85d4, #5f54b1);
+  padding:10px;
+  height:230px;
+}
+
+#jouer{
+  background-color:black;
+  border:black solid 3px;
+  border-radius:20px;
+  padding:10px;
+  font-weight:bold;
+  color:white;
+  width:200px;
+  text-align:center;
+  cursor:pointer;
+  margin-top:35px;
+}
+
+#jouer:active{
+  background-color:white;
+  color:limegreen;
+}
+
+#message{
+  background-color:white;
+  width:200px;
+  border-radius:10px;
+  padding:10px;
+  font-weight:bold;
+  font-size:1em;
+}
+
+.stopRow{
+  height:45px;
+}
+
+.colStop{
+  width:80px;
+}
+
+.rowJeu{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: center;
+  margin:auto;
+  align-items:start;
+}
+

@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container{
+  margin:auto;
+  margin-top:10px;
+  width:1000px;
+}
+
+header{
+  font-size:2em;
+  font-weight:bold;
+  padding:10px 0px 10px 20px;
+}
+
+nav{
+  display:flex;
+  margin:5px 0px;
+}
+
+nav>a{
+  flex:1;
+  text-align:center;
+  padding:10px;
+  font-weight:bold;
+  border-radius:10px;
+}
+
+nav>a:hover{
+  background-color:rgb(255, 182, 195);
+  color:white;
+}
+
+header,nav,main{
+  border-radius:10px;
+  background-color:rgb(249, 226, 230);
+}
+
+main{
+  padding:10px; 
+}
+
+.link{
+  color:rgb(84, 112, 195);
+}
+
+.options{
+  display:flex;
+  justify-content: space-around;
+  margin-top:10px;
+}
+
+button{
+  background-color:lightgray;
+  border:gray solid 1px;
+  border-radius:5px;
+  padding:5px 10px;
+  cursor:pointer;
+}
+
+button:hover{
+  background-color:rgb(194, 194, 194);
+}
+
+button:active{
+  background-color:rgb(166, 166, 166);
+}
+
+hr{
+  margin-top:10px;
+}
+
+.score{
+  font-size:1.5em;
+  font-weight:bold;
+  margin:10px 0px;
+}
+
+h3{
+  font-size:1.2em;
+  font-weight:bold;
+
+}
+
+.answers{
+  display:flex;
+  margin:auto;
+  width:600px;
+  flex-wrap:wrap;
+  justify-content:space-around;
+  gap:10px;
+  margin-top:10px;
+}
+
+.answers>div{
+  flex-basis:40%;
+  background-color:white;
+  border-radius:10px;
+  padding:5px 10px;
+  align-items: center;
+  display:flex;
+  justify-content: center;
+  cursor:pointer;
+  text-align: center;
+}
+
+.answers>div:hover{
+  background-color:rgb(237, 237, 237);
+  font-weight:bold;
+}
+
+.question{
+  margin:20px 10px 0px 10px;
+  background-color:rgb(255, 245, 246);
+  border-radius:10px;
+  padding:10px;
+}
+
+.right[class="right"]{
+  background-color:rgb(143, 255, 143);
+}
+
+.wrong[class="wrong"]{
+  background-color:rgb(255, 143, 143);
+}
+
+.result{
+  font-size:2em;
+  margin:15px 0px;
+  text-align: center;
+}
+
+.bomb{
+  font-size:3em;
+  cursor:pointer;
+  text-align:center;
+  user-select:none;
+}

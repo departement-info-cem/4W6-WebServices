@@ -1,0 +1,6 @@
+@TP2_serveur_HostAddress = http://localhost:5143
+
+GET {{TP2_serveur_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

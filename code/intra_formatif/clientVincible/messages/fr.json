@@ -1,0 +1,8 @@
+{
+    "favorites":{
+        "title":"Personnages favoris",
+        "language":"English",
+        "name":"Nom : NOM DU PERSONNAGE",
+        "empty":"Vider les favoris"
+    }
+}

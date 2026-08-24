@@ -1,0 +1,3 @@
+Ces fichiers de départ ne doivent pas être inclus dans votre projet final 😠
+
+Une fois leur contenu bien transféré, vous pouvez les jeter !

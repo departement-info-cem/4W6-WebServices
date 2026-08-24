@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: linear-gradient(#ffe7ef,#ffe7ff, #eae7ff, #e7faff) fixed;
+  font-family:Verdana;
+  color:gray;
+}
+
+header,main,footer, nav{
+    background-color:white;
+    border:lightgray solid 1px;
+    width:1000px;
+    margin:auto;
+    margin-bottom:5px;
+}
+
+header{
+  margin-top:5px;
+}
+
+footer div{
+    text-align:center;
+    padding:5px;
+    font-size:1em;
+    vertical-align: middle;
+}
+
+nav .row{
+    justify-content: space-around;
+}
+
+nav .row>a{
+    padding:5px 0px;
+    flex:1;
+    text-align:center;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+nav .row>a:hover{
+    background:linear-gradient(to right, #ffbfff, #bcf0ff) fixed;
+    color:white;
+}
+
+.row{
+    display:flex;
+    flex-wrap:wrap;
+}
+
+header .row{
+    gap:10px;
+}
+
+header .row div{
+    padding:10px;
+    font-weight:bold;
+}
+
+.description h3, .description p{
+    margin:0px;
+}
+
+.basicInput{
+  border:gray solid 1px;
+  border-radius:3px;
+  padding:2px 4px;
+}
+
+.description{
+    padding:10px;
+    flex-basis:100%;
+}
+
+.description button{
+    margin-left:5px;
+}
+
+.search input{
+    width:300px;
+    margin:5px 5px 5px 0px;
+}
+
+.map{
+    margin:0px 10px 10px 10px;
+}
+
+.search h3{
+    margin:0px;
+}
+
+.search{
+    padding:10px;
+    flex-basis:100%;
+}
+
+.search input{
+    width:300px;
+    margin:5px 5px 5px 0px;
+}
+
+.videoPlayer{
+    margin:0px 10px;
+}
+
+.videoPlayer iframe{
+   border:lightgray solid 1px;
+   padding:5px;
+}
+
+.basicButton{
+  background-color:lightgray;
+  border:gray solid 1px;
+  padding:2px 5px;
+  border-radius:5px;
+  color:darkslategray;
+  cursor:pointer;
+}
+
+.basicButton:hover{
+  background-color:rgb(179, 179, 179);
+}
+
+.carrousel{
+    width:fit-content;
+    margin:auto;
+}

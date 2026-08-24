@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<title>Spot-moi</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+	<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+	<header class="w-full">
+		<div class="flex items-center">
+			<div class="p-2 navHover">
+				<h1 class="text-3xl">Spot-moi</h1>
+			</div>
+			<div class="flex-1"></div>
+			<div class="p-2 navHover">
+				<h2 class="text-3xl"><a>Vos artistes</a></h2>
+			</div>
+			<div class="p-2">
+				<select name="language" class="bg-black py-1 px-2 rounded-md text-whites">
+					<option value="fr">Français</option>
+					<option value="en">English</option>
+				</select>
+			</div>
+		</div>
+	</header>
+
+	<main class="w-5xl mx-auto mt-4">
+		<h2 class="text-center text-2xl py-1">Albums de NOM_ARTISTE</h2>
+		<div class="flex text-center m-3 flex-wrap">
+			<div class="basis-1/4">
+				<div class="m-1 text-center p-1 artist">
+					<h4>NOM_ALBUM</h4>
+					<img src="images/disc.png" alt="NOM_ALBUM" />
+					<a><button class="lightButton mt-1">Chansons</button></a>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer class="w-full">
+		<div class="py-1">
+			<div>
+				<p class="text-center">&copy; J'ai yoink le template de l'enseignant</p>
+			</div>
+		</div>
+	</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+/* @import "tailwindcss/preflight.css" layer(base); */
+@import "tailwindcss/utilities.css" layer(utilities);
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  font-family: helvetica;
+  background-color: rgb(247, 252, 255);
+}
+
+.container{
+    display:flex;
+    gap:10px;
+    width:800px;
+    margin:auto;
+    margin-bottom:10px;
+}
+
+.container>div{
+    border:gray solid 1px;
+    padding:10px;
+    flex:1;
+    background-color:white;
+}
+
+.container>div:last-child{
+    flex:3;
+}
+
+.container>div:first-child input{
+    margin-top:5px;
+}
+
+.container>div:first-child button{
+    margin-top:5px;
+}
+
+.log:not(:first-child){
+    margin-top:10px;
+}
+
+.profile{
+    background-color:rgb(243, 243, 243);
+    padding:5px;
+}
+
+.smol{
+    font-size:0.8em;
+}
+
+.title{
+    margin-bottom:10px;
+}
+
+.newPost{
+    display:flex;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.newPost textarea{
+    flex:5;
+    resize:vertical;
+}
+
+.newPost button{
+    flex:1;
+}
+
+.post{
+    background-color:rgb(232, 232, 232);
+    padding:10px;
+    position:relative;
+    margin-bottom:5px;
+}
+
+.delete{
+    position:absolute;
+    top:0px;
+    right:0px;
+    cursor:pointer;
+}
+
+.signature{
+    text-align: right;
+    font-size:0.8em;
+}
+
+.text{
+    padding-right:10px;
+    font-size:0.9em;
+}
