@@ -1,6 +1,6 @@
 # Laboratoire 2
 
-Pour ce deuxième laboratoire il y aura un projet de départ à télécharger. Le [voici](../../static/files/labo2.zip). 🎁
+Pour ce deuxième laboratoire il y aura un projet de départ à télécharger. Le [voici](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo2.zip). 🎁
 
 <center>![Bannière du laboratoire 2](../../static/img/labo2/display1.png)</center>
 

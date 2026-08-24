@@ -1,6 +1,6 @@
 # Laboratoire 3
 
-Commencez par télécharger le ⛔ [projet de départ](../../static/files/labo3.zip) pour ce laboratoire. 🎁
+Commencez par télécharger le ⛔ [projet de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo3.zip) pour ce laboratoire. 🎁
 
 Clé d'API Last FM fournie : `9a8a3facebbccaf363bb9fd68fa37abf`
 

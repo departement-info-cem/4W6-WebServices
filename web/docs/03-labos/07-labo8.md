@@ -2,7 +2,7 @@
 
 <center>![Bannière du laboratoire](../../static/img/labo8/banner.png)</center>
 
-Téléchargez le [projet de départ](../../static/files/labo8.zip) et réinstallez les dépendances.
+Téléchargez le [projet de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo8.zip) et réinstallez les dépendances.
 
 ### 🎥 Étape 1 - À la merci de l'algorithme YouTube
 

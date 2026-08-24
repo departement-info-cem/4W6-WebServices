@@ -12,7 +12,7 @@ Le TP2 n'est ni plus facile, ni plus difficile en utilisant le **serveur maison*
 
 :::
 
-💾 Téléchargement : [Cliquez-ici](../../static/files/tp2_serveur_maison.zip)
+💾 Téléchargement : [Cliquez-ici](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-tp2_serveur_maison.zip)
 
 Si vous n'êtes pas abonné(e) à **Spotify**, utilisez simplement ce **serveur maison** que vous exécuterez localement.
 

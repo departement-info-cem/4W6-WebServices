@@ -12,7 +12,7 @@ Le titre dans la page ressemble à « Laboratoire 3 », mais c'est parce que vou
 
 ## ☃ Étape 1 - Parc du sud
 
-Téléchargez le [projet de départ](../../static/files/labo5.zip).
+Téléchargez le [projet de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo5.zip).
 
 Réinstallez les dépendances avec `npm install`, ouvrez Visual Studio Code et exécutez l'application Web avec `npm run dev`.
 

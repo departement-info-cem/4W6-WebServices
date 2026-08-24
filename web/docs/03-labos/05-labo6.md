@@ -2,7 +2,7 @@
 
 <center>![Bannière du labo 6](../../static/img/labo6/banner.png)</center>
 
-Téléchargez le [projet de départ](../../static/files/labo6.zip), mais ne le lancez pas tout de suite. ⛔🧤⚾
+Téléchargez le [projet de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo6.zip), mais ne le lancez pas tout de suite. ⛔🧤⚾
 
 ## 🚀 Étape 1 - Laboratoire du turfu
 

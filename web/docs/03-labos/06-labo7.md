@@ -6,7 +6,7 @@
 
 ### 📦 1 - Installer une dépendance pour i18n
 
-Téléchargez le [projet de départ](../../static/files/labo7.zip) et réinstallez les dépendances.
+Téléchargez le [projet de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo7.zip) et réinstallez les dépendances.
 
 [💡](/notes/rencontre4.1#-internationalisation) Avant d'ouvrir le projet, installez la dépendance nécessaire pour l'internationalisation.
 
