@@ -12,7 +12,7 @@ export default {
             "id": "web",
             "type": "server",
             "text": "Serveur web",
-            "icon": "nginx",
+            "icon": "nextjs",
             "lane": 2
         },
         {
@@ -26,7 +26,7 @@ export default {
             "id": "db",
             "type": "database",
             "text": "BD",
-            "icon": "postgres",
+            "icon": "mssql",
             "align_with": "api",
             "lane": 3
         }
