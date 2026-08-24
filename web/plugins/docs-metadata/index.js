@@ -1,7 +1,12 @@
-// Plugin Docusaurus : Génère un fichier docsMetadata.json à partir des frontmatters des fichiers Markdown du dossier docs/01-notes
+// Plugin Docusaurus : Génère un fichier docsMetadata.json à partir des frontmatters
+// des fichiers Markdown d’un dossier de documentation (docs/01-cours par défaut,
+// configurable via l’option docsDir).
 
 const fs = require("fs");
 const path = require("path");
+
+// Dossier lu par défaut, relatif à la racine du site Docusaurus
+const DEFAULT_DOCS_DIR = "docs/01-cours";
 
 /**
  * Extrait le frontmatter d'un contenu Markdown
@@ -57,13 +62,13 @@ function getAllDocsMetadata({ docsDir }) {
   const docs = [];
   const files = fs.readdirSync(docsDir);
   for (const file of files) {
-    if (!file.endsWith(".md")) continue;
+    if (!/\.mdx?$/.test(file)) continue;
     const docPath = path.join(docsDir, file);
     const content = fs.readFileSync(docPath, "utf-8");
     const frontmatter = extractFrontmatter(content) || {};
     const markdownTitle = extractFirstMarkdownTitle(content);
     docs.push({
-      id: file.replace(/\.md$/, ""),
+      id: file.replace(/\.mdx?$/, ""),
       ...frontmatter,
       _documentTitle: markdownTitle,
     });
@@ -90,8 +95,8 @@ function extractAllDocEntries(items) {
       if (fs.existsSync(dirPath)) {
         const files = fs.readdirSync(dirPath);
         files.forEach((file) => {
-          if (file.endsWith(".md")) {
-            entries.push({ id: file.replace(/\.md$/, "") });
+          if (/\.mdx?$/.test(file)) {
+            entries.push({ id: file.replace(/\.mdx?$/, "") });
           }
         });
       }
@@ -125,15 +130,21 @@ function generateSidebarDocs() {
 
 /**
  * Plugin Docusaurus pour exposer les métadonnées des documents
+ * @param {Object} context - Contexte Docusaurus
+ * @param {Object} [options]
+ * @param {string} [options.docsDir] - Dossier des fichiers Markdown à lire,
+ *   relatif à la racine du site (ou chemin absolu). Défaut : docs/01-cours
  */
 module.exports = function pluginDocsMetadata(context, options) {
+  const siteDir = context?.siteDir || path.resolve(__dirname, "../..");
+  const docsDir = path.resolve(siteDir, options?.docsDir || DEFAULT_DOCS_DIR);
+
   return {
     name: "docusaurus-plugin-docs-metadata",
     /**
      * Chargement des métadonnées à partir des fichiers Markdown
      */
     async loadContent() {
-      const docsDir = path.resolve(__dirname, "../../docs/01-notes");
       return getAllDocsMetadata({ docsDir });
     },
     /**
