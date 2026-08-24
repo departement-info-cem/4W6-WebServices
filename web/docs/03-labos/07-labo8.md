@@ -1,6 +1,6 @@
 # Laboratoire 8
 
-<center>![Bannière du laboratoire](../../static/img/labo8/banner.png)</center>
+<center>![Bannière du laboratoire](./_07-labo8/banner.png)</center>
 
 Téléchargez le [projet de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo8.zip) et réinstallez les dépendances.
 
@@ -15,7 +15,7 @@ Cette partie utilisera le composant `Home`. Le but est de permettre à l’utili
 
 Faites le nécessaire pour envoyer une requête à l'API de YouTube avec le texte fourni par l'utilisateur dans l'`<input>` et obtenir l'`id` de la première vidéo trouvée. À l'aide de cet id, construisez un URL valide pour finalement afficher la vidéo. (`https://www.youtube.com/embed/VOTRE_ID`)
 
-<center>![Lecteur YouTube](../../static/img/labo8/youtube.png)</center>
+<center>![Lecteur YouTube](./_07-labo8/youtube.png)</center>
 
 ### 🌐 Étape 2 - Une globe-trotteuse compulsive
 
@@ -39,7 +39,7 @@ C'est normal qu'une erreur de facturation soit affichée. Nous n'utiliserons pas
 * Complétez la fonction `addMarker()` pour permettre à l’utilisateur d’ajouter des marqueurs dans cette variable grâce aux `<input>` présents.
 * Complétez la fonction `clearMarkers()` pour permettre à l’utilisateur de vider le tableau de marqueurs.
 
-<center>![Carte Google](../../static/img/labo8/map.png)</center>
+<center>![Carte Google](./_07-labo8/map.png)</center>
 
 ### ✨ Étape 3 - La beauté : à quel prix ?
 
@@ -51,7 +51,7 @@ Oups haha ! **shadcn** est *coquin*, il a retiré le style `background: linear-g
 
 Transformez la page pour obtenir le résultat suivant, qui exploite quatre **composants** de **Shadcn**.
 
-<center>![Composants shadcn](../../static/img/labo8/shadcn.png)</center>
+<center>![Composants shadcn](./_07-labo8/shadcn.png)</center>
 
 Les quatre **composants shadcn** à utiliser :
 

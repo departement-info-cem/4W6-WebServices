@@ -8,7 +8,7 @@ Lorsqu’on crée un **commentaire**, on doit être capable d’y joindre zéro 
 
 Que ce soit pour créer un **commentaire** ou un **sous-commentaire**, cela se passe dans le composant réutilisable nommé `Reply` :
 
-<center>![Créer un commentaire](../../static/img/tp4/c_hotdoye_1.png)</center>
+<center>![Créer un commentaire](./_05-tp4_hotdoye/c_hotdoye_1.png)</center>
 
 Voici quelques pistes non exhaustives pour savoir où donner de la tête. Cette étape sera de loin la plus longue, entre autres car il faut explorer le projet et s'y retrouver !
 
@@ -22,7 +22,7 @@ Voici quelques pistes non exhaustives pour savoir où donner de la tête. Cette 
 * Le serveur n'envoie pas de `Comment` au client, mais plutôt des `CommentDisplayDTO`. (C'est déjà le cas) Ajouter la **liste des ids des images d'un commentaire** dans le `CommentDisplayDTO` et dans la classe `comment.ts` devrait facilement permettre de rendre accessibles tous les **ids** nécessaires au projet **Next.js**.
 * Pour pouvoir afficher les images dans le composant réutilisable `CommentBox`, il faudra une action `GetPicture` dans le `CommentsController` et il faudra glisser une requête directement dans le HTML de `CommentBox` pour afficher chaque image du commentaire à l'aide des **ids** reçus.
 
-<center>![Créer un commentaire](../../static/img/tp4/c_hotdoye_2.png)</center>
+<center>![Créer un commentaire](./_05-tp4_hotdoye/c_hotdoye_2.png)</center>
 
 :::warning
 
@@ -34,18 +34,18 @@ Il est pas mal **incontournable** de faire le merge de la branche de cette étap
 
 Les utilisateurs doivent pouvoir choisir un avatar personnalisé. L’avatar peut être changé / remplacé à tout moment. On doit pouvoir **prévisualiser** l'image choisie quand on change son avatar.
 
-<center>![Avatar](../../static/img/tp4/d_hotdoye_1.png)</center>
+<center>![Avatar](./_05-tp4_hotdoye/d_hotdoye_1.png)</center>
 
 * Ceci se déroule surtout dans le composant `Profile` et dans le `UsersController`.
 * ⛔ N’utilisez pas la classe `Picture` pour les avatars, ajoutez seulement un `FileName` et un `MimeType` dans la classe `User`, c’est plus simple. Exceptionnellement, vous pouvez vous en tirer sans utiliser de service côté serveur pour cette fois. (À l’aide de `UserManager`)
 * La requête pour afficher l’avatar sera plus simple si le paramètre dans l’URL est le **pseudo de l’utilisateur**.
 * Attention ! L'avatar est affiché à quatre endroits : `AccountMenu`, `CommentBox`, `PostThumbnail` et `Profile`. Ne vous mélangez pas avec les **icônes des forums** (hubs), qui sont affichés à plusieurs endroits aussi.
 
-<center>![Avatar](../../static/img/tp4/d_hotdoye_2.png)</center>
+<center>![Avatar](./_05-tp4_hotdoye/d_hotdoye_2.png)</center>
 
 * Un avatar par défaut doit être affiché pour ceux qui n'ont pas choisi d'avatar.
 
-<center>![Avatar](../../static/img/tp4/d_hotdoye_3.png)</center>
+<center>![Avatar](./_05-tp4_hotdoye/d_hotdoye_3.png)</center>
 
 ## Étape E
 
@@ -62,7 +62,7 @@ On doit pouvoir supprimer les images d’un **commentaire** et d'une **publicati
 * Cette suppression concerne une seule image à la fois. Les autres ne sont pas touchées.
 * Bien entendu, on peut seulement supprimer les images **de nos propres commentaires / publications**. On ne veut pas voir le petit X si on n’est pas l’auteur du message.
 
-<center>![Commentaire avec images](../../static/img/tp4/c_hotdoye_2.png)</center>
+<center>![Commentaire avec images](./_05-tp4_hotdoye/c_hotdoye_2.png)</center>
 
 :::danger
 
@@ -79,7 +79,7 @@ Les utilisateurs peuvent signaler (*Report*) les commentaires / publications des
 * Un utilisateur ne peut pas signaler ses propres commentaires. Si on est l'auteur d'un message, on ne peut pas voir l'option « Signaler ».
 * Si on n'est pas connecté, on ne peut pas signaler un message et utiliser l'option « Signaler » nous déplace vers `/account/login`.
 
-<center>![Signalement](../../static/img/tp4/g_hotdoye_1.png)</center>
+<center>![Signalement](./_05-tp4_hotdoye/g_hotdoye_1.png)</center>
 
 ## Étape H
 
@@ -87,7 +87,7 @@ Un rôle modérateur doit être créé. (Sauf si votre partenaire l'a déjà cr�
 
 Il suffira de remplir une liste de commentaires dans le composant `Profile` avec tous les commentaires ayant été signalés si on est un **modérateur**. Le bouton `Supprimer` appelera exactement la même action du serveur que si un utilisateur supprimait son propre message. Il faudra donc permettre aux modérateurs ET à l'auteur d'un message de le supprimer.
 
-<center>![Commentaires signalés](../../static/img/tp4/h_hotdoye_1.png)</center>
+<center>![Commentaires signalés](./_05-tp4_hotdoye/h_hotdoye_1.png)</center>
 
 ## Étape I
 

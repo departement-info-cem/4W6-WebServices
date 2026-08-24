@@ -94,7 +94,7 @@ Par la suite, dans les composants concernés, on peut utiliser la valeur de `maD
 
 Disons qu'on a la **hiérarchie** 🌳 de composants suivante dans notre projet :
 
-<center>![Hiérarchie de composants](../../static/img/cours6/componentTree.png)</center>
+<center>![Hiérarchie de composants](./_06-rencontre3.2/componentTree.png)</center>
 
 On peut donc comprendre que les composants `A`, `B` et `C` sont tous les trois accessibles séparément à l'aide du **Routage**. Tous les autres composants sont des **composants réutilisables** intégrés dans un **composant parent**.
 
@@ -104,7 +104,7 @@ On peut donc comprendre que les composants `A`, `B` et `C` sont tous les trois a
 
 ⛔ Bémol : on n'a pas le droit de déclarer un **état** dans le **Layout racine**. (On peut déclarer une simple valeur, mais pas un **état** avec `useState`) Ça risque de limiter le type de données qu'on pourra choisir pour un **Context** déclaré dans le **Layout racine**. La solution est généralement d'introduire un **composant** entre le **Layout racine** et les composants `A`, `B` et `C` : 
 
-<center>![Hiérarchie de composants](../../static/img/cours6/componentTree2.png)</center>
+<center>![Hiérarchie de composants](./_06-rencontre3.2/componentTree2.png)</center>
 
 Voilà, on pourra **déclarer** et **provide** un **Context** avec une *portée* relativement *globale* dans le composant `H` ! 🌐
 
@@ -114,7 +114,7 @@ Voilà, on pourra **déclarer** et **provide** un **Context** avec une *portée*
 
 Dans cet exemple, un composant **parent** partagera une **donnée** avec ses composants **enfants**. La donnée aura d'abord été obtenue grâce à une **requête HTTP**.
 
-<center>![Hiérarchie de composants](../../static/img/cours6/componentTree3.png)</center>
+<center>![Hiérarchie de composants](./_06-rencontre3.2/componentTree3.png)</center>
 
 Le Context sera ... :
 
@@ -181,7 +181,7 @@ return (
 ```
     </TabItem>
     <TabItem value="peek" label="Page Web">
-<center>![Composant parent qui déclare un context](../../static/img/cours6/contextParent.png)</center>
+<center>![Composant parent qui déclare un context](./_06-rencontre3.2/contextParent.png)</center>
     </TabItem>
 </Tabs>
 
@@ -222,11 +222,11 @@ En effet, en JavaScript / TypeScript, une `const` ça ne peut pas changer de val
 
 Dans cet exemple, les composants `Blue` et `Red`, qui sont intégrés au **layout racine** et chargés par **routage**, doivent avoir accès à une même donnée. De plus, on souhaite que ces deux composants puissent également **modifier** la donnée en plus de pouvoir la **lire**.
 
-<center>![Hiérarchie de composants](../../static/img/cours6/componentTree4.png)</center>
+<center>![Hiérarchie de composants](./_06-rencontre3.2/componentTree4.png)</center>
 
 Comme il est **impossible de déclarer un état** dans le **layout racine**, il faudra commencer par introduire un nouveau **composant** entre le **layout racine** et les composants chargés par **routage**. Comme son seul objectif sera de déclarer et *provide* un **context**, on peut le nommer `ContextWrapper`, par exemple.
 
-<center>![Hiérarchie de composants](../../static/img/cours6/componentTree5.png)</center>
+<center>![Hiérarchie de composants](./_06-rencontre3.2/componentTree5.png)</center>
 
 Le Context sera ... :
 
@@ -236,7 +236,7 @@ Le Context sera ... :
 
 Voici le nouveau composant `ContextWrapper` :
 
-<center>![Emplacement du context wrapper](../../static/img/cours6/contextWrapper.png)</center>
+<center>![Emplacement du context wrapper](./_06-rencontre3.2/contextWrapper.png)</center>
 
 Comme `CounterContext` servira à stocker un **état** ET son `setState`, le type de `CounterContext` sera `any`.
 
@@ -316,7 +316,7 @@ export default function Red() {
 
 Bien entendu, quand on augmente l'état avec `setCounter()`, la valeur change également dans le composant `Blue`.
 
-<center>![Compteur partagé dans deux composants](../../static/img/cours6/counter.png)</center>
+<center>![Compteur partagé dans deux composants](./_06-rencontre3.2/counter.png)</center>
 
 ## 🎣 Hooks
 
@@ -336,7 +336,7 @@ Il existe d'autres **hooks préexistants**, mais on comprend déjà qu'un **hook
 
 Commençons par un **hook** pas très pertinent pour mieux **comprendre** le potentiel et le fonctionnement des hooks. Le hook que nous allons créer se nommera `useStupidHook`.
 
-<center>![Dossier pour les hooks](../../static/img/cours6/hookFolder2.png)</center>
+<center>![Dossier pour les hooks](./_06-rencontre3.2/hookFolder2.png)</center>
 
 :::info
 
@@ -416,7 +416,7 @@ export default function Yellow() {
 }
 ```
 
-<center>![Composant qui intègre le hook](../../static/img/cours6/yellowComponent.png)</center>
+<center>![Composant qui intègre le hook](./_06-rencontre3.2/yellowComponent.png)</center>
 
 #### 📚 Explications
 
@@ -426,7 +426,7 @@ Bien que les **états** `[x, setX]` et `[y, setY]` sont déclarés dans le **hoo
 
 Bien que la fonction `displayStates()` est déclarée dans le **hook**, notre **composant** y a accès grâce à `stupid.displayFunction("nomDeMonChoix")`.
 
-<center>![Message dans la console du hook stupide](../../static/img/cours6/stupidHook.png)</center>
+<center>![Message dans la console du hook stupide](./_06-rencontre3.2/stupidHook.png)</center>
 
 :::info
 

@@ -20,7 +20,7 @@ Puisque l'application **Next.js** est exécutée sur l'ordinateur du client (de 
 on inclut des identifiants pour se connecter à une base de données... la sécurité
 de notre base de données sera compromise.
 
-<center>![Interaction SQL inopportune](../../static/img/cours3/sql_next.png)</center>
+<center>![Interaction SQL inopportune](./_03-rencontre2.1/sql_next.png)</center>
 
 > Oui mais si on utilise seulement des identifiants permettant de faire des SELECT sur certaines tables précises ?
 
@@ -53,17 +53,17 @@ des fins d'apprentissage.
 des **requêtes HTTP** pour obtenir des **données** sour format **JSON** ou **XML** pour ensuite utiliser ces données pour 
 meubler les pages Web de notre application Next.js.
 
-<center>![Requête HTTP envoyée à LastFM](../../static/img/cours3/lastFM_next.png)</center>
+<center>![Requête HTTP envoyée à LastFM](./_03-rencontre2.1/lastFM_next.png)</center>
 
 Rendez-vous à [cette page](https://www.last.fm/api/intro) pour accéder à la documentation qui décrit toutes les **requêtes disponibles**
 avec **Last FM**.
 
-<center>![Requêtes disponibles avec last fm](../../static/img/cours3/methods.png)</center>
+<center>![Requêtes disponibles avec last fm](./_03-rencontre2.1/methods.png)</center>
 
 Par exemple, si je souhaite obtenir des informations sur un album en particulier, la requête nommée `album.getInfo` risque
 de répondre à mes besoins.
 
-<center>![Documentation pour la requête album.getInfo](../../static/img/cours3/albumGetInfo.png)</center>
+<center>![Documentation pour la requête album.getInfo](./_03-rencontre2.1/albumGetInfo.png)</center>
 
 Last FM nous fournit un exemple d'URL complète pour cette requête :
 
@@ -79,7 +79,7 @@ pour vous simplifier la vie.
 
 On peut même essayer la requête directement dans la barre d'adresse d'un navigateur (L'affichage avec Firefox 🔥🦊 est le plus clair) :
 
-<center>![Requête testée dans un navigateur](../../static/img/cours3/objetJSON.png)</center>
+<center>![Requête testée dans un navigateur](./_03-rencontre2.1/objetJSON.png)</center>
 
 Ce qu'on voit présentement est un **objet JSON**. Nous allons pouvoir extraire des données (liste de chansons, genre, nom de l'album, etc.)
 de notre choix afin de les afficher dans notre application Angular. Tout ceci sera automatisé avec du code **TypeScript** dans notre
@@ -117,7 +117,7 @@ async function getData(){
 Dans la console du navigateur où la fonction `getData()` a été appelée, on peut apercevoir ceci suite à l'appel de
 `console.log(response.data)` :
 
-<center>![Résultat du console.log()](../../static/img/cours3/consolelOg.png)</center>
+<center>![Résultat du console.log()](./_03-rencontre2.1/consolelOg.png)</center>
 
 C'est le même **objet JSON** que lorsque nous avions directement testé la requête dans la barre d'adresse du navigateur.
 Cependant, cette fois-ci, l'objet JSON a été stocké dans la variable `reponse` ! On pourrait donc accéder à toutes les données
@@ -127,7 +127,7 @@ de l'objet JSON en manipulant `reponse.data`. (`response` ne contient pas seulem
 
 Disons qu'on souhaite afficher le **nom de l'artiste** et le **titre de l'album** :
 
-<center>![Résultat du console.log()](../../static/img/cours3/consoleLog2.png)</center>
+<center>![Résultat du console.log()](./_03-rencontre2.1/consoleLog2.png)</center>
 
 Voici comment on pourrait extraire ces données dans le code :
 
@@ -146,7 +146,7 @@ async getData(){
 Pour déterminer le chemin (Exemple : `response.data.album.artist`) vers une donnée à extraire, il faut partir de la racine
 de **l'objet JSON** et descendre dans sa hiérarchie jusqu'à la propriété voulue.
 
-<center>![Résultat du console.log()](../../static/img/cours3/consoleLog3.png)</center>
+<center>![Résultat du console.log()](./_03-rencontre2.1/consoleLog3.png)</center>
 <br/>
 > Pourquoi le chemin utilisé dans le code n'est pas `response.data.Object.album.artist` ?
 
@@ -165,7 +165,7 @@ Par exemple, `response.data.bruh.six.seven` n'existe pas dans l'objet JSON reç
 
 Disons qu'on souhaite extraire l'URL de l'image de taille `medium` pour la glisser dans un élément `<img>` plus tard :
 
-<center>![Résultat du console.log()](../../static/img/cours3/consoleLog4.png)</center>
+<center>![Résultat du console.log()](./_03-rencontre2.1/consoleLog4.png)</center>
 
 C'est un peu plus pimenté 🌶 puisqu'il y a un tableau impliqué (nommé `image`) et le *damné* caractère `#` dans le nom de la propriété `#text`.
 
@@ -232,14 +232,14 @@ async function getData() {
 {imageUrl != null && <img src={imageUrl} alt="Pochette de l'album {albumName}"/>}
 ```
 
-<center>![Affichage des données dans le HTML](../../static/img/cours3/affichageData_react.png)</center>
+<center>![Affichage des données dans le HTML](./_03-rencontre2.1/affichageData_react.png)</center>
 
 ## 📜 Extraire un tableau de données
 
 Disons que je souhaite extraire la liste des chansons de **l'objet JSON** (Le titre et la durée en secondes pour
 chaque chanson) ...
 
-<center>![Affichage de l'objet JSON](../../static/img/cours3/consoleLog5.png)</center>
+<center>![Affichage de l'objet JSON](./_03-rencontre2.1/consoleLog5.png)</center>
 
 #### ⚱ 1 - Préparer un model (au besoin)
 
@@ -298,7 +298,7 @@ En gros, on a une boucle _foreach_ qui parcourt le tableau dans l'objet JSON. Ch
 est consécutivement représenté par la variable `s` dans la boucle. Il reste donc juste à accéder à chacune
 des sous-propriétés `name` et `duration` pour remplir notre état `songs`.
 
-<center>![Parcourir un tableau dans l'objet JSON](../../static/img/cours3/array_react.png)</center>
+<center>![Parcourir un tableau dans l'objet JSON](./_03-rencontre2.1/array_react.png)</center>
 
 :::warning
 
@@ -330,7 +330,7 @@ Comme c'est un tableau, on va utiliser notre ami `map()` pour l'affichage. 😵
 </ul>
 ```
 
-<center>![Affichage d'un tableau dans le HTML](../../static/img/cours3/affichageArray_react.png)</center>
+<center>![Affichage d'un tableau dans le HTML](./_03-rencontre2.1/affichageArray_react.png)</center>
 
 ## 📈 Améliorer la requête
 
@@ -449,7 +449,7 @@ l'album n'existe pas ou bien il y a une typo dans la rédaction d'une donnée)
 Oups ! Qui l'eut cru ! Rechercher l'artiste `oeif0u809` et l'album `08f0w9ufe` n'a pas fonctionné. Il n'y a aucune donnée à afficher.
 C'est important d'offrir du feedback à l'utilisateur lorsqu'une opération échoue.
 
-<center>![Erreur lors de la requête](../../static/img/cours3/error_react.png)</center>
+<center>![Erreur lors de la requête](./_03-rencontre2.1/error_react.png)</center>
 
 Voici comment on pourrait s'y prendre.
 
@@ -493,7 +493,7 @@ Enfin, on affichage l'état avec le **message d'erreur** dans le HTML. (Qui sera
 <p className="error">{errorMessage}</p>
 ```
 
-<center>![Erreur lors de la requête](../../static/img/cours3/errorMessage.png)</center>
+<center>![Erreur lors de la requête](./_03-rencontre2.1/errorMessage.png)</center>
 
 ## ⌛ Asynchronisme
 
@@ -538,7 +538,7 @@ async function slowRequest(){
 
 Dans quel ordre seront imprimées les lettres `A`, `B` et `C` ?
 
-<center>![Exemple d'appel d'une fonction async](../../static/img/cours3/async_react.png)</center>
+<center>![Exemple d'appel d'une fonction async](./_03-rencontre2.1/async_react.png)</center>
 <br/>
 > Pourquoi `B` a-t-il été imprimé après `C` ?
 
@@ -568,7 +568,7 @@ async function slowRequest(){
 
 Dans quel ordre seront imprimées les lettres `A`, `B` et `C` ?
 
-<center>![Exemple d'appel d'une fonction async](../../static/img/cours3/async2_react.png)</center>
+<center>![Exemple d'appel d'une fonction async](./_03-rencontre2.1/async2_react.png)</center>
 <br/>
 > Pourquoi `B` a-t-il été imprimé **avant** `C` ?
 
@@ -602,7 +602,7 @@ setSongs(songList);
 
 Dans le navigateur de votre choix, ouvrez votre page Web et faites le nécessaire pour que la section du code qui contient l'instruction `debugger;` s'active.
 
-<center>![Débogage avec Microsoft Edge](../../static/img/cours8/debug.png)</center>
+<center>![Débogage avec Microsoft Edge](./_03-rencontre2.1/debug.png)</center>
 
 Vous pouvez utiliser des boutons pour progresser dans l'exécution du code, Vous pouvez survoler des variables pour inspecter leur contenu, etc.
 

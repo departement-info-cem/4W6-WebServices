@@ -13,21 +13,21 @@ autre projet Angular plus tard.
 
 Vous êtes invités à créer un dossier `services` dans le dossier `app` pour y ranger vos services :
 
-<center>![Dossier pour ranger les services](../../static/img/cours6/servicesFolder.png)</center>
+<center>![Dossier pour ranger les services](./_06-rencontre3.2/servicesFolder.png)</center>
 
 La commande `ng generate service nomDeVotreService` permet de créer un nouveau service. Commencez par
 vous déplacer vers le dossier de destination à l'aide de la commande `cd` :
 
-<center>![Commande cd](../../static/img/cours6/cd.png)</center>
+<center>![Commande cd](./_06-rencontre3.2/cd.png)</center>
 
 Puis, créez votre nouveau service :
 
-<center>![Commande ng generate service](../../static/img/cours6/newService.png)</center>
+<center>![Commande ng generate service](./_06-rencontre3.2/newService.png)</center>
 
 Deux nouveaux fichiers ont été générés. N'hésitez pas à supprimer le fichier `...spec.ts`, qui sert
 aux tests unitaires.
 
-<center>![Fichiers générés lors de la création du service](../../static/img/cours6/serviceFiles.png)</center>
+<center>![Fichiers générés lors de la création du service](./_06-rencontre3.2/serviceFiles.png)</center>
 
 N'oubliez pas de retourner dans le dossier racine du projet avec `cd ../../..` ou encore de simplement ouvrir un nouveau terminal.
 

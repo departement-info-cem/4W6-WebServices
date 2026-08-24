@@ -147,7 +147,7 @@ localStorage.clear();
 N'hésitez pas à utiliser l'outil du navigateur qui permet de jeter un coup d'oeil au **stockage local**. On peut
 d'ailleurs y supprimer manuellement des données pour simplifier les tests.
 
-<center>![Stockage local dans le navigateur](../../static/img/cours7/localStorage.png)</center>
+<center>![Stockage local dans le navigateur](./_07-rencontre4.1/localStorage.png)</center>
 
 ### 👅 Internationalisation
 
@@ -267,7 +267,7 @@ Pour une valeur d'attribut, on peut utiliser cette structure :
 Dans le dossier `public/assets/i18n` (à créer au besoin), on pourrait par exemple créer les fichiers `fr.json` et `en.json`.
 Il faut **un fichier JSON par langue**.
 
-<center>![Fichier JSON pour une langue](../../static/img/cours7/i18n_json.png)</center>
+<center>![Fichier JSON pour une langue](./_07-rencontre4.1/i18n_json.png)</center>
 <br/>
 #### Étape 5½ - 🧩 Gérer le texte mêlée à des variables
 
@@ -318,7 +318,7 @@ Le but est simplement d'offrir un mécanisme quelconque pour appeler la fonction
 
 * Exemple 1 : 🔘 Des boutons
 
-<center>![Boutons](../../static/img/cours7/buttons.png)</center>
+<center>![Boutons](./_07-rencontre4.1/buttons.png)</center>
 
 ```html
 <button (click)="changeLanguage('fr')">Français</button>
@@ -336,7 +336,7 @@ changeLanguage(lang : string){
 
 * Exemple 2 : 🛴 Un menu déroulant
 
-<center>![Menu déroulant](../../static/img/cours7/dropDown.png)</center>
+<center>![Menu déroulant](./_07-rencontre4.1/dropDown.png)</center>
 
 Assurez-vous de _two-way bind_ le `<select>` avec une variable qui contiendra la langue. (Ici, `language`)
 
@@ -376,7 +376,7 @@ Une fois que vous avez un compte, rendez-vous sur [https://developer.spotify.com
 Une fois l'application créée, nous aurons accès à un **Client ID** et un **Client Secret** qui nous
 serviront plus tard pour envoyer des requêtes.
 
-<center>![Secret Spotify](../../static/img/cours7/secret.png)</center>
+<center>![Secret Spotify](./_07-rencontre4.1/secret.png)</center>
 
 #### Étape 2 - 🕵️‍♂️ Hard-coder le Client ID et le Client Secret
 
@@ -430,7 +430,7 @@ async connect() : Promise<void> {
 
 Dans l'objet JSON obtenu, on peut accéder au **token** grâce à `x.access_token` :
 
-<center>![Objet JSON obtenu](../../static/img/cours7/json.png)</center>
+<center>![Objet JSON obtenu](./_07-rencontre4.1/json.png)</center>
 
 Dans notre cas, le **token** a été rangé dans la variable `spotifyToken`, qui a dû être déclarée dans le service :
 

@@ -39,7 +39,7 @@ export default function Home() {
 }
 ```
 
-<center>![Affichage d'un état en react](../../static/img/cours2/state.png)</center>
+<center>![Affichage d'un état en react](./_02-rencontre1.2/state.png)</center>
 
 Pour **modifier** la valeur d'un état, il faudra utiliser le `set...` de sa déclaration. Exemple :
 
@@ -268,7 +268,7 @@ return (
 );
 ```
 
-<center>![Affichage d'une liste](../../static/img/cours2/displayArray.png)</center>
+<center>![Affichage d'une liste](./_02-rencontre1.2/displayArray.png)</center>
 
 Le morceau de code ci-dessous permet de créer un élément `<li>` pour **chaque donnée** du tableau **ingredients** :
 
@@ -302,7 +302,7 @@ const [ages, setAges] = useState([17, 18, 17, 19, 20, 18]); // Certaines valeurs
 </ul>
 ```
 
-<center>![Affichage d'une liste](../../static/img/cours2/displayArrayIndex.png)</center>
+<center>![Affichage d'une liste](./_02-rencontre1.2/displayArrayIndex.png)</center>
 
 :::
 
@@ -347,7 +347,7 @@ Voici un exemple avec un objet personnalisé :
     </TabItem>
 </Tabs>
 
-<center>![Affichage d'une liste sophistiqué](../../static/img/cours2/displayArrayObject.png)</center>
+<center>![Affichage d'une liste sophistiqué](./_02-rencontre1.2/displayArrayObject.png)</center>
 
 ## ✔ Affichage conditionnel
 
@@ -382,7 +382,7 @@ return (
 
 Bien entendu, dans ce cas, puisque `userAge` est supérieur ou égal à 18, les deux boutons s'afficheront.
 
-<center>![Affichage condition](../../static/img/cours2/displayCondition.png)</center>
+<center>![Affichage condition](./_02-rencontre1.2/displayCondition.png)</center>
 
 :::tip
 
@@ -400,7 +400,7 @@ return (
 ```
 
 Le résultat est identique : 
-<center>![Affichage condition](../../static/img/cours2/displayCondition.png)</center>
+<center>![Affichage condition](./_02-rencontre1.2/displayCondition.png)</center>
 
 On peut utiliser une **condition ternaire** dans certaines situations (Quand on veut afficher une chose OU l'autre) :
 
@@ -471,7 +471,7 @@ return (
     </TabItem>
 </Tabs>
 
-<center>![Affichage conditionnel avec liste](../../static/img/cours2/displayConditionList.png)</center>
+<center>![Affichage conditionnel avec liste](./_02-rencontre1.2/displayConditionList.png)</center>
 
 :::info
 
@@ -530,7 +530,7 @@ return (
 Résultat : Comme on affiche `{x}` dans la page Web, on peut voir la valeur de `x` évoluer dynamiquement
 à chaque fois qu'on appuie sur le bouton.
 
-<center>![Événement clic](../../static/img/cours2/displayEvent.png)</center>
+<center>![Événement clic](./_02-rencontre1.2/displayEvent.png)</center>
 
 :::warning
 
@@ -590,7 +590,7 @@ return (
 );
 ```
 
-<center>![Événement de survol](../../static/img/cours2/displayEventOver.png)</center>
+<center>![Événement de survol](./_02-rencontre1.2/displayEventOver.png)</center>
 
 CSS utilisé pour le texte :
 
@@ -654,9 +654,9 @@ return (
 
 Bien entendu, l'élément `<div>` contiendra toujours le même texte que l'input.
 
-<center>![Two-way binding](../../static/img/cours2/twoWayBinding_1.png)</center>
+<center>![Two-way binding](./_02-rencontre1.2/twoWayBinding_1.png)</center>
 
-<center>![Two-way binding](../../static/img/cours2/twoWayBinding_2.png)</center>
+<center>![Two-way binding](./_02-rencontre1.2/twoWayBinding_2.png)</center>
 
 Grâce à ce mécanisme, nous aurons facilement accès à la donnée fournie par l'utilisateur
 dans l'état `favoriteWord`.
@@ -719,7 +719,7 @@ classe (nom `""`, date `""`, quantité à `1` et item *pas brisé*) se reflèten
     ```
     </TabItem>
     <TabItem value="ui" label="Page Web" default>
-    ![Formulaire pour créer un item](../../static/img/cours2/form.png)
+    ![Formulaire pour créer un item](./_02-rencontre1.2/form.png)
     </TabItem>
 </Tabs>
 
@@ -757,7 +757,7 @@ Avant de tester, on prépare un affichage quelque part dans le HTML pour la list
 
 Voici le résultat final dans la page Web après avoir créé 3 items grâce au formulaire :
 
-<center>![Affichage d'une liste avec formulaire](../../static/img/cours2/formList.png)</center>
+<center>![Affichage d'une liste avec formulaire](./_02-rencontre1.2/formList.png)</center>
 
 **Code complet** :
 

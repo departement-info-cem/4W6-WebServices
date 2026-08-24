@@ -8,13 +8,13 @@ Lorsqu'on crée une **publication**, on doit être capable d'y joindre zéro à 
 
 Rendez-vous dans le composant `CreatePost` pour créer une **publication**.
 
-<center>![Publication avec images](../../static/img/tp4/c_pinotte_1.png)</center>
+<center>![Publication avec images](./_06-tp4_sushi/c_pinotte_1.png)</center>
 
 :::danger
 
 ⛔ Attention ! Un `Post`, c'est seulement un **titre**. Le message qu'on voit sous le titre est un `Comment`. Lorsqu'on crée un `Post`, cela crée un `Post` ET un `Comment`. (Qui contient le texte et les upvotes / downvotes) Si on regarde dans le modèle `Post`, il y a une propriété nommée `MainComment` ! Bref, les images seront associées au `MainComment` (donc à un `Comment`) et non au `Post` !
 
-<center>![Publication avec images](../../static/img/tp4/c_pinotte_0.png)</center>
+<center>![Publication avec images](./_06-tp4_sushi/c_pinotte_0.png)</center>
 
 :::
 
@@ -30,7 +30,7 @@ Voici quelques pistes non exhaustives pour savoir où donner de la tête. Cette 
 * Le serveur n'envoie pas de `Post` et de `Comment` au client, mais plutôt des `PostDisplayDTO` et des `CommentDisplayDTO`. (C'est déjà le cas) Ajouter la **liste des ids des images d'un commentaire** dans le `CommentDisplayDTO` et dans la classe `comment.ts` devrait facilement permettre de rendre accessibles tous les **ids** nécessaires au projet **Next.js**.
 * Pour pouvoir afficher les images dans le composant `FullPost`, il faudra une action `GetPicture` dans le `CommentsController` et il faudra glisser une requête directement dans le HTML de `FullPost` pour afficher chaque image de la publication à l'aide des **ids** reçus.
 
-<center>![Publication avec images](../../static/img/tp4/c_pinotte_2.png)</center>
+<center>![Publication avec images](./_06-tp4_sushi/c_pinotte_2.png)</center>
 
 :::warning
 
@@ -50,19 +50,19 @@ Lorsqu'on crée un forum (`hub`), on doit pouvoir choisir une image qui servira 
 
 L'icône choisie lors de la création du forum doit pouvoir être **prévisualisée** :
 
-<center>![Icône de forum](../../static/img/tp4/d_pinotte_1.png)</center>
+<center>![Icône de forum](./_06-tp4_sushi/d_pinotte_1.png)</center>
 
 Attention ! L'icône du forum est affichée à cinq endroits : `FullHub`, `LeftBar`, `FullPost`, `CreatePost` et `PostThumbnail`. Ne vous mélangez pas avec les **avatars**, qui sont affichés à plusieurs endroits aussi.
 
-<center>![Icône de forum](../../static/img/tp4/d_pinotte_2.png)</center>
+<center>![Icône de forum](./_06-tp4_sushi/d_pinotte_2.png)</center>
 
 Si on ne choisit pas d'icône en créant un forum, une icône par défaut est affichée pour le forum :
 
-<center>![Icône de forum](../../static/img/tp4/d_pinotte_4.png)</center>
+<center>![Icône de forum](./_06-tp4_sushi/d_pinotte_4.png)</center>
 
 Pour l'affichage de la première image d'une publication dans `PostThumbnail`, ça ne devrait pas être trop complexe : si la publication possède au moins une image, utilisez l'id de la première image pour l'afficher dans l'aperçu :
 
-<center>![Publication avec images](../../static/img/tp4/d_pinotte_3.png)</center>
+<center>![Publication avec images](./_06-tp4_sushi/d_pinotte_3.png)</center>
 
 ## Étape E
 
@@ -72,7 +72,7 @@ On peut « sauvegarder » des publications pour les ajouter à nos favoris. Les 
 * Un utilisateur non authentifié est redirigé vers `/account/login` s'il utilise cette option.
 * Ajouter une propriété `IsSaved` dans le `PostDisplayDTO` devrait simplifier l'affichage de la **bonne** option parmi les deux.
 
-<center>![Sauvegarder une publication](../../static/img/tp4/e_pinotte_1.png)</center>
+<center>![Sauvegarder une publication](./_06-tp4_sushi/e_pinotte_1.png)</center>
 
 :::tip
 
@@ -82,7 +82,7 @@ Pour avoir tous vos points, que ce soit pour **sauvegarder** ou **retirer** la p
 
 Il restera ensuite à créer une requête permettant d'obtenir toutes les publications qu'on a sauvegardées dans `Profile` :
 
-<center>![Sauvegarder une publication](../../static/img/tp4/e_pinotte_2.png)</center>
+<center>![Sauvegarder une publication](./_06-tp4_sushi/e_pinotte_2.png)</center>
 
 ## Étape F
 
@@ -100,7 +100,7 @@ Les utilisateurs doivent pouvoir se connecter en utilisant leur nom d’utilisat
 * C'est une des rares questions où il n'y aura pas les méthodes nécessaires dans les notes de cours. Vérifiez les fonctions qui existent avec `UserManager`. Il y en a une pour changer un mot de passe et une pour trouver un utilisateur via son courriel.
 * Tout se passera dans `Profile` et dans `UsersController`.
 
-<center>![Changer le mot de passe](../../static/img/tp4/g_pinotte_1.png)</center>
+<center>![Changer le mot de passe](./_06-tp4_sushi/g_pinotte_1.png)</center>
 
 ## Étape H
 
@@ -109,7 +109,7 @@ Un rôle administrateur doit être créé. Les administrateurs peuvent ajouter l
 * Votre partenaire s'occupera de rendre utiles les modérateurs à votre place, mais pour le moment créez juste le rôle s'il n'existe pas déjà.
 * Il faudra rendre disponible un onglet supplémentaire **seulement visible pour les administrateurs** dans le profil.
 
-<center>![Ajout de modérateurs](../../static/img/tp4/h_pinotte_1.png)</center>
+<center>![Ajout de modérateurs](./_06-tp4_sushi/h_pinotte_1.png)</center>
 
 ## Étape I
 

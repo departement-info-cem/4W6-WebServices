@@ -2,7 +2,7 @@
 
 Pour ce deuxième laboratoire il y aura un projet de départ à télécharger. Le [voici](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo2.zip). 🎁
 
-<center>![Bannière du laboratoire 2](../../static/img/labo2/display1.png)</center>
+<center>![Bannière du laboratoire 2](./_02-labo2/display1.png)</center>
 
 ## 😵 Étape 1 - J'ai déjà tout oublié React
 
@@ -36,7 +36,7 @@ immédiatement initialisé avec trois choses que vous aimez plus que la _Prog We
 [💡](/notes/rencontre1.2#-afficher-une-liste) Dans le HTML, utilisez `.map()` pour parcourir votre liste et dupliquer un élément `<li>` trois
 fois à l'intérieur d'un élément `<ul className="list-disc ml-4">` pour afficher tous les éléments de votre liste élégamment.
 
-<center>![Affichage de la liste](../../static/img/labo2/display2.png)</center>
+<center>![Affichage de la liste](./_02-labo2/display2.png)</center>
 
 ### **3 -** Condition
 
@@ -50,7 +50,7 @@ remplacez `???` par un texte différent :
 
 Vous pourrez jouer avec la valeur de `userAge` pour tester que les deux possibilités fonctionnent.
 
-<center>![Affichage conditionnel](../../static/img/labo2/display3.png)</center>
+<center>![Affichage conditionnel](./_02-labo2/display3.png)</center>
 
 :::warning
 
@@ -66,7 +66,7 @@ Cette fois-ci je vous donne un peu moins de pistes alors soyez prudents. 👷‍
 
 N'hésitez pas à modifier le HTML. Personnellement j'ai dû ajouter deux `<span>` et une condition ternaire pour réussir.
 
-<center>![Affichage conditionnel et événement](../../static/img/labo2/display4_1.png)</center>
+<center>![Affichage conditionnel et événement](./_02-labo2/display4_1.png)</center>
 
 ### **5 -** Mini thème sombre
 
@@ -91,7 +91,7 @@ Si vous préférez les **template strings** :
 
 :::
 
-<center>![Affichage conditionnel 4](../../static/img/labo2/display5.png)</center>
+<center>![Affichage conditionnel 4](./_02-labo2/display5.png)</center>
 
 :::note
 
@@ -107,8 +107,8 @@ Pour les prochains exercices, nous travaillerons avec des éléments de formulai
 
 [💡](/notes/rencontre1.2#-formulaires) Utilisez le champ texte présent et associez-le à un état de type `string`. Le but est de pouvoir entrer son nom dans le champ, puis, de cliquer sur le bouton pour faire afficher le  message `"Salut nom"`. Vous aurez besoin d'une fonction qui appelera `alert(...message...)` dans le composant.
 
-<center>![Affichage avec champ](../../static/img/labo2/display6_1.png)</center>
-<center>![Affichage avec message](../../static/img/labo2/display6_2.png)</center>
+<center>![Affichage avec champ](./_02-labo2/display6_1.png)</center>
+<center>![Affichage avec message](./_02-labo2/display6_2.png)</center>
 
 ### **7 -** Choix d'une couleur de fond
 
@@ -127,9 +127,9 @@ Si on le formule autrement, ça donnerait « Dans le fond dude l'`<option>` que 
 ::: 
 
 
-<center>![Affichage avec fond](../../static/img/labo2/display7_1.png)</center>
-<center>![Affichage avec fond](../../static/img/labo2/display7_2.png)</center>
-<center>![Affichage avec fond](../../static/img/labo2/display7_3.png)</center>
+<center>![Affichage avec fond](./_02-labo2/display7_1.png)</center>
+<center>![Affichage avec fond](./_02-labo2/display7_2.png)</center>
+<center>![Affichage avec fond](./_02-labo2/display7_3.png)</center>
 
 
 
@@ -155,13 +155,13 @@ Exemple pour un des trois boutons radio de la solution :
 
 L'affichage avec `map()` est déjà fourni pour être sûr que ça fonctionne bien lorsque vous testerez.
 
-<center>![Affichage avec formulaire sophistiqué](../../static/img/labo2/display8.png)</center>
+<center>![Affichage avec formulaire sophistiqué](./_02-labo2/display8.png)</center>
 
 ### **9 -** Liste vide
 
 [💡](/notes/rencontre1.2#-affichage-conditionnel) L'affichage des jeux était déjà faite, mais pouvez-vous mettre un message spécial qui s'affiche seulement lorsque la liste est vide ? Utilisez la forme `booléen && expression`.
 
-<center>![Affichage d'une liste vide](../../static/img/labo2/display9_1.png)</center>
+<center>![Affichage d'une liste vide](./_02-labo2/display9_1.png)</center>
 
 ## 👽 Étape 4 - Mutation de tableau
 
@@ -169,10 +169,10 @@ L'affichage avec `map()` est déjà fourni pour être sûr que ça fonctionne b
 
 [💡](/notes/rencontre1.2#-changer-un-tableau) Rendez ce bouton fonctionnel pour qu'il retire le dernier jeu du tableau `videoGames`. Si c'est bien codé, appuyer sur le bouton mettra automatiquement à jour l'affichage de la liste dans la page.
 
-<center>![Bouton dans la page](../../static/img/labo2/display10_1.png)</center>
+<center>![Bouton dans la page](./_02-labo2/display10_1.png)</center>
 
 ### **11 -** Mutation de tous les éléments
 
 [💡](/notes/rencontre1.2#-changer-un-tableau) Rendez ce bouton fonctionnel pour qu'il augmente le nombre de joueurs de tous les jeux du tableau `videoGames` de 1. Si c'est bien codé, appuyer sur le bouton mettra automatiquement à jour l'affichage de la liste dans la page.
 
-<center>![Bouton dans la page](../../static/img/labo2/display11.png)</center>
+<center>![Bouton dans la page](./_02-labo2/display11.png)</center>

@@ -39,7 +39,7 @@ de références vers une autre classe. (Ex : `public virtual List<Item> Items { 
 
 Pour pouvoir profiter du **🦥 Lazy Loading**, vous êtes invités à installer le package `Proxies` dans la dernière version `8.X.X` pour vous simplifier la vie lors du chargement des données depuis la base de données !
 
-<center>![Package Proxies](../../static/img/cours15/proxies.png)</center>
+<center>![Package Proxies](./_16-rencontre8.1/proxies.png)</center>
 
 Le code dans `Program.cs` devra être légèrement modifier : 
 
@@ -301,7 +301,7 @@ Lorsqu'on souhaiter créer (`Post`) une `Recipe`, ce qu'on doit envoyer au serve
 
 Or, aucun modèle ne correspond à la combinaison de ces deux types. La solution est donc de créer une autre **classe** qui servira exclusivement à **transférer des données entre le client et le serveur**, d'où le nom **Data Transfer Object**.
 
-<center>![Classe Data transfer object](../../static/img/cours15/dto1.png)</center>
+<center>![Classe Data transfer object](./_16-rencontre8.1/dto1.png)</center>
 
 ```cs showLineNumbers
 public class RecipeDTO
@@ -603,7 +603,7 @@ Exemple : J'ai deux contrôleurs capables de créer des `Patate` ? Au lieu de r�
 
 Un peu plus délicat à expliquer. En gros, en programmation, en général, on aime quand une classe possède **une seule responsabilité cohérente**. Si on injecte directement le `DbContext` dans un **contrôleur**, on ouvre la porte à lui permettre de faire pas mal n'importe quoi avec la base de données. C'est à partir de ce moment qu'on n'est plus sûr dans quel contrôleur on pourra retrouver telle ou telle opération. Avec un `PatateService`, on sait qu'on pourra y retrouver toutes les opérations possibles qui concernent les patates et qu'on n'aura pas à aller fouiller dans `HotDogService` pour chercher des opérations sur les patates.
 
-<center>![Services](../../static/img/cours15/services.png)</center> 
+<center>![Services](./_16-rencontre8.1/services.png)</center> 
 
 ### 💉 Injection
 
@@ -643,7 +643,7 @@ public class VideoGamesController : ControllerBase
 
 Pour créer un **service**, créez une **simple classe** dans laquelle on **injecte le DbContext**.
 
-<center>![Dossier pour les services](../../static/img/cours15/serviceFolder.png)</center> 
+<center>![Dossier pour les services](./_16-rencontre8.1/serviceFolder.png)</center> 
 
 ```cs showLineNumbers
     public class VideoGameService

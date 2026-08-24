@@ -14,17 +14,17 @@ Pour afficher une **vidéo YouTube spécifique** dans un composant, suivez les �
 **Étape 1 - 🔍 Trouver une vidéo YouTube de notre choix**
 
 <center>
-    ![Recherche d'une vidéo YouTube](../../static/img/cours8/searchVideo.png)
-    ![Exemple de vidéo YouTube](../../static/img/cours8/videoExample.png)
+    ![Recherche d'une vidéo YouTube](./_08-rencontre4.2/searchVideo.png)
+    ![Exemple de vidéo YouTube](./_08-rencontre4.2/videoExample.png)
 </center>
 
 **Étape 2 - 🚚 Copier le \<iframe\> prémâché dans le composant**
 
-<center>![iframe prémâché](../../static/img/cours8/iframe.png)</center>
+<center>![iframe prémâché](./_08-rencontre4.2/iframe.png)</center>
 
 On colle dans le HTML d'un composant :
 
-<center>![iframe collé](../../static/img/cours8/iframe2.png)</center>
+<center>![iframe collé](./_08-rencontre4.2/iframe2.png)</center>
 <br/>
 :::warning
 
@@ -98,7 +98,7 @@ absolument pas nécessaire ! Vous devriez pouvoir revenir en arrière et / ou ob
 
 **Étape 2 - 🚀 Activer YouTube Data API v3**
 
-<center>![Page pour activer les APIs Google](../../static/img/cours8/enableAPI.png)</center>
+<center>![Page pour activer les APIs Google](./_08-rencontre4.2/enableAPI.png)</center>
 
 Pour que nos requêtes à **l'API Web de YouTube** fonctionnent, il faudra activer l'API pour notre compte Google.
 Cliquez sur « Enable APIs and services », puis cherchez l'API de YouTube pour **l'activer**.
@@ -124,7 +124,7 @@ que vous appeliez plusieurs requêtes maladroitement **dans une boucle**. Soyez 
 
 Le résultat JSON pourrait ressembler à ceci :
 
-<center>![Résultat JSON de la requête YouTube](../../static/img/cours8/jsonYoutube.png)</center>
+<center>![Résultat JSON de la requête YouTube](./_08-rencontre4.2/jsonYoutube.png)</center>
 
 Ce qui nous intéresse le plus est `videoId` car nous pourrons l'utiliser pour afficher la vidéo avec un `<iframe>`.
 
@@ -135,7 +135,7 @@ dans un `<iframe>`.
 
 ### 🗺 Intégration Google Maps
 
-<center>![Page pour activer les APIs Google](../../static/img/cours8/enableAPI.png)</center>
+<center>![Page pour activer les APIs Google](./_08-rencontre4.2/enableAPI.png)</center>
 
 Notez qu'il faudra activer une autre API (« Maps JavaScript API ») pour pouvoir afficher une **carte Google** dans notre application Web.
 
@@ -190,13 +190,13 @@ export default function Home() {
 
 :::
 
-<center>![Carte Google](../../static/img/cours8/googleMap.png)</center>
+<center>![Carte Google](./_08-rencontre4.2/googleMap.png)</center>
 
 :::warning
 
 C'est normal qu'il y ait une erreur signalée par Next.js ainsi que quelques dizaines d'erreurs et d'avertissements dans la console lorsqu'on utilise une carte Google et / ou un lecteur YouTube. Nous vivrons avec 🚒🔥
 
-<center>![Erreur avec Google Maps](../../static/img/cours8/billingError.png)</center>
+<center>![Erreur avec Google Maps](./_08-rencontre4.2/billingError.png)</center>
 
 :::
 
@@ -307,7 +307,7 @@ export default function Ui(){
 }
 ```
 
-<center>![Bouton et champ chadcn](../../static/img/cours8/ui.png)</center>
+<center>![Bouton et champ chadcn](./_08-rencontre4.2/ui.png)</center>
 
 :::note
 

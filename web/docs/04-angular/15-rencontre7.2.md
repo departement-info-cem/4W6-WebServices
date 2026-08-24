@@ -39,7 +39,7 @@ On peut envoyer du code (Ex : JavaScript) pour « étendre les fonctionnalités
 
 ### 📦 Nos prochains projets
 
-![Applications Angular et ASP.NET Core](../../static/img/cours14/angular_asp.png)
+![Applications Angular et ASP.NET Core](./_15-rencontre7.2/angular_asp.png)
 
 Pour le reste de la session, nous utiliserons simultanément un projet **Angular** et un projet **ASP.NET Core Web API**. (Notez bien : **Web API** et non **MVC** !)
 
@@ -49,11 +49,11 @@ Pour le reste de la session, nous utiliserons simultanément un projet **Angular
 
 Avec Visual Studio (Et non **Visual Studio Code**, que nous utiliserons encore pour Angular malgré tout), créez un nouveau projet avec le gabarit **ASP.NET Core Web API** :
 
-<center>![Gabarit ASP.NET Core Web API](../../static/img/cours14/webAPI.png)</center>
+<center>![Gabarit ASP.NET Core Web API](./_15-rencontre7.2/webAPI.png)</center>
 
 Faites bien attention de ne pas choisir le gabarit MVC ⛔
 
-<center>![Nommer le projet](../../static/img/cours14/namingProject.png)</center>
+<center>![Nommer le projet](./_15-rencontre7.2/namingProject.png)</center>
 
 N'hésitez pas à placer la solution dans le même dossier que le projet.
 
@@ -63,7 +63,7 @@ Généralement, on évite de placer la solution dans le même dossier que le pro
 
 :::
 
-<center>![Configuration du projet](../../static/img/cours14/configuration.png)</center>
+<center>![Configuration du projet](./_15-rencontre7.2/configuration.png)</center>
 
 8️⃣ Assurez-vous de choisir **.NET 8**. La version .NET 9 est sortie, mais elle n'est pas installée au Cégep et de toute façon la version **.NET 8** sera supportée à long terme par Microsoft contrairement à la version **.NET 9**.
 
@@ -73,13 +73,13 @@ Parmi les **fichiers de départ**...
 
 * Vous pouvez supprimer `WeatherForecast.cs` et `WeatherForecastController.cs`. Ce sont des fichiers qui servent d'exemples.
 
-<center>![Fichiers de départ du projet](../../static/img/cours14/files.png)</center>
+<center>![Fichiers de départ du projet](./_15-rencontre7.2/files.png)</center>
 
 Dans la classe `Program.cs`...
 
 * Les instructions liées à **Swagger** sont associées au package `Swashbuckle`. (Permettra de visualiser la liste des requêtes disponibles de notre API Web)
 
-<center>![Classe program.cs](../../static/img/cours14/program.png)</center>
+<center>![Classe program.cs](./_15-rencontre7.2/program.png)</center>
 
 Il faudra ajouter deux blocs de code dans `Program.cs` pour permettre à notre éventuel **projet Angular** de pouvoir envoyer des requêtes au serveur. 
 
@@ -107,7 +107,7 @@ app.UseCors("AllowAll");
 
 Il y aura trois dépendances à installer pour assurer l'interaction avec la base de données à l'aide d'**Entity Framework** :
 
-<center>![Packages NuGet](../../static/img/cours14/nuget.png)</center>
+<center>![Packages NuGet](./_15-rencontre7.2/nuget.png)</center>
 
 :::warning
 
@@ -121,7 +121,7 @@ Il y aura trois dépendances à installer pour assurer l'interaction avec la bas
 
 Ce serait crotté 💩 de créer nos modèles directement à la racine du projet. Comme il n'y a pas de dossiers pour les modèles par défaut, commencez par en créer un :
 
-<center>![Dossier pour les modèles](../../static/img/cours14/models.png)</center>
+<center>![Dossier pour les modèles](./_15-rencontre7.2/models.png)</center>
 
 **Exemple de modèle valide :**
 
@@ -173,23 +173,23 @@ Quand on utilise `= null!;`, on doit s'engager à toujours s'assurer que la prop
 
 ⛔ Lorsque vous allez générer le contrôleur, faites bien attention de choisir un contrôleur pour **API Web** (et non un contrôleur MVC qui retourne des Views...)
 
-<center>![Lancer le wizard pour créer un contrôleur](../../static/img/cours14/newController.png)</center>
+<center>![Lancer le wizard pour créer un contrôleur](./_15-rencontre7.2/newController.png)</center>
 
 Choisissez le bon type :
 
-<center>![Choisir un contrôleur d'API](../../static/img/cours14/apiController.png)</center>
+<center>![Choisir un contrôleur d'API](./_15-rencontre7.2/apiController.png)</center>
 
 Choisissez le modèle :
 
-<center>![Choisir le modèle](../../static/img/cours14/generateController.png)</center>
+<center>![Choisir le modèle](./_15-rencontre7.2/generateController.png)</center>
 
 Créez un nouveau DbContext si c'est le premier contrôleur du projet :
 
-<center>![Créer le DbContext](../../static/img/cours14/generateDbContext.png)</center>
+<center>![Créer le DbContext](./_15-rencontre7.2/generateDbContext.png)</center>
 
 Enfin, on crée le contrôleur :
 
-<center>![Créer le contrôleur](../../static/img/cours14/generateControllerFinal.png)</center>
+<center>![Créer le contrôleur](./_15-rencontre7.2/generateControllerFinal.png)</center>
 
 On obtient un résultat similaire à celui-ci :
 
@@ -224,11 +224,11 @@ Lorsqu'un premier contrôleur a été généré dans le projet, trois changement
 
 1. Ajout d'une chaîne de connexion dans `appsettings.json` :
 
-<center>![Chaîne de connexion](../../static/img/cours14/connectionString.png)</center>
+<center>![Chaîne de connexion](./_15-rencontre7.2/connectionString.png)</center>
 
 2. Ajout d'une connexion à la base de données dans `Program.cs` :
 
-<center>![Connexion à la base de données](../../static/img/cours14/connection.png)</center>
+<center>![Connexion à la base de données](./_15-rencontre7.2/connection.png)</center>
 
 3. Création d'un **DbContext** dans un dossier `Data` : 
 
@@ -258,9 +258,9 @@ Tout le **code** nécessaire pour générer la base de données est prêt. (Mod�
 
 Si ce n'est pas déjà le cas, affichez PowerShell :
 
-<center>![Afficher le terminal](../../static/img/cours14/displayTerminal.png)</center>
+<center>![Afficher le terminal](./_15-rencontre7.2/displayTerminal.png)</center>
 
-<center>![Terminal dans VS](../../static/img/cours14/terminal.png)</center>
+<center>![Terminal dans VS](./_15-rencontre7.2/terminal.png)</center>
 
 **Étape 2 - 🏠 Installer `dotnet-ef` si vous n'êtes pas au Cégep**
 
@@ -308,11 +308,11 @@ Dans ce cas, voici les étapes :
 
 **1. ❌ Supprimer la base de données :**
 
-<center>![Afficher l'explorateur d'objets SQL](../../static/img/cours14/sqlExplorer.png)</center>
+<center>![Afficher l'explorateur d'objets SQL](./_15-rencontre7.2/sqlExplorer.png)</center>
 
 N'oubliez pas de **fermer les connexions existantes** en appuyant sur supprimer.
 
-<center>![Supprimer la base de données](../../static/img/cours14/deleteDB.png)</center>
+<center>![Supprimer la base de données](./_15-rencontre7.2/deleteDB.png)</center>
 
 **2. 📂 Supprimer le dossier `migrations` en entier.**
 
@@ -328,7 +328,7 @@ N'oubliez pas de **fermer les connexions existantes** en appuyant sur supprimer.
 
 Si on exécute le projet, on peut visualiser, grâce à Swagger, la liste des requêtes disponibles de notre serveur Web API :
 
-<center>![Interface Swagger](../../static/img/cours14/swagger.png)</center>
+<center>![Interface Swagger](./_15-rencontre7.2/swagger.png)</center>
 
 Les requêtes doivent bien entendu être précédées du nom du domaine, ce qui donnerait `https://localhost:7064/api/Toys` par exemple.
 
@@ -340,7 +340,7 @@ Oui, mais c'est acceptable tant que la `méthode` de la requête est différente
 
 Voici de quoi aurait l'air les deux premières requêtes dans notre projet Angular :
 
-<center>![Requêtes GET et POST](../../static/img/cours14/getPost.png)</center>
+<center>![Requêtes GET et POST](./_15-rencontre7.2/getPost.png)</center>
 
 Remarquez bien l'usage de `this.http.GET<any>(...)` et de `this.http.POST<any>(...)`
 
@@ -358,7 +358,7 @@ Nous reverrons des exemples de requêtes plus en détails plus loin.
 
 Notez que ce sont les annotations au-dessus des actions qui déterminent la **méthode de la requête** :
 
-<center>![Méthode des actions](../../static/img/cours14/method.png)</center>
+<center>![Méthode des actions](./_15-rencontre7.2/method.png)</center>
 
 Généralement, les méthodes suivent les conventions suivantes :
 
@@ -395,7 +395,7 @@ Si on souhaite que le nom de l'action fasse partie de la requête, on peut faire
 
 Dans ce cas-ci, une action nommée `GetToy` serait donc associée à la requête `DOMAINE/api/Toys/GetToy`.
 
-<center>![Interface Swagger](../../static/img/cours14/swagger2.png)</center>
+<center>![Interface Swagger](./_15-rencontre7.2/swagger2.png)</center>
 
 :::note
 
@@ -415,7 +415,7 @@ Pour modifier la syntaxe d'une requête spécifique, il suffit d'ajouter une ann
     }
 ```
 
-<center>![Règle par action](../../static/img/cours14/regleAction.png)</center>
+<center>![Règle par action](./_15-rencontre7.2/regleAction.png)</center>
 
 Notez que si on omet la barre oblique au début de la route, la route spécifiée **s'ajoutera** à la fin de la **route globale du contrôleur**...
 
@@ -427,7 +427,7 @@ Notez que si on omet la barre oblique au début de la route, la route spécifié
     }
 ```
 
-<center>![Règle par action](../../static/img/cours14/regleAction2.png)</center>
+<center>![Règle par action](./_15-rencontre7.2/regleAction2.png)</center>
 
 :::warning
 
@@ -468,7 +468,7 @@ Voici une liste des éléments qui peuvent permettre de différencier les routes
 
 Si jamais une erreur est présente dans l'interface Swagger, vous aurez ce résultat :
 
-<center>![Message d'erreur avec Swagger](../../static/img/cours14/erreurSwagger.png)</center>
+<center>![Message d'erreur avec Swagger](./_15-rencontre7.2/erreurSwagger.png)</center>
 
 Pour voir une explication plus détaillée de l'erreur soulevée, utilisez l'URL fournie. (`https://localhost:7064/swagger/v1/swagger.json`, dans ce cas-ci)
 
@@ -508,7 +508,7 @@ Notez qu'il faut respecter la convention **PascalCase** en C# et **camelCase** e
 
 Ci-dessous, un exemple pour chacune des cinq requêtes disponibles par défaut dans un contrôleur auto-généré.
 
-<center>![Interface Swagger](../../static/img/cours14/swagger2.png)</center>
+<center>![Interface Swagger](./_15-rencontre7.2/swagger2.png)</center>
 
 ### 📦 POST
 

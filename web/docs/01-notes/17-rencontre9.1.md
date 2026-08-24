@@ -6,7 +6,7 @@ title: "9.1 - Utilisateurs et services 👤"
 
 Si vous souhaitez vous débarrasser maintenant de cette étape, voici tous les packages qui seront nécessaires pour nos projets à partir de maintenant. Pour rappel, un package NuGet **donne accès à des fonctionnalités supplémentaires** à notre projet. Notre projet utilisera des **classes** et des **méthodes** provenant de ces nombreux **packages**. Grâce à tous ces packages, on a beaucoup moins de fonctionnalités à coder nous-mêmes.
 
-<center>![Liste des packages NuGet nécessaires](../../static/img/cours16/nuget.png)</center>
+<center>![Liste des packages NuGet nécessaires](./_17-rencontre9.1/nuget.png)</center>
 
 **Résumé des packages installés** :
 
@@ -27,7 +27,7 @@ Si vous souhaitez vous débarrasser maintenant de cette étape, voici tous les p
 
 Il y aura beaucoup de code **boilerplate** à rédiger pour configurer `Identity` et rendre notre gestion des utilisateurs fonctionnelle. De votre côté, assurez-vous de suivre les prochaines étapes ⛔⛔⛔ **ultra-méga-giga-turbo-bingo-bango attentivement**, car même s'il y a beaucoup de _copié-collé_, il y a certains morceaux qui seront différents d'un projet à l'autre.
 
-<center>![Meme qui symbolise la fragilité d'Identity](../../static/img/cours16/babel.png)</center>
+<center>![Meme qui symbolise la fragilité d'Identity](./_17-rencontre9.1/babel.png)</center>
 
 ### 💋 Étapes préliminaires
 
@@ -55,7 +55,7 @@ Si vous aviez déjà des migrations et / ou une base de données, supprimez-les 
 
 Si ce n'est pas déjà fait, installez tous les packages indiqués au début de ce cours.
 
-<center>![Liste des packages NuGet nécessaires](../../static/img/cours16/nuget.png)</center>
+<center>![Liste des packages NuGet nécessaires](./_17-rencontre9.1/nuget.png)</center>
 
 :::warning
 
@@ -142,9 +142,9 @@ app.UseAuthorization();
 
 Créez un **contrôleur d'API vide** pour les utilisateurs :
 
-<center>![Création d'un contrôleur d'API vide](../../static/img/cours16/controller1.png)</center>
+<center>![Création d'un contrôleur d'API vide](./_17-rencontre9.1/controller1.png)</center>
 
-<center>![Création d'un contrôleur nommé UsersController](../../static/img/cours16/controller2.png)</center>
+<center>![Création d'un contrôleur nommé UsersController](./_17-rencontre9.1/controller2.png)</center>
 
 Vous aurez à **injecter** la classe `UserManager<T>`, où `T` est votre modèle qui représente les utilisateurs.
 
@@ -269,9 +269,9 @@ async function register(user : string, mail : string, pass : string, passCon : s
 
 Si ça ne fonctionne pas, ajoutez un **breakpoint** sur le `if(!identityResult.Succeded)` et survolez la variable `identityResult` lors de l'exécution pour découvrir la nature de l'échec.
 
-<center>![Breakpoint sur identityResult](../../static/img/cours16/identityResult.png)</center>
+<center>![Breakpoint sur identityResult](./_17-rencontre9.1/identityResult.png)</center>
 
-<center>![Échec de l'identityResult](../../static/img/cours16/failed.png)</center>
+<center>![Échec de l'identityResult](./_17-rencontre9.1/failed.png)</center>
 
 :::warning
 
@@ -564,7 +564,7 @@ Exemple : J'ai deux contrôleurs capables de créer des `Patate` ? Au lieu de r�
 
 Un peu plus délicat à expliquer. En gros, en programmation, en général, on aime quand une classe possède **une seule responsabilité cohérente**. Si on injecte directement le `DbContext` dans un **contrôleur**, on ouvre la porte à lui permettre de faire pas mal n'importe quoi avec la base de données. C'est à partir de ce moment qu'on n'est plus sûr dans quel contrôleur on pourra retrouver telle ou telle opération. Avec un `PatateService`, on sait qu'on pourra y retrouver toutes les opérations possibles qui concernent les patates et qu'on n'aura pas à aller fouiller dans `HotDogService` pour chercher des opérations sur les patates.
 
-<center>![Services](../../static/img/cours15/services.png)</center> 
+<center>![Services](./_17-rencontre9.1/services.png)</center> 
 
 ### 💉 Injection
 
@@ -604,7 +604,7 @@ public class VideoGamesController : ControllerBase
 
 Pour créer un **service**, créez une **simple classe** dans laquelle on **injecte le DbContext**.
 
-<center>![Dossier pour les services](../../static/img/cours15/serviceFolder.png)</center> 
+<center>![Dossier pour les services](./_17-rencontre9.1/serviceFolder.png)</center> 
 
 ```cs showLineNumbers
     public class VideoGameService

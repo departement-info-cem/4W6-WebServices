@@ -15,7 +15,7 @@ Identifier qui envoie la requête à l'aide de ...
 
 Il n'y en a pas de nouveaux par rapport à avant ! Assurez-vous simplement que tout soit déjà installé.
 
-<center>![Liste des packages NuGet nécessaires](../../static/img/cours16/nuget.png)</center>
+<center>![Liste des packages NuGet nécessaires](./_22-rencontre11.2/nuget.png)</center>
 
 :::warning
 

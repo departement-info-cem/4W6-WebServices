@@ -69,7 +69,7 @@ avec quelques fonctionnalités, avantages et défis différents.
 
 Comme ce type de projet ne roule pas dans un navigateur Web, n'importe quel langage de programmation peut être utilisé.
 
-<center>![Frameworks Web back end](../../static/img/cours1/back_end.png)</center>
+<center>![Frameworks Web back end](./_01-rencontre1.1/back_end.png)</center>
 
 #### 🖥 Frameworks clients
 
@@ -78,7 +78,7 @@ Il existe d'autres frameworks Web clients (_front end_) également.
 
 Comme ce type de projet roule dans le navigateur Web de l'utilisateur, **JavaScript** est un choix relativement obligatoire.
 
-<center>![Frameworks Web front end](../../static/img/cours1/front_end.png)</center>
+<center>![Frameworks Web front end](./_01-rencontre1.1/front_end.png)</center>
 
 :::warning
 
@@ -100,19 +100,19 @@ Contrairement à Angular et Vue, React n'est pas vraiment un **framework client*
 ⛔ Ces outils sont déjà installés à l'école. Cette section n'est pertinente qu'à la maison. 🏠
 
 #### NPM
-<center>![Logo de NPM](../../static/img/cours1/npm.png)</center>
+<center>![Logo de NPM](./_01-rencontre1.1/npm.png)</center>
 
 Gestionnaire de paquets 📦 pour JavaScript. Nous aidera à gérer les dépendances pour nos projets React.  
 Installez simplement [Node.js](https://nodejs.org/fr/), qui inclut NPM. Utilisez les paramètres par défaut lors de l'installation. Pas besoin d'installer Chocolatey.
 
-<center>![On ne veut pas Chocolatey](../../static/img/cours1/no_chocolatey.png)</center>
+<center>![On ne veut pas Chocolatey](./_01-rencontre1.1/no_chocolatey.png)</center>
 
 Pour vérifier que NPM est bien installé, ouvrez **PowerShell**  
-<center>![Powershell](../../static/img/cours1/powershell.png)</center>
+<center>![Powershell](./_01-rencontre1.1/powershell.png)</center>
 ...et tapez simplement la commande `npm`, qui devrait vous proposer de l'aide pour taper d'autres commandes npm.
 
 ### 🧪 Introduction à TypeScript
-<center>![Logo TypeScript](../../static/img/cours1/typescript.png)</center>
+<center>![Logo TypeScript](./_01-rencontre1.1/typescript.png)</center>
 
 **TypeScript** est le langage que nous utiliserons (en plus de HTML et CSS) pour travailler sur nos projets React. L'extension des fichiers TypeScript est **.ts**.
 
@@ -187,7 +187,7 @@ générer des erreurs lors de l'exécution. (Les erreurs ne sont pas détectées
 :::
 
 <center>
-    ![Oups, mauvais type de paramètre en JS](../../static/img/cours1/oops.png)  
+    ![Oups, mauvais type de paramètre en JS](./_01-rencontre1.1/oops.png)  
     Oups ! "sus" multiplié par 2 ne donne pas une donnée valide...
 </center>
 
@@ -324,13 +324,13 @@ playWithToy(toyName : string) : string {
 
 #### Visual Studio code
 
-<center>![Logo de VS Code](../../static/img/cours1/vscode.png)</center>
+<center>![Logo de VS Code](./_01-rencontre1.1/vscode.png)</center>
 
 Nous l'utiliserons pour travailler sur nos projets **React**. (Semaines 1 à 15)
 
 #### Visual Studio
 
-<center>![Logo de Visual Studio](../../static/img/cours1/vs.png)</center>
+<center>![Logo de Visual Studio](./_01-rencontre1.1/vs.png)</center>
 
 Nous l'utiliserons pour travailler sur nos projets **ASP.NET Core**. (Semaines 8 à 15)
 
@@ -357,13 +357,13 @@ Quelques précisions sur les « `Next.js defaults` » :
 
 Le gabarit de départ contient plusieurs fichiers essentiels :
 
-<center>![Fichiers de départ d'un projet Next.js](../../static/img/cours1/react_files.png)</center>
+<center>![Fichiers de départ d'un projet Next.js](./_01-rencontre1.1/react_files.png)</center>
 
 ### 🚬 Gestion des dépendances
 
 #### 🐳 node_modules
 
-<center>![Node modules](../../static/img/cours1/node_modules_react.png)</center>
+<center>![Node modules](./_01-rencontre1.1/node_modules_react.png)</center>
 
 Ce dossier contient toutes les dépendances qui permettent le fonctionnement de notre projet **Next.js**. Cela dit, il pèse au minimum `400 Mo` 
 et contient des tonnes et des tonnes de sous-dossiers et fichiers. Nous ne le modifierons jamais manuellement. Nous toucherons seulement
@@ -379,26 +379,26 @@ Lorsque vous transférez un projet **Next.js** sur un autre disque / ordinateur 
 de d'abord ouvrir PowerShell dans le dossier qui contient les fichiers du projet à l'aide de `shift + clic-droit`. 
 (Le dossier qui contient `app`, `public`, etc.)
 
-<center>![Commande npm install](../../static/img/cours1/npm_install.png)</center>
+<center>![Commande npm install](./_01-rencontre1.1/npm_install.png)</center>
 
 ### 🏁 Ouvrir et exécuter un projet Next.js
 
 Il suffit d'ouvrir le dossier dans **Visual Studio Code** à l'aide d'un clic-droit à l'intérieur du dossier lui-même ou sur le dossier.
 
-<center>![Clic sur le dossier](../../static/img/cours1/open2.png)</center>
+<center>![Clic sur le dossier](./_01-rencontre1.1/open2.png)</center>
 
 <center>... ou encore ...  </center>
   
-<center>![Clic à l'intérieur du dossier](../../static/img/cours1/open3.png)</center>
+<center>![Clic à l'intérieur du dossier](./_01-rencontre1.1/open3.png)</center>
 
 Pour exécuter le projet, ouvrez un terminal (Onglet `Terminal` -> `Nouveau terminal`) puis tapez la commande `npm run dev`.
 
-<center>![Commande npm run dev](../../static/img/cours1/run_dev.png)</center>
+<center>![Commande npm run dev](./_01-rencontre1.1/run_dev.png)</center>
 
 Pour voir votre site Web, ouvrez un navigateur Web de votre choix et tapez l'adresse `localhost:3000`.
 Pour le moment, ce sera le gabarit par défaut qui est affiché :
 
-<center>![Page d'accueil par défaut](../../static/img/cours1/default_index_next.png)</center>
+<center>![Page d'accueil par défaut](./_01-rencontre1.1/default_index_next.png)</center>
   
   
 :::info
@@ -420,7 +420,7 @@ Si jamais le port `3000` est déjà monopolisé, vous pouvez préciser un port s
 
 Pour le moment, tous les fichiers que nous aborderons seront situés dans le dossier `app`.
 
-<center>![Fichiers de départ Next.js](../../static/img/cours1/files_next.png)</center>
+<center>![Fichiers de départ Next.js](./_01-rencontre1.1/files_next.png)</center>
 
 :::warning
 
@@ -438,7 +438,7 @@ Pour respecter la convention de nommage en JavaScript / TypeScript, les noms de 
 
 #### 🎨 globals.css
 
-<center>![Extrait du code dans globals.css](../../static/img/cours1/globals.png)</center>
+<center>![Extrait du code dans globals.css](./_01-rencontre1.1/globals.png)</center>
 
 `globals.css` regroupe les **styles CSS** qui s'appliquent à **tout le projet**. Éventuellement, nous verrons comment créer des styles qui s'appliqueront uniquement à certaines **parties** de notre HTML.
 
@@ -472,7 +472,7 @@ export default function Home() {
 }
 ```
 
-<center>![Exemple de page.tsx](../../static/img/cours1/page.png)</center>
+<center>![Exemple de page.tsx](./_01-rencontre1.1/page.png)</center>
 
 Éventuellement, nous apprendrons à utiliser plusieurs **pages** en créant d'autres fichiers similaires à `page.tsx`.
 
@@ -480,7 +480,7 @@ export default function Home() {
 
 `layout.tsx` est un fichier qui décrit le **squelette de la page Web**. (Avec des éléments comme `<html>`, `<body>`, etc. qui sont communs à toutes les pages Web)
 
-<center>![Fichier layout.tsx](../../static/img/cours1/layout.png)</center>
+<center>![Fichier layout.tsx](./_01-rencontre1.1/layout.png)</center>
 
 Remarquez la variable nommée `metadata`, qui permet de configurer l'élément `<head>` du layout. **Next.js** va s'occuper de convertir ces données en un élément `<head>` qui sera intégré au layout.
 
@@ -575,7 +575,7 @@ export default function Home() {
 
 Il faudra souvent ajouter des **importations** dans nos composants pour pouvoir utiliser certains *bidules* comme `useState`. Lorsque vous avez du **rouge**, n'hésitez pas à faire un **clic gauche** sur le segment souligné en rouge, puis à utiliser le raccourci `Ctrl + .` pour faire apparaître le menu de suggestions, qui vous proposera généralement les **importations manquantes**. 
 
-<center>![Fichier layout.tsx](../../static/img/cours1/ctrlPoint.png)</center>
+<center>![Fichier layout.tsx](./_01-rencontre1.1/ctrlPoint.png)</center>
 
 :::
 
@@ -594,7 +594,7 @@ export default function Home() {
 }
 ```
 
-<center>![Affichage de variables](../../static/img/cours1/displayVariableReact.png)</center>
+<center>![Affichage de variables](./_01-rencontre1.1/displayVariableReact.png)</center>
 
 :::note
 
@@ -620,7 +620,7 @@ export default function Home() {
 }
 ```
 
-<center>![Affichage d'une fonction](../../static/img/cours1/displayFunctionReact.png)</center>
+<center>![Affichage d'une fonction](./_01-rencontre1.1/displayFunctionReact.png)</center>
 
 ### ⚱ Afficher un objet personnalisé
 
@@ -630,7 +630,7 @@ D'abord, créez une nouvelle classe en tentant de respecter ces indications :
 * Pour bien organiser votre projet, rangez cette classe dans le dossier `app`/`_types`.
 * Le nom de la classe doit commencer par une majuscule. (C'est une convention aussi)
 
-<center>![Fichier pour une classe](../../static/img/cours1/typesFolder.png)</center>
+<center>![Fichier pour une classe](./_01-rencontre1.1/typesFolder.png)</center>
 
 Votre classe pourrait ressembler à ceci. Rappelez-vous que le mot-clé `public` peut être
 utilisé pour simplifier la déclaration des propriétés de la classe. De plus, notez que
@@ -650,11 +650,11 @@ export class Npc{
 
 Nous pourrons maintenant créer une instance de cette nouvelle classe personnalisée dans un composant. Vous aurez à **importer** la classe pour pouvoir l'utiliser.
 
-<center>![Importer une classe](../../static/img/cours1/importClass.png)</center>
+<center>![Importer une classe](./_01-rencontre1.1/importClass.png)</center>
 
 Utilisez le **constructeur** de votre classe pour instancier un nouvel objet :
 
-<center>![Usage d'un constructeur](../../static/img/cours1/constructorCallReact.png)</center>
+<center>![Usage d'un constructeur](./_01-rencontre1.1/constructorCallReact.png)</center>
 
 Voici un exemple avec un **état** qui contient un `Npc` et l'affichage dans le **HTML** :
 
@@ -672,7 +672,7 @@ export default function Home() {
 
 ```
 
-<center>![Affichage d'un objet](../../static/img/cours1/displayClass.png)</center>
+<center>![Affichage d'un objet](./_01-rencontre1.1/displayClass.png)</center>
 
 ### 📜 Afficher un tableau
 
@@ -699,7 +699,7 @@ export default function Home() {
 
 ```
 
-<center>![Affichage des éléments d'un tableau](../../static/img/cours1/displayArrayReact.png)</center>
+<center>![Affichage des éléments d'un tableau](./_01-rencontre1.1/displayArrayReact.png)</center>
 
 :::note
 
@@ -871,26 +871,26 @@ Commencez par initialiser votre repository sur GitHub. (Pour pouvoir le cloner d
 
 ⛔ Assurez-vous qu'il soit privé !
 
-<center>![Initialiser le repository](../../static/img/cours1/git1.png)</center>
+<center>![Initialiser le repository](./_01-rencontre1.1/git1.png)</center>
 
 Clonez le repository sur votre ordinateur à l'aide de son URL :
 
-<center>![Cloner le repository](../../static/img/cours1/git2.png)</center>
+<center>![Cloner le repository](./_01-rencontre1.1/git2.png)</center>
 
 Ensuitez, créez votre projet Next.js dans le repository à l'aide de la [commande désignée](/notes/rencontre1.1#-créer-un-projet-nextjs).
 
-<center>![Contenu du projet Next.js](../../static/img/cours1/react_files_git.png)</center>
+<center>![Contenu du projet Next.js](./_01-rencontre1.1/react_files_git.png)</center>
 
 Vous remarquerez que le projet Next.js est automatiquement muni d'un fichier `.gitignore`. Il est parfait
 pour nos besoins car il permettra d'ignorer les documents lourds comme `node_modules`.
 
 Vous pourrez donc faire un premier **commit** pour l'ajout initial du projet Next.js.
 
-<center>![Commit dans le repository](../../static/img/cours1/commit_react.png)</center>
+<center>![Commit dans le repository](./_01-rencontre1.1/commit_react.png)</center>
 
 On peut également faire son premier push.
 
-<center>![Push le repository](../../static/img/cours1/git4.png)</center>
+<center>![Push le repository](./_01-rencontre1.1/git4.png)</center>
 
 #### 🐑🐑 Cloner un repo pour poursuivre son travail plus tard
 

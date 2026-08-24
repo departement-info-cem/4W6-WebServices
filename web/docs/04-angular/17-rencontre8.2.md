@@ -4,7 +4,7 @@
 
 Si vous souhaitez vous débarrasser maintenant de cette étape, voici tous les packages qui seront nécessaires pour nos projets à partir de maintenant. Pour rappel, un package NuGet **donne accès à des fonctionnalités supplémentaires** à notre projet. Notre projet utilisera des **classes** et des **méthodes** provenant de ces nombreux **packages**. Grâce à tous ces packages, on a beaucoup moins de fonctionnalités à coder nous-mêmes.
 
-<center>![Liste des packages NuGet nécessaires](../../static/img/cours16/nuget.png)</center>
+<center>![Liste des packages NuGet nécessaires](./_17-rencontre8.2/nuget.png)</center>
 
 **Résumé des packages installés** :
 
@@ -25,7 +25,7 @@ Si vous souhaitez vous débarrasser maintenant de cette étape, voici tous les p
 
 Il y aura beaucoup de code **boilerplate** à rédiger pour configurer `Identity` et rendre notre gestion des utilisateurs fonctionnelle. De votre côté, assurez-vous de suivre les prochaines étapes ⛔⛔⛔ **ultra-méga-giga-turbo-bingo-bango attentivement**, car même s'il y a beaucoup de _copié-collé_, il y a certains morceaux qui seront différents d'un projet à l'autre.
 
-<center>![Meme qui symbolise la fragilité d'Identity](../../static/img/cours16/babel.png)</center>
+<center>![Meme qui symbolise la fragilité d'Identity](./_17-rencontre8.2/babel.png)</center>
 
 ### 💋 Étapes préliminaires
 
@@ -53,7 +53,7 @@ Si vous aviez déjà des migrations et / ou une base de données, supprimez-les 
 
 Si ce n'est pas déjà fait, installez tous les packages indiqués au début de ce cours.
 
-<center>![Liste des packages NuGet nécessaires](../../static/img/cours16/nuget.png)</center>
+<center>![Liste des packages NuGet nécessaires](./_17-rencontre8.2/nuget.png)</center>
 
 :::warning
 
@@ -136,9 +136,9 @@ app.UseAuthorization();
 
 Créez un **contrôleur d'API vide** pour les utilisateurs :
 
-<center>![Création d'un contrôleur d'API vide](../../static/img/cours16/controller1.png)</center>
+<center>![Création d'un contrôleur d'API vide](./_17-rencontre8.2/controller1.png)</center>
 
-<center>![Création d'un contrôleur nommé UsersController](../../static/img/cours16/controller2.png)</center>
+<center>![Création d'un contrôleur nommé UsersController](./_17-rencontre8.2/controller2.png)</center>
 
 Vous aurez à **injecter** la classe `UserManager<T>`, où `T` est votre modèle qui représente les utilisateurs.
 
@@ -260,9 +260,9 @@ async register(user : string, mail : string, pass : string, passCon : string) : 
 
 Si ça ne fonctionne pas, ajoutez un **breakpoint** sur le `if(!identityResult.Succeded)` et survolez la variable `identityResult` lors de l'exécution pour découvrir la nature de l'échec.
 
-<center>![Breakpoint sur identityResult](../../static/img/cours16/identityResult.png)</center>
+<center>![Breakpoint sur identityResult](./_17-rencontre8.2/identityResult.png)</center>
 
-<center>![Échec de l'identityResult](../../static/img/cours16/failed.png)</center>
+<center>![Échec de l'identityResult](./_17-rencontre8.2/failed.png)</center>
 
 :::warning
 

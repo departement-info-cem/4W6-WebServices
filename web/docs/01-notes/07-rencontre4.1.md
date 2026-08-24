@@ -151,7 +151,7 @@ localStorage.clear();
 N'hésitez pas à utiliser l'outil du navigateur qui permet de jeter un coup d'oeil au **stockage local**. On peut
 d'ailleurs y supprimer manuellement des données pour simplifier les tests.
 
-<center>![Stockage local dans le navigateur](../../static/img/cours7/localStorage.png)</center>
+<center>![Stockage local dans le navigateur](./_07-rencontre4.1/localStorage.png)</center>
 
 ## 👅 Internationalisation
 
@@ -179,7 +179,7 @@ export default withNextIntl(nextConfig);
 
 #### Étape 3 - 📄 Création de fichiers
 
-<center>![Nouveaux fichiers pour i18n](../../static/img/cours7/i18nFiles.png)</center>
+<center>![Nouveaux fichiers pour i18n](./_07-rencontre4.1/i18nFiles.png)</center>
 
 On doit créer deux nouveaus dossiers nommés `i18n` et `messages` à la racine de notre projet. (Donc pas dans `app`, mais bien dans le dossier parent de `app`, dont le nom varie selon votre projet)
 
@@ -282,7 +282,7 @@ export const config = {
 
 En général, il y a les fichiers `page.tsx` et `layout.tsx` directement dans le dossier `app`. Cela dit, il nous faut un segment de **route dynamique** à la racine de la route, alors on va créer un dossier `app/[locale]` et y déplacer les fichiers `page.tsx` et `layout.tsx`.
 
-<center>![Route dynamique pour la locale](../../static/img/cours7/dynamicRoute.png)</center>
+<center>![Route dynamique pour la locale](./_07-rencontre4.1/dynamicRoute.png)</center>
 
 ⛔ L'importation de `globals.css` devra être changée légèerement dans `layout.tsx` : `import "../globals.css";`
 
@@ -330,7 +330,7 @@ Si jamais vous souhaitiez traduire certains textes de votre **layout** et / ou i
 
 Si vous voulez éviter que le 2e **layout** ait un impact sur le routage, n'oubliez pas d'utiliser un dossier entouré de **parenthèses** :
 
-<center>![Layout traduit](../../static/img/cours7/layout.png)</center>
+<center>![Layout traduit](./_07-rencontre4.1/layout.png)</center>
 
 N'oubliez pas de déplacer **tous les autres composants chargés par routage** dans le dossier `(home)`, par contre.
 
@@ -526,10 +526,10 @@ export default function Home() {
 ```
     </TabItem>
     <TabItem value="frResult" label="Résultat (fr)">
-<center>![Textes français chargés dans une page](../../static/img/cours7/frResult.png)</center>
+<center>![Textes français chargés dans une page](./_07-rencontre4.1/frResult.png)</center>
     </TabItem>
     <TabItem value="enResult" label="Résultat (en)">
-<center>![Textes anglais chargés dans une page](../../static/img/cours7/enResult.png)</center>
+<center>![Textes anglais chargés dans une page](./_07-rencontre4.1/enResult.png)</center>
     </TabItem>
 </Tabs>
 
@@ -625,7 +625,7 @@ Une fois que vous avez un compte, rendez-vous sur [https://developer.spotify.com
 Une fois l'application créée, nous aurons accès à un **Client ID** et un **Client Secret** qui nous
 serviront plus tard pour envoyer des requêtes.
 
-<center>![Secret Spotify](../../static/img/cours7/secret.png)</center>
+<center>![Secret Spotify](./_07-rencontre4.1/secret.png)</center>
 
 #### Étape 2 - 🕵️‍♂️ Hard-coder le Client ID et le Client Secret
 
@@ -678,7 +678,7 @@ async function connect(){
 
 Dans l'objet JSON obtenu, on peut accéder au **token** grâce à `response.data.access_token` :
 
-<center>![Objet JSON obtenu](../../static/img/cours7/json.png)</center>
+<center>![Objet JSON obtenu](./_07-rencontre4.1/json.png)</center>
 
 Dans notre cas, le **token** a été rangé dans l'**état** `spotifyToken`, qui a dû être déclaré plus haut :
 

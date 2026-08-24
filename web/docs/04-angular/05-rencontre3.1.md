@@ -12,18 +12,18 @@ Avant de taper la commande comme un animal, assurez-vous de vous situer dans le 
 de nos fichiers HTML / CSS / TypeScript dans le dossier `app`, à part pour quelques exceptions comme les images et les 
 fichiers de traduction. (Cours 7)
 
-<center>![Utiliser cd pour aller dans src/app](../../static/img/cours5/cd.png)</center>
+<center>![Utiliser cd pour aller dans src/app](./_05-rencontre3.1/cd.png)</center>
 
 Créez ensuite le ou les composants :
 
-<center>![Création d'un composant](../../static/img/cours5/newComponent.png)</center>
+<center>![Création d'un composant](./_05-rencontre3.1/newComponent.png)</center>
 
-<center>![Fichiers du nouveau composant](../../static/img/cours5/componentFiles.png)</center>
+<center>![Fichiers du nouveau composant](./_05-rencontre3.1/componentFiles.png)</center>
 
 Si vous comptez utiliser `ng serve` plus tard, n'oubliez pas de revenir dans le dossier principal du projet. 
 (Ou au pire fermer le terminal et en ouvrir un nouveau)
 
-<center>![Utiliser cd pour retourner à la racine](../../static/img/cours5/cdBack.png)</center>
+<center>![Utiliser cd pour retourner à la racine](./_05-rencontre3.1/cdBack.png)</center>
 
 Il y a deux manières d'intégrer un composant à la page Web :
 
@@ -40,23 +40,23 @@ Ci-dessous, on peut apercevoir trois composants :
 * Le composant `red`, qui affiche le composant `enfant` dans son template HTML.
 * Le composant `enfant`.
 
-<center>![Composant Enfant dans composant Red dans composant App](../../static/img/cours5/russianDolls1.png)</center>
+<center>![Composant Enfant dans composant Red dans composant App](./_05-rencontre3.1/russianDolls1.png)</center>
 
 #### 🔨 Afficher un composant dans un autre composant
 
 Disons qu'on souhaite afficher le composant `enfant` quelque part dans le composant `red`...
 
-<center>![Composant Enfant dans composant Red](../../static/img/cours5/russianDolls2.png)</center>
+<center>![Composant Enfant dans composant Red](./_05-rencontre3.1/russianDolls2.png)</center>
 
 📝 Voici les étapes à suivre :
 
 1. Importer le composant `enfant` dans le composant `red` :
 
-<center>![Importation du composant](../../static/img/cours5/importComponent.png)</center>
+<center>![Importation du composant](./_05-rencontre3.1/importComponent.png)</center>
 
 2. Vérifier quel est le `selector` du composant `enfant` :
 
-<center>![Sélecteur du composant](../../static/img/cours5/selector.png)</center>
+<center>![Sélecteur du composant](./_05-rencontre3.1/selector.png)</center>
 
 3. Intégrer le `selector` du composant `enfant` dans le HTML du composant `red` à l'endroit désiré :
 
@@ -112,7 +112,7 @@ l'afficher dans le HTML :
 </div>
 ```
 
-<center>![Intégration du composant enfant](../../static/img/cours5/russianDolls4.png)</center>
+<center>![Intégration du composant enfant](./_05-rencontre3.1/russianDolls4.png)</center>
 
 :::tip
 
@@ -147,7 +147,7 @@ export class RedComponent {
 </main>
 ```
 
-<center>![Intégration de plusieurs composants enfants](../../static/img/cours5/russianDolls3.png)</center>
+<center>![Intégration de plusieurs composants enfants](./_05-rencontre3.1/russianDolls3.png)</center>
 
 ### 🚗 Routage
 
@@ -157,13 +157,13 @@ dans la page parmi les composants `blue`, `red`, `yellow` et `pink`.
 
 Ceci nous donne l'impression de pouvoir « naviguer » entre plusieurs pages Web.
 
-<center>![Intégration de 4 composants avec le routage](../../static/img/cours5/routing1.gif)</center>
+<center>![Intégration de 4 composants avec le routage](./_05-rencontre3.1/routing1.gif)</center>
 
 #### 📜 Étapes pour mettre en place :
 
 1. 🏗 Créer et préparer les différents composants impliqués. (Bien entendu)
 
-<center>![Plusieurs composants dans un projet](../../static/img/cours5/components.png)</center>
+<center>![Plusieurs composants dans un projet](./_05-rencontre3.1/components.png)</center>
 
 2. 📝 Définir les règles de routage dans le fichier `app.routes.ts` :
 
@@ -236,7 +236,7 @@ Voici le menu de navigation utilisé dans l'exemple plus haut :
   </nav>
 ```
 
-<center>![Intégration de 4 composants avec le routage](../../static/img/cours5/routing1.gif)</center>
+<center>![Intégration de 4 composants avec le routage](./_05-rencontre3.1/routing1.gif)</center>
 
 :::tip
 
@@ -253,7 +253,7 @@ l'URL.
 
 Ci-dessous, on aimerait charger le composant `yellow` tout en lui transmettant une information comme `"patate"`.
 
-<center>![Paramètre de route](../../static/img/cours5/param.png)</center>
+<center>![Paramètre de route](./_05-rencontre3.1/param.png)</center>
 
 Voici les étapes à suivre :
 

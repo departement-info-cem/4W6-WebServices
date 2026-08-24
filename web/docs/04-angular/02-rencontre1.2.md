@@ -11,7 +11,7 @@ Ce cours aborde l'interaction entre la classe TypeScript d'un composant et son t
 
 Il faudra d'abord importer un module qui nous permettra d'utiliser la directive `*ngFor` dans le template HTML :
 
-<center>![Importation de CommonModule](../../static/img/cours1/commonModule.png)</center>
+<center>![Importation de CommonModule](./_02-rencontre1.2/commonModule.png)</center>
 
 #### 👶 Exemple simple
 
@@ -36,7 +36,7 @@ Nous allons utiliser la directive `*ngFor` dans le template HTML, qui permet de 
 Le code `let t of myCatToys` permet de créer la variable `t`, qui contiendra la valeur de chaque donnée
 du tableau, une à la fois, dans chaque élément **\<li\>** répété.
 
-<center>![Affichage d'un ngFor](../../static/img/cours1/displayNgFor.png)</center>
+<center>![Affichage d'un ngFor](./_02-rencontre1.2/displayNgFor.png)</center>
 
 :::warning
 
@@ -110,7 +110,7 @@ Voici un exemple avec un objet personnalisé :
     </TabItem>
 </Tabs>
 
-<center>![Affichage ngFor sophistiqué](../../static/img/cours1/displayNgFor2.png)</center>
+<center>![Affichage ngFor sophistiqué](./_02-rencontre1.2/displayNgFor2.png)</center>
 
 ### ✅ Conditions *ngIf
 
@@ -118,7 +118,7 @@ La directive `*ngIf` permet d'afficher un élément HTML (et ses enfants) seulem
 
 Il faudra d'abord importer `CommonModule`, qui nous permettra d'utiliser la directive `*ngIf` dans le template HTML :
 
-<center>![Importation de CommonModule](../../static/img/cours1/commonModule.png)</center>
+<center>![Importation de CommonModule](./_02-rencontre1.2/commonModule.png)</center>
 
 #### 👶 Exemple simple
 
@@ -138,7 +138,7 @@ export class AppComponent {
 
 Bien entendu, dans ce cas, puisque `userAge` est inférieur à 18, seul le deuxième bouton s'affichera.
 
-<center>![Affichage avec un *ngIf](../../static/img/cours1/displayNgIf.png)</center>
+<center>![Affichage avec un *ngIf](./_02-rencontre1.2/displayNgIf.png)</center>
 
 #### 🧩 Exemple sophistiqué
 
@@ -184,7 +184,7 @@ Voici un exemple avec des objets personnalisés :
     </TabItem>
 </Tabs>
 
-<center>![Affichage avec *ngIf](../../static/img/cours1/displayNgIf2.png)</center>
+<center>![Affichage avec *ngIf](./_02-rencontre1.2/displayNgIf2.png)</center>
 
 Remarquez qu'utiliser des conditions ternaires `condition ? valeur_si_vrai : valeur_si_faux` est pratique
 dans certaines situations. Cela dit, le `*ngIf` était incontournable pour rendre l'élément `<span>` optionnel
@@ -244,7 +244,7 @@ appeler la fonction `count()` à chaque fois que le bouton est **cliqué**.
 Résultat : Comme on affiche `{{n}}` dans la page Web, on peut voir la valeur de `n` évoluer dynamiquement
 à chaque fois qu'on appuie sur le bouton.
 
-<center>![Événement clic](../../static/img/cours1/clickEvent.png)</center>
+<center>![Événement clic](./_02-rencontre1.2/clickEvent.png)</center>
 
 #### 🧩 Exemple sophistiqué
 
@@ -282,7 +282,7 @@ défaut, comme nous avions mis les trois booléens à `false`, les trois textes 
 
 Voici l'état de la page si on a cliqué pour afficher les textes 1 et 3 : 
 
-<center>![Événement clic](../../static/img/cours1/clickEvent2.png)</center>
+<center>![Événement clic](./_02-rencontre1.2/clickEvent2.png)</center>
 
 :::note
 
@@ -303,7 +303,7 @@ Dans le cadre du cours, nous utiliserons principalement `(click)` et également 
 
 Le module `FormsModule` nous donnera accès à certaines directives et gadgets en lien avec les formulaires.
 
-<center>![Module FormsModule](../../static/img/cours1/formsModule.png)</center>
+<center>![Module FormsModule](./_02-rencontre1.2/formsModule.png)</center>
 
 #### ♊ Two-way binding
 
@@ -347,7 +347,7 @@ cette synchronisation en modifiant le HTML comme ceci :
 
 Bien entendu, l'élément `<p>` contiendra toujours le même texte que l'input.
 
-<center>![Usage d'ngModel](../../static/img/cours1/ngModel.png)</center>
+<center>![Usage d'ngModel](./_02-rencontre1.2/ngModel.png)</center>
 
 Grâce à ce mécanisme, nous aurons facilement accès à la donnée fournie par l'utilisateur
 en utilisant `this.motPrefere`, n'importe où dans la classe du composant.
@@ -402,7 +402,7 @@ classe (nom vide, date indéfinie, quantité à 1 et item pas brisé) se reflèt
     ```
     </TabItem>
     <TabItem value="ui" label="Page Web" default>
-    ![Formulaire pour créer un item](../../static/img/cours1/form.png)
+    ![Formulaire pour créer un item](./_02-rencontre1.2/form.png)
     </TabItem>
 </Tabs>
 
@@ -434,7 +434,7 @@ Avant de tester, on prépare un affichage simple quelque part dans le HTML pour 
 
 Voici le résultat final dans la page Web après avoir créé 3 items grâce au formulaire :
 
-<center>![Affichage simple d'une liste avec *ngFor](../../static/img/cours1/formulaireEtAffichage.png)</center>
+<center>![Affichage simple d'une liste avec *ngFor](./_02-rencontre1.2/formulaireEtAffichage.png)</center>
 
 ### 🔁 Gadgets syntaxiques supplémentaires
 

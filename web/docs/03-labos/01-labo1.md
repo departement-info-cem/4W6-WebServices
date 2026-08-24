@@ -51,7 +51,7 @@ n'est pas **Firefox** 🦊🔥) à l'aide de l'adresse `http://localhost:3000`.
 
 Pour le moment, si vous jetez un coup d'oeil à votre page Web dans le navigateur, ça ressemble à ceci :
 
-<center>![Page d'accueil par défaut](../../static/img/cours1/default_index_next.png)</center>
+<center>![Page d'accueil par défaut](./_01-labo1/default_index_next.png)</center>
 
 [💡](/notes/rencontre1.1#-pagetsx) Supprimez tout le code HTML présent dans le fichier `page.tsx`, et mettez un `<div>` vide à la place :
 
@@ -94,11 +94,11 @@ Comme un fichier `tsx` contient du **HTML** ET du **TypeScript**, le terme `clas
 [💡](/notes/rencontre1.1#-classes-tailwind) Remplacez les classes `AAA` et `BBB` par deux **classes utilitaires Tailwind**
 pour que la colonne de gauche ait un fond **rose pâle** et que la colonne de droite ait un fond **bleu pâle**.
 
-<center>![Fond coloré](../../static/img/labo1/backgroundColor.png)</center>
+<center>![Fond coloré](./_01-labo1/backgroundColor.png)</center>
 
 Dupliquez une partie du HTML pour obtenir ce résultat :
 
-<center>![Deux rangées](../../static/img/labo1/twoRows.png)</center>
+<center>![Deux rangées](./_01-labo1/twoRows.png)</center>
 
 [💡](/notes/rencontre1.1#-globalscss) Ajoutez une classe personnalisée et du **code CSS classique** (pas de Tailwind !) _au bon endroit_ pour modifier la couleur du cadran inférieur gauche (la section en bas à gauche 🙄) Vous êtes invités à choisir une couleur qui représente bien l'âme de l'esprit du mental de la tête de l'aura de votre personne. 
 
@@ -110,7 +110,7 @@ Attention ! Parfois, quand on modifie `globals.css`, même si on sauvegarde le f
 
 Ouf ! C'est assez de CSS pour le moment. Vous êtes probablement _é-pui-sé(e)_.
 
-<center>![Deux rangées](../../static/img/labo1/twoRows_with_color.png)</center>
+<center>![Deux rangées](./_01-labo1/twoRows_with_color.png)</center>
 
 ## 👶 Étape 2 - Mon tout premier TypeScript
 
@@ -122,7 +122,7 @@ Déclarez un deuxième état nommé `n` et affectez-lui un nombre quelconque de 
 
 Remplacez ensuite, dans le HTML, dans la première rangée, le mot « Droite » par la valeur de `myWisdom` à l'aide d'accolades. De plus, remplacez le mot « Gauche » par la valeur de `n`.
 
-<center>![Deux états affichés](../../static/img/labo1/displayStates.png)</center>
+<center>![Deux états affichés](./_01-labo1/displayStates.png)</center>
 
 Vérifiez votre posture : votre dos est-il droit ? Oui ? Très bien, continuez.
 
@@ -140,7 +140,7 @@ Affichez le résultat de la fonction `bruh()` dans la colonne de gauche de la 2e
 
 De plus, affichez le résultat de la fonction `equalToN()` deux fois dans la colonne de droite de la 2e rangée : une fois en fournissant un paramètre qui est égal à votre état `n` et une autre fois en fournissant un paramètre qui n'est pas égal à votre état `n`.
 
-<center>![Affichage de deux fonctions](../../static/img/labo1/displayFunctions.png)</center>
+<center>![Affichage de deux fonctions](./_01-labo1/displayFunctions.png)</center>
 
 ## 🧩 Étape 3 - Sais un peu plus compliquais
 
@@ -175,7 +175,7 @@ Dupliquez (encore) une des rangées dans le HTML pour qu'on puisse ajouter du co
 Trouvez, sur **Google images**, une image inspirante de serviette. Placez-la dans le dossier `public/images` de votre
 projet (vous aurez à créer `/images`) :
 
-<center>![Dossier](../../static/img/labo1/folder.png)</center>
+<center>![Dossier](./_01-labo1/folder.png)</center>
 
 [💡](/notes/rencontre1.1#-afficher-un-objet-personnalisé) Créez un état de type `Towel` dans le composant `Home`. Donnez lui votre couleur préférée (sauf si votre couleur préférée est bleu, dans ce cas choisissez `brun`), une taille de `1.2` et le nom de votre fichier image. (Ex : `"servietteBleue.jpeg"`)
 
@@ -183,7 +183,7 @@ Dans la colonne de droite, faites-le nécessaire pour obtenir un affichage simil
 
 Pour l'image, vous aurez besoin d'un élément `<img>` dans lequel vous glisserez l'attribut `src={'/images/' + myTowel.image}`. (Avec de la concaténation, on combine le chemin `/images/` avec le nom de votre fichier.)
 
-<center>![Afficher une serviette](../../static/img/labo1/threeRows.png)</center>
+<center>![Afficher une serviette](./_01-labo1/threeRows.png)</center>
 
 ### **9 -** Afficher un tableau
 
@@ -192,7 +192,7 @@ Pour l'image, vous aurez besoin d'un élément `<img>` dans lequel vous glissere
 Dans le HTML du composant `Home`, à l'aide d'un élément `<ul>` qui contient trois éléments `<li>`, affichez
 les trois éléments du tableau `hateList` dans la colonne de gauche de la dernière rangée.
 
-<center>![Afficher un tableau](../../static/img/labo1/hateList.png)</center>
+<center>![Afficher un tableau](./_01-labo1/hateList.png)</center>
 
 Il faut utiliser les classes `list-disc` et `ml-5` sur le `<ul>` pour que la liste ne soit pas moche.
 
@@ -219,7 +219,7 @@ Le tableau contiendra deux patates :
 
 Finalement, dans le HTML, faites un autre `<ul>` (avec `list-disc`, `ml-5` et `text-xs`) avec deux `<li>` pour afficher les patates comme ceci :
 
-<center>![Afficher un tableau d'objets](../../static/img/labo1/potatoes.png)</center>
+<center>![Afficher un tableau d'objets](./_01-labo1/potatoes.png)</center>
 
 Attention ! Les deux `<li>` doivent être **identiques** dans le code ! (Sauf pour les index `[0]` et `[1]`) Ça veut dire qu'il faudra une **condition ternaire** pour bien afficher `jolie` ou `moche`. ( `{ condition ? "jolie" : "moche" }` ) 
 

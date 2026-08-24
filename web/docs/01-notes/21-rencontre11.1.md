@@ -6,11 +6,11 @@ En résumé, nous allons voir comment ...
 
 **Faire l'envoi d'une image du client au serveur :**
 
-<center>![Envoyer une image au serveur](../../static/img/cours21/imageVersServeurReact.png)</center>
+<center>![Envoyer une image au serveur](./_21-rencontre11.1/imageVersServeurReact.png)</center>
 
 **Faire la demande au serveur pour afficher une image sur le client :**
 
-<center>![Afficher une image sur le client](../../static/img/cours21/imageVersClientReact.png)</center>
+<center>![Afficher une image sur le client](./_21-rencontre11.1/imageVersClientReact.png)</center>
 
 ## 👜 FormData
 
@@ -187,7 +187,7 @@ Exemple : `SixLabors.ImageSharp`
 
 Cela permettra, entre autres, de manipuler les dimensions d'une image. Choisissez la **dernière version stable**. Pas forcément `3.0.1` comme dans l'image.
 
-<center>![Librairie image sharp](../../static/img/cours21/imageSharp.png)</center>
+<center>![Librairie image sharp](./_21-rencontre11.1/imageSharp.png)</center>
 
 **Étape 3 - ⚙ Réaliser l'action `Post`**
 
@@ -420,7 +420,7 @@ useEffect(() => {
 
 Il faudra manuellement ajouter l'image aux fichiers du serveur en lui donnant un nom qui correspond à un **Guid** suivi de l'extension du fichier :
 
-<center>![Dossier d'images](../../static/img/cours21/imageFolder.png)</center>
+<center>![Dossier d'images](./_21-rencontre11.1/imageFolder.png)</center>
 
 ⛔ Assurez-vous que le nom de votre fichier soit unique, bien entendu.
 
@@ -452,7 +452,7 @@ protected override void OnModelCreating(ModelBuilder builder){
 
 Après avoir fait une **migration** et une **mise à jour de la base de données**, ça devrait fonctionner.
 
-<center>![Dossier d'images](../../static/img/cours21/smolBirb.png)</center>
+<center>![Dossier d'images](./_21-rencontre11.1/smolBirb.png)</center>
 
 ## 📷 Prévisualiser l'image sélectionnée
 

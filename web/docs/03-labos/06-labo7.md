@@ -1,6 +1,6 @@
 # Laboratoire 7
 
-<center>![Bannière du laboratoire 7](../../static/img/labo7/banner.png)</center>
+<center>![Bannière du laboratoire 7](./_06-labo7/banner.png)</center>
 
 ## 🐌 Étape 1 - La routine... ou presque.
 
@@ -20,7 +20,7 @@ Dans l'application Web, créez un profil dans la première page. Vous pouvez ég
 
 L'objectif de cette étape sera d'exploiter le **stockage local** pour faire persister le profil de l'utilisateur.
 
-<center>![Profil du joueur](../../static/img/labo7/profile.png)</center>
+<center>![Profil du joueur](./_06-labo7/profile.png)</center>
 
 ### 💾 2 - Sauvegarder le profil dans le stockage du navigateur
 
@@ -76,7 +76,7 @@ Dans cette partie, nous travaillerons principalement sur le composant `roulette`
 
 L'objectif sera de traduire les textes dans la page en français et en anglais. (Textes fournis plus loin)
 
-<center>![Textes à traduire](../../static/img/labo7/i18n.png)</center>
+<center>![Textes à traduire](./_06-labo7/i18n.png)</center>
 
 ### 🌐 5 - Internationaliser un composant
 

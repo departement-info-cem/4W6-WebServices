@@ -12,17 +12,17 @@ Pour afficher une **vidéo YouTube spécifique** dans un composant, suivez les �
 **Étape 1 - 🔍 Trouver une vidéo YouTube de notre choix**
 
 <center>
-    ![Recherche d'une vidéo YouTube](../../static/img/cours8/searchVideo.png)
-    ![Exemple de vidéo YouTube](../../static/img/cours8/videoExample.png)
+    ![Recherche d'une vidéo YouTube](./_08-rencontre4.2/searchVideo.png)
+    ![Exemple de vidéo YouTube](./_08-rencontre4.2/videoExample.png)
 </center>
 
 **Étape 2 - 🚚 Copier le \<iframe\> prémâché dans le composant**
 
-<center>![iframe prémâché](../../static/img/cours8/iframe.png)</center>
+<center>![iframe prémâché](./_08-rencontre4.2/iframe.png)</center>
 
 On colle dans le HTML d'un composant :
 
-<center>![iframe collé](../../static/img/cours8/iframe2.png)</center>
+<center>![iframe collé](./_08-rencontre4.2/iframe2.png)</center>
 <br/>
 :::warning
 
@@ -33,7 +33,7 @@ Dans ce cas, il faudra indiquer à Angular d'ignorer l'origine de la ressource. 
 
 **Étape 3 (optionnelle) - 🧼 Contourner le blocage d'une ressource externe**
 
-<center>![Blocage en raison d'une ressource externe](../../static/img/cours8/blocked.png)</center>
+<center>![Blocage en raison d'une ressource externe](./_08-rencontre4.2/blocked.png)</center>
 
 Si vous avez ce problème, voici la solution :
 
@@ -141,7 +141,7 @@ absolument pas nécessaire ! Vous devriez pouvoir revenir en arrière et / ou ob
 
 **Étape 2 - 🚀 Activer YouTube Data API v3**
 
-<center>![Page pour activer les APIs Google](../../static/img/cours8/enableAPI.png)</center>
+<center>![Page pour activer les APIs Google](./_08-rencontre4.2/enableAPI.png)</center>
 
 Pour que nos requêtes à **l'API Web de YouTube** fonctionnent, il faudra activer l'API pour notre compte Google.
 Cliquez sur « Enable APIs and services », puis cherchez l'API de YouTube pour **l'activer**.
@@ -167,7 +167,7 @@ que vous appeliez plusieurs requêtes maladroitement **dans une boucle \*ngFor**
 
 Le résultat JSON pourrait ressembler à ceci :
 
-<center>![Résultat JSON de la requête YouTube](../../static/img/cours8/jsonYoutube.png)</center>
+<center>![Résultat JSON de la requête YouTube](./_08-rencontre4.2/jsonYoutube.png)</center>
 
 Ce qui nous intéresse le plus est `videoId` car nous pourrons l'utiliser pour afficher la vidéo avec un `<iframe>`.
 
@@ -178,7 +178,7 @@ dans un `<iframe>`.
 
 ### 🗺 Intégration Google Maps
 
-<center>![Page pour activer les APIs Google](../../static/img/cours8/enableAPI.png)</center>
+<center>![Page pour activer les APIs Google](./_08-rencontre4.2/enableAPI.png)</center>
 
 Notez qu'il faudra activer une autre API (« Maps JavaScript API ») pour pouvoir afficher une **carte Google** dans notre application Web.
 
@@ -249,7 +249,7 @@ d'ailleurs des deux variables créées plus haut.
 ></google-map>
 ```
 
-<center>![Carte Google](../../static/img/cours8/googleMap.png)</center>
+<center>![Carte Google](./_08-rencontre4.2/googleMap.png)</center>
 
 :::warning
 
@@ -257,7 +257,7 @@ Vous aurez très probablement un message d'erreur en lien avec la facturation no
 Pas de problème, le seul impact est que la carte est obscurcie ! Vous n'avez pas à activer
 la facturation dans ce cours.
 
-<center>![Erreur avec Google Maps](../../static/img/cours8/mapError.png)</center>
+<center>![Erreur avec Google Maps](./_08-rencontre4.2/mapError.png)</center>
 
 :::
 
@@ -343,8 +343,8 @@ Utilisez la commande `ng generate pipe nomDeVotrePipe` pour créer un nouveau pi
 par **créer un dossier pour vos pipes** et **vous déplacer dans le bon dossier avec `cd`** pour créer votre pipe au bon endroit.
 
 <center>
-    ![Commande pour créer un pipe](../../static/img/cours8/pipeCommand.png)
-    ![Dossier pour ranger les pipes](../../static/img/cours8/pipeFolder.png)
+    ![Commande pour créer un pipe](./_08-rencontre4.2/pipeCommand.png)
+    ![Dossier pour ranger les pipes](./_08-rencontre4.2/pipeFolder.png)
 </center>
 
 Comme pour les composants et les services, un **fichier de tests** accompagne le pipe. On peut le supprimer pour le moment.
