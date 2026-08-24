@@ -40,6 +40,15 @@ n'hésitez pas à contacter Pierre-Olivier Brillant ou Philippe Martel sur Teams
             title="Horaire Pierre-Olivier"
             data={require('./horaire-po.json')}
         />,
+    },
+    {
+        id: "schedule-pm",
+        label: "Horaire Philippe",
+        icon: "🥸",
+        component: <WeeklySchedule
+            title="Horaire Philippe"
+            data={require('./horaire-pm.json')}
+        />
     }
     ]}
     defaultTabId="grid"

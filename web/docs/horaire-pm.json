@@ -1,0 +1,117 @@
+{
+    "startHour": "08:00",
+    "endHour": "18:00",
+    "slotMinutes": 60,
+    "name": "Philippe Martel",
+    "categories": {
+        "1C5": {
+            "backgroundColor": "#ffff66",
+            "textColor": "#000000",
+            "darkBackgroundColor": "#ffff66",
+            "darkTextColor": "#000000"
+        },
+        "4W6": {
+            "backgroundColor": "#66b2ff",
+            "textColor": "#000000",
+            "darkBackgroundColor": "#66b2ff",
+            "darkTextColor": "#000000"
+        },
+        "dispo": {
+            "backgroundColor": "#ff99ff",
+            "textColor": "#000000",
+            "darkBackgroundColor": "#ff99ff",
+            "darkTextColor": "#000000"
+        },
+        "centre-daide": {
+            "backgroundColor": "#66ff66",
+            "textColor": "#000000",
+            "darkBackgroundColor": "#66ff66",
+            "darkTextColor": "#000000"
+        }
+    },
+    "days": [
+        "lundi",
+        "mardi",
+        "mercredi",
+        "jeudi",
+        "vendredi"
+    ],
+    "events": [
+        {
+            "id": "4W6-1020-t",
+            "day": "mercredi",
+            "start": "09:10",
+            "end": "12:00",
+            "title": "Programmation Web Orientée Services",
+            "courseCode": "420-4W6-EM",
+            "courseGroup": "1020",
+            "room": "D0602",
+            "category": "4W6"
+        },
+        {
+            "id": "4W6-1020-l",
+            "day": "vendredi",
+            "start": "08:10",
+            "end": "11:00",
+            "title": "Programmation Web Orientée Services",
+            "courseCode": "420-4W6-EM",
+            "courseGroup": "1020",
+            "room": "D0602",
+            "category": "4W6"
+        },
+        {
+            "id": "centre-daide-1",
+            "day": "jeudi",
+            "start": "11:30",
+            "end": "12:00",
+            "title": "Centre d'aide",
+            "category": "centre-daide"
+        },
+        {
+            "id": "centre-daide-2",
+            "day": "vendredi",
+            "start": "11:00",
+            "end": "12:00",
+            "title": "Centre d'aide",
+            "category": "centre-daide"
+        },
+        {
+            "id": "dispo-1",
+            "day": "mardi",
+            "start": "14:00",
+            "end": "15:00",
+            "title": "Disponibilité personnelle",
+            "category": "dispo"
+        },
+        {
+            "id": "dispo-2",
+            "day": "mercredi",
+            "start": "08:00",
+            "end": "09:00",
+            "title": "Disponibilité personnelle",
+            "category": "dispo"
+        },
+        {
+            "id": "1C5-1080-t",
+            "day": "mardi",
+            "start": "10:40",
+            "end": "13:00",
+            "title": "Réseaux locaux",
+            "courseCode": "420-1C5-EM",
+            "courseGroup": "1080",
+            "room": "D0622",
+            "category": "1C5"
+        },
+        {
+            "id": "1C5-1080-l",
+            "day": "jeudi",
+            "start": "08:10",
+            "end": "10:30",
+            "title": "Réseaux locaux",
+            "courseCode": "420-1C5-EM",
+            "courseGroup": "1080",
+            "room": "D0620",
+            "category": "1C5"
+        }
+    ]
+}
