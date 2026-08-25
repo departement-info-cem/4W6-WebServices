@@ -21,6 +21,15 @@ nous renvoie du **HTML**, du **CSS** et du **JavaScript** pour que la page Web �
 l'utilisateur soit toute prête. 🎁👌
 
 <DataFlowPlayer spec={clientServeur} theme="auto" />
+<NonVoyant>
+  L'animation explique les interactions du serveur web sous un structure MCV .NET.
+  L'utilisateur ouvre la page via le navigateur, la requête HTTP est envoyée au serveur.
+  Le serveur recoit un GET /users.
+  Le serveur interroge la base de données par la requète SQL SELECT * FROM users.
+  La base de données retourne deux lignes contenant les information d'Alice et Bob.
+  Le serveur transforme ces lignes en document html bien formaté.
+  Le navigatgeur affiche la page avec Alice et Bob.
+</NonVoyant>
 
 ### ✅ Application Web ASP.NET Core <u>avec</u> Next.js
 
@@ -31,6 +40,10 @@ nous renvoie seulement les **données** à afficher (vidéos, images, morceaux d
 de JSON ou de XML et l'application **Next.js** s'occupera de « pluguer » les données dans les pages Web. 📦🔌
 
 <DataFlowPlayer spec={spa} theme="auto" />
+<NonVoyant>
+  L'animation ici est plus complexte. Elle vient introduire un deuxième serveur. Ce nouveau serveur s'occupe principalement de fournir tous ce qui relève de l'interface.
+  Tandis que le serveur ASP.NET s'occupe de tout ce qui concerne les données.
+</NonVoyant>
 
 Par exemple, lorsque je souhaite naviguer sur YouTube, voici ce qu'il se passe, grossièrement :
 
@@ -76,7 +89,7 @@ avec quelques fonctionnalités, avantages et défis différents.
 
 Comme ce type de projet ne roule pas dans un navigateur Web, n'importe quel langage de programmation peut être utilisé.
 
-<center>![Frameworks Web back end](./_01-rencontre1.1/back_end.png)</center>
+<center>![Liste de différents framework backend: Spring pour Java, Ruby on Rails, .Net Core en C#, Laravel en PHP et django en Python](./_01-rencontre1.1/back_end.png)</center>
 
 #### 🖥 Frameworks clients
 
@@ -85,7 +98,7 @@ Il existe d'autres frameworks Web clients (_front end_) également.
 
 Comme ce type de projet roule dans le navigateur Web de l'utilisateur, **JavaScript** est un choix relativement obligatoire.
 
-<center>![Frameworks Web front end](./_01-rencontre1.1/front_end.png)</center>
+<center>![Liste Frameworks Web front end: Angular, React et Vue](./_01-rencontre1.1/front_end.png)</center>
 
 :::warning
 
@@ -107,7 +120,7 @@ Contrairement à Angular et Vue, React n'est pas vraiment un **framework client*
 ⛔ Ces outils sont déjà installés à l'école. Cette section n'est pertinente qu'à la maison. 🏠
 
 #### NPM
-<center>![Logo de NPM](./_01-rencontre1.1/npm.png)</center>
+<center>![](./_01-rencontre1.1/npm.png)</center>
 
 Gestionnaire de paquets 📦 pour JavaScript. Nous aidera à gérer les dépendances pour nos projets React.  
 Installez simplement [Node.js](https://nodejs.org/fr/), qui inclut NPM. Utilisez les paramètres par défaut lors de l'installation. Pas besoin d'installer Chocolatey.
@@ -115,11 +128,11 @@ Installez simplement [Node.js](https://nodejs.org/fr/), qui inclut NPM. Utilisez
 <center>![On ne veut pas Chocolatey](./_01-rencontre1.1/no_chocolatey.png)</center>
 
 Pour vérifier que NPM est bien installé, ouvrez **PowerShell**  
-<center>![Powershell](./_01-rencontre1.1/powershell.png)</center>
+<center>![](./_01-rencontre1.1/powershell.png)</center>
 ...et tapez simplement la commande `npm`, qui devrait vous proposer de l'aide pour taper d'autres commandes npm.
 
 ### 🧪 Introduction à TypeScript
-<center>![Logo TypeScript](./_01-rencontre1.1/typescript.png)</center>
+<center>![](./_01-rencontre1.1/typescript.png)</center>
 
 **TypeScript** est le langage que nous utiliserons (en plus de HTML et CSS) pour travailler sur nos projets React. L'extension des fichiers TypeScript est **.ts**.
 
@@ -164,7 +177,7 @@ générer des erreurs lors de l'exécution. (Les erreurs ne sont pas détectées
 :::
 
 <center>
-    ![Oups, mauvais type de paramètre en JS](./_01-rencontre1.1/oops.png)  
+    ![La fonction multiplyByTwo("sus") retourne le symbole NaN.](./_01-rencontre1.1/oops.png)  
     Oups ! "sus" multiplié par 2 ne donne pas une donnée valide...
 </center>
 
@@ -301,13 +314,13 @@ playWithToy(toyName : string) : string {
 
 #### Visual Studio code
 
-<center>![Logo de VS Code](./_01-rencontre1.1/vscode.png)</center>
+<center>![](./_01-rencontre1.1/vscode.png)</center>
 
 Nous l'utiliserons pour travailler sur nos projets **React**. (Semaines 1 à 15)
 
 #### Visual Studio
 
-<center>![Logo de Visual Studio](./_01-rencontre1.1/vs.png)</center>
+<center>![](./_01-rencontre1.1/vs.png)</center>
 
 Nous l'utiliserons pour travailler sur nos projets **ASP.NET Core**. (Semaines 8 à 15)
 
@@ -335,12 +348,16 @@ Quelques précisions sur les « `Next.js defaults` » :
 Le gabarit de départ contient plusieurs fichiers essentiels :
 
 <center>![Fichiers de départ d'un projet Next.js](./_01-rencontre1.1/react_files.png)</center>
+<NonVoyant>
+  Il devrait y avoir quatre répertoires (.next, app, node_modules et public) et 
+  neuf fichiers (.gitignore, eslint.config.mjs, next.config.ts, next-env.d.ts, package.json, package-lock.json, postcss.config.mjs, README.md et tsconfig.json)
+</NonVoyant>
 
 ### 🚬 Gestion des dépendances
 
 #### 🐳 node_modules
 
-<center>![Node modules](./_01-rencontre1.1/node_modules_react.png)</center>
+<center>![](./_01-rencontre1.1/node_modules_react.png)</center>
 
 Ce dossier contient toutes les dépendances qui permettent le fonctionnement de notre projet **Next.js**. Cela dit, il pèse au minimum `400 Mo` 
 et contient des tonnes et des tonnes de sous-dossiers et fichiers. Nous ne le modifierons jamais manuellement. Nous toucherons seulement
@@ -356,26 +373,28 @@ Lorsque vous transférez un projet **Next.js** sur un autre disque / ordinateur 
 de d'abord ouvrir PowerShell dans le dossier qui contient les fichiers du projet à l'aide de `shift + clic-droit`. 
 (Le dossier qui contient `app`, `public`, etc.)
 
-<center>![Commande npm install](./_01-rencontre1.1/npm_install.png)</center>
+<center>![Commande npm install dans powershell](./_01-rencontre1.1/npm_install.png)</center>
+
 
 ### 🏁 Ouvrir et exécuter un projet Next.js
 
 Il suffit d'ouvrir le dossier dans **Visual Studio Code** à l'aide d'un clic-droit à l'intérieur du dossier lui-même ou sur le dossier.
 
-<center>![Clic sur le dossier](./_01-rencontre1.1/open2.png)</center>
+<center>![Clic droit(shift + F10) sur le dossier et choisir Open with Code](./_01-rencontre1.1/open2.png)</center>
 
 <center>... ou encore ...  </center>
   
-<center>![Clic à l'intérieur du dossier](./_01-rencontre1.1/open3.png)</center>
+<center>![Clic à l'intérieur du dossier et choisir Open with Code](./_01-rencontre1.1/open3.png)</center>
 
 Pour exécuter le projet, ouvrez un terminal (Onglet `Terminal` -> `Nouveau terminal`) puis tapez la commande `npm run dev`.
 
 <center>![Commande npm run dev](./_01-rencontre1.1/run_dev.png)</center>
+<NonVoyant>Il est possible d'utiliser un terminal powershell en dehors de Visual Studio Code.</NonVoyant>
 
 Pour voir votre site Web, ouvrez un navigateur Web de votre choix et tapez l'adresse `localhost:3000`.
 Pour le moment, ce sera le gabarit par défaut qui est affiché :
 
-<center>![Page d'accueil par défaut](./_01-rencontre1.1/default_index_next.png)</center>
+<center>![Page d'accueil par défaut http://localhost:3000](./_01-rencontre1.1/default_index_next.png)</center>
   
   
 :::info
@@ -397,7 +416,7 @@ Si jamais le port `3000` est déjà monopolisé, vous pouvez préciser un port s
 
 Pour le moment, tous les fichiers que nous aborderons seront situés dans le dossier `app`.
 
-<center>![Fichiers de départ Next.js](./_01-rencontre1.1/files_next.png)</center>
+<center>![Liste des fichiers de départ Next.js dans l'explorateur Visual Studio Code](./_01-rencontre1.1/files_next.png)</center>
 
 :::warning
 
@@ -415,7 +434,23 @@ Pour respecter la convention de nommage en JavaScript / TypeScript, les noms de 
 
 #### 🎨 globals.css
 
-<center>![Extrait du code dans globals.css](./_01-rencontre1.1/globals.png)</center>
+```css showLineNumbers title="globals.css"
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ... */
+```
 
 `globals.css` regroupe les **styles CSS** qui s'appliquent à **tout le projet**. Éventuellement, nous verrons comment créer des styles qui s'appliqueront uniquement à certaines **parties** de notre HTML.
 
@@ -439,7 +474,7 @@ L'extension `.tsx` représente un fichier qui peut contenir du **TypeScript** e
 
 Pour le moment, sachez que le fichier `page.tsx` contient la fonction `Home()`, qui **retourne** le HTML affiché dans votre page Web Next.js. N'hésitez pas à modifier ce qu'il y a dans la fonction `Home()` pour modifier la page Web, comme ceci :
 
-```tsx showLineNumbers
+```tsx showLineNumbers title="page.tsx"
 import Image from "next/image";
 
 export default function Home() {
@@ -449,7 +484,7 @@ export default function Home() {
 }
 ```
 
-<center>![Exemple de page.tsx](./_01-rencontre1.1/page.png)</center>
+<center>![Exemple de page.tsx qui affiche Salut](./_01-rencontre1.1/page.png)</center>
 
 Éventuellement, nous apprendrons à utiliser plusieurs **pages** en créant d'autres fichiers similaires à `page.tsx`.
 
@@ -457,7 +492,23 @@ export default function Home() {
 
 `layout.tsx` est un fichier qui décrit le **squelette de la page Web**. (Avec des éléments comme `<html>`, `<body>`, etc. qui sont communs à toutes les pages Web)
 
-<center>![Fichier layout.tsx](./_01-rencontre1.1/layout.png)</center>
+```tsx showLineNumbers title="layout.tsx"
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body 
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {children}
+      </body>
+    </html>
+  );
+}
+```
 
 Remarquez la variable nommée `metadata`, qui permet de configurer l'élément `<head>` du layout. **Next.js** va s'occuper de convertir ces données en un élément `<head>` qui sera intégré au layout.
 
@@ -489,7 +540,7 @@ const geistMono = Geist_Mono({
 
 Finalement, le `{children}` dans le HTML retourné par la fonction `RootLayout()` indique où le HTML du fichier `page.tsx` sera **intégré** dans le layout. (C'est-à-dire à l'intérieur de l'élément `<body>`)
 
-```tsx showLineNumbers
+```tsx showLineNumbers title="layout.tsx"
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -552,7 +603,8 @@ export default function Home() {
 
 Il faudra souvent ajouter des **importations** dans nos composants pour pouvoir utiliser certains *bidules* comme `useState`. Lorsque vous avez du **rouge**, n'hésitez pas à faire un **clic gauche** sur le segment souligné en rouge, puis à utiliser le raccourci `Ctrl + .` pour faire apparaître le menu de suggestions, qui vous proposera généralement les **importations manquantes**. 
 
-<center>![Fichier layout.tsx](./_01-rencontre1.1/ctrlPoint.png)</center>
+<center>![Exemple du menu contextuel "Quick Fix" sur une méthode manquant un import from "react"](./_01-rencontre1.1/ctrlPoint.png)</center>
+
 
 :::
 
@@ -571,7 +623,7 @@ export default function Home() {
 }
 ```
 
-<center>![Affichage de variables](./_01-rencontre1.1/displayVariableReact.png)</center>
+<center>![Résultat html: "Salut Simone, vous avez 37 ans."](./_01-rencontre1.1/displayVariableReact.png)</center>
 
 :::note
 
@@ -597,7 +649,7 @@ export default function Home() {
 }
 ```
 
-<center>![Affichage d'une fonction](./_01-rencontre1.1/displayFunctionReact.png)</center>
+<center>![Résultat html : "Voici une valeur : 67"](./_01-rencontre1.1/displayFunctionReact.png)</center>
 
 ### ⚱ Afficher un objet personnalisé
 
@@ -607,7 +659,7 @@ D'abord, créez une nouvelle classe en tentant de respecter ces indications :
 * Pour bien organiser votre projet, rangez cette classe dans le dossier `app`/`_types`.
 * Le nom de la classe doit commencer par une majuscule. (C'est une convention aussi)
 
-<center>![Fichier pour une classe](./_01-rencontre1.1/typesFolder.png)</center>
+<center>![Le fichier npc.ts qui se retrouve sous le répertoire _types](./_01-rencontre1.1/typesFolder.png)</center>
 
 Votre classe pourrait ressembler à ceci. Rappelez-vous que le mot-clé `public` peut être
 utilisé pour simplifier la déclaration des propriétés de la classe. De plus, notez que
@@ -627,11 +679,11 @@ export class Npc{
 
 Nous pourrons maintenant créer une instance de cette nouvelle classe personnalisée dans un composant. Vous aurez à **importer** la classe pour pouvoir l'utiliser.
 
-<center>![Importer une classe](./_01-rencontre1.1/importClass.png)</center>
+<center>![Quick Fix: "Add import from "./_types/npc"](./_01-rencontre1.1/importClass.png)</center>
 
 Utilisez le **constructeur** de votre classe pour instancier un nouvel objet :
 
-<center>![Usage d'un constructeur](./_01-rencontre1.1/constructorCallReact.png)</center>
+<center>![Suggestion d'auto-complétion: "Npc(name: string, dialogue: string, age: number): Npc"](./_01-rencontre1.1/constructorCallReact.png)</center>
 
 Voici un exemple avec un **état** qui contient un `Npc` et l'affichage dans le **HTML** :
 
@@ -649,7 +701,7 @@ export default function Home() {
 
 ```
 
-<center>![Affichage d'un objet](./_01-rencontre1.1/displayClass.png)</center>
+<center>![Résultat html: "Khajiit est un NPC de 176 an(s) dont le dialogue est «Khajiit has wares... if you have coin.»"](./_01-rencontre1.1/displayClass.png)</center>
 
 ### 📜 Afficher un tableau
 
@@ -676,7 +728,7 @@ export default function Home() {
 
 ```
 
-<center>![Affichage des éléments d'un tableau](./_01-rencontre1.1/displayArrayReact.png)</center>
+<center>![Résultat html : "J'adore les couleurs suivantes ! Youpi ! -indigo -cramoisi -ocre"](./_01-rencontre1.1/displayArrayReact.png)</center>
 
 :::note
 
@@ -844,19 +896,19 @@ projet ! Sinon les transferts seront exponentiellement longs ! 🐳
 
 #### 🐣 Créer un repository avec un projet Next.js
 
-Commencez par initialiser votre repository sur GitHub. (Pour pouvoir le cloner dans **Fork** 🔱 ensuite)
+Commencez par initialiser votre repository sur GitHub. (Pour pouvoir le cloner dans **Fork** 🔱 ensuite. Vous pouvez aussi utiliser **GitHub Desktop**.)
 
 ⛔ Assurez-vous qu'il soit privé !
 
-<center>![Initialiser le repository](./_01-rencontre1.1/git1.png)</center>
+<center>![S'assurer que l'option Choose visibility soit à Private. ](./_01-rencontre1.1/git1.png)</center>
 
 Clonez le repository sur votre ordinateur à l'aide de son URL :
 
-<center>![Cloner le repository](./_01-rencontre1.1/git2.png)</center>
+<center>![Cloner le repository avec Fork](./_01-rencontre1.1/git2.png)</center>
 
 Ensuitez, créez votre projet Next.js dans le repository à l'aide de la [commande désignée](/notes/rencontre1.1#-créer-un-projet-nextjs).
 
-<center>![Contenu du projet Next.js](./_01-rencontre1.1/react_files_git.png)</center>
+<center>![Contenu du projet Next.js avec .gitignore](./_01-rencontre1.1/react_files_git.png)</center>
 
 Vous remarquerez que le projet Next.js est automatiquement muni d'un fichier `.gitignore`. Il est parfait
 pour nos besoins car il permettra d'ignorer les documents lourds comme `node_modules`.
