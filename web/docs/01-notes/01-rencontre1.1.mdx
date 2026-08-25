@@ -10,6 +10,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import JavaScriptConsole from '@site/src/components/JavaScriptConsole';
 import exempleSimple from '!!raw-loader!./_01-rencontre1.1/exemple-simple.js';
+import multiplyByTwoJavaScript from '!!raw-loader!./_01-rencontre1.1/multiply-by-two.js';
+import multiplyByTwoTypeScript from '!!raw-loader!./_01-rencontre1.1/multiply-by-two.ts';
 
 
 ### 🙈 Application Web ASP.NET Core <u>sans</u> Next.js
@@ -141,24 +143,12 @@ Cela ressemble assez à **C#** pour que vous puissiez déduire le comportement d
 
 Voici le même exemple de code, dans les deux langages :
 
-<Tabs>
-    <TabItem value="js" label="JavaScript" default>
-        ```js showLineNumbers
-        multiplyByTwo(n){
-            let newValue = n * 2;
-            return newValue;
-        }
-        ```
-    </TabItem>
-    <TabItem value="ts" label="TypeScript" default>
-        ```ts showLineNumbers
-        multiplyByTwo(n : number) : number {
-            let newValue : number = n * 2;
-            return newValue;
-        }
-        ```
-    </TabItem>
-</Tabs>
+<JavaScriptConsole
+  files={{
+    "/index.js": multiplyByTwoJavaScript,
+    "/index.ts": multiplyByTwoTypeScript,
+  }}
+/>
 
 On remarque surtout le typage dans l'exemple en **TypeScript** :
 * Le paramètre de la fonction est typé.

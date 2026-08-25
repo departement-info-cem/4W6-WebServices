@@ -9,24 +9,39 @@ import {
   defaultLight,
 } from "@codesandbox/sandpack-react";
 
-export default function JavaScriptConsole({ code }: { code: string }): React.ReactElement {
+interface JavaScriptConsoleProps {
+  code?: string;
+  files?: Record<string, string>;
+  language?: "javascript" | "typescript";
+}
+
+export default function JavaScriptConsole({
+  code,
+  files,
+  language = "javascript",
+}: JavaScriptConsoleProps): React.ReactElement {
   const { colorMode } = useColorMode();
+  const isTypeScript =
+    language === "typescript" || Object.keys(files ?? {}).some((file) => file.endsWith(".ts"));
+  const entryFile = isTypeScript ? "/index.ts" : "/index.js";
+  const sandpackFiles = files ?? { [entryFile]: code ?? "" };
+  const activeFile = files?.["/index.js"] ? "/index.js" : entryFile;
 
   return (
     <SandpackProvider
-      template="vanilla"
+      template={isTypeScript ? "vanilla-ts" : "vanilla"}
       theme={colorMode === "dark" ? defaultDark : defaultLight}
       options={{
-        activeFile: "/index.js",
+        activeFile,
         autorun: false,
         autoReload: false,
-        visibleFiles: ["/index.js"],
+        visibleFiles: Object.keys(sandpackFiles),
       }}
-      files={{ "/index.js": code }}
+      files={sandpackFiles}
     >
       <SandpackPreview style={{ display: "none" }} />
       <SandpackCodeEditor
-        showTabs={false}
+        showTabs={Object.keys(sandpackFiles).length > 1}
         showLineNumbers
         style={{ minHeight: "17rem" }}
       />
