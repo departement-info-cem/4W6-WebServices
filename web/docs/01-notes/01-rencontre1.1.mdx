@@ -6,6 +6,11 @@ title: "1.1 - Intro à React / Next.js 🏁"
 import clientServeur from './_01-rencontre1.1/animation-client-serveur'
 import spa from './_01-rencontre1.1/animation-spa'
 import { DataFlowPlayer } from '@dataflow-animator/react';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import JavaScriptConsole from '@site/src/components/JavaScriptConsole';
+import exempleSimple from '!!raw-loader!./_01-rencontre1.1/exemple-simple.js';
+
 
 ### 🙈 Application Web ASP.NET Core <u>sans</u> Next.js
 
@@ -130,25 +135,7 @@ plusieurs avantages importants et quelques fonctionnalités supplémentaires.
 
 Cela ressemble assez à **C#** pour que vous puissiez déduire le comportement de ce code.
 
-```js showLineNumbers
-function printToConsole(m){
-    console.log(m);
-}
-
-let message = "Please send";
-let n = 5;
-
-message = 5 < 4 ? "Pick a Shoe" : message + " dudes";
-
-for(let i = 0; i < n; i++){
-    if(i % 2 == 0){
-        printToConsole(message);
-    }
-}
-```
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+<JavaScriptConsole code={exempleSimple} />
 
 #### TypeScript VS JavaScript
 
