@@ -51,16 +51,8 @@
         {
             "id": "centre-daide-1",
             "day": "mardi",
-            "start": "11:00",
-            "end": "12:00",
-            "title": "Centre d'aide",
-            "category": "centre-daide"
-        },
-        {
-            "id": "centre-daide-2",
-            "day": "mardi",
             "start": "13:00",
-            "end": "14:00",
+            "end": "15:00",
             "title": "Centre d'aide",
             "category": "centre-daide"
         },
@@ -95,10 +87,10 @@
             "category": "5N6"
         },
         {
-            "id": "centre-daide-3",
-            "day": "vendredi",
-            "start": "10:00",
-            "end": "12:00",
+            "id": "centre-daide-2",
+            "day": "jeudi",
+            "start": "13:00",
+            "end": "15:00",
             "title": "Centre d'aide",
             "category": "centre-daide"
         },
