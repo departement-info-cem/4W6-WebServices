@@ -2,6 +2,9 @@
 title: "1.2 - Composant dynamique 🏃"
 ---
 
+import ReactPreview from '@site/src/components/ReactPreview';
+import statePage from '!!raw-loader!./_02-rencontre1.2/state-page.tsx';
+
 :::warning
 
 Dans de nombreux exemples à partir de ce cours, des classes personnelles sont utilisées à la place des classes **Tailwind** pour alléger le code HTML des exemples. C'est normal qu'en copiant certains exemples, l'apparence de vos pages Web soit un peu moins pétillant 🌶 !
@@ -20,26 +23,12 @@ Ce cours aborde l'interaction entre le code TypeScript d'un composant et son cod
 
 Au **cours 1**, nous avions abordé les **états** (Variable qui peut être affichée dans le HTML d'un composant)
 
-```tsx showLineNumbers title="page.tsx"
-'use client';
-
-import { useState } from "react";
-
-export default function Home() {
-
-  const [favoriteColor, setFavoriteColor] = useState("indigo"); // État
-  const [daysWithoutWorkAccident, setDaysWithoutWorkAccident] = useState(0); // État
-
-  return (
-    <div className="m-2">
-        <p>Salut. Tu aimes la couleur {favoriteColor}</p>
-        <p>Il y a eu {daysWithoutWorkAccident} jour(s) sans accident au travail.</p>
-    </div>
-  );
-}
-```
-
-<center>![Résultat html = Salut. Tu aimes la couleur indigo. Il y a eu 0 jour(s) sans accident de travail.](./_02-rencontre1.2/state.png)</center>
+<ReactPreview code={statePage} previewHeight={75}/>
+<NonVoyant>
+  Le bac à sable affiche le code du composant à gauche et son résultat à droite.
+  Résultat html = Salut. Tu aimes la couleur indigo. Il y a eu 0 jour(s) sans accident de travail.
+  Le code de l'exemple peut être modifié : l'aperçu se met à jour tout seul.
+</NonVoyant>
 
 Pour **modifier** la valeur d'un état, il faudra utiliser le `set...` de sa déclaration. Exemple :
 
