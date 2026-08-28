@@ -16,6 +16,7 @@ import youtuberClass from '!!raw-loader!./_02-rencontre1.2/youtuber-class.ts';
 import displayEventPage from '!!raw-loader!./_02-rencontre1.2/display-event-page.tsx';
 import displayEventOverPage from '!!raw-loader!./_02-rencontre1.2/display-event-over-page.tsx';
 import displayEventOverCss from '!!raw-loader!./_02-rencontre1.2/display-event-over.css';
+import twoWayBindingPage from '!!raw-loader!./_02-rencontre1.2/two-way-binding-page.tsx';
 
 :::warning
 
@@ -484,8 +485,6 @@ Ci-dessous, nous avons trois boutons qui peuvent être **survolés** pour change
 
 ## 📝 Formulaires
 
-
-
 ### ♊ Two-way binding
 
 Il est possible d'associer un **état** du composant avec la valeur d'un élément `<input>` du HTML. C'est-à-dire que si
@@ -515,22 +514,14 @@ Ajoutez l'événement `onChange` suivant et l'attribut `value` suivant :
 Désormais, l'**état** et l'input sont bel et bien liés : leur valeur sera toujours synchronisée, car **dès que l'`input` change, l'état changera aussi**. On peut tester visuellement
 cette synchronisation en modifiant le HTML comme ceci :
 
-```tsx showLineNumbers
-const [favoriteWord, setFavoriteWord] = useState("");
-
-return (
-  <div className="m-2">
-    <input value={favoriteWord} onChange={(e) => setFavoriteWord(e.target.value)}  type="text" className="textInput" name="favoriteWord" placeholder="Mot préféré" />
-    <div>{favoriteWord}</div>
-  </div>
-);
-```
+<ReactPreview code={twoWayBindingPage} previewHeight={95} />
+<NonVoyant>
+  Le bac à sable affiche le code du composant, puis son résultat.
+  Résultat html = un champ de texte vide portant l'invite « Mot préféré », suivi d'une ligne vide.
+  Le champ fonctionne : le texte saisi s'affiche aussitôt sur la ligne en dessous.
+</NonVoyant>
 
 Bien entendu, l'élément `<div>` contiendra toujours le même texte que l'input.
-
-<center>![Résultat html = input vide où l'on va insérer son «Mot préféré»](./_02-rencontre1.2/twoWayBinding_1.png)</center>
-
-<center>![Le mot préféré s'affiche sous l'input suite à une modification.](./_02-rencontre1.2/twoWayBinding_2.png)</center>
 
 Grâce à ce mécanisme, nous aurons facilement accès à la donnée fournie par l'utilisateur
 dans l'état `favoriteWord`.

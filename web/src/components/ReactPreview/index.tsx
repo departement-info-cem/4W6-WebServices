@@ -29,6 +29,12 @@ const GLOBAL_STYLES = `body {
   cursor: pointer;
 }
 
+.textInput {
+  border: 2px solid royalblue;
+  border-radius: 0.125rem;
+  padding: 0.25rem 0.5rem;
+}
+
 .btn-blue   { background-color: royalblue; }
 .btn-red    { background-color: crimson; }
 .btn-yellow { background-color: goldenrod; }
