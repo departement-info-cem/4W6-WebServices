@@ -11,6 +11,9 @@ import displayArrayObjectPage from '!!raw-loader!./_02-rencontre1.2/display-arra
 import npcClass from '!!raw-loader!./_02-rencontre1.2/npc-class.ts';
 import displayConditionAndPage from '!!raw-loader!./_02-rencontre1.2/display-condition-and-page.tsx';
 import displayConditionTernaryPage from '!!raw-loader!./_02-rencontre1.2/display-condition-ternary-page.tsx';
+import displayConditionListPage from '!!raw-loader!./_02-rencontre1.2/display-condition-list-page.tsx';
+import youtuberClass from '!!raw-loader!./_02-rencontre1.2/youtuber-class.ts';
+import displayEventPage from '!!raw-loader!./_02-rencontre1.2/display-event-page.tsx';
 
 :::warning
 
@@ -357,60 +360,21 @@ On peut utiliser une **condition ternaire** dans certaines situations (Quand on 
 
 Voici un exemple avec des objets personnalisés :
 
-<Tabs>
-    <TabItem value="class" label="Classe" default>
-    ```ts showLineNumbers
-    export class Youtuber{
-
-        constructor(
-            public name : string,
-            public content : string,
-            public age : number | null
-        ){}
-
-    }
-    ```
-    </TabItem>
-    <TabItem value="componentClass" label="Composant" default>
-```tsx showLineNumbers
-const [youtubers, setYoutubers] = useState([
-  new Youtuber("MotherSniperZz", "Call of Duty gaming", 16),
-  new Youtuber("Ka$haStudioASMR", "ASMR", 24),
-  new Youtuber("SussyBaka69", "NSFW", null),
-  new Youtuber("Bl0ck4L1f3", "LEGO Collection", 47)
-]);
-
-// Ajouter l'émoji 😳 si le contenu est suspect
-function isSussy(content : string){
-  if(content == "ASMR" || content == "NSFW"){
-    return <span>😳</span>;
-  }
-  else{
-    return "";
-  }
-}
-
-// Rendu HTML
-return (
-  <div className="m-2">
-    <div className="text-2xl">Youtubeurs</div>
-    <ul className="list-disc ml-4">
-      {youtubers.map((y) =>
-        <li key={y.name}>{y.name} ({y.age ?? '???'} ans) fait des vidéos sur le thème « {y.content} » {isSussy(y.content)}</li>
-      )}
-    </ul>
-  </div>
-);
-```
-    </TabItem>
-</Tabs>
-
-<center>![Résultat html = Youtubeurs: 
--MotherSniperZz(16ans) fait des vidéos sur le thème «Call of Duty gaming», 
--Ka$shaStudioASMR(24 ans) fait des vidéos sur le thème «ASMR» 😳, 
--SussyBaka69(??? ans) fait des vidéos sur le thème «NSFW»😳,
--Bl0ck4L1f3 (47 ans) fait des vidéos sur le thème «LEGO Collection»
-)](./_02-rencontre1.2/displayConditionList.png)</center>
+<ReactPreview
+  code={displayConditionListPage}
+  files={{ "/_types/youtuber.ts": youtuberClass }}
+/>
+<NonVoyant>
+  Le bac à sable contient deux onglets : page.tsx (le composant, actif au départ)
+  et youtuber.ts (la classe Youtuber, rangée dans le dossier _types).
+  L'aperçu du résultat suit le code.
+  Résultat html = Youtubeurs, suivi d'une liste à puces :
+  MotherSniperZz (16 ans) fait des vidéos sur le thème « Call of Duty gaming »,
+  Ka$haStudioASMR (24 ans) fait des vidéos sur le thème « ASMR » 😳,
+  SussyBaka69 (??? ans) fait des vidéos sur le thème « NSFW » 😳,
+  Bl0ck4L1f3 (47 ans) fait des vidéos sur le thème « LEGO Collection ».
+  Le code de l'exemple peut être modifié : l'aperçu se met à jour tout seul.
+</NonVoyant>
 
 :::info
 
@@ -457,20 +421,15 @@ function incrementX(){
 Ensuite, dans le rendu HTML, on ajoute un écouteur d'événements de type `onClick` sur un bouton pour
 appeler la fonction `incrementX()` à chaque fois que le bouton est **cliqué**.
 
-```tsx showLineNumbers
-return (
-  <div className="m-2">
-    <div>{x}</div>
-    <button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold" onClick={incrementX}>Incrémenter X</button>
-  </div>
-);
-```
+<ReactPreview code={displayEventPage} previewHeight={95} />
+<NonVoyant>
+  Le bac à sable affiche le code du composant, puis son résultat.
+  Résultat html = la valeur 0, suivie d'un bouton bleu Incrémenter X.
+  Le bouton fonctionne : chaque clic augmente la valeur affichée de 1.
+</NonVoyant>
 
 Résultat : Comme on affiche `{x}` dans la page Web, on peut voir la valeur de `x` évoluer dynamiquement
 à chaque fois qu'on appuie sur le bouton.
-
-<center>![Résultat html = 6,
- Incrémenter X en bouton bleu](./_02-rencontre1.2/displayEvent.png)</center>
 
 :::warning
 
