@@ -18,6 +18,8 @@ import displayEventOverPage from '!!raw-loader!./_02-rencontre1.2/display-event-
 import displayEventOverCss from '!!raw-loader!./_02-rencontre1.2/display-event-over.css';
 import twoWayBindingPage from '!!raw-loader!./_02-rencontre1.2/two-way-binding-page.tsx';
 import formPage from '!!raw-loader!./_02-rencontre1.2/form-page.tsx';
+import formListPage from '!!raw-loader!./_02-rencontre1.2/form-list-page.tsx';
+import itemClass from '!!raw-loader!./_02-rencontre1.2/item-class.ts';
 
 :::warning
 
@@ -613,39 +615,21 @@ Avant de tester, on prépare un affichage quelque part dans le HTML pour la list
 </ul>
 ```
 
-Voici le résultat final dans la page Web après avoir créé 3 items grâce au formulaire :
-
-<center>![Le formulaire contient une liste d'items (3x Patate obtenur le 2025-12-16 brisé, 2x Chaise obtenu le 2026-01-28 intact, 67x piano obtenu le 2026-01-07 brisé), quatre inputs pour entrer le nom de l'item, la date d'ajout, la quantité et un checkbox brisé?, un bouton Ajouter.](./_02-rencontre1.2/formList.png)</center>
-
 **Code complet** :
 
-```tsx showLineNumbers
-const [name, setName] = useState<string>("");
-const [dateAdded, setDateAdded] = useState<string>("");
-const [quantity, setQuantity] = useState<number>(1);
-const [isBroken, setIsBroken] = useState<boolean>(false);
+<ReactPreview
+  code={formListPage}
+  files={{ "/_types/item.ts": itemClass }}
+  previewHeight={450}
+/>
+<NonVoyant>
+  Le bac à sable contient deux onglets : page.tsx (le composant, actif au départ)
+  et item.ts (la classe Item, rangée dans le dossier _types).
+  L'aperçu du résultat suit le code.
+  Résultat html = le titre « Items : » suivi d'une liste vide, puis le titre
+  « Créer un item : » et les quatre champs du formulaire, puis un bouton Ajouter.
+  Le formulaire fonctionne : remplissez les champs et appuyez sur Ajouter
+  pour voir l'item apparaître dans la liste.
+</NonVoyant>
 
-const[items, setItems] = useState<Item[]>([]); // Tableau d'items vide
-
-function addItem(){
-  setItems([
-    ...items,
-    new Item(name, new Date(dateAdded), quantity, isBroken)
-  ]);
-}
-
-return (
-  <div className="m-2">
-    <div className="text-2xl">Items :</div>
-    <ul className="list-disc ml-6 mb-5">
-      {items.map((i) => <li key={i.name}>{i.quantity} x {i.name} (Obtenu le {i.dateAdded.toLocaleDateString()}) ({i.isBroken ? 'Brisé' : 'Intact'})</li>)}
-    </ul>
-    <div className="text-xl">Créer un item : </div>
-    Nom : <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="textInput" />
-    Date d'ajout : <input type="date" value={dateAdded}  onChange={(e) => setDateAdded(e.target.value)} className="textInput" />
-    Quantité : <input type="number" value={quantity}  onChange={(e) => setQuantity(+e.target.value)} className="textInput" />
-    Brisé ? : <input type="checkbox" checked={isBroken}  onChange={(e) => setIsBroken(e.target.checked)} className="textInput" />
-    <button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold" onClick={addItem}>Ajouter</button>
-  </div>
-);
-```
+Remplissez le formulaire et appuyez sur **Ajouter** pour voir la liste d'items se remplir.
