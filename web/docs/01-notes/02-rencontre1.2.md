@@ -7,6 +7,10 @@ import statePage from '!!raw-loader!./_02-rencontre1.2/state-page.tsx';
 import displayArrayPage from '!!raw-loader!./_02-rencontre1.2/display-array-page.tsx';
 import displayArrayIndexPage from '!!raw-loader!./_02-rencontre1.2/display-array-index-page.tsx';
 import displayConditionPage from '!!raw-loader!./_02-rencontre1.2/display-condition-page.tsx';
+import displayArrayObjectPage from '!!raw-loader!./_02-rencontre1.2/display-array-object-page.tsx';
+import npcClass from '!!raw-loader!./_02-rencontre1.2/npc-class.ts';
+import displayConditionAndPage from '!!raw-loader!./_02-rencontre1.2/display-condition-and-page.tsx';
+import displayConditionTernaryPage from '!!raw-loader!./_02-rencontre1.2/display-condition-ternary-page.tsx';
 
 :::warning
 
@@ -292,41 +296,20 @@ import TabItem from '@theme/TabItem';
 
 Voici un exemple avec un objet personnalisé :
 
-<Tabs>
-    <TabItem value="class" label="Classe" default>
-    ```ts showLineNumbers
-    export class Npc{
-
-        constructor(
-            public name : string,
-            public quote : string,
-            public age : number | null
-        ){}
-
-    }
-    ```
-    </TabItem>
-    <TabItem value="state" label="État">
-    ```tsx showLineNumbers
-    const [npcs, setNpcs] = useState([
-        new Npc("Ali", "Allo !", 19),
-        new Npc("Bob", "Bonjour !", 23),
-        new Npc("Camilo", "Ça va ?", 18)
-    ])
-    ```
-    </TabItem>
-    <TabItem value="htmlTemplate" label="HTML">
-    ```tsx showLineNumbers
-    <ul className="list-disc mx-4">
-        {npcs.map(
-          (n) => <li key={n.name}>{n.name} a {n.age} an(s) et dit « {n.quote} »</li>
-        )}
-    </ul>
-    ```
-    </TabItem>
-</Tabs>
-
-<center>![Résultat html = NPCs: -Ali a 19an(s) et dit «Allo!», -Bob a 23 an(s) et dot «Bonjour!», -Camilo a 18 an(s) et dit «Ça va?»](./_02-rencontre1.2/displayArrayObject.png)</center>
+<ReactPreview
+  code={displayArrayObjectPage}
+  files={{ "/_types/npc.ts": npcClass }}
+  previewHeight={160}
+/>
+<NonVoyant>
+  Le bac à sable contient deux onglets : page.tsx (le composant, actif au départ)
+  et npc.ts (la classe Npc, rangée dans le dossier _types).
+  L'aperçu du résultat suit le code.
+  Résultat html = NPCs, suivi d'une liste à puces :
+  Ali a 19 an(s) et dit « Allo ! », Bob a 23 an(s) et dit « Bonjour ! »,
+  Camilo a 18 an(s) et dit « Ça va ? ».
+  Le code de l'exemple peut être modifié : l'aperçu se met à jour tout seul.
+</NonVoyant>
 
 ## ✔ Affichage conditionnel
 
@@ -347,33 +330,25 @@ Bien entendu, dans ce cas, puisque `userAge` est supérieur ou égal à 18, les 
 
 Il est également possible d'utiliser un *stratagème syntaxique* suivant la forme `booléen && expression` pour éviter d'avoir à créer une fonction :
 
-```tsx showLineNumbers
-return (
-  <div className="m-2">
-    {
-      userAge >= 18 && <button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold">Acheter des cigarettes 🚬</button>
-    }
-    <button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold">Acheter des briques 🧱</button>
-  </div>
-);
-```
+<ReactPreview code={displayConditionAndPage} previewHeight={75}/>
+<NonVoyant>
+  Le bac à sable affiche le code du composant, puis son résultat.
+  Résultat html = deux boutons : Acheter des cigarettes 🚬 et Acheter des briques 🧱.
+  Le code de l'exemple peut être modifié : en remplaçant useState(18) par useState(17),
+  l'aperçu n'affichera plus que le bouton Acheter des briques 🧱.
+</NonVoyant>
 
-Le résultat est identique : 
-<center>![Résultat html = Acheter des cigarettes🚬 Acheter des briques🧱](./_02-rencontre1.2/displayCondition.png)</center>
+Le résultat est identique.
 
 On peut utiliser une **condition ternaire** dans certaines situations (Quand on veut afficher une chose OU l'autre) :
 
-```tsx showLineNumbers
-return (
-  <div className="m-2">
-    <button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold">
-      { 
-        userAge >= 18 ? <span>Acheter des cigarettes 🚬</span> : <span>Acheter des briques 🧱</span>
-      }
-    </button>
-  </div>
-);
-```
+<ReactPreview code={displayConditionTernaryPage} previewHeight={75}/>
+<NonVoyant>
+  Le bac à sable affiche le code du composant, puis son résultat.
+  Résultat html = un seul bouton : Acheter des cigarettes 🚬.
+  Le code de l'exemple peut être modifié : en remplaçant useState(18) par useState(17),
+  le même bouton affichera plutôt Acheter des briques 🧱.
+</NonVoyant>
 
 
 :::
