@@ -30,7 +30,13 @@ const GLOBAL_STYLES = `body {
 }
 
 .textInput {
-  border: 2px solid royalblue;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Tailwind retire la bordure native des champs : on la redessine. */
+.textInput:not([type="checkbox"]) {
+  border: 1px solid #c4c4cc;
   border-radius: 0.125rem;
   padding: 0.25rem 0.5rem;
 }

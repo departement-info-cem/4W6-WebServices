@@ -17,6 +17,7 @@ import displayEventPage from '!!raw-loader!./_02-rencontre1.2/display-event-page
 import displayEventOverPage from '!!raw-loader!./_02-rencontre1.2/display-event-over-page.tsx';
 import displayEventOverCss from '!!raw-loader!./_02-rencontre1.2/display-event-over.css';
 import twoWayBindingPage from '!!raw-loader!./_02-rencontre1.2/two-way-binding-page.tsx';
+import formPage from '!!raw-loader!./_02-rencontre1.2/form-page.tsx';
 
 :::warning
 
@@ -295,9 +296,6 @@ const [ages, setAges] = useState([17, 18, 17, 19, 20, 18]); // Certaines valeurs
 
 :::
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 ### 🧩 Exemple sophistiqué
 
 Voici un exemple avec un objet personnalisé :
@@ -574,19 +572,14 @@ Dans le HTML, on crée quatre `<input>` adaptés à chaque propriété et on uti
 la liaison avec les **états**. Remarquez que les valeurs par défaut choisies pour les variables de
 classe (nom `""`, date `""`, quantité à `1` et item *pas brisé*) se reflètent dans l'état initial du formulaire.
 
-<Tabs>
-    <TabItem value="html" label="Code HTML" default>
-    ```tsx showLineNumbers
-    Nom : <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="textInput" />
-    Date d'ajout : <input type="date" value={dateAdded}  onChange={(e) => setDateAdded(e.target.value)} className="textInput" />
-    Quantité : <input type="number" value={quantity}  onChange={(e) => setQuantity(+e.target.value)} className="textInput" />
-    Brisé ? : <input type="checkbox" checked={isBroken}  onChange={(e) => setIsBroken(e.target.checked)} className="textInput" />
-    ```
-    </TabItem>
-    <TabItem value="ui" label="Page Web" default>
-    ![Formulaire pour créer un item](./_02-rencontre1.2/form.png)
-    </TabItem>
-</Tabs>
+<ReactPreview code={formPage} previewHeight={250} />
+<NonVoyant>
+  Le bac à sable affiche le code du composant, puis son résultat.
+  Résultat html = quatre champs empilés, chacun précédé de son étiquette :
+  Nom (texte vide), Date d'ajout (date vide), Quantité (nombre, valeur 1)
+  et Brisé ? (case à cocher, décochée).
+  Les champs fonctionnent : chacun est lié à son état.
+</NonVoyant>
 
 :::info
 
