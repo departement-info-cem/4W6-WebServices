@@ -20,6 +20,19 @@ const GLOBAL_STYLES = `body {
   margin: 0;
 }
 
+.btn {
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.125rem;
+  cursor: pointer;
+}
+
+.btn-blue   { background-color: royalblue; }
+.btn-red    { background-color: crimson; }
+.btn-yellow { background-color: goldenrod; }
+
 .cyan  { background-color: rgb(229, 255, 255); }
 .red   { background-color: rgb(255, 229, 229); }
 .amber { background-color: rgb(255, 248, 229); }
@@ -34,16 +47,19 @@ interface ReactPreviewProps {
   fileName?: string;
   /** Fichiers supplémentaires visibles dans l'éditeur. (Ex : une classe) */
   files?: Record<string, string>;
+  /** CSS propre à l'exemple, montré dans un onglet globals.css. */
+  css?: string;
   /** Hauteur de l'éditeur. (Par défaut : la hauteur du code) */
-  codeHeight?: string;
+  codeHeight?: string | number;
   /** Hauteur de l'aperçu. */
-  previewHeight?: string;
+  previewHeight?: string | number;
 }
 
 export default function ReactPreview({
   code = "",
   fileName = "/page.tsx",
   files,
+  css = "",
   codeHeight = "auto",
   previewHeight = "12rem",
 }: ReactPreviewProps): React.ReactElement {
@@ -53,12 +69,17 @@ export default function ReactPreview({
   const entryImport = `.${entryFile.replace(/\.[jt]sx?$/, "")}`;
   const extraFiles = files ?? {};
 
+  const cssFile = css ? { "/globals.css": css } : {};
+
   const sandpackFiles = {
     [entryFile]: code,
     ...extraFiles,
+    ...cssFile,
     // Le bac à sable n'a pas de routeur Next.js : App rend simplement la page.
     "/App.tsx": {
-      code: `import Page from "${entryImport}";\n\nexport default function App() {\n  return <Page />;\n}\n`,
+      code:
+        (css ? `import "./globals.css";\n` : "") +
+        `import Page from "${entryImport}";\n\nexport default function App() {\n  return <Page />;\n}\n`,
       hidden: true,
     },
     "/styles.css": { code: GLOBAL_STYLES, hidden: true },
@@ -70,7 +91,7 @@ export default function ReactPreview({
       theme={colorMode === "dark" ? defaultDark : defaultLight}
       options={{
         activeFile: entryFile,
-        visibleFiles: [entryFile, ...Object.keys(extraFiles)],
+        visibleFiles: [entryFile, ...Object.keys(extraFiles), ...Object.keys(cssFile)],
         externalResources: [TAILWIND_CDN],
       }}
       files={sandpackFiles}

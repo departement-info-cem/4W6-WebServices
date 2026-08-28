@@ -14,6 +14,8 @@ import displayConditionTernaryPage from '!!raw-loader!./_02-rencontre1.2/display
 import displayConditionListPage from '!!raw-loader!./_02-rencontre1.2/display-condition-list-page.tsx';
 import youtuberClass from '!!raw-loader!./_02-rencontre1.2/youtuber-class.ts';
 import displayEventPage from '!!raw-loader!./_02-rencontre1.2/display-event-page.tsx';
+import displayEventOverPage from '!!raw-loader!./_02-rencontre1.2/display-event-over-page.tsx';
+import displayEventOverCss from '!!raw-loader!./_02-rencontre1.2/display-event-over.css';
 
 :::warning
 
@@ -471,42 +473,14 @@ Notez qu'un **template string** est entouré d'**accents graves** `` ` ``
 
 Ci-dessous, nous avons trois boutons qui peuvent être **survolés** pour changer la classe d'un texte. Remarquez que l'état `textColor` est utilisé comme **classe** pour un **élément HTML** à l'aide d'un **template string**.
 
-```tsx showLineNumbers
-const [textColor, setTextColor] = useState("blueText");
-
-function changeTextColor(color : string){
-  setTextColor(color);
-}
-
-// Rendu HTML
-return (
-  <div className="m-2">
-    <div className={`${textColor} mb-1`}>Ce texte peut changer de couleur</div>
-    <button className="btn btn-blue mr-2" onMouseOver={() => changeTextColor('blueText')}>Bleu</button>
-    <button className="btn btn-red mr-2" onMouseOver={() => changeTextColor('redText')}>Rouge</button>
-    <button className="btn btn-yellow" onMouseOver={() => changeTextColor('yellowText')}>Jaune</button>
-  </div>
-);
-```
-
-<center>![Résultat html = Ce text peut changer de couleur,
-Bleu, Rouge, Jaune](./_02-rencontre1.2/displayEventOver.png)</center>
-
-CSS utilisé pour le texte :
-
-```css showLineNumbers
-.blueText{
-  color:cornflowerblue;
-}
-
-.redText{
-  color:crimson;
-}
-
-.yellowText{
-  color:goldenrod;
-}
-```
+<ReactPreview code={displayEventOverPage} css={displayEventOverCss} previewHeight={95} />
+<NonVoyant>
+  Le bac à sable contient deux onglets : page.tsx (le composant, actif au départ)
+  et globals.css (les classes de couleur du texte). L'aperçu du résultat suit le code.
+  Résultat html = le texte « Ce texte peut changer de couleur », suivi de trois boutons :
+  Bleu, Rouge et Jaune.
+  Les boutons fonctionnent : survoler un bouton change la couleur du texte.
+</NonVoyant>
 
 ## 📝 Formulaires
 
