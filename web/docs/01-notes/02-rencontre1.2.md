@@ -5,6 +5,7 @@ title: "1.2 - Composant dynamique 🏃"
 import ReactPreview from '@site/src/components/ReactPreview';
 import statePage from '!!raw-loader!./_02-rencontre1.2/state-page.tsx';
 import displayArrayPage from '!!raw-loader!./_02-rencontre1.2/display-array-page.tsx';
+import displayArrayIndexPage from '!!raw-loader!./_02-rencontre1.2/display-array-index-page.tsx';
 
 :::warning
 
@@ -274,17 +275,12 @@ Le morceau de code ci-dessous permet de créer un élément `<li>` pour **chaque
 const [ages, setAges] = useState([17, 18, 17, 19, 20, 18]); // Certaines valeurs se répètent ...
 ```
 
-```tsx showLineNumbers
-<ul className="list-disc mx-4">
-    {ages.map(
-        (i, index) => <li key={index}>{index} - {i}</li>
-        // i contient chaque donnée.
-        // index contient chaque ... index ! (0, 1, 2, etc.)
-    )}
-</ul>
-```
-
-<center>![Résultat html = Âges: 0 à 17, 1 à 18, 2 à 17, 3 à 19, 4 à 20, 5 à 18](./_02-rencontre1.2/displayArrayIndex.png)</center>
+<ReactPreview code={displayArrayIndexPage} />
+<NonVoyant>
+  Le bac à sable affiche le code du composant, puis son résultat.
+  Résultat html = Âges, suivi d'une liste à puces : 0 - 17, 1 - 18, 2 - 17, 3 - 19, 4 - 20, 5 - 18.
+  Le code de l'exemple peut être modifié : l'aperçu se met à jour tout seul.
+</NonVoyant>
 
 :::
 
