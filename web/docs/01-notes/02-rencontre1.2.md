@@ -4,6 +4,7 @@ title: "1.2 - Composant dynamique 🏃"
 
 import ReactPreview from '@site/src/components/ReactPreview';
 import statePage from '!!raw-loader!./_02-rencontre1.2/state-page.tsx';
+import displayArrayPage from '!!raw-loader!./_02-rencontre1.2/display-array-page.tsx';
 
 :::warning
 
@@ -244,20 +245,12 @@ const [ingredients, setIngredients] = useState(["patate", "huile d'olive", "sel"
 
 Nous allons utiliser la fonction `map()` dans le HTML, qui sert à répéter une opération pour **chaque élément** du tableau :
 
-```tsx showLineNumbers
-return (
-    <div className="m-2">
-        <div className="text-2xl">Ingrédients</div>
-        <ul className="list-disc mx-4">
-            {ingredients.map(
-                (i) => <li key={i}>{i}</li>
-            )}
-        </ul>
-    </div>
-);
-```
-
-<center>![Résultat html = Ingrédients: -patate, -huile d'olive, -sel](./_02-rencontre1.2/displayArray.png)</center>
+<ReactPreview code={displayArrayPage} previewHeight={150} /> 
+<NonVoyant>
+  Le bac à sable affiche le code du composant, puis son résultat.
+  Résultat html = Ingrédients, suivi d'une liste à puces : patate, huile d'olive, sel.
+  Le code de l'exemple peut être modifié : l'aperçu se met à jour tout seul.
+</NonVoyant>
 
 Le morceau de code ci-dessous permet de créer un élément `<li>` pour **chaque donnée** du tableau **ingredients** :
 
