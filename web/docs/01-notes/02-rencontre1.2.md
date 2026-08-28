@@ -6,6 +6,7 @@ import ReactPreview from '@site/src/components/ReactPreview';
 import statePage from '!!raw-loader!./_02-rencontre1.2/state-page.tsx';
 import displayArrayPage from '!!raw-loader!./_02-rencontre1.2/display-array-page.tsx';
 import displayArrayIndexPage from '!!raw-loader!./_02-rencontre1.2/display-array-index-page.tsx';
+import displayConditionPage from '!!raw-loader!./_02-rencontre1.2/display-condition-page.tsx';
 
 :::warning
 
@@ -331,36 +332,16 @@ Voici un exemple avec un objet personnalisé :
 
 ### 👶 Exemple simple
 
-```tsx showLineNumbers
-// Âge de l'utilisateur
-const [userAge, setUserAge] = useState(18);
-
-function displayButtons(){
-
-  // Boutons pour les 18+
-  if(userAge >= 18){
-    return <div>
-      <button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold mr-2">Acheter des cigarettes 🚬</button>
-      <button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold">Acheter des briques 🧱</button>
-    </div>;
-  }
-  // Boutons pour les 17-
-  else{
-    return <button className="bg-blue-500 text-white py-2 px-4 rounded-sm font-bold">Acheter des briques 🧱</button>;
-  }
-}
-
-// Rendu HTML
-return (
-  <div className="m-2">
-    {displayButtons()}
-  </div>
-);
-```
+<ReactPreview code={displayConditionPage} previewHeight={75}/>
 
 Bien entendu, dans ce cas, puisque `userAge` est supérieur ou égal à 18, les deux boutons s'afficheront.
 
-<center>![Résultat html = Acheter des cigarettes🚬 Acheter des briques🧱](./_02-rencontre1.2/displayCondition.png)</center>
+<NonVoyant>
+  Le bac à sable affiche le code du composant, puis son résultat.
+  Résultat html = deux boutons : Acheter des cigarettes 🚬 et Acheter des briques 🧱.
+  Le code de l'exemple peut être modifié : en remplaçant useState(18) par useState(17),
+  l'aperçu n'affichera plus que le bouton Acheter des briques 🧱.
+</NonVoyant>
 
 :::tip
 
