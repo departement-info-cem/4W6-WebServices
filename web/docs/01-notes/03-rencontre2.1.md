@@ -26,7 +26,7 @@ de notre base de données sera compromise.
 
 À un certain moment, il faudra faire de la **gestion utilisateurs**, permettre d'ajouter du contenu sur le site Web
 (commentaires, articles, vidéos, images, etc... donc des **INSERT** dans la base de données !), etc. Donc il va
-falloir qu'une autre application (qui n'est pas un projet **Angular**) s'en occupe.
+falloir qu'une autre application (qui n'est pas un projet **React**) s'en occupe.
 
 À partir de la **semaine 8**, nous créerons un **serveur Web ASP.NET Core** nous-mêmes, mais pour le moment, nous allons
 envoyer des requêtes à des **serveurs Web existants** pour obtenir des données à afficher dans nos applications Web.
