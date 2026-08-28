@@ -131,6 +131,34 @@ Pour vérifier que NPM est bien installé, ouvrez **PowerShell**
 <center>![](./_01-rencontre1.1/powershell.png)</center>
 ...et tapez simplement la commande `npm`, qui devrait vous proposer de l'aide pour taper d'autres commandes npm.
 
+:::info
+Il se peut que votre système soit plus restrictif et vous donne des erreurs lorsque vous essayez d'exécuter **npm**. Le niveau de restriction de PowerShell ne permet
+pas l'exécution de scripts par défaut. Vous devez modifier la politique de sécurité de PowerShell. Vous avez deux options:
+
+**Solution 1 : Modifier la politique pour la session actuelle (Recommandé)**
+
+Cette méthode est la plus sûre, car elle active les scripts uniquement dans la fenêtre PowerShell ouverte. La sécurité d'origine sera rétablie dès que vous fermerez
+ cette fenêtre.
+1) Laissez votre fenêtre PowerShell ouverte.
+2) Copiez et exécutez la commande suivante :
+```powershell title="PowerShell" showLineNumbers
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+```
+3) Exécutez votre commande npm.
+
+**Solution 2 : Modifier la politique de façon permanente**
+
+Cette méthode modifie la configuration de votre ordinateur pour que PowerShell autorise toujours l'exécution de vos scripts locaux:
+1) Fermez PowerShell.
+2) Ouvrez un nouveau PowerShell en mode Administrateur (clique droit sur l'icône > **Exécuter en tant qu'administrateur**).
+3) Copiez et exécutez la commande suivante :
+```powershell title="PowerShell" showLineNumbers
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+4) Appuyez sur **O** (Oui) ou **A** (Oui pour tout) si le système demande une confirmation.
+5) Vous pouvez maintenant fermer cette fenêtre et utiliser npm normalement dans vos terminaux habituels.
+:::
+
 ### 🧪 Introduction à TypeScript
 <center>![](./_01-rencontre1.1/typescript.png)</center>
 
