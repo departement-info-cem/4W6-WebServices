@@ -2,6 +2,12 @@
 title: "2.1 - Requêtes HTTP ↔️"
 ---
 
+## Révision
+
+
+
+## Introduction
+
 ✅ Une application Web client **Next.js** peut :
 
 * Gérer tout le côté visuel du site Web.
