@@ -422,7 +422,7 @@ const response = await axios.get("http://ws.audioscrobbler.com/2.0/?method=album
 Si vous préférez utiliser des `template strings` plutôt que la concaténation avec des `+`, voici une alternative :
 
 ```tsx
-const response = await axios.get(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${$lastFmKey}&artist=Cher&album=Believe&format=json`);
+const response = await axios.get(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${lastFmKey}&artist=Cher&album=Believe&format=json`);
 ```
 
 ### 🛒 Personnaliser la requête (Choisir l'input)
