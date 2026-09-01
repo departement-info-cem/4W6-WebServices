@@ -1,6 +1,6 @@
-# Laboratoire 5
+# Laboratoire 3.1
 
-<center>![Bannière du laboratoire](./_04-labo5/banner.png)</center>
+<center>![Bannière du laboratoire](./_05-labo3.1/banner.png)</center>
 
 :::note
 
@@ -12,7 +12,7 @@ Le titre dans la page ressemble à « Laboratoire 3 », mais c'est parce que vou
 
 ## ☃ Étape 1 - Parc du sud
 
-Téléchargez le [projet de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo5.zip).
+Téléchargez le [projet de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo3.1.zip).
 
 Réinstallez les dépendances avec `npm install`, ouvrez Visual Studio Code et exécutez l'application Web avec `npm run dev`.
 
@@ -22,7 +22,7 @@ Pour le moment, seuls les composants **Home** et **List** existent. Il y aussi p
 
 `Home` est affiché à cause du `{children}` dans le **layout racine** et de la **route vide**, mais `List` lui, est affiché à cause du `<List />`, à titre de composant réutilisable.
 
-<center>![Layout racine](./_04-labo5/mainApp.png)</center>
+<center>![Layout racine](./_05-labo3.1/mainApp.png)</center>
 
 ### ⛵ 1 - Routage et menu de navigation
 
@@ -91,7 +91,7 @@ puis un qui reçoit le nom `clyde`, etc.
 
 Dans le HTML de `Card`, remplacez tous les `???` par le paramètre `characterName`, qui contient le nom du personnage à afficher. Cela complètera l'affichage.
 
-<center>![Affichage de tous les personnages](./_04-labo5/list.png)</center>
+<center>![Affichage de tous les personnages](./_05-labo3.1/list.png)</center>
 
 Le composant `Card` peut sembler un peu inutile. (Pourquoi ne pas directement tout mettre dans `List` ?) Cela dit, dès qu'on compte réutiliser cet affichage ailleurs dans le site Web, on économise quelques lignes de HTML et de TypeScript.
 
@@ -153,7 +153,7 @@ la variable `characterDetails`. (**Axios** est déjà installé)
 "https://spapi.dev/api/characters?search=" + "kenny"
 ```
 
-<center>![Aperçu de l'objet JSON de spapi](./_04-labo5/spapi.png)  
+<center>![Aperçu de l'objet JSON de spapi](./_05-labo3.1/spapi.png)  
 Pour le nombre d'épisodes... vous avez besoin de `.length` !</center>
 
 <br/>
@@ -201,7 +201,7 @@ Dans le composant `Details`, attrapez le paramètre de route et faites-en deux u
 
 Vous pouvez tester avec cette route, par exemple : `http:localhost:3000/details/wendy` (Utilisez des noms en minuscules !)
 
-<center>![Paramètre de route](./_04-labo5/details.png)  </center>
+<center>![Paramètre de route](./_05-labo3.1/details.png)  </center>
 
 Modifiez le `<Link>` du menu de navigation pour qu'il mène vers `/details/kenny`, sinon il ne fonctionnera plus.
 
@@ -211,7 +211,7 @@ Dans le composant `Card`, ajoutez un `<Link>` sur le `<div>` pour rediriger vers
 
 Dans le composant `Home`, faites les modifications nécessaires pour qu'on puisse écrire le nom d'un personnage dans l'`<input>` et que ce nom soit ensuite utilisé comme **paramètre de route** quand on appuie sur le bouton « Chercher » qui mène vers la route `/details`. (Donc, si on écrit « eric » dans l'`<input>`,le bouton va rediriger vers `/details/eric`)
 
-<center>![Mini formulaire](./_04-labo5/miniForm.png)</center>
+<center>![Mini formulaire](./_05-labo3.1/miniForm.png)</center>
 
 Ce n'est pas grave si le composant `details` fonctionne mal avec un nom invalide.
 

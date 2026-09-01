@@ -1,8 +1,8 @@
-# Laboratoire 17
+# Laboratoire 9.1
 
-<center>![Bannière du site](./_10-labo17/banner.png)</center>
+<center>![Bannière du site](./_17-labo9.1/banner.png)</center>
 
-📦 Téléchargez les [projets de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo17.zip).
+📦 Téléchargez les [projets de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo9.1.zip).
 
 ## 👤 Problèmes identitaires
 
@@ -14,7 +14,7 @@ La **gestion des utilisateurs** est déjà totalement complétée côté **serve
 
 Tentez de vous **inscrire**, puis de vous **connecter**. Assurez-vous que le **token 🔑** est bien reçu.
 
-<center>![Réception du token](./_10-labo17/token.png)</center>
+<center>![Réception du token](./_17-labo9.1/token.png)</center>
 
 ### 📶 2 - Intercepteur
 
@@ -43,7 +43,7 @@ Vous allez coder plusieurs **actions** côté **serveur** qui exploitent l'authe
 
 Dans tous les cas, pour le moment, assurez-vous que l'anime est bien créé et visible ensuite :
 
-<center>![Liste des animes](./_10-labo17/animes.png)</center>
+<center>![Liste des animes](./_17-labo9.1/animes.png)</center>
 
 ### 📬 5 - Obtenir mes animes
 
@@ -53,7 +53,7 @@ Notez qu'il faudra décommenter deux lignes de code qui permettaient d'appeler l
 
 Les animes que vous avez `POST` vous-mêmes devraient déjà être présents :
 
-<center>![Liste de mes animes](./_10-labo17/myAnimes.png)</center>
+<center>![Liste de mes animes](./_17-labo9.1/myAnimes.png)</center>
 
 Si ce n'est pas le cas, c'est qu'il y a un souci avec votre `PostAnime`. Je vous mets au défi de demander de l'aide à l'enseignant 😳
 
@@ -65,7 +65,7 @@ La dernière action, `SubscribeAnime`, permet, lorsqu'on appuie sur le bouton «
 ... ou ...
 * L'utilisateur n'est pas abonné à l'`Anime` : il obtient une relation avec l'`Anime`. (Abonné)
 
-<center>![S'abonner à un anime](./_10-labo17/subscribe.png)</center>
+<center>![S'abonner à un anime](./_17-labo9.1/subscribe.png)</center>
 
 Si ça fonctionne bien, appuyer sur « Choisir » devrait permettre d'ajouter ou de retirer un `Anime` de la liste « Vos animes ».
 

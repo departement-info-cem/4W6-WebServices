@@ -1,8 +1,8 @@
-# Laboratoire 2
+# Laboratoire 1.2
 
-Pour ce deuxième laboratoire il y aura un projet de départ à télécharger. Le [voici](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo2.zip). 🎁
+Pour ce deuxième laboratoire il y aura un projet de départ à télécharger. Le [voici](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo1.2.zip). 🎁
 
-<center>![Le laboratoire 2 est dynamique 🗿](./_02-labo2/display1.png)</center>
+<center>![Le laboratoire 2 est dynamique 🗿](./_02-labo1.2/display1.png)</center>
 
 ## 😵 Étape 1 - J'ai déjà tout oublié React
 
@@ -36,7 +36,7 @@ immédiatement initialisé avec trois choses que vous aimez plus que la _Prog We
 [💡](/notes/rencontre1.2#-afficher-une-liste) Dans le HTML, utilisez `.map()` pour parcourir votre liste et dupliquer un élément `<li>` trois
 fois à l'intérieur d'un élément `<ul className="list-disc ml-4">` pour afficher tous les éléments de votre liste élégamment.
 
-<center>![Résultat html= me coincer un orteil dans une porte, me coincer un doigt dans une porte, le bowling](./_02-labo2/display2.png)</center>
+<center>![Résultat html= me coincer un orteil dans une porte, me coincer un doigt dans une porte, le bowling](./_02-labo1.2/display2.png)</center>
 
 ### **3 -** Condition
 
@@ -50,7 +50,7 @@ remplacez `???` par un texte différent :
 
 Vous pourrez jouer avec la valeur de `userAge` pour tester que les deux possibilités fonctionnent.
 
-<center>![Résultat html= «J'aime les cigarettes», «J'aime les LEGO Star Wars»](./_02-labo2/display3.png)</center>
+<center>![Résultat html= «J'aime les cigarettes», «J'aime les LEGO Star Wars»](./_02-labo1.2/display3.png)</center>
 
 :::warning
 
@@ -66,7 +66,7 @@ Cette fois-ci je vous donne un peu moins de pistes alors soyez prudents. 👷‍
 
 N'hésitez pas à modifier le HTML. Personnellement j'ai dû ajouter deux `<span>` et une condition ternaire pour réussir.
 
-<center>![Affichage de deux résultats avec le bouton «Chatouiller la bombe» et les clics restants= «Clics restants: 5💣» et «Clics restant: 0💥»](./_02-labo2/display4_1.png)</center>
+<center>![Affichage de deux résultats avec le bouton «Chatouiller la bombe» et les clics restants= «Clics restants: 5💣» et «Clics restant: 0💥»](./_02-labo1.2/display4_1.png)</center>
 
 ### **5 -** Mini thème sombre
 
@@ -91,7 +91,7 @@ Si vous préférez les **template strings** :
 
 :::
 
-<center>![Démonstration html du bouton «Changer le fond» sous fond clair et sur fond foncé.](./_02-labo2/display5.png)</center>
+<center>![Démonstration html du bouton «Changer le fond» sous fond clair et sur fond foncé.](./_02-labo1.2/display5.png)</center>
 
 :::note
 
@@ -107,8 +107,8 @@ Pour les prochains exercices, nous travaillerons avec des éléments de formulai
 
 [💡](/notes/rencontre1.2#-formulaires) Utilisez le champ texte présent et associez-le à un état de type `string`. Le but est de pouvoir entrer son nom dans le champ, puis, de cliquer sur le bouton pour faire afficher le  message `"Salut nom"`. Vous aurez besoin d'une fonction qui appelera `alert(...message...)` dans le composant.
 
-<center>![Exemple html avec Yolande dans l'input et un bouton «Saluet» adjacent.](./_02-labo2/display6_1.png)</center>
-<center>![Exemple d'un message d'alerte(«Salut Yolande!»)](./_02-labo2/display6_2.png)</center>
+<center>![Exemple html avec Yolande dans l'input et un bouton «Saluet» adjacent.](./_02-labo1.2/display6_1.png)</center>
+<center>![Exemple d'un message d'alerte(«Salut Yolande!»)](./_02-labo1.2/display6_2.png)</center>
 
 ### **7 -** Choix d'une couleur de fond
 
@@ -127,7 +127,7 @@ Si on le formule autrement, ça donnerait « Dans le fond dude l'`<option>` que 
 ::: 
 
 
-<center>![Dropbox avec le choix «Bleu» sur fond bleu.](./_02-labo2/display7_1.png)</center>
+<center>![Dropbox avec le choix «Bleu» sur fond bleu.](./_02-labo1.2/display7_1.png)</center>
 <center>![Dropbox avec le choix «Rouge» sur fond Rouge.])</center>
 <center>![Dropbox avec le choix «Jaune» sur fond jaune.])</center>
 
@@ -164,13 +164,13 @@ Une liste de jeu déjà entrés:
 -Enter the Gungeon (roguelike action top-down) se joue jusqu'à 2 joueur(s) hors ligne et est déjà sorti.
 -Mario Kart World(racing) se joue jusqu'à 24 joueurs en ligne et hors ligne et est déjà sorti.
 Un bouton «Retirer dernier jeu»
-un bouton «+1 joueur»](./_02-labo2/display8.png)</center>
+un bouton «+1 joueur»](./_02-labo1.2/display8.png)</center>
 
 ### **9 -** Liste vide
 
 [💡](/notes/rencontre1.2#-affichage-conditionnel) L'affichage des jeux était déjà faite, mais pouvez-vous mettre un message spécial qui s'affiche seulement lorsque la liste est vide ? Utilisez la forme `booléen && expression`.
 
-<center>![Aucun jeu n'a été ajouté à la liste.](./_02-labo2/display9_1.png)</center>
+<center>![Aucun jeu n'a été ajouté à la liste.](./_02-labo1.2/display9_1.png)</center>
 
 ## 👽 Étape 4 - Mutation de tableau
 
@@ -178,10 +178,10 @@ un bouton «+1 joueur»](./_02-labo2/display8.png)</center>
 
 [💡](/notes/rencontre1.2#-changer-un-tableau) Rendez ce bouton fonctionnel pour qu'il retire le dernier jeu du tableau `videoGames`. Si c'est bien codé, appuyer sur le bouton mettra automatiquement à jour l'affichage de la liste dans la page.
 
-<center>![Bouton «Retirer dernier jeu»](./_02-labo2/display10_1.png)</center>
+<center>![Bouton «Retirer dernier jeu»](./_02-labo1.2/display10_1.png)</center>
 
 ### **11 -** Mutation de tous les éléments
 
 [💡](/notes/rencontre1.2#-changer-un-tableau) Rendez ce bouton fonctionnel pour qu'il augmente le nombre de joueurs de tous les jeux du tableau `videoGames` de 1. Si c'est bien codé, appuyer sur le bouton mettra automatiquement à jour l'affichage de la liste dans la page.
 
-<center>![Bouton «+1 joueur»](./_02-labo2/display11.png)</center>
+<center>![Bouton «+1 joueur»](./_02-labo1.2/display11.png)</center>

@@ -1,8 +1,8 @@
-# Laboratoire 15
+# Laboratoire 8.1
 
-<center>![Bannière du site](./_08-labo15/banner.png)</center>
+<center>![Bannière du site](./_15-labo8.1/banner.png)</center>
 
-Un [projet de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo15.zip) Next.js vous est fourni pour ce labo. Vous devrez créer le projet ASP.NET Core Web API vous-mêmes cela dit.
+Un [projet de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo8.1.zip) Next.js vous est fourni pour ce labo. Vous devrez créer le projet ASP.NET Core Web API vous-mêmes cela dit.
 
 ## 🫃 Ma première Web API
 
@@ -27,7 +27,7 @@ Suivez toutes les étapes des notes de cours bêtement et arrêtez vous juste av
 Exécutez ensuite votre application et vérifiez que Swagger affiche les informations des requêtes de ce nouveau contrôleur. (L’ordre des requêtes pourrait être différent)
 
 <p align="center">
-    <img src={require('./_08-labo15/swagger1.png').default} width="40%" alt="Interface Swagger"/>
+    <img src={require('./_15-labo8.1/swagger1.png').default} width="40%" alt="Interface Swagger"/>
 </p>
 
 ## 🚗 Faire fausse route
@@ -46,7 +46,7 @@ De plus, changez la méthode de l'action pour que ce soit `POST` plutôt que `DE
 
 Si vous exécutez à nouveau le serveur, vous devriez avoir ceci :
 
-<center>![Interface Swagger](./_08-labo15/swagger2.png)</center>
+<center>![Interface Swagger](./_15-labo8.1/swagger2.png)</center>
 
 ## 💿 SQL c'est plate smh
 
@@ -74,13 +74,13 @@ Au lieu de pitonner l'URL de la requête au complet à chaque fois, ajoutez le p
 
 [💡](/notes/rencontre8.1#-get) Implémentez `GetAll`. Comme `Post` n'est pas encore implémenté, c'est normal que l'objet JSON retourné par le serveur soit une liste **vide**. Dans tous les cas, remplissez l'état `itemList`.
 
-<center>![GetAll](./_08-labo15/getAll.png)</center>
+<center>![GetAll](./_15-labo8.1/getAll.png)</center>
 
 <hr/>
 
 [💡](/notes/rencontre8.1#-post) En utilisant la `value` et le `name` spécifiés par l’utilisateur, implémentez la requête `Post`.
 
-<center>![Post](./_08-labo15/post.png)</center>
+<center>![Post](./_15-labo8.1/post.png)</center>
 
 Testez le `GetAll` à nouveau. Si `itemList` a bien été rempli, un ou des items devraient être visibles dans la page.
 
@@ -88,7 +88,7 @@ Testez le `GetAll` à nouveau. Si `itemList` a bien été rempli, un ou des item
 
 [💡](/notes/rencontre8.1#-get) En utilisant l’`id` spécifié par l’utilisateur, implémentez la requête `Get` et glissez l'item obtenu dans l'état `singleItem`.
 
-<center>![Get](./_08-labo15/get.png)</center>
+<center>![Get](./_15-labo8.1/get.png)</center>
 
 Si `singleItem` a bien été rempli, il devrait être visible dans la page.
 
@@ -96,7 +96,7 @@ Si `singleItem` a bien été rempli, il devrait être visible dans la page.
 
 [💡](/notes/rencontre8.1#-put) En utilisant l'`id`, la `value` et le `name` spécifiés par l'utilisateur, implémentez la requête `Put` qui permettra de modifier un item existant dans la base de données.
 
-<center>![Put](./_08-labo15/put.png)</center>
+<center>![Put](./_15-labo8.1/put.png)</center>
 
 <hr/>
 
@@ -106,7 +106,7 @@ Si `singleItem` a bien été rempli, il devrait être visible dans la page.
 * Cela dit, nous n’avons rien de pertinent à insérer dans le **corps** (Il suffit de mettre l’`id` de l’item à supprimer dans l’URL...), donc mettez `null` comme corps ou omettez le 2e paramètre totalement. 
 * Bien entendu, c’est normal que ça ne fonctionne pas si l’`id` spécifié n’existe pas dans la base de données.
 
-<center>![Delete](./_08-labo15/delete.png)</center>
+<center>![Delete](./_15-labo8.1/delete.png)</center>
 
 :::note
 

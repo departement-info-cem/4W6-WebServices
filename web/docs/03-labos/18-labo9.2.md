@@ -1,8 +1,8 @@
-# Laboratoire 18
+# Laboratoire 9.2
 
-<center>![Stime](./_11-labo18/stime.png)</center>
+<center>![Stime](./_18-labo9.2/stime.png)</center>
 
-Téléchargez les [projets de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo18.zip). N'oubliez pas de mettre à jour la base de données avec `dotnet ef database update`.
+Téléchargez les [projets de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo9.2.zip). N'oubliez pas de mettre à jour la base de données avec `dotnet ef database update`.
 
 La gestion des utilisateurs est déjà fonctionnelle et un intercepteur est déjà complété. (Vous n'aurez jamais à joindre token vous-mêmes, mais il faudra quand même être connecté !) Notez qu'il y a déjà deux `reviews` existantes dans la base de données. Elles ont été créées par l'utilisateur `bob` dont le mot de passe est `allo`. Sacré *Bob*.
 
@@ -20,7 +20,7 @@ Dans cette section, vous aurez à compléter deux actions de `ReviewsController`
 
 [💡](/notes/rencontre9.2#-data-transfer-objects) Pour le moment, les `reviews` ne s'affichent pas dans la page Web. C'est normal, il faut implémenter l'action `GetReview` d'abord. Elle va simplement récupérer toutes les `reviews` dans la base de données et les convertir en `ReviewDisplayDTO` pour les envoyer au client. Une fois que ce sera fait, *décommentez* l'instruction `getReviews()` dans le `useEffect()` du composant `Home`.
 
-<center>![Liste des reviews](./_11-labo18/reviews.png)</center>
+<center>![Liste des reviews](./_18-labo9.2/reviews.png)</center>
 
 ### 3 - PostReview
 
@@ -42,11 +42,11 @@ Connectez-vous avant de poster une `Review` !
 
 Le code côté **Next.js** est déjà complété. un **DTO** est envoyé avec le texte et le nom du jeu.
 
-<center>![Créer un review](./_11-labo18/post.png)</center>
+<center>![Créer un review](./_18-labo9.2/post.png)</center>
 
 ## 🔒 Critiques sécuritaires
 
-<center>![Opérations pour une critique](./_11-labo18/review1.png)</center>
+<center>![Opérations pour une critique](./_18-labo9.2/review1.png)</center>
 
 ### 4 - DeleteReview
 
@@ -64,7 +64,7 @@ Le code côté client est déjà complété.
 
 ### 6 - EditReview
 
-<center>![Modifier une critique](./_11-labo18/review2.png)</center>
+<center>![Modifier une critique](./_18-labo9.2/review2.png)</center>
 
 [💡](/notes/rencontre9.2#-put) Seul l'auteur d'une critique doit être capable de la modifier.
 

@@ -1,8 +1,8 @@
-# Laboratoire 16
+# Laboratoire 8.2
 
-<center>![Bannière du site](./_09-labo16/banner.png)</center>
+<center>![Bannière du site](./_16-labo8.2/banner.png)</center>
 
-Des [projets de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo16.zip) Next.js et ASP.NET Core vous sont fournis. Orchestrez bien `npm install`, `npm run dev` et `dotnet ef database update`.
+Des [projets de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo8.2.zip) Next.js et ASP.NET Core vous sont fournis. Orchestrez bien `npm install`, `npm run dev` et `dotnet ef database update`.
 
 **Mise en situation dont personne n'avait besoin** : M. Robidoux gère un zoo de dinosaures, mais il a besoin d'un système pour répertorier tous les incidents qui surviennent pour simplifier la collaboration avec ses assureurs.
 
@@ -21,7 +21,7 @@ En résumé :
 
 L'application permet déjà de créer des `Zookeeper`. Vérifiez le code de l'action `PostZookeeper()` sur le serveur : il est ultra simple et reçoit directement un `Zookeeper` en paramètre. C'est similaire au code par défaut pour `POST` quand on génère un contrôleur. Pour créer des `Dinosaur` et des `Incident`, ce sera moins simple ... il faudra utiliser des **DTOs** !
 
-<center>![Liste de zookeepers](./_09-labo16/zookeepers.png)</center>
+<center>![Liste de zookeepers](./_16-labo8.2/zookeepers.png)</center>
 
 ### 1 - Créer des dinosaures
 
@@ -39,7 +39,7 @@ return Ok(dinosaur);
 
 Gardez à l'esprit que, côté client, `response.data` contiendra le nouveau `Dinosaur`, à ajouter dans l'état `dinosaurs`.
 
-<center>![Liste de dinosaures](./_09-labo16/dinosaurs.png)</center>
+<center>![Liste de dinosaures](./_16-labo8.2/dinosaurs.png)</center>
 
 :::info
 
@@ -69,7 +69,7 @@ return BadRequest(new { Message = "Les ids reçus sont invalides ou vides." });
 
 `response.data` contiendra le nouvel `Incident`.
 
-<center>![Liste d'incidents](./_09-labo16/incidents.png)</center>
+<center>![Liste d'incidents](./_16-labo8.2/incidents.png)</center>
 
 ## 🔪 Supprimer n'est pas plus facile
 

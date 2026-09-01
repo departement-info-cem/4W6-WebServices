@@ -1,8 +1,8 @@
-# Laboratoire 6
+# Laboratoire 3.2
 
-<center>![Bannière du labo 6](./_05-labo6/banner.png)</center>
+<center>![Bannière du labo 6](./_06-labo3.2/banner.png)</center>
 
-Téléchargez le [projet de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo6.zip), mais ne le lancez pas tout de suite. ⛔🧤⚾
+Téléchargez le [projet de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo3.2.zip), mais ne le lancez pas tout de suite. ⛔🧤⚾
 
 ## 🚀 Étape 1 - Laboratoire du turfu
 
@@ -46,7 +46,7 @@ Si vous réactualisez la page ou si vous fermez l'onglet, même un Context se fe
 
 :::
 
-<center>![Usage d'un Context](./_05-labo6/context.png)</center>
+<center>![Usage d'un Context](./_06-labo3.2/context.png)</center>
 
 ### 🐳 3 - Context plus large
 
@@ -66,7 +66,7 @@ Voici un peu d'aide pour réussir à intégrer **trois états** dans le même Co
 
 Désormais, les scores records devraient être affichés dans deux composants chacun. (`Home` et la page associée au type de jeu)
 
-<center>![Usage d'un Context](./_05-labo6/largerContext.png)</center>
+<center>![Usage d'un Context](./_06-labo3.2/largerContext.png)</center>
 
 :::warning
 

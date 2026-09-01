@@ -1,6 +1,6 @@
-# Laboratoire 3
+# Laboratoire 2.1
 
-Commencez par télécharger le ⛔ [projet de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo3.zip) pour ce laboratoire. 🎁
+Commencez par télécharger le ⛔ [projet de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo2.1.zip) pour ce laboratoire. 🎁
 
 Clé d'API Last FM fournie : `9a8a3facebbccaf363bb9fd68fa37abf`
 
@@ -16,15 +16,15 @@ un résumé de la tâche à réaliser.
 
 Avant d'envoyer la moindre requête, la page aura l'air de ceci :
 
-<center>![État initial de la page Web](./_03-labo3/initialState.png)</center>
+<center>![État initial de la page Web](./_03-labo2.1/initialState.png)</center>
 
 Si on envoie des requêtes valides, la page aura l'air de ceci :
 
-<center>![Page Web lors de requêtes réussies](./_03-labo3/goodSearch.png)</center>
+<center>![Page Web lors de requêtes réussies](./_03-labo2.1/goodSearch.png)</center>
 
 Si on envoie des requêtes invalides (ou avec 0 résultats), la page aura l'air de ceci :
 
-<center>![Page Web lors de requêtes échouées](./_03-labo3/badSearch.png)</center>
+<center>![Page Web lors de requêtes échouées](./_03-labo2.1/badSearch.png)</center>
 
 ## 👶 Étape 1 - Je veux du pas-à-pas s'il vous plait monsieur
 
@@ -79,12 +79,12 @@ sont de simples `string`, la boucle fera quelque chose comme `monTableau.push(..
 
 Le résultat d'une requête valide devrait ressembler à ceci :
 
-<center>![Recherche d'artistes valide](./_03-labo3/artistGoodSearch.png)</center>
+<center>![Recherche d'artistes valide](./_03-labo2.1/artistGoodSearch.png)</center>
 
 [💡](/notes/rencontre2.1#-gérer-les-erreurs) Si on utilise un artiste qui n'existe pas dans la requête, l'API Web de Last FM nous retournera
 une erreur. Faites le nécessaire pour obtenir un affichage similaire si une erreur est obtenue suite à la recherche :
 
-<center>![Recherche d'artistes invalide](./_03-labo3/artistBadSearch.png)</center>
+<center>![Recherche d'artistes invalide](./_03-labo2.1/artistBadSearch.png)</center>
 
 Finalement, assurez-vous de vider le tableau `similarArtists` à chaque fois que vous lancez une nouvelle recherche ! (Même si la requête a généré une erreur) Sinon les anciens résultats vont s'accumuler avec les nouveaux. 
 
@@ -98,7 +98,7 @@ C'est à peu près les mêmes étapes à réaliser, mais avec deux défis suppl�
 
 Le résultat d'une requête valide devrait ressembler à ceci :
 
-<center>![Requête de chansons valide](./_03-labo3/genreGoodSearch.png)</center>
+<center>![Requête de chansons valide](./_03-labo2.1/genreGoodSearch.png)</center>
 
 Pour la gestion des erreurs, cette fois-ci, l'API Web de Last FM ne génèrera pas d'erreurs si on utilise un genre invalide. L'objet
 JSON va tout simplement contenir 0 chansons à la place. Ainsi, pour afficher un message d'erreur, il faudra plutôt vérifier combien
@@ -106,7 +106,7 @@ de résultats ont été obtenus.
 
 Le résultat d'une requête invalide devrait ressembler à ceci :
 
-<center>![Requête de chansons invalide](./_03-labo3/genreBadSearch.png)</center>
+<center>![Requête de chansons invalide](./_03-labo2.1/genreBadSearch.png)</center>
 
 ## 🚌 Étape 4 - Commencer le TP1 ? Oublie ça mon autobus passe dans 5 minutes
 
