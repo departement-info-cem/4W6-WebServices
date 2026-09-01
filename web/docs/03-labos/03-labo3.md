@@ -42,7 +42,7 @@ Une fois que c'est fait, ouvrez le projet dans VS Code et exécutez-le.
 
 ### **2 -** Compléter les formulaires
 
-[💡](/notes/rencontre1.2#-formulaires) Avant de lancer les requêtes, pouvez-vous associer les champs (les `<input`>) avec les bons états ? Ces états nous serviront pour exploiter l'input de l'utilisateur lorsque nous lancerons une requête.
+[💡](/notes/rencontre1.2#-formulaires) Avant de lancer les requêtes, pouvez-vous associer les champs (les `<input>`) avec les bons états ? Ces états nous serviront pour exploiter l'input de l'utilisateur lorsque nous lancerons une requête.
 
 [💡](/notes/rencontre1.2#-événements) De plus, assurez-vous que cliquer sur les boutons appelle bel et bien la fonction appropriée dans le code. (Bien que les fonctions en question soient vides pour le moment)
 
