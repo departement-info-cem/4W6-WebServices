@@ -2,9 +2,11 @@
 title: "2.1 - Requêtes HTTP ↔️"
 ---
 
+import quiz from './_03-rencontre2.1/test-rencontre1';
+
 ## Révision
 
-
+<Quiz file={quiz} />
 
 ## Introduction
 
