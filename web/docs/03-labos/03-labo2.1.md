@@ -21,10 +21,15 @@ Avant d'envoyer la moindre requête, la page aura l'air de ceci :
 Si on envoie des requêtes valides, la page aura l'air de ceci :
 
 <center>![Page Web lors de requêtes réussies](./_03-labo2.1/goodSearch.png)</center>
+<NonVoyant>Le résultat d'une recherche d'artiste comme «Tailor Swift» devrait être composé d'Olivia Rodrigo, Sabrina Carpenter, Gracie Abrams, Chappel Roan,
+Maisie Peters, Kelsea Ballerini, Lorde, Dua Lipa et j'en passe.</NonVoyant>
+<NonVoyant>Le résultat d'une recherche sur le genre comme «rap» devrait être composé de Stronger de Kanye West (314 secondes), Heartless de Kanye West (209 secondes), Clint Eastwood de Gorillaz (339 secondes), Hey Ya! de OutKast(233 secondes), Ms. Jackson de OutKast (271 secondes), See You Again (feat. Kali Uchis) de Tyler, the Creator (0 secodnes), Without Me de Eminem (290 secondes)</NonVoyant>
 
 Si on envoie des requêtes invalides (ou avec 0 résultats), la page aura l'air de ceci :
 
 <center>![Page Web lors de requêtes échouées](./_03-labo2.1/badSearch.png)</center>
+<NonVoyant>Le résultat erroné pour une recherche d'artiste devrait lire: «Réessayez avec un artiste qui existe 🤔»</NonVoyant>
+<NonVoyant>Le résultat erroné pour une recherche sur le genre devrait lire: «Réessayez avec un genre qui existe 🤔»</NonVoyant>
 
 ## 👶 Étape 1 - Je veux du pas-à-pas s'il vous plait monsieur
 
@@ -80,11 +85,14 @@ sont de simples `string`, la boucle fera quelque chose comme `monTableau.push(..
 Le résultat d'une requête valide devrait ressembler à ceci :
 
 <center>![Recherche d'artistes valide](./_03-labo2.1/artistGoodSearch.png)</center>
+<NonVoyant>Le résultat d'une recherche d'artiste comme «Tailor Swift» devrait être composé d'Olivia Rodrigo, Sabrina Carpenter, Gracie Abrams, Chappel Roan,
+Maisie Peters, Kelsea Ballerini, Lorde, Dua Lipa et j'en passe.</NonVoyant>
 
 [💡](/notes/rencontre2.1#-gérer-les-erreurs) Si on utilise un artiste qui n'existe pas dans la requête, l'API Web de Last FM nous retournera
 une erreur. Faites le nécessaire pour obtenir un affichage similaire si une erreur est obtenue suite à la recherche :
 
 <center>![Recherche d'artistes invalide](./_03-labo2.1/artistBadSearch.png)</center>
+<NonVoyant>Le résultat erroné pour une recherche d'artiste devrait lire: «Réessayez avec un artiste qui existe 🤔»</NonVoyant>
 
 Finalement, assurez-vous de vider le tableau `similarArtists` à chaque fois que vous lancez une nouvelle recherche ! (Même si la requête a généré une erreur) Sinon les anciens résultats vont s'accumuler avec les nouveaux. 
 
@@ -99,6 +107,7 @@ C'est à peu près les mêmes étapes à réaliser, mais avec deux défis suppl�
 Le résultat d'une requête valide devrait ressembler à ceci :
 
 <center>![Requête de chansons valide](./_03-labo2.1/genreGoodSearch.png)</center>
+<NonVoyant>Le résultat d'une recherche sur le genre comme «rap» devrait être composé de Stronger de Kanye West (314 secondes), Heartless de Kanye West (209 secondes), Clint Eastwood de Gorillaz (339 secondes), Hey Ya! de OutKast(233 secondes), Ms. Jackson de OutKast (271 secondes), See You Again (feat. Kali Uchis) de Tyler, the Creator (0 secodnes), Without Me de Eminem (290 secondes)</NonVoyant>
 
 Pour la gestion des erreurs, cette fois-ci, l'API Web de Last FM ne génèrera pas d'erreurs si on utilise un genre invalide. L'objet
 JSON va tout simplement contenir 0 chansons à la place. Ainsi, pour afficher un message d'erreur, il faudra plutôt vérifier combien
@@ -107,6 +116,7 @@ de résultats ont été obtenus.
 Le résultat d'une requête invalide devrait ressembler à ceci :
 
 <center>![Requête de chansons invalide](./_03-labo2.1/genreBadSearch.png)</center>
+<NonVoyant>Le résultat erroné pour une recherche sur le genre devrait lire: «Réessayez avec un genre qui existe 🤔»</NonVoyant>
 
 ## 🚌 Étape 4 - Commencer le TP1 ? Oublie ça mon autobus passe dans 5 minutes
 

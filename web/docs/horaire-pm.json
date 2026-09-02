@@ -65,15 +65,17 @@
             "start": "11:30",
             "end": "12:00",
             "title": "Centre d'aide",
-            "category": "centre-daide"
+            "category": "centre-daide",
+            "room": "D0008"
         },
         {
             "id": "centre-daide-2",
             "day": "vendredi",
-            "start": "11:00",
-            "end": "12:00",
+            "start": "11:30",
+            "end": "12:30",
             "title": "Centre d'aide",
-            "category": "centre-daide"
+            "category": "centre-daide",
+            "room": "E-214"
         },
         {
             "id": "dispo-1",
@@ -81,7 +83,8 @@
             "start": "14:00",
             "end": "15:00",
             "title": "Disponibilité personnelle",
-            "category": "dispo"
+            "category": "dispo",
+            "room": "E-214"
         },
         {
             "id": "dispo-2",
@@ -89,7 +92,8 @@
             "start": "08:00",
             "end": "09:00",
             "title": "Disponibilité personnelle",
-            "category": "dispo"
+            "category": "dispo",
+            "room": "E-214"
         },
         {
             "id": "1C5-1080-t",
