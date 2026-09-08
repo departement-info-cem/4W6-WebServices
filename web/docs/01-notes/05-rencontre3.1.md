@@ -77,7 +77,7 @@ Exemples :
 
 :::warning
 
-Pour les noms des dossiers, la convention à respecter est **kebab-case**. (C'est-à-dire pas de **majuscules** : on sépare les mots par des **traits d'union** !)
+Pour les noms des dossiers, la convention à respecter est **kebab-case** 🥙. (C'est-à-dire pas de **majuscules** : on sépare les mots par des **traits d'union** !)
 
 * ❌ LightBlue
 * ❌ lightBlue
