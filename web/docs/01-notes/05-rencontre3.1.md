@@ -50,6 +50,7 @@ Ci-dessous, on peut observer la navigation entre **plusieurs composants**. Selon
 dans la page parmi les composants `blue`, `red`, `yellow` et `pink`.
 
 <center>![Navigation entre plusieurs composants](./_05-rencontre3.1/routing_next.gif)</center>
+<NonVoyant>Le composant change tout dépendant de l'item cu menu cliquer soit Accueil, Bleu, Rouge, Jaune et Rose. Il faut noter que l'url du navigateur change aussi en fonction du choix de le composant sélectionnée, soit http://localhost:3001, http://localhost:3001/bleu, http://localhost:3001/red, etc. </NonVoyant>
 
 ### 📂 Routage basé sur les répertoires
 
@@ -95,6 +96,7 @@ Pour les noms des dossiers, la convention à respecter est **kebab-case** 🥙. 
 Les fichiers `layout.tsx` sont fait pour ça.
 
 <center>![Layout global](./_05-rencontre3.1/globalLayout.png)</center>
+<NonVoyant>L'image ci-haut explique le positionnement des composants dans le fichier layout.tsx. Les sections à toutes les pages sont le menu de navigation (Accueil, Bleu, Rouge, Jaune, Rose) en haut de la page et la section du bas avec le titre "Ceci est un fouteur" pour le footer. Le composant sélectionné(Bleu, Rouge, etc) s'affiche entre le menu et le footer.</NonVoyant>
 
 Ci-dessus, on a un **layout global** (utilisé pour toutes les pages du site Web) défini dans le fichier `layout.tsx` qui est situé dans le dossier `app`.
 
@@ -135,6 +137,15 @@ Gardez à l'esprit que le **composant** associé à la route sera intégré à l
 Si on préfère que certaines pages aient un **layout** supplémentaire EN PLUS du **layout racine**, on peut ajouter un fichier `layout.tsx` dans un autre dossier. Tous les composants de **ce dossier** et de **ses sous-dossiers** seront intégré à ce nouveau **layout**.
 
 <center>![Layout supplémentaire](./_05-rencontre3.1/subLayout.png)</center>
+<NonVoyant>
+/app/bleu/light-blue/page.tsx
+
+/app/blue/layout.tsx (layout pour blue et ses sous-dossiers)
+
+/app/blue/page.tsx
+
+/app/layout.tsx (layout racine)
+</NonVoyant>
 
 Le code pour un **layout** pourrait ressembler à ceci :
 
@@ -163,6 +174,7 @@ export default function BlueLayout( {children}: Readonly<{children: React.ReactN
 On peut voir le résultat, visuellement, pour les composants `Blue` et `LightBlue` :
 
 <center>![Layout supplémentaire](./_05-rencontre3.1/subLayoutDisplay.png)</center>
+<NonVoyant>Le layout supplémentaire de le composant blue vient s'imbriquer à l'intéreur du layout racine.</NonVoyant>
 
 #### 🖼 Utiliser un layout différent pour certains composants
 
@@ -196,6 +208,23 @@ Grâce à des dossiers encadrés de **parenthèses**, qui seront **ignorés par 
 Chaque groupe possède son **propre layout**, déclaré dans le dossier parent du groupe. (Ici, `(root)` et `(blue)`)
 
 <center>![Plusieurs layouts indépendants](./_05-rencontre3.1/multipleLayouts.png)</center>
+<NonVoyant>
+/app/layout.tsx (layout racine presque vide)
+
+Groupe de composants qui utilisent le layout avec le nav principal:
+
+/app/(root)/page.tsx (page d'accueil)
+
+/app/(root)/layout.tsx (layout de l'accueil)
+
+Groupe de composants qui utilisent le layout avec le nav alternatif:
+
+/app/(blue)/blue/layout.tsx
+
+/app/(blue)/blue/page.tsx
+
+/app/(blue)/blue/light-blue/page.tsx 
+</NonVoyant>
 
 **Quelques remarques :**
 
@@ -207,9 +236,11 @@ On a maintenant des composants qui utilisent exclusivement le **layout `root`** 
 <Tabs>
     <TabItem value="mainLayout" label="Layout principal" default>
 <center>![Layout principal](./_05-rencontre3.1/rootLayout.png)</center>
+<NonVoyant>Page d'accueil</NonVoyant>
     </TabItem>
     <TabItem value="otherLayout" label="Layout alternatif">
 <center>![Layout alternatif](./_05-rencontre3.1/otherLayout.png)</center>
+<NonVoyant>Composant bleu</NonVoyant>
     </TabItem>
 </Tabs>
 
@@ -227,7 +258,7 @@ Bien entendu, le composant qui sera chargé par cette route devra récupérer ce
 
 Pour créer une **route dynamique**, on doit créer un dossier **encadré de crochets** :
 
-<center>![Route dynamique](./_05-rencontre3.1/dynamicRoute.png)</center>
+<center>![Route dynamique: /app/(root)/red/[id]/page.tsx](./_05-rencontre3.1/dynamicRoute.png)</center>
 
 On peut ensuite y ajouter un **composant**, comme d'habitude, avec un fichier `page.tsx`.
 
@@ -255,6 +286,7 @@ export default function RedId() {
 ```
 
 <center>![Paramètre de route](./_05-rencontre3.1/routeParam.png)</center>
+<NonVoyant>L'image indique le paramètre 3 est bel et bien affiché dans le composant suite à l'utilisation de l'url: http://localhost/3001/red/3</NonVoyant>
 
 :::note
 
@@ -362,6 +394,7 @@ export default function Red() {
 Ci-dessous, on peut apercevoir trois sections / composants :
 
 <center>![Composant réutilisable](./_05-rencontre3.1/reusableComponent.png)</center>
+<NonVoyant>Exemple de positionnement des composants. Le layout racine qui place le menu accueil, bleu, reouge, etc en haut de la page et le fouteur racine complètement en bas. Le composant jaune au centre. Le composant ItemView à l'intérieur du composant jaune.</NonVoyant>
 
 Le composant `ItemView` est un **composant réutilisable** qui peut être intégré dans n'importe quel autre composant. C'est très utile s'il y a une section du HTML qu'on a besoin de réutiliser dans plusieurs pages Web.
 
@@ -370,12 +403,13 @@ Le composant `ItemView` est un **composant réutilisable** qui peut être intég
 Disons qu'on souhaite afficher le composant `ItemView` quelque part dans le composant `Yellow`, comme ceci :
 
 <center>![Composant réutilisable](./_05-rencontre3.1/reusableComponent2.png)</center>
+<NonVoyant>Le composant ItemView à l'intérieur du composant jaune.</NonVoyant>
 
 📝 **Étapes à suivre**
 
 1. **Créer le composant dans un dossier nommé `_components`**
 
-<center>![Dossier pour les composants réutilisables](./_05-rencontre3.1/componentFolder.png)</center>
+<center>![Dossier pour les composants réutilisables: /app/_components/item-view.tsx](./_05-rencontre3.1/componentFolder.png)</center>
 
 ```tsx showLineNumbers
 'use client';
@@ -487,7 +521,7 @@ export default function Yellow() {
 
 Observez le résultat dans le HTML :
 
-<center>![Paramètres envoyés au composant enfant](./_05-rencontre3.1/props.png)</center>
+<center>![Paramètres envoyés au composant enfant. Item #1: Chaise](./_05-rencontre3.1/props.png)</center>
 
 ### 🍇 Intégration multiple
 
@@ -526,6 +560,7 @@ export default function Yellow() {
 ```
 
 <center>![Affichage répétitif d'un composant réutilisable](./_05-rencontre3.1/multipleReusableComponent.png)</center>
+<NonVoyant>Le résultat est une suite de trois composant ItemView ayant chacun: Item #1: Chaise, Item #2: Pneu et Item #3: Cheval</NonVoyant>
 
 ### 💩 L'enfer de Tailwind
 
@@ -573,7 +608,7 @@ Il y a deux endroits cohérents où on peut ranger ce fichier, selon l'usage de 
 * Le module servira à **plusieurs composants variés** : On range le module dans `app/_styles`.
 * Le module servira à **un composant précis** : On range le module dans le dossier du composant. (Sauf si c'est un composant **réutilisable**, alors là, on peut mettre le module CSS dans `app/_styles` finalement)
 
-<center>![Répertoire pour les modules CSS](./_05-rencontre3.1/stylesFolder.png)</center>
+<center>![Répertoire pour les modules CSS: /app/_styles/tables.module.css](./_05-rencontre3.1/stylesFolder.png)</center>
 
 Le fichier contiendra simplement des styles, par exemple :
 

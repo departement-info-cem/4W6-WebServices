@@ -5,9 +5,6 @@
 :::note
 
 À partir de ce laboratoire, du CSS personnalisé sera utilisé à la place des classes **Tailwind**. Ce n'est pas mieux ou pire, c'est juste une autre approche. Dans ce cas, l'objectif est d'alléger le HTML des laboratoires.
-
-Le titre dans la page ressemble à « Laboratoire 3 », mais c'est parce que vous n'êtes pas allé chez l'optométriste depuis longtemps. C'est bel et bien un 5 qui est affiché.
-
 :::
 
 ## ☃ Étape 1 - Parc du sud
@@ -23,6 +20,25 @@ Pour le moment, seuls les composants **Home** et **List** existent. Il y aussi p
 `Home` est affiché à cause du `{children}` dans le **layout racine** et de la **route vide**, mais `List` lui, est affiché à cause du `<List />`, à titre de composant réutilisable.
 
 <center>![Layout racine](./_05-labo3.1/mainApp.png)</center>
+<NonVoyant>
+Home:
+
+Accueil
+
+Option 1
+
+Voir une liste de personnages
+
+Option 2
+
+Chercher les détails d'un personnage
+
+Nom: Input pour le nom avec un bouton «Chercher».
+
+List:
+
+Liste de personnages
+</NonVoyant>
 
 ### ⛵ 1 - Routage et menu de navigation
 
@@ -91,7 +107,7 @@ puis un qui reçoit le nom `clyde`, etc.
 
 Dans le HTML de `Card`, remplacez tous les `???` par le paramètre `characterName`, qui contient le nom du personnage à afficher. Cela complètera l'affichage.
 
-<center>![Affichage de tous les personnages](./_05-labo3.1/list.png)</center>
+<center>![Affichage de tous les personnages (bebe, butters, clyde, craig, eric, kenny, kyle, nochole, stan, tolkien, wendy)](./_05-labo3.1/list.png)</center>
 
 Le composant `Card` peut sembler un peu inutile. (Pourquoi ne pas directement tout mettre dans `List` ?) Cela dit, dès qu'on compte réutiliser cet affichage ailleurs dans le site Web, on économise quelques lignes de HTML et de TypeScript.
 
@@ -155,7 +171,19 @@ la variable `characterDetails`. (**Axios** est déjà installé)
 
 <center>![Aperçu de l'objet JSON de spapi](./_05-labo3.1/spapi.png)  
 Pour le nombre d'épisodes... vous avez besoin de `.length` !</center>
+<NonVoyant>
+Le détail du JSON:
 
+response.data.data[0].age: 9
+
+response.data.data[0].episodes: Array(198)
+
+response.data.data[0].grade: "4th grade"
+
+response.data.data[0].name: "Kenny McCormick"
+
+response.data.data[0].occupation: "Student"
+</NonVoyant>
 <br/>
 
 À l'aide des états `characterName` et `characterDetails`, remplacez tous les `???` dans le HTML.
@@ -199,9 +227,16 @@ Dans le composant `Details`, attrapez le paramètre de route et faites-en deux u
 * Affectez-le dans l'état `characterName` (Plutôt que forcément `"kenny"`)
 * Utilisez le nom reçu pour la requête. (Plutôt que forcément `"kenny"`)
 
-Vous pouvez tester avec cette route, par exemple : `http:localhost:3000/details/wendy` (Utilisez des noms en minuscules !)
+Vous pouvez tester avec cette route, par exemple : `http://localhost:3000/details/wendy` (Utilisez des noms en minuscules !)
 
 <center>![Paramètre de route](./_05-labo3.1/details.png)  </center>
+<NonVoyant>
+Le résultat de la requête à http://localhost:3000/details/wendy :
+
+Détails sur wendy
+
+Image de Wendy
+</NonVoyant>
 
 Modifiez le `<Link>` du menu de navigation pour qu'il mène vers `/details/kenny`, sinon il ne fonctionnera plus.
 
@@ -212,6 +247,16 @@ Dans le composant `Card`, ajoutez un `<Link>` sur le `<div>` pour rediriger vers
 Dans le composant `Home`, faites les modifications nécessaires pour qu'on puisse écrire le nom d'un personnage dans l'`<input>` et que ce nom soit ensuite utilisé comme **paramètre de route** quand on appuie sur le bouton « Chercher » qui mène vers la route `/details`. (Donc, si on écrit « eric » dans l'`<input>`,le bouton va rediriger vers `/details/eric`)
 
 <center>![Mini formulaire](./_05-labo3.1/miniForm.png)</center>
+<NonVoyant>
+Exemple de recherche: 
+
+Option 2
+
+Chercher les détails d'un personnage
+
+Nom: Input avec clyde et bouton «Chercher»
+
+</NonVoyant>
 
 Ce n'est pas grave si le composant `details` fonctionne mal avec un nom invalide.
 
