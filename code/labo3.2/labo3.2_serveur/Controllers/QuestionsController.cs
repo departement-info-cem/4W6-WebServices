@@ -1,29 +1,23 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using labo6_serveur.Data;
-using labo6_serveur.Models;
+using labo32_serveur.Data;
+using labo32_serveur.Models;
 
-namespace labo6_serveur.Controllers
+namespace labo32_serveur.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class QuestionsController : ControllerBase
+    public class QuestionsController(labo32_serveurContext context) : ControllerBase
     {
-        private readonly labo6_serveurContext _context;
         private readonly Random _random = new Random();
-
-        public QuestionsController(labo6_serveurContext context)
-        {
-            _context = context;
-        }
 
         [HttpGet("{quantity}")]
         public async Task<ActionResult<IEnumerable<Question>>> GetQuestions(int quantity)
         {
             if (quantity > 10) quantity = 10;
 
-            int count = await _context.Question.CountAsync();
+            int count = await context.Question.CountAsync();
             int[] indexes = new int[quantity];
 
             for (int i = 0; i < indexes.Length; i++)
@@ -38,7 +32,7 @@ namespace labo6_serveur.Controllers
                 indexes[i] = index;
             }
 
-            return await _context.Question.Where(q => indexes.Contains(q.Id)).ToListAsync();
+            return await context.Question.Where(q => indexes.Contains(q.Id)).ToListAsync();
         }
     }
 }

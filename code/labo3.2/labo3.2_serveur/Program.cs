@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using labo6_serveur.Data;
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<labo6_serveurContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("labo6_serveurContext") ?? throw new InvalidOperationException("Connection string 'labo6_serveurContext' not found.")));
+using labo32_serveur.Data;
+
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<labo32_serveurContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("labo32_serveurContext") ?? throw new InvalidOperationException("Connection string 'labo32_serveurContext' not found.")));
 
 // Add services to the container.
 
@@ -22,7 +22,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

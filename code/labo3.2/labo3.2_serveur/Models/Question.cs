@@ -1,4 +1,4 @@
-﻿namespace labo6_serveur.Models
+﻿namespace labo32_serveur.Models
 {
     public class Question
     {

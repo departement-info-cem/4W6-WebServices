@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using labo6_serveur.Models;
+using labo32_serveur.Models;
 
-namespace labo6_serveur.Data
+namespace labo32_serveur.Data
 {
-    public class labo6_serveurContext : DbContext
+    public class labo32_serveurContext : DbContext
     {
-        public labo6_serveurContext (DbContextOptions<labo6_serveurContext> options)
+        public labo32_serveurContext (DbContextOptions<labo32_serveurContext> options)
             : base(options)
         {
         }
@@ -142,6 +142,6 @@ namespace labo6_serveur.Data
             );
         }
 
-        public DbSet<labo6_serveur.Models.Question> Question { get; set; } = default!;
+        public DbSet<labo32_serveur.Models.Question> Question { get; set; } = default!;
     }
 }

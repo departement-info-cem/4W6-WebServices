@@ -4,10 +4,10 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace labo6_serveur.Migrations
+namespace labo32_serveur.Migrations
 {
     /// <inheritdoc />
-    public partial class seed : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,11 +16,11 @@ namespace labo6_serveur.Migrations
                 name: "Question",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Correct = table.Column<int>(type: "int", nullable: false),
-                    Answers = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Text = table.Column<string>(type: "TEXT", nullable: false),
+                    Correct = table.Column<int>(type: "INTEGER", nullable: false),
+                    Answers = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
