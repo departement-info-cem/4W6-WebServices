@@ -18,21 +18,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="30bd25f4-5b7e-4ffd-a540-ad972732897b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/QuestionsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/QuestionsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/labo6_serveurContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/labo6_serveurContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20260130213309_seed.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20260130213309_seed.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/labo6_serveurContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Question.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Question.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Properties/serviceDependencies.json" beforeDir="false" afterPath="$PROJECT_DIR$/Properties/serviceDependencies.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Properties/serviceDependencies.local.json" beforeDir="false" afterPath="$PROJECT_DIR$/Properties/serviceDependencies.local.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/labo6_serveur.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/labo32_serveur.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/labo6_serveur.csproj.user" beforeDir="false" afterPath="$PROJECT_DIR$/labo32_serveur.csproj.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/labo6_serveur.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/labo6_serveur.sln" beforeDir="false" afterPath="$PROJECT_DIR$/labo32_serveur.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.labo6_serveur/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.labo6_serveur/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +34,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Controllers/QuestionsController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Migrations/20260130213309_seed.Designer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///home/pobrillant/code/4W6-WebServices/code/labo3.2/labo3.2_serveur/Data/labo6_serveurContext.cs" root0="SKIP_HIGHLIGHTING" />
@@ -149,6 +136,8 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Migration nouveau nom et sqlite" />
+    <option name="LAST_COMMIT_MESSAGE" value="Migration nouveau nom et sqlite" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
