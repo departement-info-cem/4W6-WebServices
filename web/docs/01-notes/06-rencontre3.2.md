@@ -721,6 +721,6 @@ L'exception est quand un composant **serveur 🌐** est transmis **en paramètre
 
 :::info
 
-Comme les composants **serveur 🌐** sont exécutés sur le... *serveur*, il est **sécuritaire** de se connecter à une base de données directement. Il est donc possible de faire un projet Next.js **full stack** sans avoir un serveur Web ASP.NET Core. Ce n'est cela dit pas le cas pour tous les frameworks Web.
+Comme les composants **serveur 🌐** sont exécutés sur le... *serveur*, il est **sécuritaire** de se connecter à une base de données directement. Il est donc possible de faire un projet Next.js **full stack** sans avoir un serveur Web ASP.NET Core. Cela dit, ce n'est pas le cas pour tous les frameworks Web.
 
 :::
