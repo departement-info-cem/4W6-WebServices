@@ -1,6 +1,7 @@
 # Laboratoire 3.2
 
 <center>![Bannière du labo 6](./_06-labo3.2/banner.png)</center>
+<NonVoyant>La bannière du laboratoire avec un exemple du menu: Accueil, Mode Quiz et Mode Survie</NonVoyant>
 
 Téléchargez le [projet de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo3.2.zip), mais ne le lancez pas tout de suite. ⛔🧤⚾
 
@@ -47,6 +48,7 @@ Si vous réactualisez la page ou si vous fermez l'onglet, même un Context se fe
 :::
 
 <center>![Usage d'un Context](./_06-labo3.2/context.png)</center>
+<NonVoyant>L'image montre une exemple d'affichage du laboratoire. Il y a le menu Accueil, Mode Quiz et Mode Survie. Ensuite, un emoji de bombe est placé au centre de la page. Sous celui-ci, le texte «Ce laboratoire utilise un projet ASP.NET Core exécuté localement pour proposer des questions quiz. Youpi!» Trois boutons «Quiz (5 questions)», «Quiz (10 questions)» et «Suivie (max. 3 erreurs)» sont situé sous ce texte. Ensuite, une zone statistiques: Nombre de partie: 2, Record (survie): 0 et Record (quiz): 0%</NonVoyant>
 
 ### 🐳 3 - Context plus large
 
@@ -67,6 +69,7 @@ Voici un peu d'aide pour réussir à intégrer **trois états** dans le même Co
 Désormais, les scores records devraient être affichés dans deux composants chacun. (`Home` et la page associée au type de jeu)
 
 <center>![Usage d'un Context](./_06-labo3.2/largerContext.png)</center>
+<NonVoyant>Un exemple de la zone statistiques: Nombre de partie: 2, Record (survie): 10 et Record (quiz): 100%</NonVoyant>
 
 :::warning
 

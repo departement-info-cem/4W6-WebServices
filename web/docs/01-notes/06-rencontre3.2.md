@@ -45,7 +45,7 @@ export const NomDeMonContext = createContext<string>("");
 
 :::note
 
-`string` peut être remplacé par un autre **type** comme `number` ou `any`. `""` (string vide) peut être remplacé par une autre **valeur de départ** au besoin.
+`string` peut être remplacé par un autre **type** comme `number`, `any` ou même une classe. `""` (string vide) peut être remplacé par une autre **valeur de départ** au besoin.
 
 :::
 
@@ -95,6 +95,17 @@ Par la suite, dans les composants concernés, on peut utiliser la valeur de `maD
 Disons qu'on a la **hiérarchie** 🌳 de composants suivante dans notre projet :
 
 <center>![Hiérarchie de composants](./_06-rencontre3.2/componentTree.png)</center>
+<NonVoyant>
+Exemple de la hiérarchie en prenant Layout comme racine et où chaque lettre est un composant:
+
+Layout-A-D-F
+
+Layout-A-D-G
+
+Layout-B
+
+Layout-C-E
+</NonVoyant>
 
 On peut donc comprendre que les composants `A`, `B` et `C` sont tous les trois accessibles séparément à l'aide du **Routage**. Tous les autres composants sont des **composants réutilisables** intégrés dans un **composant parent**.
 
@@ -105,6 +116,18 @@ On peut donc comprendre que les composants `A`, `B` et `C` sont tous les trois a
 ⛔ Bémol : on n'a pas le droit de déclarer un **état** dans le **Layout racine**. (On peut déclarer une simple valeur, mais pas un **état** avec `useState`) Ça risque de limiter le type de données qu'on pourra choisir pour un **Context** déclaré dans le **Layout racine**. La solution est généralement d'introduire un **composant** entre le **Layout racine** et les composants `A`, `B` et `C` : 
 
 <center>![Hiérarchie de composants](./_06-rencontre3.2/componentTree2.png)</center>
+<NonVoyant>
+Exemple d'ajout d'un composant intermédiaire en prenant Layout comme racine et où chaque lettre est un composant:
+
+Layout-H-A-D-F
+
+Layout-H-A-D-G
+
+Layout-H-B
+
+Layout-H-C-E
+</NonVoyant>
+
 
 Voilà, on pourra **déclarer** et **provide** un **Context** avec une *portée* relativement *globale* dans le composant `H` ! 🌐
 
@@ -115,6 +138,13 @@ Voilà, on pourra **déclarer** et **provide** un **Context** avec une *portée*
 Dans cet exemple, un composant **parent** partagera une **donnée** avec ses composants **enfants**. La donnée aura d'abord été obtenue grâce à une **requête HTTP**.
 
 <center>![Hiérarchie de composants](./_06-rencontre3.2/componentTree3.png)</center>
+<NonVoyant>
+Exemple de la hiérarchie de composants:
+
+Blue-Cyan
+
+Blue-Indigo
+</NonVoyant>
 
 Le Context sera ... :
 
@@ -126,7 +156,7 @@ Voici le composant `Blue` :
 
 <Tabs>
     <TabItem value="typescript" label="TypeScript" default>
-```tsx showLineNumbers
+```tsx showLineNumbers title="/app/blue/page.tsx"
 "use client";
 
 import { createContext, useContext, useState } from "react";
@@ -182,12 +212,15 @@ return (
     </TabItem>
     <TabItem value="peek" label="Page Web">
 <center>![Composant parent qui déclare un context](./_06-rencontre3.2/contextParent.png)</center>
+<NonVoyant>
+L'exemple illuste le retour d'image de la recherche dans le composant cyan avec une image de taille originale et dans le composant indigo avec une image de taille miniature.
+</NonVoyant>
     </TabItem>
 </Tabs>
 
 Voici le composant `Indigo` (Le composant `Cyan` lui ressemble comme deux gouttes d'eau 💧💧)
 
-```tsx showLineNumbers
+```tsx showLineNumbers title="/app/_components/indigo.tsx"
 "use client";
 
 import { useContext } from "react";
@@ -214,7 +247,7 @@ export default function Indigo() {
 
 > Comment `imageUrl` peut rester synchronisée et changer de valeur si c'est une `const` ?
 
-En effet, en JavaScript / TypeScript, une `const` ça ne peut pas changer de valeur. Ce qui se produit, c'est qu'à chaque fois que la valeur du context `ItemUrlContext` change, le composant `Indigo` est **exécuté à nouveau**.
+En effet, en JavaScript / TypeScript, une `const` ça ne peut pas changer de valeur. Il s'agit ici d'une constante déclarée sur une référence. Rien n'empêche de modifier la valeur d'origine, le `const` interdit simplement de modifier sur quelle valeur on pointe. Le cours de 2P6 est peut-être loin 🦖☄️, mais le concept d'une variable par valeur ou par référence est important ici. 🥸
 
 :::
 
@@ -223,10 +256,28 @@ En effet, en JavaScript / TypeScript, une `const` ça ne peut pas changer de val
 Dans cet exemple, les composants `Blue` et `Red`, qui sont intégrés au **layout racine** et chargés par **routage**, doivent avoir accès à une même donnée. De plus, on souhaite que ces deux composants puissent également **modifier** la donnée en plus de pouvoir la **lire**.
 
 <center>![Hiérarchie de composants](./_06-rencontre3.2/componentTree4.png)</center>
+<NonVoyant>
+Exemple de la hiérarchie de composants:
+
+Layout-Homme
+
+Layout-Blue
+
+Layout-Red
+</NonVoyant>
 
 Comme il est **impossible de déclarer un état** dans le **layout racine**, il faudra commencer par introduire un nouveau **composant** entre le **layout racine** et les composants chargés par **routage**. Comme son seul objectif sera de déclarer et *provide* un **context**, on peut le nommer `ContextWrapper`, par exemple.
 
 <center>![Hiérarchie de composants](./_06-rencontre3.2/componentTree5.png)</center>
+<NonVoyant>
+Exemple de la hiérarchie de composants:
+
+Layout-ContextWrapper-Homme
+
+Layout-ContextWrapper-Blue
+
+Layout-ContextWrapper-Red
+</NonVoyant>
 
 Le Context sera ... :
 
@@ -236,11 +287,11 @@ Le Context sera ... :
 
 Voici le nouveau composant `ContextWrapper` :
 
-<center>![Emplacement du context wrapper](./_06-rencontre3.2/contextWrapper.png)</center>
+<center>![Emplacement du context wrapper: /app/_components/context-wrapper.tsx](./_06-rencontre3.2/contextWrapper.png)</center>
 
 Comme `CounterContext` servira à stocker un **état** ET son `setState`, le type de `CounterContext` sera `any`.
 
-```tsx showLineNumbers
+```tsx showLineNumbers title="/app/_components/context-wrapper.tsx"
 "use client";
 
 import { createContext, useState } from "react";
@@ -266,7 +317,7 @@ export function ContextWrapper({ children } : { children : React.ReactNode }){
 
 On modifie le **layout racine** ( `app/layout.tsx` ) pour y intégrer le `ContextWrapper` et lui passer `children` plutôt que l'intégrer lui-même :
 
-```tsx showLineNumbers
+```tsx showLineNumbers title="/app/layout.tsx"
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
@@ -286,7 +337,7 @@ On modifie le **layout racine** ( `app/layout.tsx` ) pour y intégrer le `Contex
 
 Voici le composant `Red`, qui ressemble comme deux gouttes d'eau 💧💧 au composant `Blue`. La valeur du `CounterContext` est affichée et on peut appuyer sur un bouton pour l'augmenter de 1.
 
-```tsx showLineNumbers
+```tsx showLineNumbers title="/app/red/page.tsx"
 "use client";
 
 import { useContext } from "react";
@@ -317,6 +368,7 @@ export default function Red() {
 Bien entendu, quand on augmente l'état avec `setCounter()`, la valeur change également dans le composant `Blue`.
 
 <center>![Compteur partagé dans deux composants](./_06-rencontre3.2/counter.png)</center>
+<NonVoyant>Exemple lorsqu'on clique sur le bouton «Augmenter» dans le composant rouge, le compteur augment aussi dans le composant bleu.</NonVoyant>
 
 ## 🎣 Hooks
 
@@ -325,7 +377,7 @@ Les **hooks** sont des **fonctions** très variées qui donnent accès à des fo
 Il y a quelques **hooks préexistants**, comme `useState`, `useEffect` et `useContext`, que nous avons déjà abordés. 
 
 * `useState` permet de stocker une donnée, la modifier et mettre à jour l'affichage du HTML quand elle change.
-* `useEffect` permet d'exécuter des requêtes à des API externes lors du chargement d'un composant.
+* `useEffect` permet d'exécuter du code lors du chargement d'un composant (ex.: requêtes à des API externes).
 * `useContext` permet de partager des données entre plusieurs composants.
 
 Il existe d'autres **hooks préexistants**, mais on comprend déjà qu'un **hook**, ça donne accès à des fonctionnalités variées.
@@ -337,6 +389,13 @@ Il existe d'autres **hooks préexistants**, mais on comprend déjà qu'un **hook
 Commençons par un **hook** pas très pertinent pour mieux **comprendre** le potentiel et le fonctionnement des hooks. Le hook que nous allons créer se nommera `useStupidHook`.
 
 <center>![Dossier pour les hooks](./_06-rencontre3.2/hookFolder2.png)</center>
+<NonVoyant>
+Exemple de fichier dans les dossiers:
+
+/app/_hooks/use-stupid-hook.ts
+
+/app/_hooks/use-two-way-bindings.ts
+</NonVoyant>
 
 :::info
 
@@ -348,7 +407,7 @@ Un fichier n'a pas besoin de l'extension `.tsx` lorsqu'il ne contient QUE du **T
 
 Voici la déclaration de notre **hook** (qui est une fonction) :
 
-```ts showLineNumbers
+```ts showLineNumbers title="/app/_hooks/use-stupid-hooks.ts"
 import { useState } from "react";
 
 // Fonction principal du hook. Elle peut recevoir des paramètres
@@ -384,7 +443,7 @@ export function useStupidHook(startValue : any){
 
 Voici un **composant** qui **intègre** le `useStupidHook` :
 
-```tsx showLineNumbers
+```tsx showLineNumbers title="/app/yellow/page.tsx"
 "use client";
 
 import { useStupidHook } from "../_hooks/useStupidHook";
@@ -417,6 +476,7 @@ export default function Yellow() {
 ```
 
 <center>![Composant qui intègre le hook](./_06-rencontre3.2/yellowComponent.png)</center>
+<NonVoyant>Composant Jaune avec le bouton «Tester le hook stupide».</NonVoyant>
 
 #### 📚 Explications
 
@@ -424,9 +484,24 @@ La constante nommée `stupid` contient l'**objet anonyme** qui a été retourné
 
 Bien que les **états** `[x, setX]` et `[y, setY]` sont déclarés dans le **hook**, notre **composant** a accès aux valeurs et aux `setState()` de ces deux **états** grâce à l'**objet anonyme**. (`stupid.state1` pour voir la valeur de `x`, `stupid.setState1(x + 1)` pour augmenter la valeur de `x`, etc.)
 
-Bien que la fonction `displayStates()` est déclarée dans le **hook**, notre **composant** y a accès grâce à `stupid.displayFunction("nomDeMonChoix")`.
+Bien que la fonction `displayStates()` est déclarée dans le **hook**, notre **composant** y a accès grâce à `stupid.displayStates("nomDeMonChoix")`.
 
 <center>![Message dans la console du hook stupide](./_06-rencontre3.2/stupidHook.png)</center>
+<NonVoyant>
+Résultat dans la console de plusieurs cliques:
+
+Salut Simone ! x vaut 5 et y vaut patate. 
+
+Salut Simone ! x vaut 6 et y vaut fromage. 
+
+Salut Simone ! x vaut 7 et y vaut patate. 
+
+Salut Simone ! x vaut 8 et y vaut fromage. 
+
+Salut Simone ! x vaut 9 et y vaut patate. 
+
+Salut Simone ! x vaut 10 et y vaut fromage.
+</NonVoyant>
 
 :::info
 
@@ -464,7 +539,7 @@ Maintenant, pour accéder à la valeur de `x`, on n'utilise donc pas `stupid.x`,
 
 Le **two-way binding** utilisé pour chaque champ de formulaire est un classique de fonctionnalité que nous réutilisons constamment.
 
-```tsx showLineNumbers
+```tsx showLineNumbers title="/app/blue/page.tsx"
 export default function Blue() {
 
     // État associé à l'input
@@ -490,7 +565,7 @@ Pour utiliser cette **fonctionnalité**, à chaque fois, on doit :
 
 Nous allons créer un **hook personnalisé** qui permet de réutiliser cette fonctionnalité avec moins de répétition.
 
-```ts showLineNumbers
+```ts showLineNumbers title="/app/_hooks/use-two-way-binding.ts"
 import { useState } from "react";
 
 // Le type de startValue doit être any pour que ça puisse fonctionner avec des string, number, tableaux, etc.
@@ -519,7 +594,7 @@ Il reste à intégrer `useTwoWayBinding` dans mon composant :
 
 <Tabs>
     <TabItem value="withHook" label="Avec hook" default>
-```tsx showLineNumbers
+```tsx showLineNumbers title="/app/blue/page.tsx"
 export default function Blue() {
 
     // Appel du hook avec "" comme valeur de départ pour l'état
@@ -538,7 +613,7 @@ export default function Blue() {
 ```
     </TabItem>
     <TabItem value="withoutHook" label="Sans hook">
-```tsx showLineNumbers
+```tsx showLineNumbers title="/app/blue/page.tsx"
 export default function Blue() {
 
     // État associé à l'input
