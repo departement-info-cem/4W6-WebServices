@@ -34,3 +34,5 @@ msbuild.wrn
 .vs/
 
 *.db
+*.db-wal
+*.db-shm
