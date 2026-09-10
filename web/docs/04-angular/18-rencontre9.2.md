@@ -1,4 +1,4 @@
-# Cours 18 - Retours, sécurité, seed
+# Cours 9.2 - Retours, sécurité, seed
 
 ## 📬 Retours
 

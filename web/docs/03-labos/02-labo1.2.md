@@ -95,7 +95,7 @@ Si vous préférez les **template strings** :
 
 :::note
 
-Vous commencez peut-être à trouver qu'il commence à y avoir beaucoup de code (TypeScript + HTML) dans le composant `Home`. C'est normal, habituellement, pour une page sophistiquée comme celle-ci, on sépare le code en **plusieurs composants**. Néanmoins, nous apprendrons seulement à le faire lors du **Cours 5**, alors pour le moment, on continue de façonner notre tour de Babel dans `Home` 🗼
+Vous commencez peut-être à trouver qu'il commence à y avoir beaucoup de code (TypeScript + HTML) dans le composant `Home`. C'est normal, habituellement, pour une page sophistiquée comme celle-ci, on sépare le code en **plusieurs composants**. Néanmoins, nous apprendrons seulement à le faire lors du **Cours 3.1**, alors pour le moment, on continue de façonner notre tour de Babel dans `Home` 🗼
 
 :::
 

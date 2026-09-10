@@ -1,4 +1,4 @@
-# Cours 23 - Git et librairies JS
+# Cours 12.1 - Git et librairies JS
 
 ## 🎨 Librairies JS
 

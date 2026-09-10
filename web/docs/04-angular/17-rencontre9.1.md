@@ -1,4 +1,4 @@
-# Cours 17 - Gestion utilisateurs
+# Cours 9.1 - Gestion utilisateurs
 
 ## 📦 Packages nécessaires
 
@@ -29,9 +29,9 @@ Il y aura beaucoup de code **boilerplate** à rédiger pour configurer `Identity
 
 ### 💋 Étapes préliminaires
 
-**1 - 📰 Se référer au cours 15**
+**1 - 📰 Se référer au cours 8.1**
 
-Tout d'abord, répétez toutes les étapes de création d'un projet telles qu'abordées dans le [cours 14](/angular/rencontre7.2).
+Tout d'abord, répétez toutes les étapes de création d'un projet telles qu'abordées dans le [cours 7.2](/angular/rencontre7.2).
 
 Arrêtez-vous juste avant la création d'un **modèle**.
 
@@ -163,7 +163,7 @@ La classe `UserManager` fait office de « UserService » et nous aidera à inter
 
 **1 - 📬 Création d'un DTO**
 
-(Les DTOs ont été abordés dans le [cours 16](/angular/rencontre8.1))
+(Les DTOs ont été abordés dans le [cours 8.2](/angular/rencontre8.1))
 
 Créez un DTO qui sera utilisé pour recevoir des données lors de l'inscription :
 
@@ -341,7 +341,7 @@ public async Task<ActionResult> Login(LoginDTO login)
     // Si l'utilisateur existe ET que son mot de passe est exact
     if (user != null && await _userManager.CheckPasswordAsync(user, login.Password))
     {
-        // Récupérer les rôles de l'utilisateur (Cours 22+)
+        // Récupérer les rôles de l'utilisateur (Cours 11.2+)
         IList<string> roles = await _userManager.GetRolesAsync(user);
         List<Claim> authClaims = new List<Claim>();
         foreach (string role in roles)

@@ -1,4 +1,4 @@
-# Cours 21 - Serveur d'images
+# Cours 11.1 - Serveur d'images
 
 En résumé, nous allons voir comment ...
 

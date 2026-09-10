@@ -1,8 +1,8 @@
-# Cours 7 - Stockage, i18n, token
+# Cours 4.1 - Stockage, i18n, token
 
 ### 💾 Stockage local
 
-🧹 Tel que vu au cours 6, si on réinitialise la page Web lorsque notre application Angular est en exécution, toutes les données (contenu des variables) sont perdues.
+🧹 Tel que vu au cours 3.2, si on réinitialise la page Web lorsque notre application Angular est en exécution, toutes les données (contenu des variables) sont perdues.
 
 ⚙ Même le cycle de vie spécial des **services** ne permet pas de faire perdurer certaines données.
 

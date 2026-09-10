@@ -1,7 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Cours 22 - Rôles et signaux
+# Cours 11.2 - Rôles et signaux
 
 ## 👮‍♀️👨‍🍳 Rôles
 

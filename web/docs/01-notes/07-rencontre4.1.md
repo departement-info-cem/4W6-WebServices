@@ -7,7 +7,7 @@ import TabItem from '@theme/TabItem';
 
 ## 💿 Stockage local
 
-🧹 Tel que brièvement abordé au cours 6, si on réinitialise la page Web lorsque notre application Next.js est en exécution, toutes les données (contenu des états et variables) sont perdues.
+🧹 Tel que brièvement abordé au cours 3.2, si on réinitialise la page Web lorsque notre application Next.js est en exécution, toutes les données (contenu des états et variables) sont perdues.
 
 💡 C'est là que le **stockage local** et le **stockage de session** entrent en jeu ! Ces deux types
 de stockage permettent de sauvegarder des données <u>dans le navigateur du client</u>.
@@ -360,7 +360,7 @@ export default function OtherLayout({ children }: Readonly<{ children: React.Rea
 }
 ```
 
-N'hésitez pas à consulter [cette section du cours 5](/notes/rencontre3.1#-layouts-et-menus-de-navigation) qui aborde les **layouts**. Ça ressemble énormément à un composant réutilisable, sauf que le fichier se nommera `layout.tsx`.
+N'hésitez pas à consulter [cette section du cours 3.1](/notes/rencontre3.1#-layouts-et-menus-de-navigation) qui aborde les **layouts**. Ça ressemble énormément à un composant réutilisable, sauf que le fichier se nommera `layout.tsx`.
 
 :::
 
@@ -475,7 +475,7 @@ La date fournie doit respecter un format précis. Si votre date est sous forme d
 ```json showLineNumbers
 {
     "Home":{
-        "title":"Cours 7",
+        "title":"Cours 4.1",
         "hi":"Bonjour {name} !",
         "friends":"Tu {count, plural, =0 {n'as aucun ami, HAHAHA !} =1 {as un ami.} other {as # amis.}}",
         "button":"Appuie-moi délicatement 😩",

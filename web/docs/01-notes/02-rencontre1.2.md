@@ -37,7 +37,7 @@ Ce cours aborde l'interaction entre le code TypeScript d'un composant et son cod
 
 ## ✏ Changer un état
 
-Au **cours 1**, nous avions abordé les **états** (Variable qui peut être affichée dans le HTML d'un composant)
+Au **cours 1.1**, nous avions abordé les **états** (Variable qui peut être affichée dans le HTML d'un composant)
 
 <ReactPreview code={statePage} previewHeight={75}/>
 <NonVoyant>

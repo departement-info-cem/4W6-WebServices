@@ -1,7 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Cours 15 - Intro Web API
+# Cours 8.1 - Intro Web API
 
 ## 😴 Architecture REST
 

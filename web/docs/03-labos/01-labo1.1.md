@@ -13,7 +13,7 @@ ouverte en cliquant sur l'💡, maintenez `ctrl` appuyé.
 
 #### 🦸‍♂️ Tous pour un ou Un pour tous ?
 
-Si vous ne comptez pas utiliser Git pour vos labos -> faites-le au moins une fois avant le TP1 (Cours 4) car pour les TPs vous
+Si vous ne comptez pas utiliser Git pour vos labos -> faites-le au moins une fois avant le TP1 (Cours 2.2) car pour les TPs vous
 serez forcés.
 
 Si vous comptez utiliser Git pour vos labos -> décidez si vous voulez faire 1 repo avec TOUS vos labos (moins de bordel sur GitHub) ou bien 1 repo par labo. (Projets mieux séparés... mais bordel sur GitHub)

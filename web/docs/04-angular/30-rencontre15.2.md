@@ -1,3 +1,3 @@
-# Cours 30 - Final sommatif (25%)
+# Cours 15.2 - Final sommatif (25%)
 
 
