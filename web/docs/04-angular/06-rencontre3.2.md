@@ -1,4 +1,4 @@
-# Cours 6 - Services
+# Cours 3.2 - Services
 
 ⚙ Les services sont des **classes TypeScript** qui ne sont associées à aucun code HTML ou CSS.
 Ces classes permettent de rassembler des données (variables) et fonctionnalités (fonctions)
@@ -258,7 +258,7 @@ les composants dans lesquels le service est injecté**.
 
 Grâce à ce fonctionnement, un service peut permettre à plusieurs composants de « communiquer » entre eux. (S'ils utilisent 
 simultanément une variable située dans le service) Il existe toutefois d'autres moyens encore plus fiables de faire perdurer
-certaines données au fil de la navigation sur un site Web Angular, comme le **stockage local**. (Cours 7)
+certaines données au fil de la navigation sur un site Web Angular, comme le **stockage local**. (Cours 4.1)
 
 :::
 

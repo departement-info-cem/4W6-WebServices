@@ -1,4 +1,4 @@
-# Cours 2 - Composant dynamique
+# Cours 1.2 - Composant dynamique
 
 Ce cours aborde l'interaction entre la classe TypeScript d'un composant et son template HTML.
 

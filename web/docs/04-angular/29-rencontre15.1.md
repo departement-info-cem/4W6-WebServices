@@ -1,4 +1,4 @@
-# Cours 29 - Final formatif
+# Cours 15.1 - Final formatif
 
 [Voici le formatif](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-final_formatif.zip). Les instructions sont dans un document Word.
 

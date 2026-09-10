@@ -1,4 +1,4 @@
-# Cours 3 - Requêtes HTTP
+# Cours 2.1 - Requêtes HTTP
 
 ✅ Une application Web client Angular peut :
 

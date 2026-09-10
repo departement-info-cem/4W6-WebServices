@@ -1,4 +1,4 @@
-# Cours 5 - Plusieurs composants
+# Cours 3.1 - Plusieurs composants
 
 Utiliser plusieurs composants permettra de « naviguer sur plusieurs pages Web » et permettra également d'éviter
 de répéter des portions de page Web similaires.
@@ -10,7 +10,7 @@ il existe la commande `ng generate component nomDuNouveauComposant`.
 
 Avant de taper la commande comme un animal, assurez-vous de vous situer dans le dossier `app`. On veut situer la majorité
 de nos fichiers HTML / CSS / TypeScript dans le dossier `app`, à part pour quelques exceptions comme les images et les 
-fichiers de traduction. (Cours 7)
+fichiers de traduction. (Cours 4.1)
 
 <center>![Utiliser cd pour aller dans src/app](./_05-rencontre3.1/cd.png)</center>
 
@@ -309,7 +309,7 @@ export class YellowComponent implements OnInit{
 ```
 
 ⛔ Notez que le nom du paramètre (ici, `"legume"`) doit être identique à celui déclaré dans la règle de routage ! (sans le symbole `:`)
-De plus, la fonction `ngOnInit()` est plutôt incontournable pour cette tâche. ([Notion du cours 3](/angular/rencontre2.1#-lancer-la-requête-dès-le-chargement-de-la-page-web))
+De plus, la fonction `ngOnInit()` est plutôt incontournable pour cette tâche. ([Notion du cours 2.1](/angular/rencontre2.1#-lancer-la-requête-dès-le-chargement-de-la-page-web))
 
 ```ts
 {path: "yellow/:legume", component: YellowComponent}

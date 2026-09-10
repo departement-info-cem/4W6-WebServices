@@ -1,4 +1,4 @@
-# Cours 1 - Intro à Angular
+# Cours 1.1 - Intro à Angular
 
 ### 🙈 Application Web ASP.NET Core <u>sans</u> client Angular
 
@@ -639,7 +639,7 @@ et afficher ses données dans le HTML comme ceci :
 
 :::note
 
-Lors du Cours 2, nous verrons une méthode plus élégante pour afficher les éléments d'un tableau dans le HTML.
+Lors du Cours 1.2, nous verrons une méthode plus élégante pour afficher les éléments d'un tableau dans le HTML.
 
 :::
 

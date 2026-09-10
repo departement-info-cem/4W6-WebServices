@@ -8,7 +8,7 @@ Un [projet de départ](https://github.com/departement-info-cem/4W6-WebServices/r
 
 ### 1 - Création du projet
 
-[💡](/notes/rencontre8.1#-serveur-web-api-simple) Créez un projet ASP.NET Core Web API avec la version .NET 8 nommé `labo15_serveur`.
+[💡](/notes/rencontre8.1#-serveur-web-api-simple) Créez un projet ASP.NET Core Web API avec la version .NET 8 nommé `labo8.1_serveur`.
 
 Suivez toutes les étapes des notes de cours bêtement et arrêtez vous juste avant la **création du modèle**.
 

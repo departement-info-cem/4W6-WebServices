@@ -55,7 +55,7 @@ export default function Home() {
 
   return (
     <div>
-      <h3>Cours 8</h3>
+      <h3>Cours 4.2</h3>
       {/* On a mis src={YT_URL + videoId} */}
       <iframe width="560" height="315" src={YT_URL + videoId} title="YouTube video player" 
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 

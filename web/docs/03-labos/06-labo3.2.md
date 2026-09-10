@@ -11,11 +11,11 @@ Ce laboratoire utilise une **API Web** *faite maison* plutôt qu'une **API publi
 
 ### 🏗 1 - Lancer deux projets
 
-Le projet `labo6_client` est un projet **Next.js**, comme d'habitude. C'est sur lui qu'on va travailler. Vous pouvez déjà le lancer comme d'habitude, avec `npm install` puis `npm run dev`.
+Le projet `labo3.2_client` est un projet **Next.js**, comme d'habitude. C'est sur lui qu'on va travailler. Vous pouvez déjà le lancer comme d'habitude, avec `npm install` puis `npm run dev`.
 
-Le projet `labo6_serveur` est un projet **ASP.NET Core** qui sert de **serveur Web**. Cela correspond au type de projet que nous allons créer à partir du **cours 15**. Aujourd'hui, nous n'allons pas modifier ce projet, nous allons simplement l'utiliser : c'est l'API Web à laquelle nous enverrons des requêtes. Le projet vous retournera du **JSON** lorsque vous lui enverrez des requêtes. Pour une fois, les requêtes n'iront *pas très loin* : elles sont envoyées de votre ordinateur vers ... *votre ordinateur*. (Puisque les deux applications Web roulent sur la même machine)
+Le projet `labo3.2_serveur` est un projet **ASP.NET Core** qui sert de **serveur Web**. Cela correspond au type de projet que nous allons créer à partir du **cours 8.1**. Aujourd'hui, nous n'allons pas modifier ce projet, nous allons simplement l'utiliser : c'est l'API Web à laquelle nous enverrons des requêtes. Le projet vous retournera du **JSON** lorsque vous lui enverrez des requêtes. Pour une fois, les requêtes n'iront *pas très loin* : elles sont envoyées de votre ordinateur vers ... *votre ordinateur*. (Puisque les deux applications Web roulent sur la même machine)
 
-Nous n'allons pas ouvrir `labo6_serveur` dans un **IDE**. Vous avez seulement à exécuter deux commandes avec **PowerShell** en vous situant dans le dossier `/labo6_serveur` : `dotnet ef database update`, puis `dotnet run`. ⛔ Laissez cette fenêtre PowerShell **ouverte** pendant votre laboratoire ! Sinon le serveur ne sera plus actif.
+Nous n'allons pas ouvrir `labo3.2_serveur` dans un **IDE**. Vous avez seulement à exécuter deux commandes avec **PowerShell** en vous situant dans le dossier `/labo3.2_serveur` : `dotnet ef database update`, puis `dotnet run`. ⛔ Laissez cette fenêtre PowerShell **ouverte** pendant votre laboratoire ! Sinon le serveur ne sera plus actif.
 
 :::note
 

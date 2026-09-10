@@ -1,4 +1,4 @@
-# Cours 8 - Maps, vidéos, pipes
+# Cours 4.2 - Maps, vidéos, pipes
 
 ### ▶ Intégration YouTube
 
