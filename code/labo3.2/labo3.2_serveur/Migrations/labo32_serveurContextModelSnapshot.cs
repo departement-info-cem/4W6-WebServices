@@ -14,7 +14,7 @@ namespace labo32_serveur.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.23");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.10");
 
             modelBuilder.Entity("labo32_serveur.Models.Question", b =>
                 {
@@ -22,7 +22,7 @@ namespace labo32_serveur.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Answers")
+                    b.PrimitiveCollection<string>("Answers")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

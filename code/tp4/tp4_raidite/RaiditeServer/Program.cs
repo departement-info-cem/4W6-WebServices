@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,7 +20,7 @@ builder.Services.AddScoped<PostService>();
 
 builder.Services.AddDbContext<RaiditeServerContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("RaiditeServerContext") ?? throw new InvalidOperationException("Connection string 'serveur16Context' not found."));
+    options.UseSqlite(builder.Configuration.GetConnectionString("RaiditeServerContext") ?? throw new InvalidOperationException("Connection string 'serveur16Context' not found."));
     options.UseLazyLoadingProxies(); // Ceci
 });
 
@@ -95,3 +95,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

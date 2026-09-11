@@ -18,10 +18,14 @@ namespace DixCordesServeur.Data
             base.OnModelCreating(builder);
 
             builder.Entity<IdentityRole>().HasData(
-                new IdentityRole { Id = "1", Name = "moderator", NormalizedName = "MODERATOR" }
+                new IdentityRole
+                {
+                    Id = "1",
+                    Name = "moderator",
+                    NormalizedName = "MODERATOR",
+                    ConcurrencyStamp = "6012d293-bab4-4bb1-bfa4-268ca8af5e40"
+                }
             );
-
-            PasswordHasher<User> hasher = new PasswordHasher<User>();
 
             User u1 = new User
             {
@@ -29,18 +33,23 @@ namespace DixCordesServeur.Data
                 UserName = "admin",
                 NormalizedUserName = "ADMIN",
                 Email = "a@a.a",
-                NormalizedEmail = "A@A.A"
+                NormalizedEmail = "A@A.A",
+                ConcurrencyStamp = "78417866-0585-4f0b-9ada-c5af1ae028c3",
+                SecurityStamp = "ecd539fa-cdad-4ca5-95ef-0452a80c7ada",
+                PasswordHash = "AQAAAAIAAYagAAAAEDIKbUYbjWY61KNmx16cm9jw4CD2WMAkqh0tlvRmdtzldXlOQTFN5yEATDXZpxVr9Q=="
             };
-            u1.PasswordHash = hasher.HashPassword(u1, "salut");
+
             User u2 = new User
             {
                 Id = "11111111-1111-1111-1111-111111111112",
                 UserName = "sussyfella",
                 NormalizedUserName = "SUSSYFELLA",
                 Email = "s@s.s",
-                NormalizedEmail = "S@S.S"
+                NormalizedEmail = "S@S.S",
+                ConcurrencyStamp = "fb786519-7cc3-4b54-a4f0-45182a17dfd9",
+                SecurityStamp = "fd136e2a-feb0-4bda-a32a-e14bc4c4bf07",
+                PasswordHash = "AQAAAAIAAYagAAAAEPsEkmvp5kQzB9g1LyC5E7kkbYLtKq+hZKwF6ZTWiw8LiK5E+mu1CredXWPG8kkunA=="
             };
-            u2.PasswordHash = hasher.HashPassword(u2, "salut");
 
             builder.Entity<User>().HasData(u1, u2);
 

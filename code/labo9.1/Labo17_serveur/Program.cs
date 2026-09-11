@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using Labo17_serveur.Data;
 using Labo17_serveur.Models;
 using Labo17_serveur.Services;
@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<Labo17_serveurContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Labo17_serveurContext") ?? throw new InvalidOperationException("Connection string 'serveur16Context' not found."));
+    options.UseSqlite(builder.Configuration.GetConnectionString("Labo17_serveurContext") ?? throw new InvalidOperationException("Connection string 'serveur16Context' not found."));
     options.UseLazyLoadingProxies(); // Ceci
 });
 
@@ -86,3 +86,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

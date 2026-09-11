@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<serveur16Context>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("serveur16Context") ?? throw new InvalidOperationException("Connection string 'serveur16Context' not found."));
+    options.UseSqlite(builder.Configuration.GetConnectionString("serveur16Context") ?? throw new InvalidOperationException("Connection string 'serveur16Context' not found."));
     options.UseLazyLoadingProxies();
 });
 
@@ -82,3 +82,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

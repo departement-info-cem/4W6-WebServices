@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<DixCordesServeurContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DixCordesServeurContext") ?? 
+    options.UseSqlite(builder.Configuration.GetConnectionString("DixCordesServeurContext") ?? 
         throw new InvalidOperationException("Connection string 'DixCordesServeurContext' not found."));
     options.UseLazyLoadingProxies();
 });
@@ -44,7 +44,7 @@ builder.Services.AddAuthentication(options =>
 }).AddJwtBearer(options =>
 {
     options.SaveToken = true;
-    options.RequireHttpsMetadata = false; // Lors du développement
+    options.RequireHttpsMetadata = false; // Lors du dï¿½veloppement
     options.TokenValidationParameters = new TokenValidationParameters()
     {
         ValidateAudience = true,
@@ -52,7 +52,7 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = "http://localhost:3000", // Client -> HTTP
         ValidIssuer = "https://localhost:7253", // Serveur -> HTTPS
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-        .GetBytes("LooOOongue Phrase SiNoN Ça ne Marchera PaAaAAAaAas !"))
+        .GetBytes("LooOOongue Phrase SiNoN ï¿½a ne Marchera PaAaAAAaAas !"))
     };
 });
 

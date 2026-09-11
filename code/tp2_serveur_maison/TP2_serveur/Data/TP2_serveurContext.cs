@@ -20,12 +20,17 @@ namespace TP2_serveur.Data
         {
             base.OnModelCreating(builder);
 
-            PasswordHasher<User> hasher = new PasswordHasher<User>();
             User u1 = new User
             {
-                Id = "11111111-1111-1111-1111-111111111111", UserName = "abc", Email = "a@a.a", NormalizedUserName = "ABC", NormalizedEmail = "A@A.A"
+                Id = "11111111-1111-1111-1111-111111111111",
+                UserName = "abc",
+                Email = "a@a.a",
+                NormalizedUserName = "ABC",
+                NormalizedEmail = "A@A.A",
+                ConcurrencyStamp = "b1e01a19-da8e-45ac-8f93-f2bff75cec2c",
+                SecurityStamp = "e8225142-eb6e-4c14-a0e2-4c02bd0408d0",
+                PasswordHash = "AQAAAAIAAYagAAAAEBiUO0zV5/ysu+vGzff4kztWAehBc0rUduTCnJQQot+8doJmM2Ydqv2ItNm4XpfWpQ=="
             };
-            u1.PasswordHash = hasher.HashPassword(u1, "123");
             builder.Entity<User>().HasData(u1);
 
             CreateArtists(builder);

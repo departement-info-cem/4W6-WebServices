@@ -2,55 +2,50 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using serveur16.Data;
+using serveur21.Data;
 
 #nullable disable
 
-namespace serveur16.Migrations
+namespace serveur21.Migrations
 {
-    [DbContext(typeof(serveur16Context))]
-    [Migration("20260218003926_seed")]
-    partial class seed
+    [DbContext(typeof(serveur21Context))]
+    [Migration("20260911140932_InitialSqlite")]
+    partial class InitialSqlite
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.14")
+                .HasAnnotation("ProductVersion", "10.0.10")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
-                .HasAnnotation("Proxies:LazyLoading", true)
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+                .HasAnnotation("Proxies:LazyLoading", true);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
                 });
@@ -59,19 +54,17 @@ namespace serveur16.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -84,19 +77,17 @@ namespace serveur16.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -108,17 +99,17 @@ namespace serveur16.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -130,10 +121,10 @@ namespace serveur16.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -145,130 +136,93 @@ namespace serveur16.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ReviewUser", b =>
-                {
-                    b.Property<int>("UpvotedReviewsId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UpvotersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UpvotedReviewsId", "UpvotersId");
-
-                    b.HasIndex("UpvotersId");
-
-                    b.ToTable("ReviewUser");
-                });
-
-            modelBuilder.Entity("serveur16.Models.Review", b =>
+            modelBuilder.Entity("serveur21.Models.Review", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AuthorId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Game")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Review");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AuthorId = "11111111-1111-1111-1111-111111111111",
-                            Game = "Cyberpunk 2077",
-                            Text = "C'parce que lé bonhommes font des T poses pis y rentrer dans le plancher des fois xd"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AuthorId = "11111111-1111-1111-1111-111111111111",
-                            Game = "Mario Kart World",
-                            Text = "Je préfère de loin Garfield Kart !"
-                        });
                 });
 
-            modelBuilder.Entity("serveur16.Models.User", b =>
+            modelBuilder.Entity("serveur21.Models.User", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -277,8 +231,7 @@ namespace serveur16.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
 
@@ -287,17 +240,49 @@ namespace serveur16.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d8351a2b-30ba-4da3-83fa-3863c4942d4d",
-                            Email = "b@b.b",
+                            ConcurrencyStamp = "9f1980e9-6065-4770-90fc-beb8060b56ab",
+                            Email = "m@m.m",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "B@B.B",
-                            NormalizedUserName = "BOB",
-                            PasswordHash = "AQAAAAIAAYagAAAAEF1cOIaomsDzgz/R911ZN9sIZ14+LQNmztYW/YXXgPhLTRIs39seCIdVqoSAqIroOg==",
+                            NormalizedEmail = "M@M.M",
+                            NormalizedUserName = "MAXOU",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKxDUQjOBPf9eJNxNQDuZzMOxOnQKvppPgMyJ4rpktXYFD2FKXvhx2OE1g2B90qpqQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b6c3c44c-6f36-4f53-9df7-d66c6c481764",
+                            SecurityStamp = "16d3c891-1eda-4304-9b19-bf6ec5ef6734",
                             TwoFactorEnabled = false,
-                            UserName = "bob"
+                            UserName = "Maxou"
+                        },
+                        new
+                        {
+                            Id = "11111111-1111-1111-1111-111111111112",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "33974a2b-657f-4a2d-b771-f12cd37b6f21",
+                            Email = "p@p.p",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "P@P.P",
+                            NormalizedUserName = "PIELLE-AREXANDRE",
+                            PasswordHash = "AQAAAAIAAYagAAAAEF/s1bvNLT8B2cW9LVFedcEh556N35M/jwuxp7FvKWv6giC6Nem923MLHHA8Xems8Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "401c2cb4-8015-4a9b-a252-03fb2eae6e86",
+                            TwoFactorEnabled = false,
+                            UserName = "Pielle-Arexandre"
+                        },
+                        new
+                        {
+                            Id = "11111111-1111-1111-1111-111111111113",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "7c53ff9c-9740-4efb-a79e-8106baea2e99",
+                            Email = "c@c.c",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "C@C.C",
+                            NormalizedUserName = "MASIE-CARRANDRA",
+                            PasswordHash = "AQAAAAIAAYagAAAAEA8Lglcn/TkHkKvIarLUGTgvFa7N3Isnjo8ysLHr0ZdsBfGEi+z9wp9JtLm9T2oeOg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a11e4581-dd97-4416-93a2-2f823e4a0cbe",
+                            TwoFactorEnabled = false,
+                            UserName = "Masie-Carrandra"
                         });
                 });
 
@@ -312,7 +297,7 @@ namespace serveur16.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("serveur16.Models.User", null)
+                    b.HasOne("serveur21.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -321,7 +306,7 @@ namespace serveur16.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("serveur16.Models.User", null)
+                    b.HasOne("serveur21.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -336,7 +321,7 @@ namespace serveur16.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("serveur16.Models.User", null)
+                    b.HasOne("serveur21.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -345,38 +330,23 @@ namespace serveur16.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("serveur16.Models.User", null)
+                    b.HasOne("serveur21.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ReviewUser", b =>
+            modelBuilder.Entity("serveur21.Models.Review", b =>
                 {
-                    b.HasOne("serveur16.Models.Review", null)
-                        .WithMany()
-                        .HasForeignKey("UpvotedReviewsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("serveur16.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UpvotersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("serveur16.Models.Review", b =>
-                {
-                    b.HasOne("serveur16.Models.User", "Author")
+                    b.HasOne("serveur21.Models.User", "User")
                         .WithMany("Reviews")
-                        .HasForeignKey("AuthorId");
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("Author");
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("serveur16.Models.User", b =>
+            modelBuilder.Entity("serveur21.Models.User", b =>
                 {
                     b.Navigation("Reviews");
                 });

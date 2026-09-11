@@ -7,7 +7,7 @@
 namespace Vincible.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitialSqlite : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,12 +16,12 @@ namespace Vincible.Migrations
                 name: "Characters",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Age = table.Column<int>(type: "int", nullable: true),
-                    IsAlive = table.Column<bool>(type: "bit", nullable: false),
-                    Img = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Age = table.Column<int>(type: "INTEGER", nullable: true),
+                    IsAlive = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Img = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,10 +32,10 @@ namespace Vincible.Migrations
                 name: "Superpowers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,8 +46,8 @@ namespace Vincible.Migrations
                 name: "CharacterSuperpower",
                 columns: table => new
                 {
-                    CharactersId = table.Column<int>(type: "int", nullable: false),
-                    SuperpowersId = table.Column<int>(type: "int", nullable: false)
+                    CharactersId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SuperpowersId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

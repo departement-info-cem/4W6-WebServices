@@ -4,7 +4,7 @@ using serveur15.Data;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<serveur15Context>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("serveur15Context") ?? throw new InvalidOperationException("Connection string 'serveur15Context' not found."));
+    options.UseSqlite(builder.Configuration.GetConnectionString("serveur15Context") ?? throw new InvalidOperationException("Connection string 'serveur15Context' not found."));
     options.UseLazyLoadingProxies();
 });
     
@@ -44,3 +44,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

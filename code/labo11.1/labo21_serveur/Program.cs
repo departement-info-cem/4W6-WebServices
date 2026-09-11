@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using semaine11_serveur.Data;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<semaine11_serveurContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("semaine11_serveurContext") ?? throw new InvalidOperationException("Connection string 'semaine11_serveurContext' not found.")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("semaine11_serveurContext") ?? throw new InvalidOperationException("Connection string 'semaine11_serveurContext' not found.")));
 
 // Add services to the container.
 
@@ -40,3 +40,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

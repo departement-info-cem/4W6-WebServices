@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RaiditeServer.Data;
 using RaiditeServer.Models;
 using SixLabors.ImageSharp;

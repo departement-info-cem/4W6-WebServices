@@ -10,14 +10,14 @@ using labo32_serveur.Data;
 namespace labo32_serveur.Migrations
 {
     [DbContext(typeof(labo32_serveurContext))]
-    [Migration("20260910221221_Initial")]
-    partial class Initial
+    [Migration("20260911140941_InitialSqlite")]
+    partial class InitialSqlite
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.23");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.10");
 
             modelBuilder.Entity("labo32_serveur.Models.Question", b =>
                 {
@@ -25,7 +25,7 @@ namespace labo32_serveur.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Answers")
+                    b.PrimitiveCollection<string>("Answers")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

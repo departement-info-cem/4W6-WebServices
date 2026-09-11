@@ -20,13 +20,18 @@ namespace serveur16.Data
         {
             base.OnModelCreating(builder);
 
-            PasswordHasher<User> hasher = new PasswordHasher<User>();
             User u1 = new User
             {
-                Id = "11111111-1111-1111-1111-111111111111", UserName = "bob", Email = "b@b.b", NormalizedUserName = "BOB", NormalizedEmail = "B@B.B"
+                Id = "11111111-1111-1111-1111-111111111111",
+                UserName = "bob",
+                Email = "b@b.b",
+                NormalizedUserName = "BOB",
+                NormalizedEmail = "B@B.B",
+                ConcurrencyStamp = "8ad80a27-73dd-4785-9ff9-118c05cf9719",
+                SecurityStamp = "56825025-1e7a-4309-afc0-7edf7ac0fea0",
+                PasswordHash = "AQAAAAIAAYagAAAAENvyCAm+H9eSlX+/4uupNrY9Kl4EoVbqTPztcz/zjyfTLpWIABVIgkry4P8qsTcn3g=="
             };
 
-            u1.PasswordHash = hasher.HashPassword(u1, "allo");
             builder.Entity<User>().HasData(u1);
 
             builder.Entity<Review>().HasData(

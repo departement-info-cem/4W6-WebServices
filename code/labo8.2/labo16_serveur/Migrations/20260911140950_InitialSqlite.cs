@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace serveur15.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitialSqlite : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,11 +15,11 @@ namespace serveur15.Migrations
                 name: "Incident",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NbCasualties = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    NbCasualties = table.Column<int>(type: "INTEGER", nullable: false),
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,9 +30,9 @@ namespace serveur15.Migrations
                 name: "Zookeeper",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,11 +43,11 @@ namespace serveur15.Migrations
                 name: "Dinosaur",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Specie = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ZookeeperId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Specie = table.Column<string>(type: "TEXT", nullable: false),
+                    ZookeeperId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -64,8 +64,8 @@ namespace serveur15.Migrations
                 name: "DinosaurIncident",
                 columns: table => new
                 {
-                    IncidentsId = table.Column<int>(type: "int", nullable: false),
-                    InvolvedDinosaursId = table.Column<int>(type: "int", nullable: false)
+                    IncidentsId = table.Column<int>(type: "INTEGER", nullable: false),
+                    InvolvedDinosaursId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

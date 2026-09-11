@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Vincible.Data;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<VincibleContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("VincibleContext") ?? throw new InvalidOperationException("Connection string 'VincibleContext' not found.")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("VincibleContext") ?? throw new InvalidOperationException("Connection string 'VincibleContext' not found.")));
 
 // Add services to the container.
 
@@ -40,3 +40,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
