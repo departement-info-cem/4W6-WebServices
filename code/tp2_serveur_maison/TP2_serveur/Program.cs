@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using TP2_serveur.Data;
 using TP2_serveur.Models;
+using TP2_serveur.Spotify;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<TP2_serveurContext>(options =>
@@ -31,10 +32,10 @@ builder.Services.AddAuthentication(options =>
     {
         ValidateAudience = true,
         ValidateIssuer = true,
-        ValidAudience = "http://localhost:3000", // Audience : Client
-        ValidIssuer = "http://localhost:5143", // ⛔ Issuer : Serveur -> HTTPS VÉRIFIEZ le PORT de votre serveur dans launchsettings.json !
+        ValidAudience = SpotifyCredentials.Audience, // Audience : Client
+        ValidIssuer = SpotifyCredentials.Issuer, // ⛔ Issuer : Serveur -> HTTPS VÉRIFIEZ le PORT de votre serveur dans launchsettings.json !
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-            .GetBytes("LooOOongue Phrase SiNoN Ça ne Marchera PaAaAAAaAas !")) // Clé pour déchiffrer les tokens
+            .GetBytes(SpotifyCredentials.SigningKey)) // Clé pour déchiffrer les tokens
     };
 });
 
@@ -58,6 +59,10 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 app.UseCors("AllowAll");
+
+// Les requêtes /v1/... et /api/token qui ne correspondent à aucune route doivent
+// répondre une erreur JSON, comme le fait Spotify.
+app.UseSpotifyEndpointErrors();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

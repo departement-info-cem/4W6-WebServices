@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using TP2_serveur.DTOs;
 using TP2_serveur.Models;
+using TP2_serveur.Spotify;
 
 namespace TP2_serveur.Controllers
 {
@@ -41,10 +42,10 @@ namespace TP2_serveur.Controllers
 
                 // Générer et chiffrer le token 
                 SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8
-                    .GetBytes("LooOOongue Phrase SiNoN Ça ne Marchera PaAaAAAaAas !")); // Phrase identique dans Program.cs
+                    .GetBytes(SpotifyCredentials.SigningKey)); // Phrase identique dans Program.cs
                 JwtSecurityToken token = new JwtSecurityToken(
-                    issuer: "http://localhost:5143", // ⛔ Vérifiez le PORT de votre serveur dans launchSettings.json !
-                    audience: "http://localhost:3000",
+                    issuer: SpotifyCredentials.Issuer, // ⛔ Vérifiez le PORT de votre serveur dans launchSettings.json !
+                    audience: SpotifyCredentials.Audience,
                     claims: authClaims,
                     expires: DateTime.Now.AddMinutes(30), // Durée de validité du token
                     signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature)
