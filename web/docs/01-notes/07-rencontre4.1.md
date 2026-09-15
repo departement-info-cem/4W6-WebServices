@@ -615,6 +615,13 @@ export default function Home() {
 Certaines Web API requièrent une authentification pour être utilisées. C'est par exemple le cas
 de **Spotify**, que nous allons aborder en exemple.
 
+:::tip
+
+💰 Vous n'êtes pas abonné(e) à **Spotify** ? Sautez l'étape 1 et choisissez l'onglet **🏠 Serveur maison** dans les
+exemples de code : le [serveur maison](/notes/rencontre5.1) du **TP2** comprend exactement les mêmes requêtes.
+
+:::
+
 #### Étape 1 - 👤 Créer un compte
 
 Rendez-vous sur [https://open.spotify.com/](https://open.spotify.com/ ) pour créer un compte
@@ -632,6 +639,8 @@ serviront plus tard pour envoyer des requêtes.
 Dans le **composant** ou **hook** de votre choix, créez des constantes pour y ranger
 votre **Client ID** et votre **Client Secret** :
 
+<Tabs groupId="api-musique">
+    <TabItem value="spotify" label="🎧 Spotify" default>
 ```tsx showLineNumbers
 // Déclarées à l'extérieur comme ça elles ne sont pas réinitialisée à chaque fois que le composant est chargé
 const CLIENT_ID = "098gf0fd987gdf89g7sd7g9sd";
@@ -643,6 +652,22 @@ export default function Home() {
 
 }
 ```
+    </TabItem>
+    <TabItem value="maison" label="🏠 Serveur maison">
+```tsx showLineNumbers
+// Déclarées à l'extérieur comme ça elles ne sont pas réinitialisée à chaque fois que le composant est chargé
+// Ces deux valeurs sont toujours les mêmes : le serveur maison n'a pas de tableau de bord !
+const CLIENT_ID = "4a9b2c7d1e0f3a8b5c6d7e8f9a0b1c2d";
+const CLIENT_SECRET = "9f8e7d6c5b4a39281706152433425160";
+
+export default function Home() {
+
+  //...
+
+}
+```
+    </TabItem>
+</Tabs>
 
 :::note
 
@@ -656,6 +681,8 @@ Spotify et c'est **son ID** et **son secret** qui seraient utilisés par l'appli
 Avant de pouvoir envoyer une requête quelconque à Spotify, nous allons devoir nous munir d'un **🪙 token d'authentification**.
 Ce **🪙 token** peut être obtenu à l'aide d'une **requête de connexion** :
 
+<Tabs groupId="api-musique">
+    <TabItem value="spotify" label="🎧 Spotify" default>
 ```tsx showLineNumbers
 async function connect(){
 
@@ -675,6 +702,29 @@ async function connect(){
 
 }
 ```
+    </TabItem>
+    <TabItem value="maison" label="🏠 Serveur maison">
+```tsx showLineNumbers
+async function connect(){
+
+  // Attention ! Pour une fois, on utilise une requête POST
+  const response = await axios.post("http://localhost:5143/api/token", 
+    // On joint un contenu (body) à la requête
+    new URLSearchParams({ grant_type : "client_credentials" }), {
+    // On joint des en-têtes (headers) à la requête
+    headers : {
+      "Content-Type" : "application/x-www-form-urlencoded",
+      "Authorization" : "Basic " + btoa(CLIENT_ID + ":" + CLIENT_SECRET)
+    }});
+  console.log(response.data);
+
+  // response.data.access_token contient le token qu'on voulait obtenir !
+  setSpotifyToken(response.data.access_token);
+
+}
+```
+    </TabItem>
+</Tabs>
 
 Dans l'objet JSON obtenu, on peut accéder au **token** grâce à `response.data.access_token` :
 
@@ -712,6 +762,8 @@ useEffect(() => {
 Une fois le **token obtenu** grâce à la **requête de connexion**, on peut envoyer toutes sortes de requêtes
 à la Web API de Spotify. Voici comment joindre le token à une requête :
 
+<Tabs groupId="api-musique">
+    <TabItem value="spotify" label="🎧 Spotify" default>
 ```ts showLineNumbers
 async function getArtist(){
 
@@ -729,6 +781,27 @@ async function getArtist(){
 
 }
 ```
+    </TabItem>
+    <TabItem value="maison" label="🏠 Serveur maison">
+```ts showLineNumbers
+async function getArtist(){
+
+  const response = await axios.get('http://localhost:5143/v1/search?type=artist&offset=0&limit=1&q=' + artistInput, {
+    // On joint le token dans les en-têtes de la requête !
+    headers : {
+      "Content-Type" : "application/x-www-form-urlencoded",
+      "Authorization" : "Bearer " + spotifyToken
+    }
+  });
+  console.log(response.data);
+
+  // On récupère les infos de l'artiste
+  setArtist(new Artist(response.data.artists.items[0].id, response.data.artists.items[0].name, response.data.artists.items[0].images[0].url));
+
+}
+```
+    </TabItem>
+</Tabs>
 
 C'est à peu près tout, sinon le fonctionnement est similaire à une requête sans authentification.
 
@@ -761,6 +834,8 @@ N'hésitez pas à consulter la [documentation de l'API de Spotify](https://devel
 
 * Requête pour rechercher un **artiste** (il vous faudra le **nom de l'artiste**) :
 
+<Tabs groupId="api-musique">
+    <TabItem value="spotify" label="🎧 Spotify" default>
 ```ts showLineNumbers
 async function getArtist(artistName : string){
 
@@ -776,9 +851,30 @@ async function getArtist(artistName : string){
 
 }
 ```
+    </TabItem>
+    <TabItem value="maison" label="🏠 Serveur maison">
+```ts showLineNumbers
+async function getArtist(artistName : string){
+
+  const response = await axios.get('http://localhost:5143/v1/search?type=artist&offset=0&limit=1&q=' + artistName, {
+    headers : {
+      "Content-Type" : "application/x-www-form-urlencoded",
+      "Authorization" : "Bearer " + spotifyToken
+    }
+  });
+  console.log(response.data);
+
+  return new Artist(response.data.artists.items[0].id, response.data.artists.items[0].name, response.data.artists.items[0].images[0].url);
+
+}
+```
+    </TabItem>
+</Tabs>
 
 * Requête pour obtenir les **albums d'un artiste** précis (il vous faudra l'**id Spotify de l'artiste**) :
 
+<Tabs groupId="api-musique">
+    <TabItem value="spotify" label="🎧 Spotify" default>
 ```ts showLineNumbers
 async function getAlbums(artistId : string){
 
@@ -798,9 +894,34 @@ async function getAlbums(artistId : string){
 
 }
 ```
+    </TabItem>
+    <TabItem value="maison" label="🏠 Serveur maison">
+```ts showLineNumbers
+async function getAlbums(artistId : string){
+
+  const response = await axios.get("http://localhost:5143/v1/artists/" + artistId + "/albums?include_groups=album,single", {
+    headers : {
+      "Content-Type" : "application/x-www-form-urlencoded",
+      "Authorization" : "Bearer " + spotifyToken
+    }
+  });
+  console.log(response.data);
+  
+  let albums : Album[] = [];
+  for(let i = 0; i < response.data.items.length; i++){
+    albums.push(new Album(response.data.items[i].id, response.data.items[i].name, response.data.items[i].images[0].url));
+  }
+  return albums;
+
+}
+```
+    </TabItem>
+</Tabs>
 
 * Requête pour obtenir les **chansons d'un album** précis (il vous faudra l'**id Spotify de l'album**) :
 
+<Tabs groupId="api-musique">
+    <TabItem value="spotify" label="🎧 Spotify" default>
 ```ts showLineNumbers
 async function getSongs(albumId : string){
 
@@ -820,6 +941,29 @@ async function getSongs(albumId : string){
 
 }
 ```
+    </TabItem>
+    <TabItem value="maison" label="🏠 Serveur maison">
+```ts showLineNumbers
+async function getSongs(albumId : string){
+
+  const response = await axios.get("http://localhost:5143/v1/albums/" + albumId, {
+    headers : {
+      "Content-Type" : "application/x-www-form-urlencoded",
+      "Authorization" : "Bearer " + spotifyToken
+    }
+  });
+  console.log(response.data);
+  
+  let songs : string[] = [];
+  for(let i = 0; i < response.data.tracks.items.length; i++){
+    songs.push(response.data.tracks.items[i].name);
+  }
+  return songs;
+
+}
+```
+    </TabItem>
+</Tabs>
 
 ## 📶 Intercepteurs
 
@@ -857,6 +1001,8 @@ spotifyRequest.interceptors.request.use((config) => {
 
 Pour exploiter le **token** qui a été obtenu en se **connectant** à l'API de Spotify, il a fallu le sauvegarder dans le **stockage local** lors de la connexion :
 
+<Tabs groupId="api-musique">
+    <TabItem value="spotify" label="🎧 Spotify" default>
 ```ts showLineNumbers
 async function connect(){
 
@@ -873,11 +1019,33 @@ async function connect(){
 
 }
 ```
+    </TabItem>
+    <TabItem value="maison" label="🏠 Serveur maison">
+```ts showLineNumbers
+async function connect(){
+
+  const response = await axios.post("http://localhost:5143/api/token", new URLSearchParams({ grant_type : "client_credentials" }), {
+    headers : {
+      "Content-Type" : "application/x-www-form-urlencoded",
+      "Authorization" : "Basic " + btoa(CLIENT_ID + ":" + CLIENT_SECRET)
+    }}
+  );
+  console.log(response.data);
+
+  // ⛔ On range le token dans le stockage local plutôt que dans un état !
+  localStorage.setItem("token", response.data.access_token);
+
+}
+```
+    </TabItem>
+</Tabs>
 
 :::
 
 ⚠ Pour que l'intercepteur ... *intercepte* ... une requête, il faudra lancer la requête comme ceci :
 
+<Tabs groupId="api-musique">
+    <TabItem value="spotify" label="🎧 Spotify" default>
 ```ts showLineNumbers
 async function getArtist(){
 
@@ -889,6 +1057,21 @@ async function getArtist(){
 
 }
 ```
+    </TabItem>
+    <TabItem value="maison" label="🏠 Serveur maison">
+```ts showLineNumbers
+async function getArtist(){
+
+  // Remarquez qu'on n'utilise pas axios.get() et qu'on a retiré les en-têtes !
+  const response = await spotifyRequest.get('http://localhost:5143/v1/search?type=artist&offset=0&limit=1&q=' + artistInput);
+  console.log(response.data);
+
+  setArtist(new Artist(response.data.artists.items[0].id, response.data.artists.items[0].name, response.data.artists.items[0].images[0].url));
+
+}
+```
+    </TabItem>
+</Tabs>
 
 Plus haut dans le fichier, il y a l'**importation** suivante, qui fait référence à la constante `spotifyRequest` que nous avions créée au-dessus de l'**intercepteur**.
 
@@ -924,6 +1107,8 @@ spotifyRequest.interceptors.request.use((config) => {
 
 🕊 N'oubliez surtout pas que vous n'aurez plus à joindre des en-têtes avec le token manuellement dans vos requêtes !
 
+<Tabs groupId="api-musique">
+    <TabItem value="spotify" label="🎧 Spotify" default>
 ```ts showLineNumbers
 async function getAlbums(artistId : string){
 
@@ -940,3 +1125,23 @@ async function getAlbums(artistId : string){
 
 }
 ```
+    </TabItem>
+    <TabItem value="maison" label="🏠 Serveur maison">
+```ts showLineNumbers
+async function getAlbums(artistId : string){
+
+  // La partie commentée n'est plus nécessaire ! L'intercepteur s'en occupe !
+  const response = await spotifyRequest.get("http://localhost:5143/v1/artists/" + artistId + "/albums?include_groups=album,single" /*, {
+    headers : {
+      "Content-Type" : "application/x-www-form-urlencoded",
+      "Authorization" : "Bearer " + spotifyToken
+    }
+  }*/);
+  console.log(response.data);
+  
+  // ...
+
+}
+```
+    </TabItem>
+</Tabs>

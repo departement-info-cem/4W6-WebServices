@@ -1,6 +1,59 @@
 @TP2_serveur_HostAddress = http://localhost:5143
 
-GET {{TP2_serveur_HostAddress}}/weatherforecast/
-Accept: application/json
+### Ces identifiants sont codés en dur dans Spotify/SpotifyCredentials.cs
+@CLIENT_ID = 4a9b2c7d1e0f3a8b5c6d7e8f9a0b1c2d
+@CLIENT_SECRET = 9f8e7d6c5b4a39281706152433425160
+
+### btoa(CLIENT_ID + ":" + CLIENT_SECRET)
+@BASIC = NGE5YjJjN2QxZTBmM2E4YjVjNmQ3ZThmOWEwYjFjMmQ6OWY4ZTdkNmM1YjRhMzkyODE3MDYxNTI0MzM0MjUxNjA=
+
+### 🔑 Connexion : équivalent de https://accounts.spotify.com/api/token
+# @name connect
+POST {{TP2_serveur_HostAddress}}/api/token
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic {{BASIC}}
+
+grant_type=client_credentials
+
+### Le token obtenu est réutilisé par toutes les requêtes ci-dessous
+@TOKEN = {{connect.response.body.access_token}}
+
+### 👨‍🎨 Rechercher un artiste par son nom
+# @name search
+GET {{TP2_serveur_HostAddress}}/v1/search?type=artist&offset=0&limit=1&q=hans zimmer
+Authorization: Bearer {{TOKEN}}
+
+### 💿 Obtenir les albums d'un artiste (avec son id Spotify)
+# @name albums
+GET {{TP2_serveur_HostAddress}}/v1/artists/{{search.response.body.artists.items[0].id}}/albums?include_groups=album,single
+Authorization: Bearer {{TOKEN}}
+
+### 🎵 Obtenir un album et ses chansons (dans tracks.items)
+GET {{TP2_serveur_HostAddress}}/v1/albums/{{albums.response.body.items[0].id}}
+Authorization: Bearer {{TOKEN}}
+
+### ⛔ Sans token : 401 No token provided
+GET {{TP2_serveur_HostAddress}}/v1/search?type=artist&q=drake
+
+### ⛔ Mauvais secret : 400 invalid_client
+POST {{TP2_serveur_HostAddress}}/api/token
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic bWF1dmFpczptYXV2YWlz
+
+grant_type=client_credentials
+
+### 🏠 Anciennes routes du serveur maison (toujours fonctionnelles)
+# @name login
+POST {{TP2_serveur_HostAddress}}/api/Users/Login
+Content-Type: application/json
+
+{
+  "username": "abc",
+  "password": "123"
+}
+
+###
+GET {{TP2_serveur_HostAddress}}/api/Artists/GetArtist/Drake
+Authorization: Bearer {{login.response.body.token}}
 
 ###
