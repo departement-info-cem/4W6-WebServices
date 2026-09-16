@@ -1,6 +1,7 @@
 # Laboratoire 4.1
 
 <center>![Bannière du laboratoire 7](./_07-labo4.1/banner.png)</center>
+<NonVoyant>On peut lire: Pas le laboratoire 7</NonVoyant>
 
 ## 🐌 Étape 1 - La routine... ou presque.
 
@@ -21,6 +22,17 @@ Dans l'application Web, créez un profil dans la première page. Vous pouvez ég
 L'objectif de cette étape sera d'exploiter le **stockage local** pour faire persister le profil de l'utilisateur.
 
 <center>![Profil du joueur](./_07-labo4.1/profile.png)</center>
+<NonVoyant>
+Exemple du profile utilisateur:
+
+Une photo de jetons de poker
+
+Nom: Simone
+
+Âge: 42 ans
+
+Argent: 20$
+</NonVoyant>
 
 ### 💾 2 - Sauvegarder le profil dans le stockage du navigateur
 
@@ -77,6 +89,25 @@ Dans cette partie, nous travaillerons principalement sur le composant `roulette`
 L'objectif sera de traduire les textes dans la page en français et en anglais. (Textes fournis plus loin)
 
 <center>![Textes à traduire](./_07-labo4.1/i18n.png)</center>
+<NonVoyant>
+Exemple de l'interface roulette de casino:
+
+Le solde en cours: 💰30💰
+
+Montant misé: 5
+
+5$ sur un numéro: 0
+
+bouton «5$ sur rouge» «5$ sur noir»
+
+bouton «Français», bouton «English»
+
+Roulette bilingue
+
+Annimation de la roulette de casino
+
+Ne pas jouer si vous êtes facilements étourdi(e)
+</NonVoyant>
 
 ### 🌐 5 - Internationaliser un composant
 
@@ -111,15 +142,24 @@ pourrait sembler très facile à compléter, c'est normal. Le but est simplement
 
 [💡](/notes/rencontre4.1#étape-2---%EF%B8%8F%EF%B8%8F-hard-coder-le-client-id-et-le-client-secret) Hardcodez votre ID et votre secret dans le composant `Spotify`.
 
+Si vous n'avez pas de compte Spotify, vous pouvez utiliser le serveur maison. Utilisez les informations suivantes:
+
+- Le `Client ID`: 4a9b2c7d1e0f3a8b5c6d7e8f9a0b1c2d
+- Le `Secret`: 9f8e7d6c5b4a39281706152433425160
+
 ### 🪙 7 - Obtention du token
 
 Initialement, vous remarquerez que la page n'affiche rien : c'est normal, c'est à cause d'un `booléen && expression` dans le HTML. Il faudra que l'utilisateur se connecte à l'API de Spotify pour pouvoir lancer sa première recherche.
 
 [💡](/notes/rencontre4.1#étape-3----utiliser-une-requête-de-connexion) La requête de connexion est déjà codée pour vous. Vous devrez simplement trouver **où l'appeler** pour qu'un **token d'authentification Spotify** soit obtenu **dès le chargement de la page**.
 
+Si vous utilisez la solution maison, remplacez `https://accounts.spotify.com/api/token` par `http://localhost:5143/api/token`.
+
 ### 📶 8 - Requêtes avec authentification
 
 Une fonction permettant de rechercher un artiste dans l’API Spotify et d’afficher son nom et sa photo dans la page est déjà présente dans le composant `Spotify`. Testez-la en lançant une recherche pour vous assurer que tout est en ordre.
+
+Si vous utilisez la solution maison, remplacer `https://api.spotify.com/v1/` par `http://localhost:5143/v1/`.
 
 🥳 Bon travail ! Vous avez terminé. Il n'y a pas d'autres instructions en-dessous de cette phrase.
 

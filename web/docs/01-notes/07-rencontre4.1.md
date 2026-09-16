@@ -152,6 +152,11 @@ N'hésitez pas à utiliser l'outil du navigateur qui permet de jeter un coup d'o
 d'ailleurs y supprimer manuellement des données pour simplifier les tests.
 
 <center>![Stockage local dans le navigateur](./_07-rencontre4.1/localStorage.png)</center>
+<NonVoyant>
+Dans chrome: dirigez-vous dans le débogueur et sélectionnez l'onglet «Application» situé entre «Memory» et «Security». De là, naviguez à «Storage» dans le menu de la barre latéral, «Local storage» ou «Session storage» puis «https: //localhost:3000». Vous trouverez une de clés et de valeurs associées.
+
+Dans firefox: digigez-vous dans le débogueur et sélectionnez l'onglet «Stockage» situé entre «Mémoire» et «Accessibilité». De là, naviguez à «Stockage local» ou «Stockage de session» dans le menu de la barre latérale et finalement sélectionnez «https: //localhost:3000»
+</NonVoyant>
 
 ## 👅 Internationalisation
 
@@ -165,7 +170,7 @@ Il y a plusieurs manières de traduire les textes d'un projet Next.js. Dans ce c
 
 On « active » les fonctionnalités de `next-intl` dans la configuration de notre projet.
 
-```ts showLineNumbers
+```ts showLineNumbers title="/demo/next.config.ts"
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
@@ -180,6 +185,21 @@ export default withNextIntl(nextConfig);
 #### Étape 3 - 📄 Création de fichiers
 
 <center>![Nouveaux fichiers pour i18n](./_07-rencontre4.1/i18nFiles.png)</center>
+<NonVoyant>
+Exemple et arborescence des fichiers créés:
+
+/demo/app/i18n/navigation.ts
+
+/demo/app/i18n/request.ts
+
+/demo/app/i18n/routing.ts
+
+/demo/app/i18n/messages/en.json
+
+/demo/app/i18n/messages/fr.json
+
+/demo/proxy.ts
+</NonVoyant>
 
 On doit créer deux nouveaus dossiers nommés `i18n` et `messages` à la racine de notre projet. (Donc pas dans `app`, mais bien dans le dossier parent de `app`, dont le nom varie selon votre projet)
 
@@ -191,7 +211,7 @@ Notez que la langue 👅 (la « locale ») active sera spécifiée **dans la rou
 
 Dans ce fichier, nous spécifions les **langues disponibles** et la **langue par défaut**.
 
-```ts showLineNumbers
+```ts showLineNumbers title="/demo/i18n/routing.ts"
 import { defineRouting } from "next-intl/routing";
 
 export const routing = defineRouting({
@@ -204,7 +224,7 @@ export const routing = defineRouting({
 
 À chaque fois que l'utilisateur naviguera vers une nouvelle page, la fonction `getRequestConfig()` récupérera la **locale** présente dans la **route** et chargera les messages (textes) de la langue détectée. Si la langue est invalide (Ex : `'es'` n'existe pas dans `routing.ts`), les textes de la langue par défaut seront chargés à la place.
 
-```ts showLineNumbers
+```ts showLineNumbers title="/demo/i18n/request.ts"
 import { hasLocale } from 'next-intl';
 import { getRequestConfig } from 'next-intl/server';
 import { routing } from './routing';
@@ -232,7 +252,7 @@ Ce petit fichier **permettra de ne pas avoir à constamment préciser la langue 
 
 La locale actuellement chargée sera simplement transposée dans la nouvelle route lors de la navigation.
 
-```ts showLineNumbers
+```ts showLineNumbers title="/demo/i18n/navigation.ts"
 import { createNavigation } from 'next-intl/navigation';
 import { routing } from './routing';
 
@@ -245,7 +265,7 @@ Attention, on change de dossier ! Rendez-vous dans `messages` :
 
 Ce fichier sera relativement vide pour le moment. Il contiendra les textes français de nos pages Web.
 
-```json showLineNumbers
+```json showLineNumbers title="/demo/messages/fr.json"
 {
 
 }
@@ -255,7 +275,7 @@ Ce fichier sera relativement vide pour le moment. Il contiendra les textes fran�
 
 Ce fichier sera relativement vide pour le moment. Il contiendra les textes anglais de nos pages Web.
 
-```json showLineNumbers
+```json showLineNumbers title="/demo/messages/en.json"
 {
 
 }
@@ -267,7 +287,7 @@ Finalement, à la <u>racine</u> du projet, on crée le fichier `proxy.ts`.
 
 Celui-ci permet entre autres d'ajouter la locale par défaut dans la route lorsqu'aucune locale n'est précisée dans l'URL et de détecter la locale actuelle. De plus, il permet aussi d'**exclure** certaines routes de la localisation. (ex : **fichiers** statiques, chargement d'**assets**, **requêtes** à des APIs, etc.)
 
-```ts showLineNumbers
+```ts showLineNumbers title="/demo/proxy.ts"
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
  
@@ -283,6 +303,13 @@ export const config = {
 En général, il y a les fichiers `page.tsx` et `layout.tsx` directement dans le dossier `app`. Cela dit, il nous faut un segment de **route dynamique** à la racine de la route, alors on va créer un dossier `app/[locale]` et y déplacer les fichiers `page.tsx` et `layout.tsx`.
 
 <center>![Route dynamique pour la locale](./_07-rencontre4.1/dynamicRoute.png)</center>
+<NonVoyant>
+Exemple et hiérarchie des fichiers déplacés:
+
+/demo/app/[locale]/layout.tsx
+
+/demo/app/[locale]/page.tsx
+</NonVoyant>
 
 ⛔ L'importation de `globals.css` devra être changée légèerement dans `layout.tsx` : `import "../globals.css";`
 
@@ -296,7 +323,7 @@ Si votre projet contenait **plusieurs composants** chargés via le routage, il f
 
 Le layout racine, qu'on vient de déplacer dans `/app/[locale]`, doit être modifié légèrement pour **préciser la langue dans la balise `<html>`** et pour que les **composants** de l'application puissent avoir accès à la configuration de `next-intl` et être traduits.
 
-```tsx showLineNumbers
+```tsx showLineNumbers title="/demo/app/[locale].layout.tsx"
 // 1️⃣ Ajout d'un paramètre dans la fonction RootLayout
 export default async function RootLayout({ children, params }: Readonly<{ children: React.ReactNode, params : Promise<{locale : string}> }>) {
 
@@ -331,12 +358,19 @@ Si jamais vous souhaitiez traduire certains textes de votre **layout** et / ou i
 Si vous voulez éviter que le 2e **layout** ait un impact sur le routage, n'oubliez pas d'utiliser un dossier entouré de **parenthèses** :
 
 <center>![Layout traduit](./_07-rencontre4.1/layout.png)</center>
+<NonVoyant>
+Exemple et hiérarchie des fichiers layout divisés:
+
+layout traduit: /demo/app/[locale]/(home)/layout.tsx 
+
+layout racine: /demo/app/[locale]/layout.tsx
+</NonVoyant>
 
 N'oubliez pas de déplacer **tous les autres composants chargés par routage** dans le dossier `(home)`, par contre.
 
 Votre 2e **layout** pourrait ressembler à ceci :
 
-```tsx showLineNumbers
+```tsx showLineNumbers title="/demo/app/[locale]/(home)/layout.tsx"
 export default function OtherLayout({ children }: Readonly<{ children: React.ReactNode }>) {
 
   // ... Bidules variés pour i18n (locale, router, pathname, etc.)
@@ -375,7 +409,7 @@ Le plus gros du travail est bien entendu de produire les textes dans les fichier
 
 <Tabs>
     <TabItem value="fr" label="fr.json" default>
-```json showLineNumbers
+```json showLineNumbers title="/demo/messages/fr.json"
 {
   "NomComposant1":{
     "title":"Titre de la page",
@@ -390,7 +424,7 @@ Le plus gros du travail est bien entendu de produire les textes dans les fichier
 ```
     </TabItem>
     <TabItem value="en" label="en.json">
-```json showLineNumbers
+```json showLineNumbers title="/demo/messages/en.json"
 {
   "NomComposant1":{
     "title":"Page title",
@@ -410,7 +444,7 @@ Le plus gros du travail est bien entendu de produire les textes dans les fichier
 
 Il faut commencar par ajouter cette ligne de code dans chaque composant. La constante `t` nous permettra d'accéder aux **textes** préparés plus haut.
 
-```tsx showLineNumbers
+```tsx showLineNumbers title="/demo/app/[locale]/page.tsx"
 export default function Home() {
 
   // "Home" est le nom de la section dans les fichiers fr.json et en.json 
@@ -498,7 +532,7 @@ La date fournie doit respecter un format précis. Si votre date est sous forme d
 ```
     </TabItem>
     <TabItem value="component" label="Composant" default>
-```tsx showLineNumbers
+```tsx showLineNumbers  title="/dev/app/[locale]/page.tsx"
 "use client";
 
 import { useTranslations } from "next-intl";
@@ -533,13 +567,40 @@ export default function Home() {
     </TabItem>
 </Tabs>
 
+
+      <NonVoyant>
+      Exemple résultat (fr) html:
+      
+      Nous somme le 12 janvier 2026
+
+      Cours 7
+
+      Bonjour Simone !
+
+      Tu n'as aucun ami, HAHAHA !
+
+      Bouton «Appuie-moi délicatement 😩»
+      
+      Exemple résultat (en) html:
+      
+      It is Januray 12, 2026
+
+      Lesson 7
+
+      Hi Simone !
+
+      You have no friends, HAHAHA !
+
+      Bouton «Click me gently 😩»
+      </NonVoyant>
+
 #### Étape 7 - 🙋‍♂️ Permettre à l'utilisateur de changer la langue
 
 Généralement, le bouton ou le menu permettant de changer la **locale** (la langue) risque d'être dans un **layout** ou une page principale.
 
 **🔘 Bouton permettant d'alterner entre `fr` et `en`**
 
-```tsx showLineNumbers
+```tsx showLineNumbers title="/dev/app/[locale]/page.tsx"
 "use client";
 
 import { Link, usePathname } from "@/i18n/navigation"; // ⛔ Utilisez le BON import pour <Link> !
@@ -570,7 +631,7 @@ export default function Home() {
 
 Cette fois nous aurons besoin d'effectuer du **two-way binding ♊** pour un menu `<select>` :
 
-```tsx showLineNumbers
+```tsx showLineNumbers title="/dev/app/[locale]/page.tsx"
 "use client";
 
 import { usePathname, useRouter } from "@/i18n/navigation";
@@ -626,13 +687,28 @@ Une fois l'application créée, nous aurons accès à un **Client ID** et un **C
 serviront plus tard pour envoyer des requêtes.
 
 <center>![Secret Spotify](./_07-rencontre4.1/secret.png)</center>
+<NonVoyant>
+Fenêtre Spotify Overview:
+
+SpotifyRequest
+
+Project for teaching.
+
+App Status: Development mode (what does this mean?)
+
+Client ID: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Client Secret: xxxxxxxxxxxxxxxxxxxxxxxxxx
+
+HIDE CLIENT SECRET
+</NonVoyant>
 
 #### Étape 2 - 🕵️‍♂️ Hard-coder le Client ID et le Client Secret
 
 Dans le **composant** ou **hook** de votre choix, créez des constantes pour y ranger
 votre **Client ID** et votre **Client Secret** :
 
-```tsx showLineNumbers
+```tsx showLineNumbers title="/demo/app/[locale]/page.tsx"
 // Déclarées à l'extérieur comme ça elles ne sont pas réinitialisée à chaque fois que le composant est chargé
 const CLIENT_ID = "098gf0fd987gdf89g7sd7g9sd";
 const CLIENT_SECRET = "9dsh79d8m7j9ds7b97nber978675";
@@ -656,7 +732,7 @@ Spotify et c'est **son ID** et **son secret** qui seraient utilisés par l'appli
 Avant de pouvoir envoyer une requête quelconque à Spotify, nous allons devoir nous munir d'un **🪙 token d'authentification**.
 Ce **🪙 token** peut être obtenu à l'aide d'une **requête de connexion** :
 
-```tsx showLineNumbers
+```tsx showLineNumbers title="/demo/app/[locale]/spotify/page.tsx"
 async function connect(){
 
   // Attention ! Pour une fois, on utilise une requête POST
@@ -679,10 +755,11 @@ async function connect(){
 Dans l'objet JSON obtenu, on peut accéder au **token** grâce à `response.data.access_token` :
 
 <center>![Objet JSON obtenu](./_07-rencontre4.1/json.png)</center>
+<NonVoyant>Object ( access_token: "BQDU5wxtT5ZSXcBYr1tktQRRkGDr3bgykQrmtDM2NKwmSoqhXsFMyrjGC2uySWLWjY0wYSS0i_NjwW-ZYFVTUI-_8OBaOVRkjBbydBe261YRnrcPCAxp", token_type: "Bearer", expires_in: 3600 )</NonVoyant>
 
 Dans notre cas, le **token** a été rangé dans l'**état** `spotifyToken`, qui a dû être déclaré plus haut :
 
-```tsx showLineNumbers
+```tsx showLineNumbers title="/demo/app/[locale]/page.tsx"
 export default function Home(){
 
   const [spotifyToken, setSpotifyToken] = useState(""); // Utilisé pour stocker le token
@@ -712,7 +789,7 @@ useEffect(() => {
 Une fois le **token obtenu** grâce à la **requête de connexion**, on peut envoyer toutes sortes de requêtes
 à la Web API de Spotify. Voici comment joindre le token à une requête :
 
-```ts showLineNumbers
+```ts showLineNumbers title="/demo/app/[locale]/page.tsx"
 async function getArtist(){
 
   const response = await axios.get('https://api.spotify.com/v1/search?type=artist&offset=0&limit=1&q=' + artistInput, {
@@ -742,7 +819,7 @@ Un token n'est pas valide éternellement. Selon l'API, le token peut expirer apr
 
 Voici deux classes qui pourraient vous être utiles dans le contexte du **TP2** (N'oubliez pas de les isoler chacune dans leur propre fichier !) :
 
-```ts showLineNumbers
+```ts showLineNumbers title="/demo/app/_types/artiste.ts et /demo/app/_types/album.ts"
 export class Artist{
   constructor(public id : string, public name : string, public imageUrl : string){}
 }
@@ -761,7 +838,7 @@ N'hésitez pas à consulter la [documentation de l'API de Spotify](https://devel
 
 * Requête pour rechercher un **artiste** (il vous faudra le **nom de l'artiste**) :
 
-```ts showLineNumbers
+```ts showLineNumbers title="/demo/app/[locale]/page.tsx"
 async function getArtist(artistName : string){
 
   const response = await axios.get('https://api.spotify.com/v1/search?type=artist&offset=0&limit=1&q=' + artistName, {
@@ -779,7 +856,7 @@ async function getArtist(artistName : string){
 
 * Requête pour obtenir les **albums d'un artiste** précis (il vous faudra l'**id Spotify de l'artiste**) :
 
-```ts showLineNumbers
+```ts showLineNumbers title="/demo/app/[locale]/page.tsx"
 async function getAlbums(artistId : string){
 
   const response = await axios.get("https://api.spotify.com/v1/artists/" + artistId + "/albums?include_groups=album,single", {
@@ -801,7 +878,7 @@ async function getAlbums(artistId : string){
 
 * Requête pour obtenir les **chansons d'un album** précis (il vous faudra l'**id Spotify de l'album**) :
 
-```ts showLineNumbers
+```ts showLineNumbers  title="/demo/app/[locale]/page.tsx"
 async function getSongs(albumId : string){
 
   const response = await axios.get("https://api.spotify.com/v1/albums/" + albumId, {
