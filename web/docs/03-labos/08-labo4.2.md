@@ -16,6 +16,15 @@ Cette partie utilisera le composant `Home`. Le but est de permettre à l’utili
 Faites le nécessaire pour envoyer une requête à l'API de YouTube avec le texte fourni par l'utilisateur dans l'`<input>` et obtenir l'`id` de la première vidéo trouvée. À l'aide de cet id, construisez un URL valide pour finalement afficher la vidéo. (`https://www.youtube.com/embed/VOTRE_ID`)
 
 <center>![Lecteur YouTube](./_08-labo4.2/youtube.png)</center>
+<NonVoyant>
+Exemple de la page HTML
+
+Chercher une vidéo 🎥
+
+Input: baby shark et bouton: Rechercher
+
+iframe: Vidéo baby shark
+</NonVoyant>
 
 ### 🌐 Étape 2 - Une globe-trotteuse compulsive
 
@@ -40,6 +49,15 @@ C'est normal qu'une erreur de facturation soit affichée. Nous n'utiliserons pas
 * Complétez la fonction `clearMarkers()` pour permettre à l’utilisateur de vider le tableau de marqueurs.
 
 <center>![Carte Google](./_08-labo4.2/map.png)</center>
+<NonVoyant>
+Résultat HTML:
+
+Ajouter un marqueur
+
+Latitude: input element = 26 Longitude: input element = 7 Bouton «Ajouter» et Bouton «Retirer tout»
+
+Map Google avec les marqueurs ajoutés
+</NonVoyant>
 
 ### ✨ Étape 3 - La beauté : à quel prix ?
 
@@ -52,6 +70,25 @@ Oups haha ! **shadcn** est *coquin*, il a retiré le style `background: linear-g
 Transformez la page pour obtenir le résultat suivant, qui exploite quatre **composants** de **Shadcn**.
 
 <center>![Composants shadcn](./_08-labo4.2/shadcn.png)</center>
+<NonVoyant>
+Resultat HTML:
+
+Recherche de digimons
+
+Exemples de digimons: carrousel pour naviguer entre cinq images
+
+Recherche
+
+input avec bouton «Chercher» suivi d'un spinner
+
+Résultat
+
+90 - shellder
+
+Type(s): water
+
+icon du pokémon
+</NonVoyant>
 
 Les quatre **composants shadcn** à utiliser :
 

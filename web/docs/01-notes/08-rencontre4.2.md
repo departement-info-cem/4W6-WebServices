@@ -21,10 +21,16 @@ Pour afficher une **vidéo YouTube spécifique** dans un composant, suivez les �
 **Étape 2 - 🚚 Copier le \<iframe\> prémâché dans le composant**
 
 <center>![iframe prémâché](./_08-rencontre4.2/iframe.png)</center>
+<NonVoyant>
+
+Utiliser le bouton «Partager» de YouTube, puis l'option «Intégrer»
+
+Vous aurez l'élément HTML dans le presse-papier, soit un iframe avec le lien URL.
+</NonVoyant>
 
 On colle dans le HTML d'un composant :
 
-<center>![iframe collé](./_08-rencontre4.2/iframe2.png)</center>
+<center>![iframe collé dans un élément main](./_08-rencontre4.2/iframe2.png)</center>
 <br/>
 :::warning
 
@@ -83,9 +89,12 @@ Une fois connecté(e), rendez-vous sur cette page : [https://console.cloud.googl
 
 Pour pouvoir générer une clé d'API (« Create credentials »), vous devrez : 
 
-1. Créer un projet (remplir plusieurs champs d'un formulaire pour décrire votre application à Google)
-2. « Configure consent screen » (Choisissez **external**)
-3. « Create credentials » puis « API key »
+1. Créer un projet (remplir plusieurs champs d'un formulaire pour décrire votre application à Google).
+2. Dans le menu de navigation, sélectionner `API et services` puis la `Bibliothèque`.
+3. Sélectioner `YouTube Data API v3`, puis l'activer.
+4. Choisir l'onglet `Identifiants`, puis `Créer des identifiants` avec l'option `Clé API`.
+5. Choisir l'API `YouTube Data API v3` puis créer votre clé.
+
 
 Vous aurez ensuite accès à une clé d'API.
 
@@ -96,14 +105,7 @@ absolument pas nécessaire ! Vous devriez pouvoir revenir en arrière et / ou ob
 
 :::
 
-**Étape 2 - 🚀 Activer YouTube Data API v3**
-
-<center>![Page pour activer les APIs Google](./_08-rencontre4.2/enableAPI.png)</center>
-
-Pour que nos requêtes à **l'API Web de YouTube** fonctionnent, il faudra activer l'API pour notre compte Google.
-Cliquez sur « Enable APIs and services », puis cherchez l'API de YouTube pour **l'activer**.
-
-**Étape 3 - 📬 Utiliser la requête YouTube**
+**Étape 2 - 📬 Utiliser la requête YouTube**
 
 Voici la requête à utiliser :
 
@@ -125,25 +127,31 @@ que vous appeliez plusieurs requêtes maladroitement **dans une boucle**. Soyez 
 Le résultat JSON pourrait ressembler à ceci :
 
 <center>![Résultat JSON de la requête YouTube](./_08-rencontre4.2/jsonYoutube.png)</center>
+<NonVoyant>La propriété qui nous intéresse dans le JSON est: response.data.items[0].id.videoId: "3aGRojOKyu8"</NonVoyant>
 
 Ce qui nous intéresse le plus est `videoId` car nous pourrons l'utiliser pour afficher la vidéo avec un `<iframe>`.
 
-**Étape 4 - 📽 Afficher la vidéo**
+**Étape 3 - 📽 Afficher la vidéo**
 
 Que faire avec **l'id obtenu** ? Comme on a vu plus haut, il suffit de le glisser à la fin de l'URL `https://www.youtube.com/embed/`
 dans un `<iframe>`.
 
 ### 🗺 Intégration Google Maps
 
-<center>![Page pour activer les APIs Google](./_08-rencontre4.2/enableAPI.png)</center>
-
 Notez qu'il faudra activer une autre API (« Maps JavaScript API ») pour pouvoir afficher une **carte Google** dans notre application Web.
 
-**Étape 1 - 📦 Installer une dépendance**
+**Étape 1 - 🚀Activer l'API `Map Javascript API`**
+
+1. Retournez dans la bibliothèque de votre compte Google : [https://console.cloud.google.com/apis/library?](https://console.cloud.google.com/apis/library?)
+2. Choisissez `Maps Javascript API` et activez le.
+3. Vous n'avez pas a entrer de `Validation des informations de paiement`. Vous pouvez retourner sans crainte vers la bibliothèque ou tout simplement fermer la fenêtre.
+4. Utilisez la même clé optenu lors de l'ajout de l'API YouTube.
+
+**Étape 2 - 📦 Installer une dépendance**
 
 `npm install @react-google-maps/api`
 
-**Étape 2 - ⚙ Préparation de trois constantes**
+**Étape 3 - ⚙ Préparation de trois constantes**
 
 (Dans le **composant** de votre choix)
 
@@ -167,7 +175,7 @@ export default function Home() {
 
 ```
 
-**Étape 3 - 🗺 Placer un élément `<google-map>`**
+**Étape 4 - 🗺 Placer un élément `<google-map>`**
 
 ```tsx showLineNumbers
 <h2>Gougueule mappe</h2>
@@ -190,13 +198,13 @@ export default function Home() {
 
 :::
 
-<center>![Carte Google](./_08-rencontre4.2/googleMap.png)</center>
+<center>![Carte Google centré sur Madrid, la ville d'espagne.](./_08-rencontre4.2/googleMap.png)</center>
 
 :::warning
 
 C'est normal qu'il y ait une erreur signalée par Next.js ainsi que quelques dizaines d'erreurs et d'avertissements dans la console lorsqu'on utilise une carte Google et / ou un lecteur YouTube. Nous vivrons avec 🚒🔥
 
-<center>![Erreur avec Google Maps](./_08-rencontre4.2/billingError.png)</center>
+<center>![Erreur avec Google Maps. Plusieurs "Cross-Origin Request Blocked!" dans la console](./_08-rencontre4.2/billingError.png)</center>
 
 :::
 
@@ -308,6 +316,15 @@ export default function Ui(){
 ```
 
 <center>![Bouton et champ chadcn](./_08-rencontre4.2/ui.png)</center>
+<NonVoyant>
+Exemple de la page html:
+
+Shadcn ✨
+
+Input: Votre nom...
+
+Bouton: Clique-moi 😩
+</NonVoyant>
 
 :::note
 
