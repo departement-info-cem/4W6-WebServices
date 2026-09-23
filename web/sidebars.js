@@ -105,7 +105,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Pierre-Olivier": [
-            { "1010": "2026-09-15" }
+            { "1010": "2026-09-18" }
           ],
           "Philippe": [
             { "1020": "2026-09-16" }
@@ -120,7 +120,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Pierre-Olivier": [
-            { "1010": "2026-09-18" }
+            { "1010": "2026-09-22" }
           ],
           "Philippe": [
             { "1020": "2026-09-18" }
@@ -135,7 +135,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Pierre-Olivier": [
-            { "1010": "2026-09-22" }
+            { "1010": "2026-09-25" }
           ],
           "Philippe": [
             { "1020": "2026-09-23" }
@@ -152,7 +152,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Pierre-Olivier": [
-            { "1010": "2026-09-25" }
+            { "1010": "2026-09-29" }
           ],
           "Philippe": [
             { "1020": "2026-09-25" }
@@ -169,7 +169,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Pierre-Olivier": [
-            { "1010": "2026-09-29" }
+            { "1010": "2026-10-02" }
           ],
           "Philippe": [
             { "1020": "2026-09-30" }
@@ -186,7 +186,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Pierre-Olivier": [
-            { "1010": "2026-10-02" }
+            { "1010": "2026-10-09" }
           ],
           "Philippe": [
             { "1020": "2026-10-02" }
@@ -203,7 +203,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Pierre-Olivier": [
-            { "1010": "2026-10-09" }
+            { "1010": "2026-10-20" }
           ],
           "Philippe": [
             { "1020": "2026-10-07" }
@@ -218,7 +218,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Pierre-Olivier": [
-            { "1010": "2026-10-20" }
+            { "1010": "2026-10-23" }
           ],
           "Philippe": [
             { "1020": "2026-10-09" }
@@ -234,7 +234,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Pierre-Olivier": [
-            { "1010": "2026-10-23" }
+            { "1010": "2026-10-27" }
           ],
           "Philippe": [
             { "1020": "2026-10-21" }
@@ -249,7 +249,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Pierre-Olivier": [
-            { "1010": "2026-10-27" }
+            { "1010": "2026-10-30" }
           ],
           "Philippe": [
             { "1020": "2026-10-23" }
@@ -264,7 +264,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Pierre-Olivier": [
-            { "1010": "2026-10-30" }
+            { "1010": "2026-11-03" }
           ],
           "Philippe": [
             { "1020": "2026-10-28" }
@@ -279,7 +279,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Pierre-Olivier": [
-            { "1010": "2026-11-03" }
+            { "1010": "2026-11-06" }
           ],
           "Philippe": [
             { "1020": "2026-10-30" }
@@ -297,7 +297,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Pierre-Olivier": [
-            { "1010": "2026-11-06" }
+            { "1010": "2026-11-10" }
           ],
           "Philippe": [
             { "1020": "2026-11-04" }
@@ -314,7 +314,7 @@ const sidebars = {
       customProps: {
         calendrier: {
           "Pierre-Olivier": [
-            { "1010": "2026-11-10" }
+            { "1010": "2026-11-11" }
           ],
           "Philippe": [
             { "1020": "2026-11-06" }

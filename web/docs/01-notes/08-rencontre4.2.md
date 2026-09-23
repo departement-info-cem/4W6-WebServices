@@ -83,7 +83,7 @@ Voici les étapes à suivre pour pouvoir faire des **requêtes YouTube** et affi
 
 **Étape 1 - 🔑 Obtenir une clé d'API YouTube**
 
-Commencez par créer un compte Google.
+Commencez par créer un compte Google si vous n'en avez pas déjà un.
 
 Une fois connecté(e), rendez-vous sur cette page : [https://console.cloud.google.com/apis/credentials?](https://console.cloud.google.com/apis/credentials?)
 
