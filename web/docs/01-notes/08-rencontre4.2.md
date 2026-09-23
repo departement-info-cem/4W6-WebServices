@@ -145,7 +145,7 @@ Notez qu'il faudra activer une autre API (« Maps JavaScript API ») pour pouvoi
 1. Retournez dans la bibliothèque de votre compte Google : [https://console.cloud.google.com/apis/library?](https://console.cloud.google.com/apis/library?)
 2. Choisissez `Maps Javascript API` et activez le.
 3. Vous n'avez pas a entrer de `Validation des informations de paiement`. Vous pouvez retourner sans crainte vers la bibliothèque ou tout simplement fermer la fenêtre.
-4. Utilisez la même clé optenu lors de l'ajout de l'API YouTube.
+4. Utilisez la même clé obtenu lors de l'ajout de l'API YouTube.
 
 **Étape 2 - 📦 Installer une dépendance**
 

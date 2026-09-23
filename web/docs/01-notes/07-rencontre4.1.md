@@ -311,7 +311,7 @@ Exemple et hiérarchie des fichiers déplacés:
 /demo/app/[locale]/page.tsx
 </NonVoyant>
 
-⛔ L'importation de `globals.css` devra être changée légèerement dans `layout.tsx` : `import "../globals.css";`
+⛔ L'importation de `globals.css` devra être changée légèrement dans `layout.tsx` : `import "../globals.css";`
 
 :::warning
 
