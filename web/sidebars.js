@@ -195,6 +195,7 @@ const sidebars = {
         avancementLabel: "TP2",
         avancement: 1
       },
+      "className": "remise-tp2"
     },
     {
       type: "doc",
@@ -322,7 +323,8 @@ const sidebars = {
         },
         avancementLabel: "TP3",
         avancement: 1
-      }
+      },
+      "className": "remise-tp3"
     },
     {
       type: "doc",
@@ -338,7 +340,6 @@ const sidebars = {
           ]
         }
       },
-      "className": "remise-tp3"
     },
     {
       type: "doc",
