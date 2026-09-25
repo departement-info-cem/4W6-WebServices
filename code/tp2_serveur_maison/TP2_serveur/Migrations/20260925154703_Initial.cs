@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TP2_serveur.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialSqlite : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -222,7 +222,8 @@ namespace TP2_serveur.Migrations
                     { 2, "http://localhost:5143/api/Artists/GetPicture/2", "The Weeknd" },
                     { 3, "http://localhost:5143/api/Artists/GetPicture/3", "Drake" },
                     { 4, "http://localhost:5143/api/Artists/GetPicture/4", "Lady Gaga" },
-                    { 5, "http://localhost:5143/api/Artists/GetPicture/5", "Beyoncé" }
+                    { 5, "http://localhost:5143/api/Artists/GetPicture/5", "Beyoncé" },
+                    { 6, "http://localhost:5143/api/Artists/GetPicture/6", "Nana Mouskouri" }
                 });
 
             migrationBuilder.InsertData(
@@ -254,7 +255,10 @@ namespace TP2_serveur.Migrations
                     { 17, 5, "http://localhost:5143/api/Albums/GetPicture/17", "Cowboy Carter" },
                     { 18, 5, "http://localhost:5143/api/Albums/GetPicture/18", "Lemonade" },
                     { 19, 5, "http://localhost:5143/api/Albums/GetPicture/19", "4" },
-                    { 20, 5, "http://localhost:5143/api/Albums/GetPicture/20", "B'Day" }
+                    { 20, 5, "http://localhost:5143/api/Albums/GetPicture/20", "B'Day" },
+                    { 21, 6, "http://localhost:5143/api/Albums/GetPicture/21", "The Girl from Greece Sings" },
+                    { 22, 6, "http://localhost:5143/api/Albums/GetPicture/22", "Nana Mouskouri in New York" },
+                    { 23, 6, "http://localhost:5143/api/Albums/GetPicture/23", "Only Love" }
                 });
 
             migrationBuilder.InsertData(
@@ -321,7 +325,16 @@ namespace TP2_serveur.Migrations
                     { 57, 19, "Party" },
                     { 58, 20, "Deja Vu" },
                     { 59, 20, "Ring the Alarm" },
-                    { 60, 20, "Green Light" }
+                    { 60, 20, "Green Light" },
+                    { 61, 21, "The White Rose of Athens" },
+                    { 62, 21, "My Colouring Book" },
+                    { 63, 21, "Turn On the Sun" },
+                    { 64, 22, "The Rose" },
+                    { 65, 22, "Try to Remember" },
+                    { 66, 22, "Scarlet Ribbons" },
+                    { 67, 23, "Only Love" },
+                    { 68, 23, "Song for Liberty" },
+                    { 69, 23, "The Last Rose of Summer" }
                 });
 
             migrationBuilder.CreateIndex(

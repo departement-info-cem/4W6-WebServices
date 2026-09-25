@@ -48,7 +48,8 @@ namespace TP2_serveur.Data
                 new { Id = 2, Name = "The Weeknd", ImageUrl = domain + 2 },
                 new { Id = 3, Name = "Drake", ImageUrl = domain + 3 },
                 new { Id = 4, Name = "Lady Gaga", ImageUrl = domain + 4 },
-                new { Id = 5, Name = "Beyoncé", ImageUrl = domain + 5 }
+                new { Id = 5, Name = "Beyoncé", ImageUrl = domain + 5 },
+                new { Id = 6, Name = "Nana Mouskouri", ImageUrl = domain + 6 }
             );
         }
 
@@ -76,7 +77,10 @@ namespace TP2_serveur.Data
                 new { Id = 17, Name = "Cowboy Carter", ImageUrl = domain + 17, ArtistId = 5 },
                 new { Id = 18, Name = "Lemonade", ImageUrl = domain + 18, ArtistId = 5 },
                 new { Id = 19, Name = "4", ImageUrl = domain + 19, ArtistId = 5 },
-                new { Id = 20, Name = "B'Day", ImageUrl = domain + 20, ArtistId = 5 }
+                new { Id = 20, Name = "B'Day", ImageUrl = domain + 20, ArtistId = 5 },
+                new { Id = 21, Name = "The Girl from Greece Sings", ImageUrl = domain + 21, ArtistId = 6 },
+                new { Id = 22, Name = "Nana Mouskouri in New York", ImageUrl = domain + 22, ArtistId = 6 },
+                new { Id = 23, Name = "Only Love", ImageUrl = domain + 23, ArtistId = 6 }
             );
         }
 
@@ -142,7 +146,16 @@ namespace TP2_serveur.Data
                 new { Id = 57, Name = "Party", AlbumId = 19 },
                 new { Id = 58, Name = "Deja Vu", AlbumId = 20 },
                 new { Id = 59, Name = "Ring the Alarm", AlbumId = 20 },
-                new { Id = 60, Name = "Green Light", AlbumId = 20 }
+                new { Id = 60, Name = "Green Light", AlbumId = 20 },
+                new { Id = 61, Name = "The White Rose of Athens", AlbumId = 21 },
+                new { Id = 62, Name = "My Colouring Book", AlbumId = 21 },
+                new { Id = 63, Name = "Turn On the Sun", AlbumId = 21 },
+                new { Id = 64, Name = "The Rose", AlbumId = 22 },
+                new { Id = 65, Name = "Try to Remember", AlbumId = 22 },
+                new { Id = 66, Name = "Scarlet Ribbons", AlbumId = 22 },
+                new { Id = 67, Name = "Only Love", AlbumId = 23 },
+                new { Id = 68, Name = "Song for Liberty", AlbumId = 23 },
+                new { Id = 69, Name = "The Last Rose of Summer", AlbumId = 23 }
             );
         }
         #endregion

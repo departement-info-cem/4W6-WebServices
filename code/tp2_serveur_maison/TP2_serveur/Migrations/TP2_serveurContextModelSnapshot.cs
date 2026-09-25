@@ -312,6 +312,27 @@ namespace TP2_serveur.Migrations
                             ArtistId = 5,
                             ImageUrl = "http://localhost:5143/api/Albums/GetPicture/20",
                             Name = "B'Day"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            ArtistId = 6,
+                            ImageUrl = "http://localhost:5143/api/Albums/GetPicture/21",
+                            Name = "The Girl from Greece Sings"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            ArtistId = 6,
+                            ImageUrl = "http://localhost:5143/api/Albums/GetPicture/22",
+                            Name = "Nana Mouskouri in New York"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            ArtistId = 6,
+                            ImageUrl = "http://localhost:5143/api/Albums/GetPicture/23",
+                            Name = "Only Love"
                         });
                 });
 
@@ -363,6 +384,12 @@ namespace TP2_serveur.Migrations
                             Id = 5,
                             ImageUrl = "http://localhost:5143/api/Artists/GetPicture/5",
                             Name = "Beyoncé"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ImageUrl = "http://localhost:5143/api/Artists/GetPicture/6",
+                            Name = "Nana Mouskouri"
                         });
                 });
 
@@ -745,6 +772,60 @@ namespace TP2_serveur.Migrations
                             Id = 60,
                             AlbumId = 20,
                             Name = "Green Light"
+                        },
+                        new
+                        {
+                            Id = 61,
+                            AlbumId = 21,
+                            Name = "The White Rose of Athens"
+                        },
+                        new
+                        {
+                            Id = 62,
+                            AlbumId = 21,
+                            Name = "My Colouring Book"
+                        },
+                        new
+                        {
+                            Id = 63,
+                            AlbumId = 21,
+                            Name = "Turn On the Sun"
+                        },
+                        new
+                        {
+                            Id = 64,
+                            AlbumId = 22,
+                            Name = "The Rose"
+                        },
+                        new
+                        {
+                            Id = 65,
+                            AlbumId = 22,
+                            Name = "Try to Remember"
+                        },
+                        new
+                        {
+                            Id = 66,
+                            AlbumId = 22,
+                            Name = "Scarlet Ribbons"
+                        },
+                        new
+                        {
+                            Id = 67,
+                            AlbumId = 23,
+                            Name = "Only Love"
+                        },
+                        new
+                        {
+                            Id = 68,
+                            AlbumId = 23,
+                            Name = "Song for Liberty"
+                        },
+                        new
+                        {
+                            Id = 69,
+                            AlbumId = 23,
+                            Name = "The Last Rose of Summer"
                         });
                 });
 
