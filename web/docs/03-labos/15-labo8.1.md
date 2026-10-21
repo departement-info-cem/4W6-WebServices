@@ -1,6 +1,6 @@
 # Laboratoire 8.1
 
-<center>![Bannière du site](./_15-labo8.1/banner.png)</center>
+<center>![Bannière du site - MonPetitInventaire UwU](./_15-labo8.1/banner.png)</center>
 
 Un [projet de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo8.1.zip) Next.js vous est fourni pour ce labo. Vous devrez créer le projet ASP.NET Core Web API vous-mêmes cela dit.
 
@@ -29,6 +29,20 @@ Exécutez ensuite votre application et vérifiez que Swagger affiche les informa
 <p align="center">
     <img src={require('./_15-labo8.1/swagger1.png').default} width="40%" alt="Interface Swagger"/>
 </p>
+<NonVoyant>
+Exmple des endpoints illustrés avec swagger:
+
+GET /api/Items/Getitem
+
+GET /api/Items/GetItem/(id)
+
+PUT /api/Items/PutItem/(id)
+
+POST /api/Items/PostItem
+
+POST /api/destroy/(id)
+
+</NonVoyant>
 
 ## 🚗 Faire fausse route
 
@@ -47,6 +61,20 @@ De plus, changez la méthode de l'action pour que ce soit `POST` plutôt que `DE
 Si vous exécutez à nouveau le serveur, vous devriez avoir ceci :
 
 <center>![Interface Swagger](./_15-labo8.1/swagger2.png)</center>
+<NonVoyant>
+Exmple des endpoints illustrés avec swagger:
+
+GET /api/Items/Getitem
+
+GET /api/Items/GetItem/(id)
+
+PUT /api/Items/PutItem/(id)
+
+POST /api/Items/PostItem
+
+POST /api/destroy/(id)
+
+</NonVoyant>
 
 ## 💿 SQL c'est plate smh
 
@@ -75,12 +103,22 @@ Au lieu de pitonner l'URL de la requête au complet à chaque fois, ajoutez le p
 [💡](/notes/rencontre8.1#-get) Implémentez `GetAll`. Comme `Post` n'est pas encore implémenté, c'est normal que l'objet JSON retourné par le serveur soit une liste **vide**. Dans tous les cas, remplissez l'état `itemList`.
 
 <center>![GetAll](./_15-labo8.1/getAll.png)</center>
+<NonVoyant>
+Exemple HTML des éléments utilisés:
+
+Bouton «Voir tous mes items» suivi d'une zone de texte avec le placeholder «Pèse juste sul'bouton dude».
+</NonVoyant>
 
 <hr/>
 
 [💡](/notes/rencontre8.1#-post) En utilisant la `value` et le `name` spécifiés par l’utilisateur, implémentez la requête `Post`.
 
 <center>![Post](./_15-labo8.1/post.png)</center>
+<NonVoyant>
+Exemple HTML des éléments utilisés:
+
+Bouton «Créer un item» suivi d'une zone de texte pour le nom «silencieux d'automobile» et une autre pour la valeur «80».
+</NonVoyant>
 
 Testez le `GetAll` à nouveau. Si `itemList` a bien été rempli, un ou des items devraient être visibles dans la page.
 
@@ -89,6 +127,11 @@ Testez le `GetAll` à nouveau. Si `itemList` a bien été rempli, un ou des item
 [💡](/notes/rencontre8.1#-get) En utilisant l’`id` spécifié par l’utilisateur, implémentez la requête `Get` et glissez l'item obtenu dans l'état `singleItem`.
 
 <center>![Get](./_15-labo8.1/get.png)</center>
+<NonVoyant>
+Exemple HTML des éléments utilisés:
+
+Bouton «Voir un item précis» suivi d'une zone de texte pour le id «1».
+</NonVoyant>
 
 Si `singleItem` a bien été rempli, il devrait être visible dans la page.
 
@@ -97,6 +140,11 @@ Si `singleItem` a bien été rempli, il devrait être visible dans la page.
 [💡](/notes/rencontre8.1#-put) En utilisant l'`id`, la `value` et le `name` spécifiés par l'utilisateur, implémentez la requête `Put` qui permettra de modifier un item existant dans la base de données.
 
 <center>![Put](./_15-labo8.1/put.png)</center>
+<NonVoyant>
+Exemple HTML des éléments utilisés:
+
+Bouton «Modifier un item» suivi d'une zone de texte pour le id «1», le nom «rhinocéros» et une autre pour la valeur «2».
+</NonVoyant>
 
 <hr/>
 
@@ -107,6 +155,11 @@ Si `singleItem` a bien été rempli, il devrait être visible dans la page.
 * Bien entendu, c’est normal que ça ne fonctionne pas si l’`id` spécifié n’existe pas dans la base de données.
 
 <center>![Delete](./_15-labo8.1/delete.png)</center>
+<NonVoyant>
+Exemple HTML des éléments utilisés:
+
+Bouton «Supprimer un item» suivi d'une zone de texte pour le id «1».
+</NonVoyant>
 
 :::note
 

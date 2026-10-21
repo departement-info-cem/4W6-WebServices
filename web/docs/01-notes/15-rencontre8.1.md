@@ -42,6 +42,13 @@ On peut envoyer du code (Ex : JavaScript) pour « étendre les fonctionnalités
 ### 📦 Nos prochains projets
 
 ![Applications Next.js et ASP.NET Core](./_15-rencontre8.1/next_asp.png)
+<NonVoyant>
+Un projet next.js avec VS Code où l'on va retrouver: interface (inputs/outputs), données de session, envoie des requêtes HTTP et reçoit du JSON.
+
+Un projet .NET Core avec Visual Studio 2026 où lon va retrouver: Communique avec BD, reçoit des requêtes HTTP et retourne du JSON, définit les models et la gestion des utilisateurs.
+
+Ces deux projets vont communiquer ensemble via HTTP. Le projet next.js va formuler des requêtes HTTP, tandis que le projet .net core va répondre par des objects JSON via les réponses HTTP.
+</NonVoyant>
 
 Pour le reste de la session, nous utiliserons simultanément un projet **Next.js** et un projet **ASP.NET Core Web API**. (Notez bien : **Web API** et non **MVC** !)
 
@@ -52,6 +59,9 @@ Pour le reste de la session, nous utiliserons simultanément un projet **Next.js
 Avec Visual Studio (Et non **Visual Studio Code**, que nous utiliserons encore pour Next.js malgré tout), créez un nouveau projet avec le gabarit **ASP.NET Core Web API** :
 
 <center>![Gabarit ASP.NET Core Web API](./_15-rencontre8.1/webAPI.png)</center>
+<NonVoyant>
+Utilisez les mots clés «core api» dans la barre de recherche et assurez-vous de sélectionner API web ASP.NET Core.
+</NonVoyant>
 
 Faites bien attention de ne pas choisir le gabarit MVC ⛔
 
@@ -66,22 +76,61 @@ Généralement, on évite de placer la solution dans le même dossier que le pro
 :::
 
 <center>![Configuration du projet](./_15-rencontre8.1/configuration.png)</center>
+<NonVoyant>
+Infrastructure: .NET 10
 
-8️⃣ Assurez-vous de choisir **.NET 8**. Les versions .NET 9 et .NET 10 sont sorties, mais elles ne sont pas installées au Cégep et de toute façon la version **.NET 8** sera supportée jusqu'à la fin de 2026. Il n'y a pas de changements majeurs entre ces versions.
+Type d'authentification: Aucun
+
+Configurer pour HTTPS
+
+Activer la prise en charge d'OpenAPI
+
+Utiliser des contrôleurs
+</NonVoyant>
+
+8️⃣ Assurez-vous de choisir **.NET 10**. 
 
 Parmi les **fichiers de départ**...
-
-* Remarquez le package `Swashbuckle`, qui est installé par défaut. Il nous sera utile pour visualiser la **liste des requêtes disponibles** de notre API Web.
 
 * Vous pouvez supprimer `WeatherForecast.cs` et `WeatherForecastController.cs`. Ce sont des fichiers qui servent d'exemples.
 
 <center>![Fichiers de départ du projet](./_15-rencontre8.1/files.png)</center>
+<NonVoyant>
+Fichiers à supprimer à partir de l'explorateur de solutions:
+
+/labo8_1/Controllers/WeatherForecastController.cs
+
+/labo8_1/WeatherForecast.cs
+</NonVoyant>
 
 Dans la classe `Program.cs`...
 
-* Les instructions liées à **Swagger** sont associées au package `Swashbuckle`. (Permettra de visualiser la liste des requêtes disponibles de notre API Web)
+```cs showLineNumbers title="Program.cs"
+var builder = WebApplication.CreateBuilder(args);
 
-<center>![Classe program.cs](./_15-rencontre8.1/program.png)</center>
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddOpenApi();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
+
+```
 
 Il faudra ajouter deux blocs de code dans `Program.cs` pour permettre à notre éventuel **projet Next.js** de pouvoir envoyer des requêtes au serveur. 
 
@@ -110,10 +159,17 @@ app.UseCors("AllowAll");
 Il y aura deux dépendances à installer pour assurer l'interaction avec la base de données à l'aide d'**Entity Framework** :
 
 <center>![Packages NuGet](./_15-rencontre8.1/nuget.png)</center>
+<NonVoyant>
+Packages
+
+Microsoft.EntityFrameworkCore.SqlServer
+
+Microsoft.EntityFrameworkCore.Tools
+</NonVoyant>
 
 :::warning
 
-⛔🚔🚨🔥🤬 Installez la dernière version **8** de ces packages. ET NON `8.0.10` !
+⛔🚔🚨🔥🤬 Installez la dernière version **10** de ces packages. ET NON `8.0.10` !
 
 :::
 
@@ -124,10 +180,13 @@ Il y aura deux dépendances à installer pour assurer l'interaction avec la base
 Ce serait crotté 💩 de créer nos modèles directement à la racine du projet. Comme il n'y a pas de dossiers pour les modèles par défaut, commencez par en créer un :
 
 <center>![Dossier pour les modèles](./_15-rencontre8.1/models.png)</center>
+<NonVoyant>
+Répertoire Models créé à la racine du projet.
+</NonVoyant>
 
 **Exemple de modèle valide :**
 
-```cs showLineNumbers
+```cs showLineNumbers title="Models/Toys.cs"
 namespace cours14.Models
 {
     public class Toy
@@ -176,27 +235,50 @@ Quand on utilise `= null!;`, on doit s'engager à toujours s'assurer que la prop
 ⛔ Lorsque vous allez générer le contrôleur, faites bien attention de choisir un contrôleur pour **API Web** (et non un contrôleur MVC qui retourne des Views...)
 
 <center>![Lancer le wizard pour créer un contrôleur](./_15-rencontre8.1/newController.png)</center>
+<NonVoyant>
+Avec un clic droit de la souris ou MAJ+F10 sur le répertoire «Controllers», sélectionner «Ajouter...» et «Contrôleurs...»
+</NonVoyant>
 
 Choisissez le bon type :
 
 <center>![Choisir un contrôleur d'API](./_15-rencontre8.1/apiController.png)</center>
+<NonVoyant>
+Dans éléments communs, API: Choissir «Contrôleur d'API avec actions, utilisant Entity Framework»
+</NonVoyant>
 
 Choisissez le modèle :
 
 <center>![Choisir le modèle](./_15-rencontre8.1/generateController.png)</center>
+<NonVoyant>
+Classe de modèle: Toy (labo8_1.Models)
+
+Cliquer sur le «+» pour créer un nouveau DbContext.
+</NonVoyant>
 
 Créez un nouveau DbContext si c'est le premier contrôleur du projet :
 
 <center>![Créer le DbContext](./_15-rencontre8.1/generateDbContext.png)</center>
+<NonVoyant>
+Dans ce cas-ci, nous pouvons l'appeler cours8_1.Data.cours8_1Context et selectionner «Ajouter».
+</NonVoyant>
 
 Enfin, on crée le contrôleur :
 
 <center>![Créer le contrôleur](./_15-rencontre8.1/generateControllerFinal.png)</center>
+<NonVoyant>
+Classe de modèle: Toy(cours8_1.Models)
+
+Classe DbContext class: cours8_1.Data.cours8_1Context
+
+Fournisseur de base de données: SQL Server
+
+Nom du contrôleur: ToysController
+</NonVoyant>
 
 On obtient un résultat similaire à celui-ci :
 
-```cs showLineNumbers
-namespace cours14.Controllers
+```cs showLineNumbers title="/Controllers/ToysController.cs"
+namespace cours8_1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -226,23 +308,27 @@ Lorsqu'un premier contrôleur a été généré dans le projet, trois changement
 
 1. Ajout d'une chaîne de connexion dans `appsettings.json` :
 
-<center>![Chaîne de connexion](./_15-rencontre8.1/connectionString.png)</center>
+```json showLineNumbers title="appsettings.json"
+"ConnectionStrings": {
+  "labo8_1Context": "Server=(localdb)\\mssqllocaldb;Database=labo8_1Context;Trusted_Connection=True;MultipleActiveResultSets=true"
+}
+```
 
 2. Ajout d'une connexion à la base de données dans `Program.cs` :
 
-<center>![Connexion à la base de données](./_15-rencontre8.1/connection.png)</center>
+```cs showLineNumbers title="Program.cs"
+var connectionString = builder.Configuration.GetConnectionString("labo8_1Context") ?? throw new InvalidOperationException("Connection string 'labo8_1Context' not found.");
 
-3. Création d'un **DbContext** dans un dossier `Data` : 
+builder.Services.AddDbContext<labo8_1Context>(options => options.UseSqlServer(connectionString));
+```
+3. Création d'un **DbContext** dans à la racine : 
 
-```cs showLineNumbers
-namespace cours14.Data
+```cs showLineNumbers title="labo8_1Context.cs"
+using Microsoft.EntityFrameworkCore;
+
+public class labo8_1Context(DbContextOptions<labo8_1Context> options) : DbContext(options)
 {
-    public class cours14Context : DbContext
-    {
-        public cours14Context (DbContextOptions<cours14Context> options) : base(options){}
-
-        public DbSet<cours14.Models.Toy> Toy { get; set; } = default!;
-    }
+    public DbSet<labo8_1.Models.Toy> Toy { get; set; } = default!;
 }
 ```
 
@@ -261,6 +347,9 @@ Tout le **code** nécessaire pour générer la base de données est prêt. (Mod�
 Si ce n'est pas déjà le cas, affichez PowerShell :
 
 <center>![Afficher le terminal](./_15-rencontre8.1/displayTerminal.png)</center>
+<NonVoyant>
+Dans le menu Affichage, choisir Terminal ou faire le raccourcis Ctrl+`
+</NonVoyant>
 
 <center>![Terminal dans VS](./_15-rencontre8.1/terminal.png)</center>
 
@@ -311,10 +400,16 @@ Dans ce cas, voici les étapes :
 **1. ❌ Supprimer la base de données :**
 
 <center>![Afficher l'explorateur d'objets SQL](./_15-rencontre8.1/sqlExplorer.png)</center>
+<NonVoyant>
+Dans le menu Affichage, choisir Explorateur d'objets SQL Server
+</NonVoyant>
 
 N'oubliez pas de **fermer les connexions existantes** en appuyant sur supprimer.
 
 <center>![Supprimer la base de données](./_15-rencontre8.1/deleteDB.png)</center>
+<NonVoyant>
+Dans l'explorateur d'objets SQL Server, sélectionner cours8_1Context et afficher le menu du clic droit de la souris. Choisir Supprimer.
+</NonVoyant>
 
 **2. 📂 Supprimer le dossier `migrations` en entier.**
 
@@ -328,9 +423,52 @@ N'oubliez pas de **fermer les connexions existantes** en appuyant sur supprimer.
 
 ## 🗺 Routage
 
-Si on exécute le projet, on peut visualiser, grâce à Swagger, la liste des requêtes disponibles de notre serveur Web API :
+Il est possible de visualiser la liste des requêtes disponibles de notre serveur Web API en utilisant Swagger.
 
+Pour ce faire, nous aurons besoin d'installer les dépendances suivants:
+- **`Swashbuckle.AspNetCore.Swagger`**
+- **`Swashbuckle.AspNetCore.SwaggerGen`**
+- **`Swashbuckle.AspNetCore.SwaggerUI`**
+
+Dans la classe `Programe.cs`, il faudra ajouter les trois instructions suivantes:
+```cs showLineNumbers title="Program.cs"
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddOpenApi();
+builder.Services.AddSwaggerGen(); // <--- Ajout #1
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    app.UseSwagger(); // <--- Ajout #2
+    app.UseSwaggerUI(); // <--- Ajout #3
+}
+
+```
+Vous pouvez maintenant accéder à l'interface Web de Swagger:
 <center>![Interface Swagger](./_15-rencontre8.1/swagger.png)</center>
+<NonVoyant>
+Exemple HTML à l'adresse https://localhost:7296/swagger/index.html
+
+Cours8_1
+
+Toys
+
+GET /api/Toys
+
+POST /api/Toys
+
+GET /api/Toys/(id)
+
+PUT /api/Toys/(id)
+
+DELETE /api/Toys/(id)
+</NonVoyant>
 
 Les requêtes doivent bien entendu être précédées du nom du domaine, ce qui donnerait `https://localhost:7064/api/Toys` par exemple.
 
@@ -343,6 +481,14 @@ Oui, mais c'est acceptable tant que la `méthode` de la requête est différente
 Voici de quoi aurait l'air les deux premières requêtes dans notre projet Next.js :
 
 <center>![Requêtes GET et POST](./_15-rencontre8.1/getPost.png)</center>
+<NonVoyant>
+Exemple HTML GET et POST de l'interface Swagger:
+Toys
+
+GET /api/Toys
+
+POST /api/Toys
+</NonVoyant>
 
 Remarquez bien l'usage de `axios.GET(...)` et de `axios.POST(...)`
 
@@ -360,7 +506,26 @@ Nous reverrons des exemples de requêtes plus en détails plus loin.
 
 Notez que ce sont les annotations au-dessus des actions qui déterminent la **méthode de la requête** :
 
-<center>![Méthode des actions](./_15-rencontre8.1/method.png)</center>
+<!-- <center>![Méthode des actions](./_15-rencontre8.1/method.png)</center> -->
+```cs showLineNumbers title="/Controllers/ToysController.cs"
+    // GET: api/Toy
+    [HttpGet] // <---
+    public async Task<ActionResult<IEnumerable<Toy>>> GetToy()
+    {
+        return await _context.Toy.ToListAsync();
+    }
+
+    // POST: api/Toy
+    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [HttpPost] // <---
+    public async Task<ActionResult<Toy>> PostToy(Toy toy)
+    {
+        _context.Toy.Add(toy);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction("GetToy", new { id = toy.Id }, toy);
+    }
+```
 
 Généralement, les méthodes suivent les conventions suivantes :
 
@@ -375,7 +540,7 @@ Le type de méthode est seulement une **convention**. En théorie, une action av
 
 Une annotation au-dessus du contrôleur permet de dicter une règle globale pour toutes les actions à l'intérieur du contrôleur :
 
-```cs showLineNumbers
+```cs showLineNumbers title="/Controllers/ToysController.cs"
     [Route("api/[controller]")] //  Règle globale
     [ApiController]
     public class ToysController : ControllerBase
@@ -387,7 +552,7 @@ Dans ce cas-ci, chaque requête aura la forme `DOMAINE/api/Toys`.
 
 Si on souhaite que le nom de l'action fasse partie de la requête, on peut faire la modification suivante :
 
-```cs showLineNumbers
+```cs showLineNumbers title="/Controllers/ToysController.cs"
     [Route("api/[controller]/[action]")] //  Règle globale
     [ApiController]
     public class ToysController : ControllerBase
@@ -398,6 +563,23 @@ Si on souhaite que le nom de l'action fasse partie de la requête, on peut faire
 Dans ce cas-ci, une action nommée `GetToy` serait donc associée à la requête `DOMAINE/api/Toys/GetToy`.
 
 <center>![Interface Swagger](./_15-rencontre8.1/swagger2.png)</center>
+<NonVoyant>
+Exemple HTML du résultat de l'interface Swagger:
+
+Cours8_1
+
+Toys
+
+GET /api/Toys/GetToy
+
+GET /api/Toys/GetToy(id)
+
+PUT /api/Toys/PutToy/(id)
+
+POST /api/Toys/PostToy
+
+DELETE /api/Toys/DeleteToy/(id)
+</NonVoyant>
 
 :::note
 
@@ -418,6 +600,9 @@ Pour modifier la syntaxe d'une requête spécifique, il suffit d'ajouter une ann
 ```
 
 <center>![Règle par action](./_15-rencontre8.1/regleAction.png)</center>
+<NonVoyant>
+GET /allo/hihi/proute/(id)
+</NonVoyant>
 
 Notez que si on omet la barre oblique au début de la route, la route spécifiée **s'ajoutera** à la fin de la **route globale du contrôleur**...
 
@@ -430,6 +615,9 @@ Notez que si on omet la barre oblique au début de la route, la route spécifié
 ```
 
 <center>![Règle par action](./_15-rencontre8.1/regleAction2.png)</center>
+<NonVoyant>
+GET /api/Toys/GetToy/allo/hihi/proute/(id)
+</NonVoyant>
 
 :::warning
 
@@ -471,6 +659,17 @@ Voici une liste des éléments qui peuvent permettre de différencier les routes
 Si jamais une erreur est présente dans l'interface Swagger, vous aurez ce résultat :
 
 <center>![Message d'erreur avec Swagger](./_15-rencontre8.1/erreurSwagger.png)</center>
+<NonVoyant>
+Erreur Swagger en HTML:
+
+Failed to load API definition.
+
+Errors
+
+Fetch error
+
+response status is 500 https://localhost:7064/swagger/v1/swagger.json
+</NonVoyant>
 
 Pour voir une explication plus détaillée de l'erreur soulevée, utilisez l'URL fournie. (`https://localhost:7064/swagger/v1/swagger.json`, dans ce cas-ci)
 
@@ -511,6 +710,21 @@ Notez qu'il faut respecter la convention **PascalCase** en C# et **camelCase** e
 Ci-dessous, un exemple pour chacune des cinq requêtes disponibles par défaut dans un contrôleur auto-généré.
 
 <center>![Interface Swagger](./_15-rencontre8.1/swagger2.png)</center>
+<NonVoyant>
+Exemple HTML du résultat de l'interface Swagger:
+
+Toys
+
+GET /api/Toys/GetToy
+
+GET /api/Toys/GetToy(id)
+
+PUT /api/Toys/PutToy/(id)
+
+POST /api/Toys/PostToy
+
+DELETE /api/Toys/DeleteToy/(id)
+</NonVoyant>
 
 ### 📦 POST
 
