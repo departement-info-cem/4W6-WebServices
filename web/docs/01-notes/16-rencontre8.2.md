@@ -39,9 +39,10 @@ de références vers une autre classe. (Ex : `public virtual List<Item> Items { 
 :::
 
 
-Pour pouvoir profiter du **🦥 Lazy Loading**, vous êtes invités à installer le package `Proxies` dans la dernière version `8.X.X` pour vous simplifier la vie lors du chargement des données depuis la base de données !
+Pour pouvoir profiter du **🦥 Lazy Loading**, vous êtes invités à installer le package `Proxies` dans la dernière version `10.X.X` pour vous simplifier la vie lors du chargement des données depuis la base de données !
 
-<center>![Package Proxies](./_16-rencontre8.2/proxies.png)</center>
+<center>![Package: Microsoft.EntityFrameworkCore.Proxies](./_16-rencontre8.2/proxies.png)</center>
+
 
 Le code dans `Program.cs` devra être légèrement modifier : 
 
@@ -305,9 +306,15 @@ Lorsqu'on souhaiter créer (`Post`) une `Recipe`, ce qu'on doit envoyer au serve
 * Un `string` (le name `Name`)
 * Une `List<int>` (l'`id` de chaque `Ingredient` faisant partie de cette `Recipe`)
 
-Or, aucun modèle ne correspond à la combinaison de ces deux types. La solution est donc de créer une autre **classe** qui servira exclusivement à **transférer des données entre le client et le serveur**, d'où le nom **Data Transfer Object**.
+Or, aucun modèle ne correspond à la combinaison de ces deux types. La solution est donc de créer une autre **classe** qui servira exclusivement à **transférer des données entre le client et le serveur**, d'où le nom **Data Transfer Object**. Ajoutez un dossier **DTOs** à la racine du projet où déposer vos objets de transfert de données.
 
 <center>![Classe Data transfer object](./_16-rencontre8.2/dto1.png)</center>
+<NonVoyant>
+Exemple de structure de fichier:
+
+Serveur8_2 (racine du projet)/DTOs/CommentDTO.cs
+
+</NonVoyant>
 
 ```cs showLineNumbers
 public class RecipeDTO

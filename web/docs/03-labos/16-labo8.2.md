@@ -1,6 +1,6 @@
 # Laboratoire 8.2
 
-<center>![Bannière du site](./_16-labo8.2/banner.png)</center>
+<center>![Bannière du site - Gestions des nombreux incidents du parc](./_16-labo8.2/banner.png)</center>
 
 Des [projets de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo8.2.zip) Next.js et ASP.NET Core vous sont fournis. Orchestrez bien `npm install`, `npm run dev` et `dotnet ef database update`.
 
@@ -22,6 +22,15 @@ En résumé :
 L'application permet déjà de créer des `Zookeeper`. Vérifiez le code de l'action `PostZookeeper()` sur le serveur : il est ultra simple et reçoit directement un `Zookeeper` en paramètre. C'est similaire au code par défaut pour `POST` quand on génère un contrôleur. Pour créer des `Dinosaur` et des `Incident`, ce sera moins simple ... il faudra utiliser des **DTOs** !
 
 <center>![Liste de zookeepers](./_16-labo8.2/zookeepers.png)</center>
+<NonVoyant>
+Exemple HTML de la zone de recherche des zookeepers:
+
+Gardiens du zoo
+
+input: Claudia suivi du bouton Ajouter
+
+Une liste de gardien avec le format: Id: 1, Nom: Ali et bouton X pour effacer.
+</NonVoyant>
 
 ### 1 - Créer des dinosaures
 
@@ -40,6 +49,15 @@ return Ok(dinosaur);
 Gardez à l'esprit que, côté client, `response.data` contiendra le nouveau `Dinosaur`, à ajouter dans l'état `dinosaurs`.
 
 <center>![Liste de dinosaures](./_16-labo8.2/dinosaurs.png)</center>
+<NonVoyant>
+Exemple HTML de la zone des dinosaures:
+
+Dinosaures
+
+Input: Nom du dinosaure, input: Espèce, input: Id et un bouton Ajouter.
+
+Liste des dinosaures où chaque item à la forme: Id: 3, Nom: Réjean, Espèce: Alphadrodon, Gardien: Claudia, Bouton Voir les incidents associés et un bouton Sélectionner.
+</NonVoyant>
 
 :::info
 
@@ -70,6 +88,13 @@ return BadRequest(new { Message = "Les ids reçus sont invalides ou vides." });
 `response.data` contiendra le nouvel `Incident`.
 
 <center>![Liste d'incidents](./_16-labo8.2/incidents.png)</center>
+<NonVoyant>
+Exemple HTML des incidents:
+
+Incidents impliquant le dinosaure Pierre-Alexandre
+
+Liste des incidents où chaque item à la forme: Id: 3, Description: Oublié de le nourrir, Victime: 12.
+</NonVoyant>
 
 ## 🔪 Supprimer n'est pas plus facile
 
