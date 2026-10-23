@@ -82,9 +82,11 @@ public class Subscription{
     public int Points { get; set; }
     public DateOnly StartDate { get; set; }
 
+    public int UserId { get; set; }
+    
     // Annotation nécessaire pour que EntityFramework sache dans quelle table placer la FK.
-    // « User » est le nom de la classe qui complète la relation.
-    [ForeignKey(nameof(User))]
+    // « UserId » est le nom de la clé qui complète la relation.
+    [ForeignKey(nameof(UserId))]
     public virtual User User { get; set; } = null!; // Propriété de navigation
 }
 ```
