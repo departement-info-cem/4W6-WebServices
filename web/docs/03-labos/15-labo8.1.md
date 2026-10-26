@@ -27,7 +27,7 @@ Suivez toutes les étapes des notes de cours bêtement et arrêtez vous juste av
 Exécutez ensuite votre application et vérifiez que Swagger affiche les informations des requêtes de ce nouveau contrôleur. (L’ordre des requêtes pourrait être différent)
 
 <p align="center">
-    <img src={require('./_15-labo8.1/swagger1.png').default} width="40%" alt="Interface Swagger"/>
+    ![Interface Swagger](./_15-labo8.1/swagger1.png)
 </p>
 <NonVoyant>
 Exmple des endpoints illustrés avec swagger:
