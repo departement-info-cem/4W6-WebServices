@@ -6,7 +6,20 @@ title: "9.1 - Utilisateurs et services 👤"
 
 Si vous souhaitez vous débarrasser maintenant de cette étape, voici tous les packages qui seront nécessaires pour nos projets à partir de maintenant. Pour rappel, un package NuGet **donne accès à des fonctionnalités supplémentaires** à notre projet. Notre projet utilisera des **classes** et des **méthodes** provenant de ces nombreux **packages**. Grâce à tous ces packages, on a beaucoup moins de fonctionnalités à coder nous-mêmes.
 
-<center>![Liste des packages NuGet nécessaires](./_17-rencontre9.1/nuget.png)</center>
+- **`Swashbuckle.AspNetCore`**
+- **`Swashbuckle.AspNetCore.Swagger`**
+- **`Swashbuckle.AspNetCore.SwaggerGen`**
+- **`Swashbuckle.AspNetCore.SwaggerUI`**
+- **`Microsoft.AspNetCore.Authentication.JwtBearer`**
+- **`Microsoft.AspNetCore.Identity.EntityFrameworkCore`**
+- **`Microsoft.EntityFrameworkCore.Proxies`**
+- **`Microsoft.EntityFrameworkCore.SqlServer`**
+- **`Microsoft.EntityFrameworkCore.Tools`**
+- **`Microsoft.Identity.Core`**
+- **`Microsoft.Identity.Store`**
+- **`Microsoft.VisualStudio.Web.CodeGeneration.Design`**
+
+<center>![Étudiant fatigué en train d'installer 47 packages NuGet](./_17-rencontre9.1/nuget.png)</center>
 
 **Résumé des packages installés** :
 
@@ -19,7 +32,7 @@ Si vous souhaitez vous débarrasser maintenant de cette étape, voici tous les p
 
 :::warning
 
-⛔🚔🚨🔥🤬 Installez la dernière version **8.X.X** pour ces packages. (Sauf pour `Swashbuckle`) Ne vous fiez pas seulement à la capture d'écran fournie !
+⛔🚔🚨🔥🤬 Installez la dernière version **10.X.X** pour ces packages. Ne vous fiez pas seulement à la capture d'écran fournie !
 
 :::
 
@@ -33,7 +46,7 @@ Il y aura beaucoup de code **boilerplate** à rédiger pour configurer `Identity
 
 **1 - 📰 Se référer au cours 8.1**
 
-Tout d'abord, répétez toutes les étapes de création d'un projet telles qu'abordées dans le [cours quinze](/notes/rencontre8.1).
+Tout d'abord, répétez toutes les étapes de création d'un projet telles qu'abordées dans le [huit point un](/notes/rencontre8.1).
 
 Arrêtez-vous juste avant la création d'un **modèle**.
 
@@ -53,15 +66,7 @@ Si vous aviez déjà des migrations et / ou une base de données, supprimez-les 
 
 **5 - 📦 Installer les packages**
 
-Si ce n'est pas déjà fait, installez tous les packages indiqués au début de ce cours.
-
-<center>![Liste des packages NuGet nécessaires](./_17-rencontre9.1/nuget.png)</center>
-
-:::warning
-
-⛔🚔🚨🔥🤬 Installez la dernière version **8.X.X** pour ces packages. (Sauf pour `Swashbuckle`) Ne vous fiez pas seulement à la capture d'écran fournie !
-
-:::
+Liste des [Packages nécessaires](/notes/rencontre9.1#-packages-nécessaires)
 
 **6 - 👤 Classe `User`**
 
@@ -143,8 +148,11 @@ app.UseAuthorization();
 Créez un **contrôleur d'API vide** pour les utilisateurs :
 
 <center>![Création d'un contrôleur d'API vide](./_17-rencontre9.1/controller1.png)</center>
+<NonVoyant>
+Dans la section Common, API: API Controller - Empty
+</NonVoyant>
 
-<center>![Création d'un contrôleur nommé UsersController](./_17-rencontre9.1/controller2.png)</center>
+<center>![Création d'un contrôleur nommé UsersController.cs](./_17-rencontre9.1/controller2.png)</center>
 
 Vous aurez à **injecter** la classe `UserManager<T>`, où `T` est votre modèle qui représente les utilisateurs.
 
@@ -172,7 +180,7 @@ La classe `UserManager` fait office de « UserService » et nous aidera à inter
 
 **1 - 📬 Création d'un DTO**
 
-(Les DTOs ont été abordés dans le [cours 8.2](/angular/rencontre8.1))
+(Les DTOs ont été abordés dans le [cours 8.2](/notes/rencontre8.2#-data-transfer-objects))
 
 Créez un DTO qui sera utilisé pour recevoir des données lors de l'inscription :
 
@@ -272,6 +280,11 @@ Si ça ne fonctionne pas, ajoutez un **breakpoint** sur le `if(!identityResult.S
 <center>![Breakpoint sur identityResult](./_17-rencontre9.1/identityResult.png)</center>
 
 <center>![Échec de l'identityResult](./_17-rencontre9.1/failed.png)</center>
+<NonVoyant>
+L'échec peut prendre la forme par exemple de :
+
+identityResult: `{Failed : DuplicateUserName}`
+</NonVoyant>
 
 :::warning
 
@@ -565,6 +578,9 @@ Exemple : J'ai deux contrôleurs capables de créer des `Patate` ? Au lieu de r�
 Un peu plus délicat à expliquer. En gros, en programmation, en général, on aime quand une classe possède **une seule responsabilité cohérente**. Si on injecte directement le `DbContext` dans un **contrôleur**, on ouvre la porte à lui permettre de faire pas mal n'importe quoi avec la base de données. C'est à partir de ce moment qu'on n'est plus sûr dans quel contrôleur on pourra retrouver telle ou telle opération. Avec un `PatateService`, on sait qu'on pourra y retrouver toutes les opérations possibles qui concernent les patates et qu'on n'aura pas à aller fouiller dans `HotDogService` pour chercher des opérations sur les patates.
 
 <center>![Services](./_17-rencontre9.1/services.png)</center> 
+<NonVoyant>
+L'image illustre l'insertion d'un service entre le contrôleur et le DBContext.
+</NonVoyant>
 
 ### 💉 Injection
 
@@ -604,7 +620,7 @@ public class VideoGamesController : ControllerBase
 
 Pour créer un **service**, créez une **simple classe** dans laquelle on **injecte le DbContext**.
 
-<center>![Dossier pour les services](./_17-rencontre9.1/serviceFolder.png)</center> 
+<center>![Exemple: projetDemo16.Services.VideoGameService.cs](./_17-rencontre9.1/serviceFolder.png)</center> 
 
 ```cs showLineNumbers
     public class VideoGameService

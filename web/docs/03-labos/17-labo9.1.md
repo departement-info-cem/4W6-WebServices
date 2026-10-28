@@ -1,6 +1,6 @@
 # Laboratoire 9.1
 
-<center>![Bannière du site](./_17-labo9.1/banner.png)</center>
+<center>![Bannière du site - MyWeebList](./_17-labo9.1/banner.png)</center>
 
 📦 Téléchargez les [projets de départ](https://github.com/departement-info-cem/4W6-WebServices/releases/latest/download/code-labo9.1.zip).
 
@@ -14,7 +14,7 @@ La **gestion des utilisateurs** est déjà totalement complétée côté **serve
 
 Tentez de vous **inscrire**, puis de vous **connecter**. Assurez-vous que le **token 🔑** est bien reçu.
 
-<center>![Réception du token](./_17-labo9.1/token.png)</center>
+<center>![Lecture du token dans le stockage locale via le débogueur du navigateur](./_17-labo9.1/token.png)</center>
 
 ### 📶 2 - Intercepteur
 
@@ -44,6 +44,17 @@ Vous allez coder plusieurs **actions** côté **serveur** qui exploitent l'authe
 Dans tous les cas, pour le moment, assurez-vous que l'anime est bien créé et visible ensuite :
 
 <center>![Liste des animes](./_17-labo9.1/animes.png)</center>
+<NonVoyant>
+Exemple HTML de la liste de Tous les animes. Chaque anime est affiché dans un paneau sous la forme:
+
+Dessin de la pochette
+
+Titre - One Piece
+
+Genre(s): shonen, action, fantasy
+
+Un bouton «Choisir»
+</NonVoyant>
 
 ### 📬 5 - Obtenir mes animes
 
@@ -54,6 +65,9 @@ Notez qu'il faudra décommenter deux lignes de code qui permettaient d'appeler l
 Les animes que vous avez `POST` vous-mêmes devraient déjà être présents :
 
 <center>![Liste de mes animes](./_17-labo9.1/myAnimes.png)</center>
+<NonVoyant>
+Même format d'affichage pour la liste de Vos animes
+</NonVoyant>
 
 Si ce n'est pas le cas, c'est qu'il y a un souci avec votre `PostAnime`. Je vous mets au défi de demander de l'aide à l'enseignant 😳
 
@@ -65,7 +79,7 @@ La dernière action, `SubscribeAnime`, permet, lorsqu'on appuie sur le bouton «
 ... ou ...
 * L'utilisateur n'est pas abonné à l'`Anime` : il obtient une relation avec l'`Anime`. (Abonné)
 
-<center>![S'abonner à un anime](./_17-labo9.1/subscribe.png)</center>
+<center>![S'abonner à un anime en cliquant sur le bouton «Choisir»](./_17-labo9.1/subscribe.png)</center>
 
 Si ça fonctionne bien, appuyer sur « Choisir » devrait permettre d'ajouter ou de retirer un `Anime` de la liste « Vos animes ».
 
