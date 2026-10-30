@@ -15,8 +15,8 @@ Si vous souhaitez vous débarrasser maintenant de cette étape, voici tous les p
 - **`Microsoft.EntityFrameworkCore.Proxies`**
 - **`Microsoft.EntityFrameworkCore.SqlServer`**
 - **`Microsoft.EntityFrameworkCore.Tools`**
-- **`Microsoft.Identity.Core`**
-- **`Microsoft.Identity.Store`**
+- **`Microsoft.Extensions.Identity.Core`**
+- **`Microsoft.Extensions.Identity.Store`**
 - **`Microsoft.VisualStudio.Web.CodeGeneration.Design`**
 
 <center>![Étudiant fatigué en train d'installer 47 packages NuGet](./_17-rencontre9.1/nuget.png)</center>
