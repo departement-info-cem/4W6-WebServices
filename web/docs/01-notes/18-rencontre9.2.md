@@ -47,7 +47,7 @@ Selon le type d'erreur, il existe plein de retours possibles. De plus, bien que 
 
 * 🔒 Utilisateur authentifié mais non autorisé à réaliser une opération (**code 403**) :
 
-> `return Forbid("Hey hey tu n'as pas le droit de faire ça.");`
+> `return Forbid();`
 
 * ❓ Requête inadéquate (**code 400**) Paramètres inadéquats, requête envoyée au mauvais moment, etc.
 
