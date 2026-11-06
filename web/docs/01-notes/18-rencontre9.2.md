@@ -513,11 +513,14 @@ protected override void OnModelCreating(ModelBuilder builder)
         UserName = "Bob69",
         Email = "bobibou@mail.com", // Optionnel
         NormalizedUserName = "BOB69", // Important
-        NormalizedEmail = "BOBIBOU@MAIL.COM" // Important si on a mis un Email 2 lignes plus haut
+        NormalizedEmail = "BOBIBOU@MAIL.COM" // Important si on a mis un Email 2 lignes plus haut,
+        ConcurrencyStamp = "8ad80a27-73dd-4785-9ff9-118c05cf9719",
+        SecurityStamp = "56825025-1e7a-4309-afc0-7edf7ac0fea0",
+        // mot de passe "allo"
+        PasswordHash = "AQAAAAIAAYagAAAAENvyCAm+H9eSlX+/4uupNrY9Kl4EoVbqTPztcz/zjyfTLpWIABVIgkry4P8qsTcn3g=="
     };
 
-    // Hachage du mot de passe et ajout de l'utilisateur au seed
-    u1.PasswordHash = hasher.HashPassword(u1, "Salut1!");
+
     builder.Entity<User>().HasData(u1);
 }
 ```
@@ -549,11 +552,13 @@ protected override void OnModelCreating(ModelBuilder builder)
         UserName = "Bob69",
         Email = "bobibou@mail.com",
         NormalizedUserName = "BOB69",
-        NormalizedEmail = "BOBIBOU@MAIL.COM"
+        NormalizedEmail = "BOBIBOU@MAIL.COM",
+        ConcurrencyStamp = "8ad80a27-73dd-4785-9ff9-118c05cf9719",
+        SecurityStamp = "56825025-1e7a-4309-afc0-7edf7ac0fea0",
+        // mot de passe "allo"
+        PasswordHash = "AQAAAAIAAYagAAAAENvyCAm+H9eSlX+/4uupNrY9Kl4EoVbqTPztcz/zjyfTLpWIABVIgkry4P8qsTcn3g=="
     };
 
-    // Hachage du mot de passe et ajout de l'utilisateur au seed
-    u1.PasswordHash = hasher.HashPassword(u1, "Salut1!");
     builder.Entity<User>().HasData(u1);
 
     // Le modèle -To-Many doit être créé APRÈS pour avoir accès à l'id du One-To- (créé plus haut)
@@ -610,9 +615,13 @@ protected override void OnModelCreating(ModelBuilder builder)
         UserName = "Bob69",
         Email = "bobibou@mail.com",
         NormalizedUserName = "BOB69",
-        NormalizedEmail = "BOBIBOU@MAIL.COM"
+        NormalizedEmail = "BOBIBOU@MAIL.COM",
+        ConcurrencyStamp = "8ad80a27-73dd-4785-9ff9-118c05cf9719",
+        SecurityStamp = "56825025-1e7a-4309-afc0-7edf7ac0fea0",
+        // mot de passe "allo"
+        PasswordHash = "AQAAAAIAAYagAAAAENvyCAm+H9eSlX+/4uupNrY9Kl4EoVbqTPztcz/zjyfTLpWIABVIgkry4P8qsTcn3g=="
     };
-    u1.PasswordHash = hasher.HashPassword(u1, "Salut1!");
+    
     builder.Entity<User>().HasData(u1);
 
     // Comment
