@@ -441,17 +441,11 @@ Préparer un **seed** permet de peupler la base de données avec un **🎲 jeu d
 
 ### 🐣 Nouvelle méthode
 
-Nous aurons deux étapes importantes. Un première étape de création d'un objet **`DatabaseSeeder.cs`** qui contiendra tous les objets que nous volons avoir
-initialement dans la base de données. Un deuxième étape où l'on ajoute l'exécution de cet objet dans notre **`Program.cs`**
+**1 - Création du `DatabaseSeeder`**
 
-**1 - 🪄 Création du `DatabaseSeeder.cs`**
+C'est dans cette classe statique que nous allons déposer toutes nos instances de modèles afin de nourrir la base de données avec des valeurs initiales. Il sera important de s'assurer que tous les objets ajoutés n'existent pas déjà dans la base de données.
 
-C'est dans cet objet statique que nous allons déposer tous nos instances de modèles afin de nourrir la base de données avec des valeurs initiales. Il va être
-important de s'assurer que tous les objets ajoutés n'existent pas déjà dans la base de données.
-
-Ce fichier sera ajouté au répertoire **`Data`** où notre context réside déjà.
-
-Dans l'exemple qui suit, un utilisateur **Bob** est créé et deux reviews lui sont ajoutées; soit un pour **Cyberpunk 2077** et un pour **Mario Kart World**:
+Dans l'exemple qui suit, un utilisateur **Bob** est créé et deux avis (ou critiques) lui sont ajoutés : un pour **Cyberpunk 2077** et un pour **Mario Kart World** :
 
 ```cs showLineNumbers title="/Data/DatabaseSeeder.cs"
 using Microsoft.AspNetCore.Identity;
@@ -468,12 +462,12 @@ public static class DatabaseSeeder
     {
         await using var scope = services.CreateAsyncScope();
 
-        // Notre context est ajouté au scope
+        // Notre contexte est ajouté au scope
         var context = scope.ServiceProvider
             .GetRequiredService<serveur16Context>();
 
-        // Le userManager pour bien gérer la création de l'utilisateur avec l'encryption du mot de passe
-        // et la normalisation son nom d'utilisateur ainsi que de son courriel.
+        // Le userManager pour bien gérer la création de l'utilisateur avec le hachage (chiffrement) du mot de passe
+        // et la normalisation de son nom d'utilisateur ainsi que de son courriel.
         var userManager = scope.ServiceProvider
             .GetRequiredService<UserManager<User>>();
 
@@ -492,7 +486,7 @@ public static class DatabaseSeeder
                 EmailConfirmed = true
             };
 
-            // Encryption du mot de passe géré par le userManager 🥳
+            // Chiffrement du mot de passe géré par le userManager 🥳
             var result = await userManager.CreateAsync(user, "Salut1!");
 
             if (!result.Succeeded)
@@ -506,19 +500,19 @@ public static class DatabaseSeeder
             }
         }
 
-        // Ajout du premier review Cyberpunk 2077 🦾
+        // Ajout du premier avis pour Cyberpunk 2077 🦾
         if (!await context.Review.AnyAsync(review => review.Id == 1))
         {
             context.Review.Add(new Review
             {
                 Id = 1,
                 Game = "Cyberpunk 2077",
-                Text = "C'parce que lé bonhommes font des T poses pis y rentrer dans le plancher des fois xd",
+                Text = "C'parce que lé bonhommes font des T poses pis y rentrent dans le plancher des fois xd",
                 AuthorId = user.Id
             });
         }
 
-        // ... et ajout du deuxième review Mario Kart World 🏎️
+        // ... et ajout du deuxième avis pour Mario Kart World 🏎️
         if (!await context.Review.AnyAsync(review => review.Id == 2))
         {
             context.Review.Add(new Review
@@ -536,40 +530,8 @@ public static class DatabaseSeeder
 }
 ```
 
-**2 - 🛠️ Modification du `Program.cs`**
+Voici un exemple plus complet avec deux utilisateurs et des méthodes généralisant la détection d'éléments existants :
 
-Nous avons qu'une seule ligne à ajouter à notre **`Program.cs`**, mais il est important de la placer quelque part entre le `var app = builder.Build();`
-et le `app.Run();`
-
-```cs showLineNumbers title="Program.cs"
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-// ICI - Peupler la base de données avec nos modèles initiaux
-await DatabaseSeeder.SeedAsync(app.Services);
-
-app.UseCors("AllowAll");
-
-app.UseHttpsRedirection();
-
-app.UseAuthentication();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
-```
-
-**👩‍💼👨‍💼 Exemple plus complet à deux utilisateurs**
-
-Voici un exemple plus complèt avec deux utilisateurs et des méthodes généralisant la détection d'éléments existants: 
 ```cs showLineNumbers title="/Data/DatabaseSeeder.cs"
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -612,7 +574,7 @@ public static class DatabaseSeeder
             context,
             1,
             "Cyberpunk 2077",
-            "C'parce que lé bonhommes font des T poses pis y rentrer dans le plancher des fois xd",
+            "C'parce que lé bonhommes font des T poses pis y rentrent dans le plancher des fois xd",
             firstUser.Id);
 
         await AddReviewIfMissingAsync(
@@ -646,7 +608,7 @@ public static class DatabaseSeeder
         await context.SaveChangesAsync();
     }
 
-    // Crée l'utilisateur si il n'existe pas.
+    // Crée l'utilisateur s'il n'existe pas.
     private static async Task<User> CreateUserIfMissingAsync(
         UserManager<User> userManager,
         string userId,
@@ -684,7 +646,7 @@ public static class DatabaseSeeder
         return user;
     }
 
-    // Crée le review si il n'existe pas.
+    // Crée le review s'il n'existe pas.
     private static async Task AddReviewIfMissingAsync(
         serveur16Context context,
         int id,
@@ -714,7 +676,7 @@ public static class DatabaseSeeder
 
 ### 👴 Ancienne méthode 
 
-Cette méthode ne fonctionne qu'avec des objets statiques. En utilisant le **`HasData`**, nous somme limité dans la création.
+Cette méthode ne fonctionne qu'avec des objets statiques. En utilisant **`HasData`**, nous sommes limités dans la création.
 
 :::warning
 
