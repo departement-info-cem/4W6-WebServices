@@ -269,7 +269,7 @@ async function register(user : string, mail : string, pass : string, passCon : s
         passwordConfirm : passCon
     };
 
-    const x = await axios.post(domain + "api/Users/Register", registerDTO));
+    const x = await axios.post(domain + "api/Users/Register", registerDTO);
     console.log(x.data);
     
 }

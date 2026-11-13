@@ -124,7 +124,7 @@ async function postSomething(){
 
     const file = myFileInput.current.files[0]; // On récupère le (premier) fichier
 
-    // Créer le formData est mettre le fichier dedans (Le fichier est un BLOB !)
+    // Créer le formData et mettre le fichier dedans (Le fichier est un BLOB !)
     const formData = new FormData();
     formData.append("myImage", file);
 
