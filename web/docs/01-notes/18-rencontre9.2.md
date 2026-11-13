@@ -441,10 +441,15 @@ Préparer un **seed** permet de peupler la base de données avec un **🎲 jeu d
 
 ### 🐣 Nouvelle méthode
 
-**1 - Création du `DatabaseSeeder`**
+Nous aurons deux étapes importantes. Un première étape de création d'un objet **`DatabaseSeeder.cs`** qui contiendra tous les objets que nous volons avoir
+initialement dans la base de données. Un deuxième étape où l'on ajoute l'exécution de cet objet dans notre **`Program.cs`**
+
+**1 - 🪄 Création du `DatabaseSeeder.cs`**
 
 C'est dans cet objet statique que nous allons déposer tous nos instances de modèles afin de nourrir la base de données avec des valeurs initiales. Il va être
 important de s'assurer que tous les objets ajoutés n'existent pas déjà dans la base de données.
+
+Ce fichier sera ajouté au répertoire **`Data`** où notre context réside déjà.
 
 Dans l'exemple qui suit, un utilisateur **Bob** est créé et deux reviews lui sont ajoutées; soit un pour **Cyberpunk 2077** et un pour **Mario Kart World**:
 
@@ -531,6 +536,38 @@ public static class DatabaseSeeder
 }
 ```
 
+**2 - 🛠️ Modification du `Program.cs`**
+
+Nous avons qu'une seule ligne à ajouter à notre **`Program.cs`**, mais il est important de la placer quelque part entre le `var app = builder.Build();`
+et le `app.Run();`
+
+```cs showLineNumbers title="Program.cs"
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+// ICI - Peupler la base de données avec nos modèles initiaux
+await DatabaseSeeder.SeedAsync(app.Services);
+
+app.UseCors("AllowAll");
+
+app.UseHttpsRedirection();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
+```
+
+**👩‍💼👨‍💼 Exemple plus complet à deux utilisateurs**
 
 Voici un exemple plus complèt avec deux utilisateurs et des méthodes généralisant la détection d'éléments existants: 
 ```cs showLineNumbers title="/Data/DatabaseSeeder.cs"

@@ -71,6 +71,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+await DatabaseSeeder.SeedAsync(app.Services);
+
 app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
