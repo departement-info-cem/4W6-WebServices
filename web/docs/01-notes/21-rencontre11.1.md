@@ -187,7 +187,7 @@ Exemple : `SixLabors.ImageSharp`
 
 Cela permettra, entre autres, de manipuler les dimensions d'une image. Choisissez la **dernière version stable**. Pas forcément `3.0.1` comme dans l'image.
 
-<center>![Librairie image sharp](./_21-rencontre11.1/imageSharp.png)</center>
+<center>![Librairie image sharp - SixLabors.ImageSharp](./_21-rencontre11.1/imageSharp.png)</center>
 
 **Étape 3 - ⚙ Réaliser l'action `Post`**
 
@@ -421,38 +421,75 @@ useEffect(() => {
 Il faudra manuellement ajouter l'image aux fichiers du serveur en lui donnant un nom qui correspond à un **Guid** suivi de l'extension du fichier :
 
 <center>![Dossier d'images](./_21-rencontre11.1/imageFolder.png)</center>
+<NonVoyant>
+L'exemple pointe vers l'image d'un oiseau partant le nom de fichier reflétant son Guid 11111111-1111-1111-1111-111111111111.png
+</NonVoyant>
 
 ⛔ Assurez-vous que le nom de votre fichier soit unique, bien entendu.
 
 **Étape 2 - 🌰 Ajouter les données de l'image dans le seed**
 
-Pour rappel, ceci se passe dans le `DbContext`.
+Pour rappel, ceci se passe dans le `DatabaseSeeder.cs`.
 
-```cs showLineNumbers
-protected override void OnModelCreating(ModelBuilder builder){
-    
-    base.OnModelCreating(builder);
+```cs showLineNumbers title="/Data/DatabaseSeeder.cs"using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using serveur16.Models;
 
-    Birb b1 = new Birb(){
-        Id = 1,
-        Name = "Smol birb",
-        FileName = "11111111-1111-1111-1111-111111111111.png",
-        MimeType = "image/png"
-    };
-    builder.Entity<Birb>().HasData(b1);
+namespace serveur16.Data;
 
-    // Optionnel : si on veut plusieurs tailles de l'image et qu'on ne veut pas créer les copies manuellement
-    byte[] file = File.ReadAllBytes(Directory.GetCurrentDirectory() + "/images/original/" + b1.FileName);
-    Image image = Image.Load(file);
-    image.Mutate(i => i.Resize(new ResizeOptions(){ Mode = ResizeMode.Min, Size = new Size() { Width = 320 } }));
-    image.Save(Directory.GetCurrentDirectory() + "/images/miniature/" + b1.FileName);
+public static class DatabaseSeeder
+{
+    private const string FirstBirbId = "11111111-1111-1111-1111-111111111111";
 
+    public static async Task SeedAsync(IServiceProvider services)
+    {
+        await using var scope = services.CreateAsyncScope();
+
+        var context = scope.ServiceProvider
+            .GetRequiredService<semaine11_serveurContext>();
+
+        var userManager = scope.ServiceProvider
+            .GetRequiredService<UserManager<User>>();
+
+        await context.Database.MigrateAsync();
+
+        if (!await context.Birb.AnyAsync(birb => birb.Id == FirstBirbId))
+        {
+            Birb b1 = new Birb(){
+                Id = 1,
+                Name = "Smol birb",
+                FileName = FirstBirbId + ".png",
+                MimeType = "image/png"
+            };
+            context.Birb.Add(b1);
+            
+            // Optionnel : si on veut plusieurs tailles de l'image et qu'on ne veut pas créer les copies manuellement
+            byte[] file = File.ReadAllBytes(Directory.GetCurrentDirectory() + "/images/original/" + b1.FileName);
+            Image image = Image.Load(file);
+            image.Mutate(i => i.Resize(new ResizeOptions(){ Mode = ResizeMode.Min, Size = new Size() { Width = 320 } }));
+            image.Save(Directory.GetCurrentDirectory() + "/images/miniature/" + b1.FileName);
+        }
+        
+        // Ne pas oublier de persister les objets dans le contexte afin de les ajouter à la base de données.
+        await context.SaveChangesAsync();
+    }
 }
 ```
 
 Après avoir fait une **migration** et une **mise à jour de la base de données**, ça devrait fonctionner.
 
 <center>![Dossier d'images](./_21-rencontre11.1/smolBirb.png)</center>
+<NonVoyant>
+Exemple HTML:
+
+Id: 1
+
+Nom: Smol birb
+
+L'image 11111111-1111-1111-1111-111111111111.png
+
+Bouton Supprimer le birb
+</NonVoyant>
 
 ## 📷 Prévisualiser l'image sélectionnée
 
