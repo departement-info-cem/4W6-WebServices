@@ -439,6 +439,246 @@ Préparer un **seed** permet de peupler la base de données avec un **🎲 jeu d
 * Permet de créer des tests pour l'application.
 * Accélère les tests manuels.
 
+### 🐣 Nouvelle méthode
+
+**1 - Création du `DatabaseSeeder`**
+
+C'est dans cet objet statique que nous allons déposer tous nos instances de modèles afin de nourrir la base de données avec des valeurs initiales. Il va être
+important de s'assurer que tous les objets ajoutés n'existent pas déjà dans la base de données.
+
+Dans l'exemple qui suit, un utilisateur **Bob** est créé et deux reviews lui sont ajoutées; soit un pour **Cyberpunk 2077** et un pour **Mario Kart World**:
+
+```cs showLineNumbers title="/Data/DatabaseSeeder.cs"
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using serveur16.Models;
+
+namespace serveur16.Data;
+
+public static class DatabaseSeeder
+{
+    private const string DefaultUserId = "11111111-1111-1111-1111-111111111111";
+
+    public static async Task SeedAsync(IServiceProvider services)
+    {
+        await using var scope = services.CreateAsyncScope();
+
+        // Notre context est ajouté au scope
+        var context = scope.ServiceProvider
+            .GetRequiredService<serveur16Context>();
+
+        // Le userManager pour bien gérer la création de l'utilisateur avec l'encryption du mot de passe
+        // et la normalisation son nom d'utilisateur ainsi que de son courriel.
+        var userManager = scope.ServiceProvider
+            .GetRequiredService<UserManager<User>>();
+
+        await context.Database.MigrateAsync();
+
+        // On s'assure que l'utilisateur n'existe pas avant de l'ajouter.
+        var user = await userManager.FindByIdAsync(DefaultUserId);
+        if (user is null)
+        {
+            // Création de Bob
+            user = new User
+            {
+                Id = DefaultUserId,
+                UserName = "bob",
+                Email = "b@b.b",
+                EmailConfirmed = true
+            };
+
+            // Encryption du mot de passe géré par le userManager 🥳
+            var result = await userManager.CreateAsync(user, "Salut1!");
+
+            if (!result.Succeeded)
+            {
+                var errors = string.Join(
+                    ", ",
+                    result.Errors.Select(error => error.Description));
+
+                throw new InvalidOperationException(
+                    $"Impossible de créer l'utilisateur de seed : {errors}");
+            }
+        }
+
+        // Ajout du premier review Cyberpunk 2077 🦾
+        if (!await context.Review.AnyAsync(review => review.Id == 1))
+        {
+            context.Review.Add(new Review
+            {
+                Id = 1,
+                Game = "Cyberpunk 2077",
+                Text = "C'parce que lé bonhommes font des T poses pis y rentrer dans le plancher des fois xd",
+                AuthorId = user.Id
+            });
+        }
+
+        // ... et ajout du deuxième review Mario Kart World 🏎️
+        if (!await context.Review.AnyAsync(review => review.Id == 2))
+        {
+            context.Review.Add(new Review
+            {
+                Id = 2,
+                Game = "Mario Kart World",
+                Text = "Je préfère de loin Garfield Kart !",
+                AuthorId = user.Id
+            });
+        }
+
+        // Ne pas oublier de persister les objets dans le contexte afin de les ajouter à la base de données.
+        await context.SaveChangesAsync();
+    }
+}
+```
+
+
+Voici un exemple plus complèt avec deux utilisateurs et des méthodes généralisant la détection d'éléments existants: 
+```cs showLineNumbers title="/Data/DatabaseSeeder.cs"
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using serveur16.Models;
+
+namespace serveur16.Data;
+
+public static class DatabaseSeeder
+{
+    private const string FirstUserId = "11111111-1111-1111-1111-111111111111";
+    private const string SecondUserId = "22222222-2222-2222-2222-222222222222";
+
+    public static async Task SeedAsync(IServiceProvider services)
+    {
+        await using var scope = services.CreateAsyncScope();
+
+        var context = scope.ServiceProvider
+            .GetRequiredService<serveur16Context>();
+
+        var userManager = scope.ServiceProvider
+            .GetRequiredService<UserManager<User>>();
+
+        await context.Database.MigrateAsync();
+
+        var firstUser = await CreateUserIfMissingAsync(
+            userManager,
+            FirstUserId,
+            "bob",
+            "b@b.b",
+            "Salut1!");
+
+        var secondUser = await CreateUserIfMissingAsync(
+            userManager,
+            SecondUserId,
+            "alice",
+            "a@a.a",
+            "Salut2!");
+
+        await AddReviewIfMissingAsync(
+            context,
+            1,
+            "Cyberpunk 2077",
+            "C'parce que lé bonhommes font des T poses pis y rentrer dans le plancher des fois xd",
+            firstUser.Id);
+
+        await AddReviewIfMissingAsync(
+            context,
+            2,
+            "Mario Kart World",
+            "Je préfère de loin Garfield Kart !",
+            firstUser.Id);
+
+        await AddReviewIfMissingAsync(
+            context,
+            3,
+            "The Legend of Zelda: Tears of the Kingdom",
+            "Un monde immense avec énormément de liberté et de possibilités.",
+            secondUser.Id);
+
+        await AddReviewIfMissingAsync(
+            context,
+            4,
+            "Minecraft",
+            "Très bon jeu pour construire et explorer avec ses amis.",
+            secondUser.Id);
+
+        await AddReviewIfMissingAsync(
+            context,
+            5,
+            "Super Mario Bros. Wonder",
+            "Un excellent jeu de plateformes, amusant et créatif.",
+            secondUser.Id);
+
+        await context.SaveChangesAsync();
+    }
+
+    // Crée l'utilisateur si il n'existe pas.
+    private static async Task<User> CreateUserIfMissingAsync(
+        UserManager<User> userManager,
+        string userId,
+        string userName,
+        string email,
+        string password)
+    {
+        var user = await userManager.FindByIdAsync(userId);
+
+        if (user is not null)
+        {
+            return user;
+        }
+
+        user = new User
+        {
+            Id = userId,
+            UserName = userName,
+            Email = email,
+            EmailConfirmed = true
+        };
+
+        var result = await userManager.CreateAsync(user, password);
+
+        if (!result.Succeeded)
+        {
+            var errors = string.Join(
+                ", ",
+                result.Errors.Select(error => error.Description));
+
+            throw new InvalidOperationException(
+                $"Impossible de créer l'utilisateur '{userName}' : {errors}");
+        }
+
+        return user;
+    }
+
+    // Crée le review si il n'existe pas.
+    private static async Task AddReviewIfMissingAsync(
+        serveur16Context context,
+        int id,
+        string game,
+        string text,
+        string authorId)
+    {
+        var reviewExists = await context.Review
+            .AnyAsync(review => review.Id == id);
+
+        if (reviewExists)
+        {
+            return;
+        }
+
+        context.Review.Add(new Review
+        {
+            Id = id,
+            Game = game,
+            Text = text,
+            AuthorId = authorId
+        });
+    }
+}
+```
+
+
+### 👴 Ancienne méthode 
+
+Cette méthode ne fonctionne qu'avec des objets statiques. En utilisant le **`HasData`**, nous somme limité dans la création.
+
 :::warning
 
 Notez qu'à chaque fois que le seed est modifié, **une migration doit être générée** et **la base de données doit être mise à jour**.
