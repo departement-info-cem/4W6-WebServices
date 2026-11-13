@@ -529,7 +529,38 @@ public static class DatabaseSeeder
     }
 }
 ```
+**2 - 🛠️ Modification du `Program.cs`**
 
+Nous avons qu'une seule ligne à ajouter à notre **`Program.cs`**, mais il est important de la placer quelque part entre le `var app = builder.Build();`
+et le `app.Run();`
+
+```cs showLineNumbers title="Program.cs"
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+// ICI - Peupler la base de données avec nos modèles initiaux
+await DatabaseSeeder.SeedAsync(app.Services);
+
+app.UseCors("AllowAll");
+
+app.UseHttpsRedirection();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
+```
+
+**3 -👩‍💼👨‍💼 Exemple plus complet à deux utilisateurs**
 Voici un exemple plus complet avec deux utilisateurs et des méthodes généralisant la détection d'éléments existants :
 
 ```cs showLineNumbers title="/Data/DatabaseSeeder.cs"
