@@ -18,10 +18,10 @@ namespace serveur21.Controllers
     [ApiController]
     public class ReviewsController : ControllerBase
     {
-        private readonly serveur21Context _context;
+        private readonly Serveur21Context _context;
         private readonly UserManager<User> _userManager;
 
-        public ReviewsController(serveur21Context context, UserManager<User> userManager)
+        public ReviewsController(Serveur21Context context, UserManager<User> userManager)
         {
             _context = context;
             _userManager = userManager;

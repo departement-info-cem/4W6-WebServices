@@ -6,15 +6,15 @@ using Microsoft.IdentityModel.Tokens;
 using serveur21.Data;
 using serveur21.Models;
 using System.Text;
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<serveur21Context>(options =>
+builder.Services.AddDbContext<Serveur21Context>(options =>
 {
     options.UseSqlite(builder.Configuration.GetConnectionString("serveur21Context") ?? throw new InvalidOperationException("Connection string 'serveur16Context' not found."));
     options.UseLazyLoadingProxies(); // Ceci
 });
 
-builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<serveur21Context>();
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<Serveur21Context>();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -60,13 +60,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+await DatabaseSeeder.SeedAsync(app.Services);
 
 app.UseCors("AllowAll");
 

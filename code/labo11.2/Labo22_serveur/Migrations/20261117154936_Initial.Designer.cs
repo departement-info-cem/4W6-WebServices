@@ -10,9 +10,9 @@ using serveur21.Data;
 
 namespace serveur21.Migrations
 {
-    [DbContext(typeof(serveur21Context))]
-    [Migration("20260911140932_InitialSqlite")]
-    partial class InitialSqlite
+    [DbContext(typeof(Serveur21Context))]
+    [Migration("20261117154936_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -234,56 +234,6 @@ namespace serveur21.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "11111111-1111-1111-1111-111111111111",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "9f1980e9-6065-4770-90fc-beb8060b56ab",
-                            Email = "m@m.m",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "M@M.M",
-                            NormalizedUserName = "MAXOU",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKxDUQjOBPf9eJNxNQDuZzMOxOnQKvppPgMyJ4rpktXYFD2FKXvhx2OE1g2B90qpqQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "16d3c891-1eda-4304-9b19-bf6ec5ef6734",
-                            TwoFactorEnabled = false,
-                            UserName = "Maxou"
-                        },
-                        new
-                        {
-                            Id = "11111111-1111-1111-1111-111111111112",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "33974a2b-657f-4a2d-b771-f12cd37b6f21",
-                            Email = "p@p.p",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "P@P.P",
-                            NormalizedUserName = "PIELLE-AREXANDRE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEF/s1bvNLT8B2cW9LVFedcEh556N35M/jwuxp7FvKWv6giC6Nem923MLHHA8Xems8Q==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "401c2cb4-8015-4a9b-a252-03fb2eae6e86",
-                            TwoFactorEnabled = false,
-                            UserName = "Pielle-Arexandre"
-                        },
-                        new
-                        {
-                            Id = "11111111-1111-1111-1111-111111111113",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "7c53ff9c-9740-4efb-a79e-8106baea2e99",
-                            Email = "c@c.c",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "C@C.C",
-                            NormalizedUserName = "MASIE-CARRANDRA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEA8Lglcn/TkHkKvIarLUGTgvFa7N3Isnjo8ysLHr0ZdsBfGEi+z9wp9JtLm9T2oeOg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "a11e4581-dd97-4416-93a2-2f823e4a0cbe",
-                            TwoFactorEnabled = false,
-                            UserName = "Masie-Carrandra"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
