@@ -7,7 +7,7 @@ using RaiditeServer.Data;
 using RaiditeServer.Models;
 using RaiditeServer.Services;
 using System.Text;
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // █ Services pour les opérations sur la BD █
 
@@ -76,7 +76,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 app.UseCors("AllowAll");
 
@@ -85,6 +85,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+await DatabaseSeeder.SeedAsync(app.Services);
 
 app.UseHttpsRedirection();
 
