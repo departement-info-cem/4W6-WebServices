@@ -27,34 +27,77 @@ Comme toujours, assurez-vous d'utiliser la dernière version `10.X.X` pour tous 
 
 Il y plusieurs manières de le faire. Par souci de simplicité, on pourrait le faire avec **seed** :
 
-```cs showLineNumbers
-protected override void OnModelCreating(ModelBuilder builder){
-    
-    base.OnModelCreating(builder);
+```cs showLineNumbers title="/Data/DatabaseSeeder.cs"
+public static class DatabaseSeeder
+{
+    public static async Task SeedAsync(IServiceProvider services)
+    {
+        await using AsyncServiceScope scope = services.CreateAsyncScope();
 
-    // Rôles
-    builder.Entity<IdentityRole>().HasData(
-        new IdentityRole { Id = "1", Name = "admin", NormalizedName = "ADMIN" },
-        new IdentityRole { Id = "2", Name = "moderator", NormalizedName = "MODERATOR" }
-    );
+        // Injection des contexts
+        Serveur21Context context = scope.ServiceProvider
+            .GetRequiredService<Serveur21Context>();
+        UserManager<User> userManager = scope.ServiceProvider
+            .GetRequiredService<UserManager<User>>();        
+        RoleManager<IdentityRole> roleManager = scope.ServiceProvider
+            .GetRequiredService<RoleManager<IdentityRole>>();
 
-    // Utilisateur(s)
-    PasswordHasher<User> hasher = new PasswordHasher<User>();
-    User u1 = new User{
-        Id = "11111111-1111-1111-1111-111111111111",
-        UserName = "Bob69",
-        Email = "bobibou@mail.com",
-        NormalizedUserName = "BOB69",
-        NormalizedEmail = "BOBIBOU@MAIL.COM"
-    };
-    u1.PasswordHash = hasher.HashPassword(u1, "Salut1!");
-    builder.Entity<User>().HasData(u1);
+        await context.Database.MigrateAsync();
 
-    // Relation entre utilisateurs et rôles
-    builder.Entity<IdentityUserRole<string>>().HasData(
-        new IdentityUserRole<string> { UserId = u1.Id, RoleId = "1" } // Bob69 est un admin ! Wouhou 🥳
-    );
+        IdentityRole? role = await roleManager.FindByIdAsync("1");
+        if (role is null)
+        {
+            role = new IdentityRole { Id = "1", Name = "admin" } 
+            IdentityResult result = await roleManager.CreateAsync(role)
+            if(!result.Succeeded)
+            {
+                string errors = string.Join(", ", 
+                    result.Errors.Select(error => error.Description));
+                throw new InvalidOperationException(
+                    $"Impossible de créer l'utilisateur 'admin' : {errors}");
+            }
+        }
+        
+        IdentityRole? role = await roleManager.FindByIdAsync("2");
+        if (role is null)
+        {
+            role = new IdentityRole { Id = "2", Name = "moderator" } 
+            IdentityResult result = await roleManager.CreateAsync(role);
 
+            if(!result.Succeeded)
+            {
+                string errors = string.Join(", ", 
+                    result.Errors.Select(error => error.Description));
+                throw new InvalidOperationException(
+                    $"Impossible de créer l'utilisateur 'moderator' : {errors}");
+            }
+        }
+
+        User? user = await userManager.FindByIdAsync(userId);
+        if(user is not null) return user;
+
+        user = new User
+        {
+            Id = "11111111-1111-1111-1111-111111111111",
+            UserName = "Bob69",
+            Email = "bobibou@mail.com",
+            EmailConfirmed = true
+        }
+
+        IdentityResult result = await userManager.CreateAsync(user, "Salut1!");
+
+        await _userManager.AddToRoleAsync(user, "admin");
+        await _userManager.AddToRoleAsync(user, "moderator");
+
+        if(!result.Succeed){
+            string errors = string.Join(", ", 
+                result.Errors.Select(error => error.Description));
+            throw new InvalidOperationException( 
+                $"Impossible de créer l'utilisateur 'Bob69' : {errors}");
+        }
+
+        await context.SaveChangesAsync();
+    }
 }
 ```
 
