@@ -19,7 +19,7 @@ Il n'y en a pas de nouveaux par rapport à avant ! Assurez-vous simplement que t
 
 :::warning
 
-Comme toujours, assurez-vous d'utiliser la dernière version `8.X.X` pour tous les packages. (Sauf `Swashbuckle`)
+Comme toujours, assurez-vous d'utiliser la dernière version `10.X.X` pour tous les packages. (Sauf `Swashbuckle`)
 
 :::
 
